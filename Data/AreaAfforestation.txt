@@ -1,0 +1,4 @@
+   class_desc area_est_ha lci_area_ha uci_area_ha
+3  AR Lowland    4955.452   4303.3100    6291.430
+4   AR Upland    1224.132    726.1463    1310.089
+31      Total    6179.583   5299.5333    7186.335

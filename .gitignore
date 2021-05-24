@@ -1,0 +1,10 @@
+pytestdebug.log
+*.retry
+*/__pycache__
+*.pyc
+.svn
+.RData
+.Rhistory
+.DS_Store
+data1.RData
+1.RData

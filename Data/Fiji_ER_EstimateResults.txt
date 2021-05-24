@@ -1,0 +1,14 @@
+                stratum   Estimate        LCI        UCI
+1         Deforestation  2696826.9  2129680.1  3036050.0
+2  Forest Deg (felling)   195316.1   161927.0   228678.3
+3     Forest Deg (fire)    82832.9    45652.4   102262.1
+4    Forest Plantations   596195.0   513800.8   701355.5
+5         Sum Emissions  3571170.9  2959737.8  4029896.1
+6  Forest Deg (felling)   -42361.6   -59107.2   -26947.9
+7         Afforestation   -59552.8   -80113.2   -39080.9
+8    Forest Plantations -1764231.2 -2168585.3 -1404800.6
+9          Sum Removals -1866145.6 -2271158.6 -1505920.5
+10        Deforestation  2696826.9  2129680.1  3036050.0
+11   Forest Degradation   235787.4   179698.1   271990.4
+12          Enhancement -1227589.0 -1633032.3  -845941.8
+13                Total  1705025.3   912292.2  2273214.9
