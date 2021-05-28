@@ -7,21 +7,21 @@ createUC_MV_Values <- function(MV) {
 
   #### Values with Uncertainty #####
 
-  result$DFAreaLow <- ValueWithUncertainty(
-    Value = MV$DFAreaLow,
-    LowerCI = MV$DFAreaLow_LCI,
-    UpperCI = MV$DFAreaLow_UCI,
+  result$DeforAreaLow <- ValueWithUncertainty(
+    Value = MV$DeforAreaLow,
+    LowerCI = MV$DeforAreaLow_LCI,
+    UpperCI = MV$DeforAreaLow_UCI,
     model = vwuTriangle, fixed = FALSE
   )
-  names(result$DFAreaLow) <- c("DFAreaLow")
+  names(result$DeforAreaLow) <- c("DeforAreaLow")
 
-  result$DFAreaUp <- ValueWithUncertainty(
-    Value = MV$DFAreaUp,
-    LowerCI = MV$DFAreaUp_LCI,
-    UpperCI = MV$DFAreaUp_UCI,
+  result$DeforAreaUp <- ValueWithUncertainty(
+    Value = MV$DeforAreaUp,
+    LowerCI = MV$DeforAreaUp_LCI,
+    UpperCI = MV$DeforAreaUp_UCI,
     model = vwuTriangle, fixed = FALSE
   )
-  names(result$DFAreaUp) <- c("DFAreaUp")
+  names(result$DeforAreaUp) <- c("DeforAreaUp")
 
   result$ARArea <- ValueWithUncertainty(
     Value = MV$ARArea,
@@ -31,13 +31,13 @@ createUC_MV_Values <- function(MV) {
   )
   names(result$ARArea) <- c("ARArea")
 
-  result$FDFellArea <- ValueWithUncertainty(
-    Value = MV$FDFellArea,
-    LowerCI = MV$FDFellArea - MV$FDFellArea * ErrAreaFell,
-    UpperCI = MV$FDFellArea + MV$FDFellArea * ErrAreaFell,
+  result$FDegFellArea <- ValueWithUncertainty(
+    Value = MV$FDegFellArea,
+    LowerCI = MV$FDegFellArea - MV$FDegFellArea * ErrAreaFell,
+    UpperCI = MV$FDegFellArea + MV$FDegFellArea * ErrAreaFell,
     model = vwuTriangle, fixed = FALSE
   )
-  names(result$FDFellArea) <- c("FDFellArea")
+  names(result$FDegFellArea) <- c("FDegFellArea")
 
   return(result)
 }

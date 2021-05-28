@@ -8,21 +8,21 @@ create_EstMRValues <- function(UC_ER, ER, EmRems, MV, MRparams) {
   MR$year1$year <- MV$year1$year
   MR$year2$year <- MV$year2$year
 
-  MR$year1$EstEmRemsDefor <- EmRems$year1$EmEstDFTotal
-  MR$year2$EstEmRemsDefor <- EmRems$year2$EmEstDFTotal
+  MR$year1$EstEmRemsDefor <- EmRems$year1$EstEmRemsDefor
+  MR$year2$EstEmRemsDefor <- EmRems$year2$EstEmRemsDefor
 
   MR$MpEstEmRemsDefor <- ER$MpEstEmRemsDefor
 
-  MR$year1$EstEmRemsFDeg <- EmRems$year1$FDEst
-  MR$year2$EstEmRemsFDeg <- EmRems$year2$FDEst
+  MR$year1$EstEmRemsFDeg <- EmRems$year1$EstEmRemsFDeg
+  MR$year2$EstEmRemsFDeg <- EmRems$year2$EstEmRemsFDeg
   MR$MpEstEmRemsFDeg <- ER$MpEstEmRemsFDeg
 
-  MR$year1$EstEmRemsEnh <- EmRems$year1$ECEst
-  MR$year2$EstEmRemsEnh <- EmRems$year2$ECEst
+  MR$year1$EstEmRemsEnh <- EmRems$year1$EstEmRemsEnh
+  MR$year2$EstEmRemsEnh <- EmRems$year2$EstEmRemsEnh
   MR$MpEstEmRemsEnh <- ER$MpEstEmRemsEnh
 
-  MR$year1$NetEmRems <- EmRems$year1$NetEmTotal
-  MR$year2$NetEmRems <- EmRems$year2$NetEmTotal
+  MR$year1$NetEmRems <- EmRems$year1$NetEmRems
+  MR$year2$NetEmRems <- EmRems$year2$NetEmRems
 
   # Table4_2, Table 4_3
   MR$MpNetEmRems <- ER$MpNetEmRems
@@ -46,21 +46,21 @@ create_MRValues <- function(UC_ER, ER, EmRems, MV, MRparams) {
   MR$year1$year <- MV$year1$year
   MR$year2$year <- MV$year2$year
 
-  MR$year1$EstEmRemsDefor <- EmRems$year1$EmEstDFTotal
-  MR$year2$EstEmRemsDefor <- EmRems$year2$EmEstDFTotal
+  MR$year1$EstEmRemsDefor <- EmRems$year1$EstEmRemsDefor
+  MR$year2$EstEmRemsDefor <- EmRems$year2$EstEmRemsDefor
 
   MR$MpEstEmRemsDefor <- ER$MpEstEmRemsDefor
 
-  MR$year1$EstEmRemsFDeg <- EmRems$year1$FDEst
-  MR$year2$EstEmRemsFDeg <- EmRems$year2$FDEst
+  MR$year1$EstEmRemsFDeg <- EmRems$year1$EstEmRemsFDeg
+  MR$year2$EstEmRemsFDeg <- EmRems$year2$EstEmRemsFDeg
   MR$MpEstEmRemsFDeg <- ER$MpEstEmRemsFDeg
 
-  MR$year1$EstEmRemsEnh <- EmRems$year1$ECEst
-  MR$year2$EstEmRemsEnh <- EmRems$year2$ECEst
+  MR$year1$EstEmRemsEnh <- EmRems$year1$EstEmRemsEnh
+  MR$year2$EstEmRemsEnh <- EmRems$year2$EstEmRemsEnh
   MR$MpEstEmRemsEnh <- ER$MpEstEmRemsEnh
 
-  MR$year1$NetEmRems <- EmRems$year1$NetEmTotal
-  MR$year2$NetEmRems <- EmRems$year2$NetEmTotal
+  MR$year1$NetEmRems <- EmRems$year1$NetEmRems
+  MR$year2$NetEmRems <- EmRems$year2$NetEmRems
 
   # Table4_2, Table 4_3
   MR$MpNetEmRems <- ER$MpNetEmRems

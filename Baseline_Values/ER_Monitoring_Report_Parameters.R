@@ -1,10 +1,10 @@
 # ER Monitoring Report Parameters
 
 MonitoringReportParams <- list()
-MonitoringReportParams$MPdays <- 730 # number of days in the Monitoring Period # Always 2 years (365*2) Don't change this...
-MonitoringReportParams$RPdays <- 540 # number of days in the Reporting Period
-MonitoringReportParams$IsRpEqualToMp <- (MonitoringReportParams$MPdays == MonitoringReportParams$RPdays)
-MonitoringReportParams$RpMpRatio <- (MonitoringReportParams$RPdays / MonitoringReportParams$MPdays)
+MonitoringReportParams$MpDays <- 730 # number of days in the Monitoring Period # Always 2 years (365*2) Don't change this...
+MonitoringReportParams$RpDays <- 540 # number of days in the Reporting Period
+MonitoringReportParams$IsRpEqualToMp <- (MonitoringReportParams$MpDays == MonitoringReportParams$RpDays)
+MonitoringReportParams$RpMpRatio <- (MonitoringReportParams$RpDays / MonitoringReportParams$MpDays)
 MonitoringReportParams$RpMpProrataYears <- 2 * MonitoringReportParams$RpMpRatio
 MonitoringReportParams$ErpaYearlyFRL <-  FRL
 MonitoringReportParams$ErpaYearlyFRLDefor <-  FRLDeforestation
@@ -29,4 +29,4 @@ MonitoringReportParams$ErpaPreviousEmRems <- 0 # Todo: It is the sum of Emission
 MonitoringReportParams$ErpaPreviousERs <- 0 # Todo: It is the sum of Emission
 # Reductions from previous reporting periods
 
-MonitoringReportParams$FDUncertaintyDiscount <- 0.15 #Defined Forest Degradation Uncertainty Discount for Table 5.2.2
+MonitoringReportParams$FDegUncertaintyDiscount <- 0.15 #Defined Forest Degradation Uncertainty Discount for Table 5.2.2

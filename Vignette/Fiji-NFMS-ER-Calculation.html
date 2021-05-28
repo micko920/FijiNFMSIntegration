@@ -258,12 +258,15 @@ div.tocify {
 <div id="purpose-of-document" class="section level2">
 <h2>1.1 Purpose of Document</h2>
 <p>This document describes the methodology used to calculate the emissions, removals and emissions reductions in R for the for the Fijian Ministry of Forestry Forest Carbon Partnership Fund (FCPF) Monitoring Report.</p>
-<p>The document will:<br />
-- Outline the parameters and outputs for the functions used to calculate the emissions and removals from REDD+ Activities,<br />
-- Reference the functions used to calculate the outputs required for the FCPF monitoring report,<br />
-- Discuss the outputs from the R calculations with reference to their values, associated uncertainty and sensitivity analysis,<br />
-- Provide guidance on modification of the code for a change in methodology or adoption to a new data set (e.g a new country),<br />
-- Provide information/code for the packages used to complete the calculations.</p>
+<p>The document will:</p>
+<ul>
+<li>Outline the parameters and outputs for the functions used to calculate the emissions and removals from REDD+ Activities,<br />
+</li>
+<li>Reference the functions used to calculate the outputs required for the FCPF monitoring report,</li>
+<li>Discuss the outputs from the R calculations with reference to their values, associated uncertainty and sensitivity analysis,</li>
+<li>Provide guidance on modification of the code for a change in methodology or adoption to a new data set (e.g a new country),</li>
+<li>Provide information/code for the packages used to complete the calculations.</li>
+</ul>
 </div>
 <div id="terminology" class="section level2">
 <h2>1.2 Terminology</h2>
@@ -272,55 +275,30 @@ div.tocify {
 <thead>
 <tr class="header">
 <th align="left">Root</th>
-<th align="left">Calculation</th>
+<th>Calculation</th>
 <th align="left">Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">Calc</td>
-<td align="left">Est</td>
+<td>Est</td>
 <td align="left">Em</td>
 </tr>
 <tr class="even">
 <td align="left">Mp</td>
-<td align="left">Net</td>
+<td>Net</td>
 <td align="left">Rem</td>
 </tr>
 <tr class="odd">
 <td align="left">Rp</td>
-<td align="left">Gross</td>
+<td>Gross</td>
 <td align="left">EmRems</td>
 </tr>
 <tr class="even">
-<td align="left">Erpa</td>
-<td align="left">Current</td>
+<td align="left"></td>
+<td></td>
 <td align="left">ERs</td>
-</tr>
-<tr class="odd">
-<td align="left">Previous</td>
-<td align="left">FRL</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Transferred</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Adj</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Contested</td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Sold</td>
-<td align="left"></td>
-<td align="left"></td>
 </tr>
 </tbody>
 </table>
@@ -334,20 +312,13 @@ EmRem: Emissions and Removals - can be +ve or -ve as it is considers both emissi
 </div>
 <div id="preliminaries" class="section level2">
 <h2>Preliminaries</h2>
-<ul>
-<li>contact information for FIJI team to get latest code set<br />
-</li>
-<li>Location and how to download latest r code files<br />
-</li>
-<li>github links for open source documents (non-Fiji specific documents)</li>
-</ul>
-<p>Ask MG Download library?<br />
+<p>Ask MG</p>
+<p>Download library?<br />
 Packages?<br />
 Versions?</p>
 <div id="acronyms" class="section level3">
 <h3>Acronyms</h3>
 <p>[Check with MG]</p>
-<p>Emission Reduction Program agreement (ERPA)</p>
 </div>
 </div>
 </div>
@@ -458,108 +429,34 @@ Function Script - <code>ForestPlantations.R</code></p>
 <h1>3. Discussion</h1>
 <div id="drivers" class="section level2">
 <h2>3.1. Drivers</h2>
-<p>-Purpose - Load files, Run drivers, see outputs.</p>
-<ul>
-<li><p>Three different drivers Values Values_with_Uc [check naming] Sensitivity [check naming]</p></li>
-<li><p>General Instructions</p>
-<ul>
-<li><p>Open R Studio<br />
-</p></li>
-<li><p>Set working directory to file directory</p></li>
-<li><p>Open Driver file</p></li>
-<li><p>Run file (Ctrl+alt+r, through code menu or on console source(“./driverfilename.R”))</p></li>
-<li><p>Check the outputs in the environment window or console.</p></li>
-<li><p>Link to Rstudio help documentation (Rstudio help link)</p></li>
-</ul></li>
-</ul>
-<p>-Output - Console - Environment (variables and parameters defined from the code)</p>
-<ul>
-<li>See individual driver sections for specific purpose and outputs.</li>
-</ul>
 <div id="values" class="section level3">
 <h3>3.1.1. Values</h3>
-<p><strong>Purpose</strong> - The Values drive produces estimates without uncertainty that are quick to run: - Yearly EmRems<br />
-- Monitoring Period Gross ERs - Reporting period Emission Reduction Program Agreement (ERPA) balance of ERs.</p>
-<ul>
-<li>Produce Tables 4.2, 4.3 and 7.2 for the FCPF Monitoring Report.</li>
-</ul>
-<p><strong>Output</strong></p>
-<p>EmRems_values : 2 Yeas/Monitoring Period data ER_Values : Potential ER’s before deductions or Buffering</p>
-<pre class="r"><code>#(2 lists to be added)</code></pre>
 </div>
 <div id="values-with-uncertainty" class="section level3">
 <h3>3.1.2. Values with Uncertainty</h3>
-<p><strong>Purpose</strong></p>
-<ul>
-<li><p>The Values with uncertainty driver provides estimates with uncertainty for the monitoring period data and the Emission Reductions available for transfer to the carbon fund.</p></li>
-<li><p>Produce Tables 5.2.2 and 8 for the FCPF Monitoring Report.</p></li>
-</ul>
-<p><strong>Output</strong></p>
-<p>Table 5.2.2 and 8 for the FCPF Monitoring Report.</p>
 </div>
 <div id="sensitivity-analysis" class="section level3">
 <h3>3.1.3. Sensitivity Analysis</h3>
-<p><strong>Purpose</strong></p>
-<ul>
-<li>The Sensitivity Analysis produces a report which assesses the total effect index of parameters which have uncertainty included which are used in the calculation.</li>
-</ul>
-<p><em>(To do) Reference (Word document with value with uncertainty defined) either in CG document (link) or coding table with parameter and code name……..</em></p>
-<p><em>(MG - TE index document notes to be added here)</em></p>
-<p><strong>Output</strong></p>
-<p>TBC</p>
-<p>Table of 2 cols - name of value, TEI</p>
 </div>
 </div>
 <div id="modification-of-code" class="section level2">
 <h2>3.2. Modification of Code</h2>
-<p>-number of use cases for modification of the code 1. Fiji methodological changes requires code to be updated/reviewed 2. Another country adopts the calculation code 3. Monitoring Period Report Tasks for new FCPF Report</p>
-<p>Note placeholder for diagram showing drivers code structure .<br />
-.<br />
-.<br />
-.<br />
-.<br />
-.</p>
 <div id="resulting-from-changes-to-methodology" class="section level3">
 <h3>3.2.1. Resulting from changes to Methodology</h3>
-<ul>
-<li>If a default parameter is changed, the relevant params file will need to be updated.</li>
-<li>If a calculation equation is changed, the relevant calc file will need to be updated.
-<ul>
-<li>Associated Test documents will need to be updated</li>
-</ul></li>
-<li>New calculations or activities will need to be added to the FIJI_NFMS_Calculations package and the drivers files.</li>
-</ul>
 </div>
 <div id="adoption-of-code-for-a-new-country-context" class="section level3">
 <h3>3.2.2 Adoption of code for a new country context</h3>
-<ul>
-<li>Country specific default parameters will need to be updated,</li>
-<li>Calculations in FIJINFMSCalculations Package to be reviewed and updated for the new countries activities and saved as a new package.
-<ul>
-<li>New calculations package should be referenced in the the drivers files in EmRem, ER and data list sections.</li>
-</ul></li>
-</ul>
-</div>
-<div id="monitoring-period-report-tasks-for-new-fcpf-report" class="section level3">
-<h3>3.2.3 Monitoring Period Report Tasks for new FCPF Report</h3>
-<p>(Baseline Values files need to be updated for each new FCPF monitoring report. This can be done in two ways: - directly in the code files - via FIMS</p>
-<p>Each updating method depends on the updating party. Updating directly in the code is useful in the case where the code can be sent to an external party who does not have access to the FIMS.</p>
-<p>See FIMS manual for editing in the FIMS. <strong>Link to manual- which will be saved in the FIMS.pdf</strong></p>
 </div>
 </div>
 <div id="testing-unit-testing" class="section level2">
 <h2>3.3. Testing &amp; Unit Testing</h2>
-<p>Unit testing is written into all code packages to test functions. Each test set includes test data from Fiji data</p>
-<p>Other tests are general examples and use cases of using the code.</p>
-<p>Code changes should be reflected in associated tests.</p>
-<p><strong>Running the Tests</strong> devtools::test() See <code>?testthat</code> for more information</p>
-<p>Note: Some of the tests use a <code>set.seed(#)</code> with an arbitrary number to ensure that the tests are repeatable when using random number generation. The seed is not required in the normal operation of the code.</p>
 </div>
 </div>
 <div id="packages" class="section level1 tabset">
 <h1 class="tabset">4. Packages</h1>
 <div id="fiji-nfms-calculations" class="section level2">
 <h2>Fiji NFMS Calculations</h2>
+<p><a href="https://cran.r-project.org/web/packages/roxygen2md/roxygen2md.pdf" class="uri">https://cran.r-project.org/web/packages/roxygen2md/roxygen2md.pdf</a></p>
 <ul>
 <li><code>Afforestation.R</code></li>
 <li><code>Burning.R</code></li>

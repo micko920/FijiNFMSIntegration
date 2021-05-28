@@ -30,7 +30,7 @@ MCTolerance <- 0.01 # how stable the UCI and LCI should be before stopping
 
 # This number was used to generate the chk file.
 # MCRuns <- 1.5e+06
-# MCTolerance <- 0.01
+# MCTolerance <- 0.0025
 set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
 debug_er <- FALSE # Turn printed output on
@@ -168,51 +168,61 @@ if (debug_er) {
 ResultsTables <- list()
 ResultsTables$year1 <- data.frame(
   stratum = c(
-    "Deforestation", "Forest Deg (felling)", "Forest Deg (fire)",
-    "Forest Plantations", "Sum Emissions", "Forest Deg (felling)", "Afforestation",
-    "Forest Plantations", "Sum Removals", "Deforestation", "Forest Degradation", "Enhancement", "Total"
+    "Deforestation",
+	"Forest Deg (felling)",
+	"Forest Deg (fire)",
+    "Forest Plantations",
+	"Sum Emissions",
+	"Forest Deg (felling)",
+	"Afforestation",
+    "Forest Plantations",
+	"Sum Removals",
+	"Deforestation",
+	"Forest Degradation",
+	"Enhancement",
+	"Total"
   ),
   Estimate = c(
-    UC_EmRems_Values$year1$EmEstDFTotalFinal$value[[1]],
-    UC_EmRems_Values$year1$EmEstFellFinal$value[[1]],
+    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[1]],
+    UC_EmRems_Values$year1$EstEmFellFinal$value[[1]],
     UC_EmRems_Values$year1$EmFireFinal$value[[1]],
     UC_EmRems_Values$year1$EmEstFPTotalFinal$value[[1]],
     UC_EmRems_Values$year1$GrossEmTotalFinal$value[[1]],
-    UC_EmRems_Values$year1$RemEstFellFinal$value[[1]],
+    UC_EmRems_Values$year1$EstRemFellFinal$value[[1]],
     UC_EmRems_Values$year1$RemEstARFinal$value[[1]],
     UC_EmRems_Values$year1$RemEstFPTotalFinal$value[[1]],
     UC_EmRems_Values$year1$GrossRemTotalFinal$value[[1]],
-    UC_EmRems_Values$year1$EmEstDFTotalFinal$value[[1]],
+    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[1]],
     UC_EmRems_Values$year1$FDFinal$value[[1]],
     UC_EmRems_Values$year1$ECFinal$value[[1]],
     UC_EmRems_Values$year1$NetEmissionsFinal$value[[1]]
   ),
   LCI = c(
-    UC_EmRems_Values$year1$EmEstDFTotalFinal$value[[2]],
-    UC_EmRems_Values$year1$EmEstFellFinal$value[[2]],
+    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[2]],
+    UC_EmRems_Values$year1$EstEmFellFinal$value[[2]],
     UC_EmRems_Values$year1$EmFireFinal$value[[2]],
     UC_EmRems_Values$year1$EmEstFPTotalFinal$value[[2]],
     UC_EmRems_Values$year1$GrossEmTotalFinal$value[[2]],
-    UC_EmRems_Values$year1$RemEstFellFinal$value[[2]],
+    UC_EmRems_Values$year1$EstRemFellFinal$value[[2]],
     UC_EmRems_Values$year1$RemEstARFinal$value[[2]],
     UC_EmRems_Values$year1$RemEstFPTotalFinal$value[[2]],
     UC_EmRems_Values$year1$GrossRemTotalFinal$value[[2]],
-    UC_EmRems_Values$year1$EmEstDFTotalFinal$value[[2]],
+    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[2]],
     UC_EmRems_Values$year1$FDFinal$value[[2]],
     UC_EmRems_Values$year1$ECFinal$value[[2]],
     UC_EmRems_Values$year1$NetEmissionsFinal$value[[2]]
   ),
   UCI = c(
-    UC_EmRems_Values$year1$EmEstDFTotalFinal$value[[3]],
-    UC_EmRems_Values$year1$EmEstFellFinal$value[[3]],
+    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[3]],
+    UC_EmRems_Values$year1$EstEmFellFinal$value[[3]],
     UC_EmRems_Values$year1$EmFireFinal$value[[3]],
     UC_EmRems_Values$year1$EmEstFPTotalFinal$value[[3]],
     UC_EmRems_Values$year1$GrossEmTotalFinal$value[[3]],
-    UC_EmRems_Values$year1$RemEstFellFinal$value[[3]],
+    UC_EmRems_Values$year1$EstRemFellFinal$value[[3]],
     UC_EmRems_Values$year1$RemEstARFinal$value[[3]],
     UC_EmRems_Values$year1$RemEstFPTotalFinal$value[[3]],
     UC_EmRems_Values$year1$GrossRemTotalFinal$value[[3]],
-    UC_EmRems_Values$year1$EmEstDFTotalFinal$value[[3]],
+    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[3]],
     UC_EmRems_Values$year1$FDFinal$value[[3]],
     UC_EmRems_Values$year1$ECFinal$value[[3]],
     UC_EmRems_Values$year1$NetEmissionsFinal$value[[3]]
@@ -226,46 +236,46 @@ ResultsTables$year2 <- data.frame(
     "Forest Plantations", "Sum Removals", "Deforestation", "Forest Degradation", "Enhancement", "Total"
   ),
   Estimate = c(
-    UC_EmRems_Values$year2$EmEstDFTotalFinal$value[[1]],
-    UC_EmRems_Values$year2$EmEstFellFinal$value[[1]],
+    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[1]],
+    UC_EmRems_Values$year2$EstEmFellFinal$value[[1]],
     UC_EmRems_Values$year2$EmFireFinal$value[[1]],
     UC_EmRems_Values$year2$EmEstFPTotalFinal$value[[1]],
     UC_EmRems_Values$year2$GrossEmTotalFinal$value[[1]],
-    UC_EmRems_Values$year2$RemEstFellFinal$value[[1]],
+    UC_EmRems_Values$year2$EstRemFellFinal$value[[1]],
     UC_EmRems_Values$year2$RemEstARFinal$value[[1]],
     UC_EmRems_Values$year2$RemEstFPTotalFinal$value[[1]],
     UC_EmRems_Values$year2$GrossRemTotalFinal$value[[1]],
-    UC_EmRems_Values$year2$EmEstDFTotalFinal$value[[1]],
+    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[1]],
     UC_EmRems_Values$year2$FDFinal$value[[1]],
     UC_EmRems_Values$year2$ECFinal$value[[1]],
     UC_EmRems_Values$year2$NetEmissionsFinal$value[[1]]
   ),
   LCI = c(
-    UC_EmRems_Values$year2$EmEstDFTotalFinal$value[[2]],
-    UC_EmRems_Values$year2$EmEstFellFinal$value[[2]],
+    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[2]],
+    UC_EmRems_Values$year2$EstEmFellFinal$value[[2]],
     UC_EmRems_Values$year2$EmFireFinal$value[[2]],
     UC_EmRems_Values$year2$EmEstFPTotalFinal$value[[2]],
     UC_EmRems_Values$year2$GrossEmTotalFinal$value[[2]],
-    UC_EmRems_Values$year2$RemEstFellFinal$value[[2]],
+    UC_EmRems_Values$year2$EstRemFellFinal$value[[2]],
     UC_EmRems_Values$year2$RemEstARFinal$value[[2]],
     UC_EmRems_Values$year2$RemEstFPTotalFinal$value[[2]],
     UC_EmRems_Values$year2$GrossRemTotalFinal$value[[2]],
-    UC_EmRems_Values$year2$EmEstDFTotalFinal$value[[2]],
+    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[2]],
     UC_EmRems_Values$year2$FDFinal$value[[2]],
     UC_EmRems_Values$year2$ECFinal$value[[2]],
     UC_EmRems_Values$year2$NetEmissionsFinal$value[[2]]
   ),
   UCI = c(
-    UC_EmRems_Values$year2$EmEstDFTotalFinal$value[[3]],
-    UC_EmRems_Values$year2$EmEstFellFinal$value[[3]],
+    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[3]],
+    UC_EmRems_Values$year2$EstEmFellFinal$value[[3]],
     UC_EmRems_Values$year2$EmFireFinal$value[[3]],
     UC_EmRems_Values$year2$EmEstFPTotalFinal$value[[3]],
     UC_EmRems_Values$year2$GrossEmTotalFinal$value[[3]],
-    UC_EmRems_Values$year2$RemEstFellFinal$value[[3]],
+    UC_EmRems_Values$year2$EstRemFellFinal$value[[3]],
     UC_EmRems_Values$year2$RemEstARFinal$value[[3]],
     UC_EmRems_Values$year2$RemEstFPTotalFinal$value[[3]],
     UC_EmRems_Values$year2$GrossRemTotalFinal$value[[3]],
-    UC_EmRems_Values$year2$EmEstDFTotalFinal$value[[3]],
+    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[3]],
     UC_EmRems_Values$year2$FDFinal$value[[3]],
     UC_EmRems_Values$year2$ECFinal$value[[3]],
     UC_EmRems_Values$year2$NetEmissionsFinal$value[[3]]

@@ -2,22 +2,22 @@ $year1
 $year1$year
 [1] "2018"
 
-$year1$DFAreaLow
+$year1$DeforAreaLow
 [1] 8332.15
 
-$year1$DFAreaLow_UCI
+$year1$DeforAreaLow_UCI
 [1] 9437
 
-$year1$DFAreaLow_LCI
+$year1$DeforAreaLow_LCI
 [1] 5531
 
-$year1$DFAreaUp
+$year1$DeforAreaUp
 [1] 2681.64
 
-$year1$DFAreaUp_UCI
+$year1$DeforAreaUp_UCI
 [1] 2889
 
-$year1$DFAreaUp_LCI
+$year1$DeforAreaUp_LCI
 [1] 1627
 
 $year1$ARArea
@@ -29,7 +29,7 @@ $year1$ARArea_UCI
 $year1$ARArea_LCI
 [1] 4415
 
-$year1$FDBurnData
+$year1$FDegBurnData
     year  area_ha age_yrs
 235 2018  1.70000       1
 236 2018  1.90000       1
@@ -92,40 +92,40 @@ $year1$FDBurnData
 293 2018 23.60000      27
 294 2018 12.60000      28
 
-$year1$FPVolHarvHW
+$year1$FPlnVolHarvHwd
 [1] 62199.6
 
-$year1$FPAreaStockHW
+$year1$FPlnAreaStockHwd
 [1] 56950.5
 
-$year1$FPAreaPlantHW
+$year1$FPlnAreaPlantHwd
 [1] 3050.3
 
-$year1$FPAreaHarvestHW
+$year1$FPlnAreaHarvHwd
 [1] 3316.6
 
-$year1$FPAreaJustGrowsHW
+$year1$FPlnAreaJustGrowsHwd
 [1] 53633.9
 
-$year1$FPVolHarvSW
+$year1$FPlnVolHarvSwd
 [1] 334463
 
-$year1$FPAreaStockSW
+$year1$FPlnAreaStockSwd
 [1] 49106
 
-$year1$FPAreaPlantSW
+$year1$FPlnAreaPlantSwd
 [1] 370.82
 
-$year1$FPAreaHarvestSW
+$year1$FPlnAreaHarvSwd
 [1] 1282.4
 
-$year1$FPAreaJustGrowsSW
+$year1$FPlnAreaJustGrowsSwd
 [1] 47823.6
 
-$year1$FDFellVol
+$year1$FDegFellVol
 [1] 50731.5
 
-$year1$FDFellArea
+$year1$FDegFellArea
 [1] 11669.9
 
 
@@ -133,22 +133,22 @@ $year2
 $year2$year
 [1] "2019"
 
-$year2$DFAreaLow
+$year2$DeforAreaLow
 [1] 8332.15
 
-$year2$DFAreaLow_UCI
+$year2$DeforAreaLow_UCI
 [1] 9437
 
-$year2$DFAreaLow_LCI
+$year2$DeforAreaLow_LCI
 [1] 5531
 
-$year2$DFAreaUp
+$year2$DeforAreaUp
 [1] 2681.64
 
-$year2$DFAreaUp_UCI
+$year2$DeforAreaUp_UCI
 [1] 2889
 
-$year2$DFAreaUp_LCI
+$year2$DeforAreaUp_LCI
 [1] 1627
 
 $year2$ARArea
@@ -160,7 +160,7 @@ $year2$ARArea_UCI
 $year2$ARArea_LCI
 [1] 4415
 
-$year2$FDBurnData
+$year2$FDegBurnData
     year  area_ha age_yrs
 235 2018  1.70000       1
 236 2018  1.90000       1
@@ -223,40 +223,40 @@ $year2$FDBurnData
 293 2018 23.60000      27
 294 2018 12.60000      28
 
-$year2$FPVolHarvHW
+$year2$FPlnVolHarvHwd
 [1] 62199.6
 
-$year2$FPAreaStockHW
+$year2$FPlnAreaStockHwd
 [1] 56950.5
 
-$year2$FPAreaPlantHW
+$year2$FPlnAreaPlantHwd
 [1] 3050.3
 
-$year2$FPAreaHarvestHW
+$year2$FPlnAreaHarvHwd
 [1] 3316.6
 
-$year2$FPAreaJustGrowsHW
+$year2$FPlnAreaJustGrowsHwd
 [1] 53633.9
 
-$year2$FPVolHarvSW
+$year2$FPlnVolHarvSwd
 [1] 334463
 
-$year2$FPAreaStockSW
+$year2$FPlnAreaStockSwd
 [1] 49106
 
-$year2$FPAreaPlantSW
+$year2$FPlnAreaPlantSwd
 [1] 370.82
 
-$year2$FPAreaHarvestSW
+$year2$FPlnAreaHarvSwd
 [1] 1282.4
 
-$year2$FPAreaJustGrowsSW
+$year2$FPlnAreaJustGrowsSwd
 [1] 47823.6
 
-$year2$FDFellVol
+$year2$FDegFellVol
 [1] 50731.5
 
-$year2$FDFellArea
+$year2$FDegFellArea
 [1] 11669.9
 
 
@@ -267,7 +267,7 @@ $year1$EmEstDFUp
 $year1$EmEstDFLow
 [1] 2161360
 
-$year1$EmEstDFTotal
+$year1$EstEmRemsDefor
 [1] 2696827
 
 $year1$EmEstFell
@@ -318,13 +318,13 @@ $year1$GrossRemTotal
 $year1$GrossRemNoFDTotal
 [1] -59544.9
 
-$year1$FDEst
+$year1$EstEmRemsFDeg
 [1] 234514
 
-$year1$ECEst
+$year1$EstEmRemsEnh
 [1] -1227582
 
-$year1$NetEmTotal
+$year1$NetEmRems
 [1] 1703759
 
 
@@ -335,7 +335,7 @@ $year2$EmEstDFUp
 $year2$EmEstDFLow
 [1] 2161360
 
-$year2$EmEstDFTotal
+$year2$EstEmRemsDefor
 [1] 2696827
 
 $year2$EmEstFell
@@ -386,13 +386,13 @@ $year2$GrossRemTotal
 $year2$GrossRemNoFDTotal
 [1] -59544.9
 
-$year2$FDEst
+$year2$EstEmRemsFDeg
 [1] 234514
 
-$year2$ECEst
+$year2$EstEmRemsEnh
 [1] -1227582
 
-$year2$NetEmTotal
+$year2$NetEmRems
 [1] 1703759
 
 

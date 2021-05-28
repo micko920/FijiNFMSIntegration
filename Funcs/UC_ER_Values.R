@@ -32,52 +32,52 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
 
   # Emission estimates for deforestation (tCO2e):
   CalcEmDFUpArgs <- function() {
-    return(list(UC_MV$DFAreaUp, UC$EFDFUp))
+    return(list(UC_MV$DeforAreaUp, UC$EFDeforUp))
   }
 
-  EmDFUpFinal <- CalcMonteCarlo("EmEstDFUp", EmRems$EmEstDFUp, CalcEmDF, CalcEmDFUpArgs)
+  EmDFUpFinal <- CalcMonteCarlo("EmEstDeforUp", EmRems$EmEstDeforUp, CalcEmDF, CalcEmDFUpArgs)
   if (debug_er) EmDFUpFinal
 
-  local$EmEstDFUp <- ValueWithUncertainty(
-    Value = EmRems$EmEstDFUp,
+  local$EmEstDeforUp <- ValueWithUncertainty(
+    Value = EmRems$EmEstDeforUp,
     LowerCI = EmDFUpFinal$value[2],
     UpperCI = EmDFUpFinal$value[3],
     model = create_vwuSampled(EmDFUpFinal$MCresults), fixed = FALSE
   )
-  names(local$EmEstDFUp) <- c("EmEstDFUp")
+  names(local$EmEstDeforUp) <- c("EmEstDeforUp")
 
   CalcEmDFLowArgs <- function() {
-    return(list(UC_MV$DFAreaLow, UC$EFDFLow))
+    return(list(UC_MV$DeforAreaLow, UC$EFDeforLow))
   }
 
 
-  EmDFLowFinal <- CalcMonteCarlo("EmEstDFLow", EmRems$EmEstDFLow, CalcEmDF, CalcEmDFLowArgs)
+  EmDFLowFinal <- CalcMonteCarlo("EmEstDeforLow", EmRems$EmEstDeforLow, CalcEmDF, CalcEmDFLowArgs)
   if (debug_er) EmDFLowFinal
-  local$EmEstDFLow <- ValueWithUncertainty(
-    Value = EmRems$EmEstDFLow,
+  local$EmEstDeforLow <- ValueWithUncertainty(
+    Value = EmRems$EmEstDeforLow,
     LowerCI = EmDFLowFinal$value[2],
     UpperCI = EmDFLowFinal$value[3],
     model = create_vwuSampled(EmDFLowFinal$MCresults), fixed = FALSE
   )
-  names(local$EmEstDFLow) <- c("EmEstDFLow")
+  names(local$EmEstDeforLow) <- c("EmEstDeforLow")
 
   # Total emissions from Deforestation (tCO2e)
   CalcEmTotalDFArgs <- function() {
-    return(list(local$EmEstDFUp, local$EmEstDFLow))
+    return(list(local$EmEstDeforUp, local$EmEstDeforLow))
   }
 
 
   ## MGG - UC
   # Final Estimate of emissions with UCI and LCI
-  result$EmEstDFTotalFinal <- CalcMonteCarlo("EmEstDFTotal", EmRems$EmEstDFTotal, CalcEmTotalDF, CalcEmTotalDFArgs)
-  if (debug_er) result$EmEstDFTotalFinal
-  local$EmEstDFTotal <- ValueWithUncertainty(
-    Value = EmRems$EmEstDFTotal,
-    LowerCI = result$EmEstDFTotalFinal$value[2],
-    UpperCI = result$EmEstDFTotalFinal$value[3],
-    model = create_vwuSampled(result$EmEstDFTotalFinal$MCresults), fixed = FALSE
+  result$McEstEmRemsDefor <- CalcMonteCarlo("EstEmRemsDefor", EmRems$EstEmRemsDefor, CalcEmTotalDF, CalcEmTotalDFArgs)
+  if (debug_er) result$McEstEmRemsDefor
+  local$EstEmRemsDefor <- ValueWithUncertainty(
+    Value = EmRems$EstEmRemsDefor,
+    LowerCI = result$McEstEmRemsDefor$value[2],
+    UpperCI = result$McEstEmRemsDefor$value[3],
+    model = create_vwuSampled(result$McEstEmRemsDefor$MCresults), fixed = FALSE
   )
-  names(local$EmEstDFTotal) <- c("EmEstDFTotal")
+  names(local$EstEmRemsDefor) <- c("EstEmRemsDefor")
 
   #################### 2. Forest Degradation (FD) ########
 
@@ -90,20 +90,20 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   # Felling Volume uncertainty not included in MC, just use actual volume
 
   CalcEmFellArgs <- function() {
-    return(list(UC$TEF, MV$FDFellVol))
+    return(list(UC$TEF, MV$FDegFellVol))
   }
 
 
   ## MGG - UC
-  result$EmEstFellFinal <- CalcMonteCarlo("EmEstFell", EmRems$EmEstFell, CalcEmFell, CalcEmFellArgs)
-  if (debug_er) result$EmEstFellFinal
-  local$EmEstFell <- ValueWithUncertainty(
-    Value = EmRems$EmEstFell,
-    LowerCI = result$EmEstFellFinal$value[2],
-    UpperCI = result$EmEstFellFinal$value[3],
-    model = create_vwuSampled(result$EmEstFellFinal$MCresults), fixed = FALSE
+  result$EstEmFellFinal <- CalcMonteCarlo("EstEmFell", EmRems$EstEmFell, CalcEmFell, CalcEmFellArgs)
+  if (debug_er) result$EstEmFellFinal
+  local$EstEmFell <- ValueWithUncertainty(
+    Value = EmRems$EstEmFell,
+    LowerCI = result$EstEmFellFinal$value[2],
+    UpperCI = result$EstEmFellFinal$value[3],
+    model = create_vwuSampled(result$EstEmFellFinal$MCresults), fixed = FALSE
   )
-  names(local$EmEstFell) <- c("EmEstFell")
+  names(local$EstEmFell) <- c("EstEmFell")
 
   ## Yearly REMOVALS from felling in natural forest (tCO2e)
   #  no need to (* delta t) as delta t = 1 for 1 year
@@ -111,29 +111,29 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   # Uncertainty associated with the with MAIC and Area Felled
   # Calculate the arguments
   CalcRemFellArgs <- function() {
-    return(list(UC_MV$FDFellArea, UC$MAICFell))
+    return(list(UC_MV$FDegFellArea, UC$MAICFell))
   }
 
 
   ## MGG - UC
   # Final Estimate for Removals with UCI and LCI
-  result$RemEstFellFinal <- CalcMonteCarlo("RemEstFell", EmRems$RemEstFell, CalcRemFell, CalcRemFellArgs)
-  if (debug_er) result$RemEstFellFinal
-  local$RemEstFell <- ValueWithUncertainty(
-    Value = EmRems$RemEstFell,
-    LowerCI = result$RemEstFellFinal$value[2],
-    UpperCI = result$RemEstFellFinal$value[3],
-    model = create_vwuSampled(result$RemEstFellFinal$MCresults), fixed = FALSE
+  result$EstRemFellFinal <- CalcMonteCarlo("EstRemFell", EmRems$EstRemFell, CalcRemFell, CalcRemFellArgs)
+  if (debug_er) result$EstRemFellFinal
+  local$EstRemFell <- ValueWithUncertainty(
+    Value = EmRems$EstRemFell,
+    LowerCI = result$EstRemFellFinal$value[2],
+    UpperCI = result$EstRemFellFinal$value[3],
+    model = create_vwuSampled(result$EstRemFellFinal$MCresults), fixed = FALSE
   )
-  names(local$RemEstFell) <- c("RemEstFell")
+  names(local$EstRemFell) <- c("EstRemFell")
 
   CalcEmTotalFellArgs <- function() {
-    return(list(local$EmEstFell, local$RemEstFell))
+    return(list(local$EstEmFell, local$EstRemFell))
   }
 
   # Final Estimate of emissions with UCI and LCI
-  EmEstFellTotalFinal <- CalcMonteCarlo("EmEstFellTotal", EmRems$EstFellTotal, CalcEmTotalFell, CalcEmTotalDFArgs)
-  if (debug_er) EmEstFellTotalFinal
+  EstEmFellTotalFinal <- CalcMonteCarlo("EstEmFellTotal", EmRems$EstFellTotal, CalcEmTotalFell, CalcEmTotalFellArgs)
+  if (debug_er) EstEmFellTotalFinal
 
   ##***********************************************************
   ## 2.2 Biomass Burning
@@ -142,7 +142,7 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   # Random inputs for the MC simulation
   CalcEmFireArgs <- function() {
     return(list(
-      MV$FDBurnData$age_yrs, UC$MAIBsw, UC$RootToShootDryLandSmall, MV$FDBurnData$area_ha
+      MV$FDegBurnData$age_yrs, UC$MAIBsw, UC$RootToShootDryLandSmall, MV$FDegBurnData$area_ha
     ))
   }
 
@@ -188,7 +188,7 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   # Uncertainty assessment (Monte Carlo simulations) related to Biomass Conversion and Expansion
   # Factor, Root To shoot Tropical Rain
   CalcEmFPHWArgs <- function() {
-    return(list(MV$FPVolHarvHW, UC$BiomassConvExpansionHW, UC$RootToShootTropRain))
+    return(list(MV$FPlnVolHarvHwd, UC$BiomassConvExpansionHW, UC$RootToShootTropRain))
   }
 
   # Final Estimate for Emissions with UCI and LCI
@@ -203,7 +203,7 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   names(local$EmEstFPHW) <- c("EmEstFPHW")
   # Emissions Softwood plantations ####
   CalcEmFPSWArgs <- function() {
-    return(list(MV$FPVolHarvSW, UC$Recovery, UC$WoodDensity, UC$RootToShootDryLandBig))
+    return(list(MV$FPlnVolHarvSwd, UC$Recovery, UC$WoodDensity, UC$RootToShootDryLandBig))
   }
 
   # Final Estimate for SW Emissions with UCI and LCI
@@ -222,7 +222,7 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   # Uncertainty assessment (removals) of MAIV, Biomass Conversion and Expansion Factor,
   # Root To Shoot Tropical Rain, MAIC, Average annual area of forest that just grows
   CalcRemFPHWArgs <- function() {
-    return(list(MV$FPAreaJustGrowsHW, MV$FPAreaPlantHW, MV$FPAreaHarvestHW, UC$MAIVhw, UC$BiomassConvExpansionIncHW, UC$RootToShootTropRain))
+    return(list(MV$FPlnAreaJustGrowsHwd, MV$FPlnAreaPlantHwd, MV$FPlnAreaHarvHwd, UC$MAIVhw, UC$BiomassConvExpansionIncHW, UC$RootToShootTropRain))
   }
 
 
@@ -238,7 +238,7 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   names(local$RemEstFPHW) <- c("RemEstFPHW")
   # Estimate of softwood removals for yr (tCO2e) ####
   CalcRemFPSWArgs <- function() {
-    return(list(UC$MAIBsw, MV$FPAreaJustGrowsSW, MV$FPAreaPlantSW, MV$FPAreaHarvestSW))
+    return(list(UC$MAIBsw, MV$FPlnAreaJustGrowsSwd, MV$FPlnAreaPlantSwd, MV$FPlnAreaHarvSwd))
   }
 
   # Final Estimate for SW Removals with UCI and LCI
@@ -321,7 +321,7 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
 
   # Gross Emissions Total
   CalcGrossEmTotalArgs <- function() {
-    return(list(local$EmEstDFTotal, local$EmEstFell, local$EmFire, local$EmEstFPTotal))
+    return(list(local$EstEmRemsDefor, local$EstEmFell, local$EmFire, local$EmEstFPTotal))
   }
 
   ## MGG - UC
@@ -335,18 +335,9 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   names(local$GrossEmTotal) <- c("GrossEmTotal")
 
 
-  # Gross Emissions without degradation
-  CalcGrossEmNoFDTotalArgs <- function() {
-    return(list(local$EmEstDFTotal, local$EmEstFPTotal))
-  }
-
-  result$GrossEmissionsNoFDFinal <- CalcMonteCarlo("GrossEmissonsNoFD", EmRems$GrossEmNoFDTotal, CalcGrossEmNoFDTotal, CalcGrossEmNoFDTotalArgs)
-
-
-
   # Gross Removals Total
   CalcGrossRemTotalArgs <- function() {
-    return(list(local$RemEstFell, local$RemEstAR, local$RemEstFPTotal))
+    return(list(local$EstRemFell, local$RemEstAR, local$RemEstFPTotal))
   }
 
   ## MGG - UC
@@ -359,21 +350,13 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   )
   names(local$GrossRemTotal) <- c("GrossRemTotal")
 
-  # Gross Removals without degradation
-  CalcGrossRemNoFDTotalArgs <- function() {
-    return(list(local$RemEstAR))
-  }
-
-  result$GrossRemovalsNoFDFinal <- CalcMonteCarlo("GrossRemovalsNoFD", EmRems$GrossRemNoFDTotal, CalcGrossRemNoFDTotal, CalcGrossRemNoFDTotalArgs)
-
-
   # Forest Degradation Total
   CalcFDEstArgs <- function() {
-    return(list(local$EmEstFell, local$RemEstFell, local$EmFire))
+    return(list(local$EstEmFell, local$EstRemFell, local$EmFire))
   }
 
   ## MGG - UC
-  result$FDFinal <- CalcMonteCarlo("FDFinal", EmRems$FDEst, CalcFDEst, CalcFDEstArgs)
+  result$FDFinal <- CalcMonteCarlo("FDFinal", EmRems$EstEmRemsFDeg, CalcFDEst, CalcFDEstArgs)
 
 
   # Enhancement Total
@@ -382,7 +365,7 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   }
 
   ## MGG - UC
-  result$ECFinal <- CalcMonteCarlo("ECFinal", EmRems$ECEst, CalcECEst, CalcECEstArgs)
+  result$ECFinal <- CalcMonteCarlo("ECFinal", EmRems$EstEmRemsEnh, CalcECEst, CalcECEstArgs)
 
 
   # Net Emissions Total
@@ -391,7 +374,7 @@ createUC_EmRemsValues <- function(UC, UC_MV, EmRems, MV) {
   }
 
   ## MGG - UC
-  result$NetEmissionsFinal <- CalcMonteCarlo("NetEmissions", EmRems$NetEmTotal, CalcNetEmTotal, CalcNetEmTotalArgs)
+  result$NetEmissionsFinal <- CalcMonteCarlo("NetEmissions", EmRems$NetEmRems, CalcNetEmTotal, CalcNetEmTotalArgs)
 
   return(result)
 }
@@ -438,17 +421,17 @@ createUC_ERValues <- function(UC_EmRems, UC_MV, UC, MRparams) {
   # Monitoring Period ERs Defor and Enhancements (excluding Forest Deg)
 
   year1$MpEstEmRemsDefor <- ValueWithUncertainty(
-    Value = UC_EmRems$year1$EmEstDFTotalFinal$value[1],
-    LowerCI = UC_EmRems$year1$EmEstDFTotalFinal$value[2],
-    UpperCI = UC_EmRems$year1$EmEstDFTotalFinal$value[3],
-    model = create_vwuSampled(UC_EmRems$year1$EmEstDFTotalFinal$MCresults), fixed = FALSE
+    Value = UC_EmRems$year1$McEstEmRemsDefor$value[1],
+    LowerCI = UC_EmRems$year1$McEstEmRemsDefor$value[2],
+    UpperCI = UC_EmRems$year1$McEstEmRemsDefor$value[3],
+    model = create_vwuSampled(UC_EmRems$year1$McEstEmRemsDefor$MCresults), fixed = FALSE
   )
 
   year2$MpEstEmRemsDefor <- ValueWithUncertainty(
-    Value = UC_EmRems$year2$EmEstDFTotalFinal$value[1],
-    LowerCI = UC_EmRems$year2$EmEstDFTotalFinal$value[2],
-    UpperCI = UC_EmRems$year2$EmEstDFTotalFinal$value[3],
-    model = create_vwuSampled(UC_EmRems$year2$EmEstDFTotalFinal$MCresults), fixed = FALSE
+    Value = UC_EmRems$year2$McEstEmRemsDefor$value[1],
+    LowerCI = UC_EmRems$year2$McEstEmRemsDefor$value[2],
+    UpperCI = UC_EmRems$year2$McEstEmRemsDefor$value[3],
+    model = create_vwuSampled(UC_EmRems$year2$McEstEmRemsDefor$MCresults), fixed = FALSE
   )
 
   MpEstEmRemsDeforValue <- CalcMpEstEmRemsDefor(

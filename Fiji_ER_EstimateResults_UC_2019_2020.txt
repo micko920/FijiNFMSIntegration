@@ -1,0 +1,180 @@
+$year1
+                stratum   Estimate        LCI        UCI
+1         Deforestation  2696826.9  2096944.2  2820654.2
+2  Forest Deg (felling)   195316.3   162012.6   228757.6
+3     Forest Deg (fire)    81559.2    68597.0    94262.9
+4    Forest Plantations   560497.2   487296.1   658921.3
+5         Sum Emissions  3534199.5  2937547.5  3682395.0
+6  Forest Deg (felling)   -42361.7   -59037.0   -26951.4
+7         Afforestation   -59544.9   -88256.6   -36341.0
+8    Forest Plantations -1371814.8 -1614253.2 -1147073.5
+9          Sum Removals -1473721.5 -1718203.6 -1246273.5
+10        Deforestation  2696826.9  2096944.2  2820654.2
+11   Forest Degradation   234513.7   195562.6   273119.0
+12          Enhancement  -870862.6 -1117791.8  -618128.7
+13                Total  2060478.0  1403371.9  2288379.5
+
+$year2
+                stratum   Estimate        LCI        UCI
+1         Deforestation  2696826.9  2097093.6  2819653.2
+2  Forest Deg (felling)   195316.3   161961.5   228724.0
+3     Forest Deg (fire)    81559.2    68591.7    94276.4
+4    Forest Plantations   687430.2   596675.5   809459.4
+5         Sum Emissions  3661132.5  3062656.1  3816814.8
+6  Forest Deg (felling)   -42361.7   -59122.9   -26978.2
+7         Afforestation   -59544.9   -88089.1   -36285.2
+8    Forest Plantations -1378312.7 -1624609.1 -1152592.2
+9          Sum Removals -1480219.3 -1728697.3 -1253172.9
+10        Deforestation  2696826.9  2097093.6  2819653.2
+11   Forest Degradation   234513.7   195410.1   272964.6
+12          Enhancement  -750427.4 -1004653.1  -485077.2
+13                Total  2180913.2  1521720.7  2413959.4
+
+$year1
+$year1$year
+[1] "2018"
+
+$year1$EstEmRemsDefor
+[1] 2696827
+
+$year1$EstEmRemsFDeg
+[1] 234514
+
+$year1$EstEmRemsEnh
+[1] -870863
+
+$year1$NetEmRems
+[1] 2060478
+
+
+$year2
+$year2$year
+[1] "2019"
+
+$year2$EstEmRemsDefor
+[1] 2696827
+
+$year2$EstEmRemsFDeg
+[1] 234514
+
+$year2$EstEmRemsEnh
+[1] -750427
+
+$year2$NetEmRems
+[1] 2180913
+
+
+$MpEstEmRemsDefor
+[1] 5393654
+
+$MpEstEmRemsFDeg
+[1] 469027
+
+$MpEstEmRemsEnh
+[1] -1621290
+
+$MpNetEmRems
+[1] 4241391
+
+$RpNetEmRems
+[1] 3137467
+
+$MpEstFRL
+[1] 3273600
+
+$RpEstFRL
+[1] 2421567
+
+$MpEstERs
+[1] -967791
+
+$RpEstERs
+[1] -715900
+
+$MpEstERsDefEnh
+$MpEstERsDefEnh$median
+[1] -590027
+
+$MpEstERsDefEnh$UCI
+   UCI 
+573816 
+
+$MpEstERsDefEnh$LCI
+     LCI 
+-1704283 
+
+$MpEstERsDefEnh$halfWidth
+    UCI 
+1139049 
+
+$MpEstERsDefEnh$relativeMargin
+    UCI 
+-1.9305 
+
+$MpEstERsDefEnh$conserFactor
+[1] 0
+
+
+$MpEstERsFDeg
+$MpEstERsFDeg$median
+[1] 159315
+
+$MpEstERsFDeg$UCI
+   UCI 
+239791 
+
+$MpEstERsFDeg$LCI
+    LCI 
+81489.1 
+
+$MpEstERsFDeg$halfWidth
+    UCI 
+79150.8 
+
+$MpEstERsFDeg$relativeMargin
+    UCI 
+0.49682 
+
+$MpEstERsFDeg$conserFactor
+[1] 0.08
+
+
+$ErpaCurrentFRL
+[1] 2421567
+
+$ErpaCurrentEmRems
+[1] 3137467
+
+$ErpaCurrentERs
+[1] -715900
+
+$ErpaCurrentBalance
+[1] -715900
+
+$IsReversal
+[1] TRUE
+
+$RpCanceledERs
+[1] NaN
+
+$RpEstERsFDeg
+[1] 112332
+
+$RpEstERsDefEnh
+[1] -828233
+
+$RpSetaside
+[1] 8986.58
+
+$RpAdjERs
+[1] -724887
+
+$RpPotentialERs
+[1] -724887
+
+$RpBufferedERs
+[1] -115982
+
+$RpERs
+[1] -608905
+

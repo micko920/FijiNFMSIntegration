@@ -1,34 +1,34 @@
 $year1
                 stratum   Estimate        LCI        UCI
-1         Deforestation  2696826.9  2087305.6  2819422.2
-2  Forest Deg (felling)   195316.3   161657.8   229303.5
-3     Forest Deg (fire)    81559.2    68742.4    94555.3
-4    Forest Plantations   596194.8   530003.9   685534.1
-5         Sum Emissions  3569897.2  2960852.6  3712059.7
-6  Forest Deg (felling)   -42361.7   -58886.7   -26959.3
-7         Afforestation   -59544.9   -87916.7   -35793.4
-8    Forest Plantations -1764231.9 -2035572.7 -1509867.4
-9          Sum Removals -1866138.6 -2137213.3 -1604082.3
-10        Deforestation  2696826.9  2087305.6  2819422.2
-11   Forest Degradation   234513.7   195767.0   273415.6
-12          Enhancement -1227582.1 -1496089.6  -951620.0
-13                Total  1703758.6  1021838.4  1946627.4
+1         Deforestation  2696826.9  2098020.3  2819882.5
+2  Forest Deg (felling)   195316.3   162016.4   228678.8
+3     Forest Deg (fire)    81559.2    68601.9    94218.4
+4    Forest Plantations   596194.8   529973.1   684192.8
+5         Sum Emissions  3569897.2  2971564.9  3712598.0
+6  Forest Deg (felling)   -42361.7   -59266.6   -26957.6
+7         Afforestation   -59544.9   -88278.6   -36372.0
+8    Forest Plantations -1764231.9 -2035996.8 -1507326.7
+9          Sum Removals -1866138.6 -2139499.5 -1608166.0
+10        Deforestation  2696826.9  2098020.3  2819882.5
+11   Forest Degradation   234513.7   195596.2   272984.7
+12          Enhancement -1227582.1 -1500518.8  -948505.5
+13                Total  1703758.6  1032421.9  1942891.7
 
 $year2
                 stratum   Estimate        LCI        UCI
-1         Deforestation  2696826.9  2096654.4  2820281.7
-2  Forest Deg (felling)   195316.3   161733.7   228626.6
-3     Forest Deg (fire)    81559.2    68807.0    94393.3
-4    Forest Plantations   596194.8   528434.5   684161.7
-5         Sum Emissions  3569897.2  2975773.9  3714817.8
-6  Forest Deg (felling)   -42361.7   -58601.4   -26980.5
-7         Afforestation   -59544.9   -88344.2   -36257.2
-8    Forest Plantations -1764231.9 -2042118.7 -1505691.1
-9          Sum Removals -1866138.6 -2146693.0 -1606394.7
-10        Deforestation  2696826.9  2096654.4  2820281.7
-11   Forest Degradation   234513.7   194684.3   274719.8
-12          Enhancement -1227582.1 -1515514.7  -938680.9
-13                Total  1703758.6  1025542.4  1944578.9
+1         Deforestation  2696826.9  2097644.3  2819772.4
+2  Forest Deg (felling)   195316.3   161927.7   228627.9
+3     Forest Deg (fire)    81559.2    68564.3    94235.2
+4    Forest Plantations   596194.8   529834.4   684062.0
+5         Sum Emissions  3569897.2  2973288.8  3712979.9
+6  Forest Deg (felling)   -42361.7   -59002.2   -26992.8
+7         Afforestation   -59544.9   -88261.5   -36288.9
+8    Forest Plantations -1764231.9 -2033366.4 -1506916.5
+9          Sum Removals -1866138.6 -2138235.9 -1608536.9
+10        Deforestation  2696826.9  2097644.3  2819772.4
+11   Forest Degradation   234513.7   195489.4   272942.8
+12          Enhancement -1227582.1 -1497865.0  -948007.7
+13                Total  1703758.6  1034534.6  1943034.7
 
 $year1
 $year1$year
@@ -93,23 +93,23 @@ $RpEstERs
 
 $MpEstERsDefEnh
 $MpEstERsDefEnh$median
-[1] 251005
+[1] 248957
 
 $MpEstERsDefEnh$UCI
     UCI 
-1419404 
+1425020 
 
 $MpEstERsDefEnh$LCI
     LCI 
--855252 
+-875205 
 
 $MpEstERsDefEnh$halfWidth
     UCI 
-1137328 
+1150113 
 
 $MpEstERsDefEnh$relativeMargin
     UCI 
-4.53109 
+4.61972 
 
 $MpEstERsDefEnh$conserFactor
 [1] 0.15
@@ -117,23 +117,23 @@ $MpEstERsDefEnh$conserFactor
 
 $MpEstERsFDeg
 $MpEstERsFDeg$median
-[1] 158483
+[1] 159387
 
 $MpEstERsFDeg$UCI
    UCI 
-240318 
+239687 
 
 $MpEstERsFDeg$LCI
     LCI 
-79830.5 
+82117.9 
 
 $MpEstERsFDeg$halfWidth
     UCI 
-80243.5 
+78784.6 
 
 $MpEstERsFDeg$relativeMargin
      UCI 
-0.506323 
+0.494296 
 
 $MpEstERsFDeg$conserFactor
 [1] 0.08

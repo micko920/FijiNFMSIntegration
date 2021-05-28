@@ -58,21 +58,21 @@ createUC_Values <- function() {
 
   #### Values with Uncertainty #####
 
-  result$EFDFUp <- ValueWithUncertainty(
-    Value = EFDFUp,
-    LowerCI = EFDFUp_LCI,
-    UpperCI = EFDFUp_UCI,
+  result$EFDeforUp <- ValueWithUncertainty(
+    Value = EFDeforUp,
+    LowerCI = EFDeforUp_LCI,
+    UpperCI = EFDeforUp_UCI,
     model = vwuTriangle, fixed = FALSE
   )
-  names(result$EFDFUp) <- c("EFDFUp")
+  names(result$EFDeforUp) <- c("EFDeforUp")
 
-  result$EFDFLow <- ValueWithUncertainty(
-    Value = EFDFLow,
-    LowerCI = EFDFLow_LCI,
-    UpperCI = EFDFLow_UCI,
+  result$EFDeforLow <- ValueWithUncertainty(
+    Value = EFDeforLow,
+    LowerCI = EFDeforLow_LCI,
+    UpperCI = EFDeforLow_UCI,
     model = vwuTriangle, fixed = FALSE
   )
-  names(result$EFDFLow) <- c("EFDFLow")
+  names(result$EFDeforLow) <- c("EFDeforLow")
 
   result$TEF <- ValueWithUncertainty(
     Value = TEF,
