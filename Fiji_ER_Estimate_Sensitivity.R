@@ -23,13 +23,15 @@ library(FijiNFMSCalculations)
 options(digits = 8)
 options(show.error.locations = TRUE)
 
-#MCRuns <- 1.5e+06 # limit the number of runs in MC simulation - change as required
-#MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
-
 # This number was used to generate the chk file.
-MCRuns <- 1.5e+06 #  number of runs in MC simulation - change as required
-MCTolerance <- 0.0025
+MCRuns <- 1.5e+06 # limit the number of runs in MC simulation - change as required
+MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
+
+#### Values used to calculate 2019-2020 output - about 4 hours
+# MCRuns <- 1.5e+06 #  number of runs in MC simulation - change as required
+# MCTolerance <- 0.0025
+# set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
 debug_er <- FALSE # Turn printed output on
 show_output <- TRUE # Turn final table printed output on
@@ -39,7 +41,8 @@ plot_mc_output <- FALSE # Turn on plots for MC samples
 # Yearly Data (to be input for each year)
 # .....................................................................................
 # Used input data from baseline FRL, actual data to be input for each year
-source(file = "./Baseline_Values/Monitored_Values_2019_2020.R")
+source(file = "./Baseline_Values/Monitored_Values.R")
+#source(file = "./Baseline_Values/Monitored_Values_2019_2020.R")
 
 # results of accuracy assessment for uncertainty analysis
 # aa_boot <- read.table("./Data/aa_boot.txt", header = T) # or use new AccuracyAssessment.R file
