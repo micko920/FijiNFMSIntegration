@@ -4,7 +4,7 @@ source(file = "../Fiji_Constants_from_Reference_Level.R")
 
 options(digits = 8)
 
-# Uncertainty attached to the estimated total carbon increment for AR
+# Uncertainty attached to the estimated total carbon increment for AReforefor
 VMAICar <- rtriangle(
   # Random mean annual carbon increment
   n = MCRuns,
@@ -22,41 +22,41 @@ VMAICar
 
 
 # Total Area of Afforestation
-AreaTotal <- ARAreaUp + ARAreaLow 
+AreaTotal <- AReforeforAreaUp + AReforeforAreaLow 
 # Carbon gains on areas afforested/reforested in one year
 CarbonT <- AreaTotal * MAICar
 
 
 # Uncertainty analysis
 # Create vector
-UncAnaRemAR <- vector()
+UncAnaRemAReforefor <- vector()
 
-UncAnaRemAR
+UncAnaRemAReforefor
 # MC simulation
 for(i in 1:MCRuns){ # i <- 1
-  UncAnaRemAR[i] <- (  
-      AreaTotal *  # Average annual area of AR
+  UncAnaRemAReforefor[i] <- (  
+      AreaTotal *  # Average annual area of AReforefor
       VMAICar[i])                  # Random increment
 }
-UncAnaRemAR[1:10]
+UncAnaRemAReforefor[1:10]
 
 
-# Average annual removals from afforestation/reforestation (AR)
-EstimateRemAR <- CarbonT * CarbonToCO2eRatio                              # Estimate
-LCIRemAr <- quantile(UncAnaRemAR * CarbonToCO2eRatio, probs = QLCI) # Lower confidence limit
-UCIRemAR <- quantile(UncAnaRemAR * CarbonToCO2eRatio, probs = QUCI) # Upper confidence limit
-MCERemAR <- UncAnaRemAR * CarbonToCO2eRatio                            # MC estimates
+# Average annual removals from afforestation/reforestation (AReforefor)
+EstimateRemAReforefor <- CarbonT * CarbonToCO2eRatio                              # Estimate
+LCIRemAr <- quantile(UncAnaRemAReforefor * CarbonToCO2eRatio, probs = QLCI) # Lower confidence limit
+UCIRemAReforefor <- quantile(UncAnaRemAReforefor * CarbonToCO2eRatio, probs = QUCI) # Upper confidence limit
+MCERemAReforefor <- UncAnaRemAReforefor * CarbonToCO2eRatio                            # MC estimates
 
 # missing (-1)
-EstimateRemAR 
+EstimateRemAReforefor 
 LCIRemAr
-UCIRemAR 
+UCIRemAReforefor 
 
 ############################################################################
 
 # MAICar  <- MAICAGBar * (1 + RootToShootTropRain) which is affected by final value for MAICAGBar
 
-CalcRemAR <- function(
+CalcEstRemAReforefor <- function(
   AreaUpland,
   AreaLowland,
   MAICar, 
@@ -72,5 +72,5 @@ CalcRemAR <- function(
 
 
 # Yearly Removals from Afforestation  (tCO2e)
-RemAR <- CalcRemAR(ARAreaLow, ARAreaUp, MAICar, CarbonToCO2eRatio)
-RemAR
+RemAReforefor <- CalcEstRemAReforefor(AReforeforAreaLow, AReforeforAreaUp, MAICar, CarbonToCO2eRatio)
+RemAReforefor

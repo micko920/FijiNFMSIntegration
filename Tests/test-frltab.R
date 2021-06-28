@@ -1,7 +1,11 @@
 
 setwd("..")
 set.seed(08121976) #Seed set to remove random nature of MC Analysis for LCI & UCI
-source(file = "./fiji_frl_all_R_code.R")
+
+test_that("Run the FRL code", {
+  expect_silent(source(file = "./fiji_frl_all_R_code.R", echo=FALSE))
+})
+
 
 test_that("FRL Table Exists", {
   expect_equal(exists("frltab"), TRUE)

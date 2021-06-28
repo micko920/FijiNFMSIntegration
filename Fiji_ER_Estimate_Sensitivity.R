@@ -20,15 +20,15 @@ library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
 # Set up
-options(digits = 8) # 6 significant figures
+options(digits = 8)
 options(show.error.locations = TRUE)
 
-MCRuns <- 1.5e+06 # limit the number of runs in MC simulation - change as required
-MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
+#MCRuns <- 1.5e+06 # limit the number of runs in MC simulation - change as required
+#MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 
 # This number was used to generate the chk file.
-# MCRuns <- 1.5e+06 #  number of runs in MC simulation - change as required
-#MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
+MCRuns <- 1.5e+06 #  number of runs in MC simulation - change as required
+MCTolerance <- 0.0025
 set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
 debug_er <- FALSE # Turn printed output on
@@ -39,7 +39,7 @@ plot_mc_output <- FALSE # Turn on plots for MC samples
 # Yearly Data (to be input for each year)
 # .....................................................................................
 # Used input data from baseline FRL, actual data to be input for each year
-source(file = "./Baseline_Values/Monitored_Values.R")
+source(file = "./Baseline_Values/Monitored_Values_2019_2020.R")
 
 # results of accuracy assessment for uncertainty analysis
 # aa_boot <- read.table("./Data/aa_boot.txt", header = T) # or use new AccuracyAssessment.R file
@@ -149,7 +149,7 @@ calcTEI <- function(newSamples, oldVar) {
 }
 
 
-V_all <- var(UC_ER_Values$MpEstERsDefEnhFinal$MCresults)
+V_all <- var(UC_ER_Values$McMpEstERsDefEnh$MCresults)
 
 TEI_Values <- list()
 
@@ -175,7 +175,7 @@ for (i in 1:length(UC_Values)) {
   UC_ER_Values <- createUC_ERValues(UC_EmRems_Values, UC_MV_Values, UC_Values, MonitoringReportParams)
 
   TEI_Values$params$name[i] <- names(UC_Values[i])
-  TEI_Values$params$v[i] <- formatDecimal(calcTEI(UC_ER_Values$MpEstERsDefEnhFinal$MCresults, V_all))
+  TEI_Values$params$v[i] <- formatDecimal(calcTEI(UC_ER_Values$McMpEstERsDefEnh$MCresults, V_all))
   print(date())
   print(paste(TEI_Values$params$name[i], ": ", TEI_Values$params$v[i]))
   print(paste(i, "of ", length(UC_Values)))
@@ -206,7 +206,7 @@ for (i in 1:length(UC_MV_Values$year1)) {
   UC_ER_Values <- createUC_ERValues(UC_EmRems_Values, UC_MV_Values, UC_Values, MonitoringReportParams)
 
   TEI_Values$activityData$name[i] <- names(UC_MV_Values$year1[i])
-  TEI_Values$activityData$v[i] <- formatDecimal(calcTEI(UC_ER_Values$MpEstERsDefEnhFinal$MCresults, V_all))
+  TEI_Values$activityData$v[i] <- formatDecimal(calcTEI(UC_ER_Values$McMpEstERsDefEnh$MCresults, V_all))
   print(date())
   print(paste(TEI_Values$activityData$name[i], ": ", TEI_Values$activityData$v[i]))
   print(paste(i, "of ", length(UC_MV_Values$year1)))

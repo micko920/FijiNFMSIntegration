@@ -114,13 +114,13 @@ createUC_Values <- function() {
   )
   names(result$MAIVhw) <- c("MAIVhw")
 
-  result$BiomassConvExpansionAR <- ValueWithUncertainty(
-    Value = BiomassConvExpansionAR,
-    LowerCI = BiomassConvExpansionAR - (BiomassConvExpansionAR * errBiomassConvExpansionAR),
-    UpperCI = BiomassConvExpansionAR + (BiomassConvExpansionAR * errBiomassConvExpansionAR),
+  result$BiomassConvExpansionARefor <- ValueWithUncertainty(
+    Value = BiomassConvExpansionARefor,
+    LowerCI = BiomassConvExpansionARefor - (BiomassConvExpansionARefor * errBiomassConvExpansionARefor),
+    UpperCI = BiomassConvExpansionARefor + (BiomassConvExpansionARefor * errBiomassConvExpansionARefor),
     model = vwuTriangle, fixed = FALSE
   )
-  names(result$BiomassConvExpansionAR) <- c("BiomassConvExpansionAR")
+  names(result$BiomassConvExpansionARefor) <- c("BiomassConvExpansionARefor")
 
   result$BiomassConvExpansionHW <- ValueWithUncertainty(
     Value = BiomassConvExpansionHW,

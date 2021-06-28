@@ -23,13 +23,13 @@ createUC_MV_Values <- function(MV) {
   )
   names(result$DeforAreaUp) <- c("DeforAreaUp")
 
-  result$ARArea <- ValueWithUncertainty(
-    Value = MV$ARArea,
-    LowerCI = MV$ARArea_LCI,
-    UpperCI = MV$ARArea_UCI,
+  result$AReforArea <- ValueWithUncertainty(
+    Value = MV$AReforArea,
+    LowerCI = MV$AReforArea_LCI,
+    UpperCI = MV$AReforArea_UCI,
     model = vwuTriangle, fixed = FALSE
   )
-  names(result$ARArea) <- c("ARArea")
+  names(result$AReforArea) <- c("AReforArea")
 
   result$FDegFellArea <- ValueWithUncertainty(
     Value = MV$FDegFellArea,

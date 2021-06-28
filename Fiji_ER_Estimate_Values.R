@@ -16,12 +16,12 @@ library(VGAM)
 library(FijiNFMSCalculations)
 
 # Set up
-options(digits = 6) # 6 significant figures
+options(digits = 6)
 options(show.error.locations = TRUE)
 
 debug_er <- FALSE # Turn printed output on
 show_output <- TRUE # Turn final table printed output on
-
+ 
 # Yearly Data (to be input for each year)
 # .....................................................................................
 # Used input data from baseline FRL, actual data to be input for each year
@@ -74,9 +74,13 @@ if (debug_er | show_output) {
   #**************************************************************************
   # put results in txt file
   sink("Fiji_ER_EstimateResults_Values.txt")
-  print(MonitoredValues)
+  #print(MonitoredValues)
+  
+  print("***** EmRems_Values *******")
   print(EmRems_Values)
+  print("****** ER_Values *******")
   print(ER_Values)
+  print("***** MR_Values ********")
   print(MR_Values)
   sink()
   options(old_width)

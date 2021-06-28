@@ -1,0 +1,6 @@
+# When running the Fiji_ER_Estimate_UC (Uncertainty) code there is an option for changing the number of
+# Monte Carlo Analysis iterations (runs) which are carried out. When the number is low e.g 1.5e02 (150 runs)
+# the results outputs an error for the UC_ER_Values calculation indicating that the Upper CI must be higher than the value.
+# If the MC iteration runs are increased, the calculation will stablise and this error will be removed. 
+
+## See screenshots for line code to change MC and the error log. 

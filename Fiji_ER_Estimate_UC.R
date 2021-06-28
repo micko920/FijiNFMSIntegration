@@ -20,28 +20,32 @@ library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
 # Set up
-options(digits = 6) # 6 significant figures
+options(digits = 6)
 options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 
-MCRuns <- 1.5e+06 # limit the number of runs in MC simulation - change as required
-MCTolerance <- 0.01 # how stable the UCI and LCI should be before stopping
-
 # This number was used to generate the chk file.
+MCRuns <- 1.5e+06
+MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
+set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
+
+#### Values used to calculate 2019-2020 output
 # MCRuns <- 1.5e+06
 # MCTolerance <- 0.0025
-set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
+# set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
+
 
 debug_er <- FALSE # Turn printed output on
 show_output <- TRUE # Turn final table printed output on
-plot_mc_output <- FALSE # Turn on plots for MC samples
+plot_mc_output <- TRUE # Turn on plots for MC samples
 
 
 # Yearly Data (to be input for each year)
 # .....................................................................................
 # Used input data from baseline FRL, actual data to be input for each year
 source(file = "./Baseline_Values/Monitored_Values.R")
+#source(file = "./Baseline_Values/Monitored_Values_2019_2020.R")
 
 # results of accuracy assessment for uncertainty analysis
 # aa_boot <- read.table("./Data/aa_boot.txt", header = T) # or use new AccuracyAssessment.R file
@@ -183,49 +187,49 @@ ResultsTables$year1 <- data.frame(
 	"Total"
   ),
   Estimate = c(
-    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[1]],
-    UC_EmRems_Values$year1$EstEmFellFinal$value[[1]],
-    UC_EmRems_Values$year1$EmFireFinal$value[[1]],
-    UC_EmRems_Values$year1$EmEstFPTotalFinal$value[[1]],
-    UC_EmRems_Values$year1$GrossEmTotalFinal$value[[1]],
-    UC_EmRems_Values$year1$EstRemFellFinal$value[[1]],
-    UC_EmRems_Values$year1$RemEstARFinal$value[[1]],
-    UC_EmRems_Values$year1$RemEstFPTotalFinal$value[[1]],
-    UC_EmRems_Values$year1$GrossRemTotalFinal$value[[1]],
-    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[1]],
-    UC_EmRems_Values$year1$FDFinal$value[[1]],
-    UC_EmRems_Values$year1$ECFinal$value[[1]],
-    UC_EmRems_Values$year1$NetEmissionsFinal$value[[1]]
+    UC_EmRems_Values$year1$McGrossEmDefor$value[[1]],
+    UC_EmRems_Values$year1$McEstEmFell$value[[1]],
+    UC_EmRems_Values$year1$McEstEmFire$value[[1]],
+    UC_EmRems_Values$year1$McGrossEmFPln$value[[1]],
+    UC_EmRems_Values$year1$McGrossEm$value[[1]],
+    UC_EmRems_Values$year1$McEstRemFell$value[[1]],
+    UC_EmRems_Values$year1$McEstRemARefor$value[[1]],
+    UC_EmRems_Values$year1$McGrossRemFPln$value[[1]],
+    UC_EmRems_Values$year1$McGrossRem$value[[1]],
+    UC_EmRems_Values$year1$McGrossEmDefor$value[[1]],
+    UC_EmRems_Values$year1$McFDeg$value[[1]],
+    UC_EmRems_Values$year1$McEnh$value[[1]],
+    UC_EmRems_Values$year1$McNetEmRems$value[[1]]
   ),
   LCI = c(
-    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[2]],
-    UC_EmRems_Values$year1$EstEmFellFinal$value[[2]],
-    UC_EmRems_Values$year1$EmFireFinal$value[[2]],
-    UC_EmRems_Values$year1$EmEstFPTotalFinal$value[[2]],
-    UC_EmRems_Values$year1$GrossEmTotalFinal$value[[2]],
-    UC_EmRems_Values$year1$EstRemFellFinal$value[[2]],
-    UC_EmRems_Values$year1$RemEstARFinal$value[[2]],
-    UC_EmRems_Values$year1$RemEstFPTotalFinal$value[[2]],
-    UC_EmRems_Values$year1$GrossRemTotalFinal$value[[2]],
-    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[2]],
-    UC_EmRems_Values$year1$FDFinal$value[[2]],
-    UC_EmRems_Values$year1$ECFinal$value[[2]],
-    UC_EmRems_Values$year1$NetEmissionsFinal$value[[2]]
+    UC_EmRems_Values$year1$McGrossEmDefor$value[[2]],
+    UC_EmRems_Values$year1$McEstEmFell$value[[2]],
+    UC_EmRems_Values$year1$McEstEmFire$value[[2]],
+    UC_EmRems_Values$year1$McGrossEmFPln$value[[2]],
+    UC_EmRems_Values$year1$McGrossEm$value[[2]],
+    UC_EmRems_Values$year1$McEstRemFell$value[[2]],
+    UC_EmRems_Values$year1$McEstRemARefor$value[[2]],
+    UC_EmRems_Values$year1$McGrossRemFPln$value[[2]],
+    UC_EmRems_Values$year1$McGrossRem$value[[2]],
+    UC_EmRems_Values$year1$McGrossEmDefor$value[[2]],
+    UC_EmRems_Values$year1$McFDeg$value[[2]],
+    UC_EmRems_Values$year1$McEnh$value[[2]],
+    UC_EmRems_Values$year1$McNetEmRems$value[[2]]
   ),
   UCI = c(
-    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[3]],
-    UC_EmRems_Values$year1$EstEmFellFinal$value[[3]],
-    UC_EmRems_Values$year1$EmFireFinal$value[[3]],
-    UC_EmRems_Values$year1$EmEstFPTotalFinal$value[[3]],
-    UC_EmRems_Values$year1$GrossEmTotalFinal$value[[3]],
-    UC_EmRems_Values$year1$EstRemFellFinal$value[[3]],
-    UC_EmRems_Values$year1$RemEstARFinal$value[[3]],
-    UC_EmRems_Values$year1$RemEstFPTotalFinal$value[[3]],
-    UC_EmRems_Values$year1$GrossRemTotalFinal$value[[3]],
-    UC_EmRems_Values$year1$McEstEmRemsDefor$value[[3]],
-    UC_EmRems_Values$year1$FDFinal$value[[3]],
-    UC_EmRems_Values$year1$ECFinal$value[[3]],
-    UC_EmRems_Values$year1$NetEmissionsFinal$value[[3]]
+    UC_EmRems_Values$year1$McGrossEmDefor$value[[3]],
+    UC_EmRems_Values$year1$McEstEmFell$value[[3]],
+    UC_EmRems_Values$year1$McEstEmFire$value[[3]],
+    UC_EmRems_Values$year1$McGrossEmFPln$value[[3]],
+    UC_EmRems_Values$year1$McGrossEm$value[[3]],
+    UC_EmRems_Values$year1$McEstRemFell$value[[3]],
+    UC_EmRems_Values$year1$McEstRemARefor$value[[3]],
+    UC_EmRems_Values$year1$McGrossRemFPln$value[[3]],
+    UC_EmRems_Values$year1$McGrossRem$value[[3]],
+    UC_EmRems_Values$year1$McGrossEmDefor$value[[3]],
+    UC_EmRems_Values$year1$McFDeg$value[[3]],
+    UC_EmRems_Values$year1$McEnh$value[[3]],
+    UC_EmRems_Values$year1$McNetEmRems$value[[3]]
   )
 )
 
@@ -236,49 +240,49 @@ ResultsTables$year2 <- data.frame(
     "Forest Plantations", "Sum Removals", "Deforestation", "Forest Degradation", "Enhancement", "Total"
   ),
   Estimate = c(
-    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[1]],
-    UC_EmRems_Values$year2$EstEmFellFinal$value[[1]],
-    UC_EmRems_Values$year2$EmFireFinal$value[[1]],
-    UC_EmRems_Values$year2$EmEstFPTotalFinal$value[[1]],
-    UC_EmRems_Values$year2$GrossEmTotalFinal$value[[1]],
-    UC_EmRems_Values$year2$EstRemFellFinal$value[[1]],
-    UC_EmRems_Values$year2$RemEstARFinal$value[[1]],
-    UC_EmRems_Values$year2$RemEstFPTotalFinal$value[[1]],
-    UC_EmRems_Values$year2$GrossRemTotalFinal$value[[1]],
-    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[1]],
-    UC_EmRems_Values$year2$FDFinal$value[[1]],
-    UC_EmRems_Values$year2$ECFinal$value[[1]],
-    UC_EmRems_Values$year2$NetEmissionsFinal$value[[1]]
+    UC_EmRems_Values$year2$McGrossEmDefor$value[[1]],
+    UC_EmRems_Values$year2$McEstEmFell$value[[1]],
+    UC_EmRems_Values$year2$McEstEmFire$value[[1]],
+    UC_EmRems_Values$year2$McGrossEmFPln$value[[1]],
+    UC_EmRems_Values$year2$McGrossEm$value[[1]],
+    UC_EmRems_Values$year2$McEstRemFell$value[[1]],
+    UC_EmRems_Values$year2$McEstRemARefor$value[[1]],
+    UC_EmRems_Values$year2$McGrossRemFPln$value[[1]],
+    UC_EmRems_Values$year2$McGrossRem$value[[1]],
+    UC_EmRems_Values$year2$McGrossEmDefor$value[[1]],
+    UC_EmRems_Values$year2$McFDeg$value[[1]],
+    UC_EmRems_Values$year2$McEnh$value[[1]],
+    UC_EmRems_Values$year2$McNetEmRems$value[[1]]
   ),
   LCI = c(
-    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[2]],
-    UC_EmRems_Values$year2$EstEmFellFinal$value[[2]],
-    UC_EmRems_Values$year2$EmFireFinal$value[[2]],
-    UC_EmRems_Values$year2$EmEstFPTotalFinal$value[[2]],
-    UC_EmRems_Values$year2$GrossEmTotalFinal$value[[2]],
-    UC_EmRems_Values$year2$EstRemFellFinal$value[[2]],
-    UC_EmRems_Values$year2$RemEstARFinal$value[[2]],
-    UC_EmRems_Values$year2$RemEstFPTotalFinal$value[[2]],
-    UC_EmRems_Values$year2$GrossRemTotalFinal$value[[2]],
-    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[2]],
-    UC_EmRems_Values$year2$FDFinal$value[[2]],
-    UC_EmRems_Values$year2$ECFinal$value[[2]],
-    UC_EmRems_Values$year2$NetEmissionsFinal$value[[2]]
+    UC_EmRems_Values$year2$McGrossEmDefor$value[[2]],
+    UC_EmRems_Values$year2$McEstEmFell$value[[2]],
+    UC_EmRems_Values$year2$McEstEmFire$value[[2]],
+    UC_EmRems_Values$year2$McGrossEmFPln$value[[2]],
+    UC_EmRems_Values$year2$McGrossEm$value[[2]],
+    UC_EmRems_Values$year2$McEstRemFell$value[[2]],
+    UC_EmRems_Values$year2$McEstRemARefor$value[[2]],
+    UC_EmRems_Values$year2$McGrossRemFPln$value[[2]],
+    UC_EmRems_Values$year2$McGrossRem$value[[2]],
+    UC_EmRems_Values$year2$McGrossEmDefor$value[[2]],
+    UC_EmRems_Values$year2$McFDeg$value[[2]],
+    UC_EmRems_Values$year2$McEnh$value[[2]],
+    UC_EmRems_Values$year2$McNetEmRems$value[[2]]
   ),
   UCI = c(
-    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[3]],
-    UC_EmRems_Values$year2$EstEmFellFinal$value[[3]],
-    UC_EmRems_Values$year2$EmFireFinal$value[[3]],
-    UC_EmRems_Values$year2$EmEstFPTotalFinal$value[[3]],
-    UC_EmRems_Values$year2$GrossEmTotalFinal$value[[3]],
-    UC_EmRems_Values$year2$EstRemFellFinal$value[[3]],
-    UC_EmRems_Values$year2$RemEstARFinal$value[[3]],
-    UC_EmRems_Values$year2$RemEstFPTotalFinal$value[[3]],
-    UC_EmRems_Values$year2$GrossRemTotalFinal$value[[3]],
-    UC_EmRems_Values$year2$McEstEmRemsDefor$value[[3]],
-    UC_EmRems_Values$year2$FDFinal$value[[3]],
-    UC_EmRems_Values$year2$ECFinal$value[[3]],
-    UC_EmRems_Values$year2$NetEmissionsFinal$value[[3]]
+    UC_EmRems_Values$year2$McGrossEmDefor$value[[3]],
+    UC_EmRems_Values$year2$McEstEmFell$value[[3]],
+    UC_EmRems_Values$year2$McEstEmFire$value[[3]],
+    UC_EmRems_Values$year2$McGrossEmFPln$value[[3]],
+    UC_EmRems_Values$year2$McGrossEm$value[[3]],
+    UC_EmRems_Values$year2$McEstRemFell$value[[3]],
+    UC_EmRems_Values$year2$McEstRemARefor$value[[3]],
+    UC_EmRems_Values$year2$McGrossRemFPln$value[[3]],
+    UC_EmRems_Values$year2$McGrossRem$value[[3]],
+    UC_EmRems_Values$year2$McGrossEmDefor$value[[3]],
+    UC_EmRems_Values$year2$McFDeg$value[[3]],
+    UC_EmRems_Values$year2$McEnh$value[[3]],
+    UC_EmRems_Values$year2$McNetEmRems$value[[3]]
   )
 )
 
@@ -313,3 +317,5 @@ if (debug_er | show_output) {
   sink()
   options(old_width)
 }
+
+

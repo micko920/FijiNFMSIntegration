@@ -8,10 +8,10 @@ create_EstMRValues <- function(UC_ER, ER, EmRems, MV, MRparams) {
   MR$year1$year <- MV$year1$year
   MR$year2$year <- MV$year2$year
 
-  MR$year1$EstEmRemsDefor <- EmRems$year1$EstEmRemsDefor
-  MR$year2$EstEmRemsDefor <- EmRems$year2$EstEmRemsDefor
+  MR$year1$GrossEmDefor <- EmRems$year1$GrossEmDefor
+  MR$year2$GrossEmDefor <- EmRems$year2$GrossEmDefor
 
-  MR$MpEstEmRemsDefor <- ER$MpEstEmRemsDefor
+  MR$MpGrossEmDefor <- ER$MpGrossEmDefor
 
   MR$year1$EstEmRemsFDeg <- EmRems$year1$EstEmRemsFDeg
   MR$year2$EstEmRemsFDeg <- EmRems$year2$EstEmRemsFDeg
@@ -46,10 +46,10 @@ create_MRValues <- function(UC_ER, ER, EmRems, MV, MRparams) {
   MR$year1$year <- MV$year1$year
   MR$year2$year <- MV$year2$year
 
-  MR$year1$EstEmRemsDefor <- EmRems$year1$EstEmRemsDefor
-  MR$year2$EstEmRemsDefor <- EmRems$year2$EstEmRemsDefor
+  MR$year1$GrossEmDefor <- EmRems$year1$GrossEmDefor
+  MR$year2$GrossEmDefor <- EmRems$year2$GrossEmDefor
 
-  MR$MpEstEmRemsDefor <- ER$MpEstEmRemsDefor
+  MR$MpGrossEmDefor <- ER$MpGrossEmDefor
 
   MR$year1$EstEmRemsFDeg <- EmRems$year1$EstEmRemsFDeg
   MR$year2$EstEmRemsFDeg <- EmRems$year2$EstEmRemsFDeg

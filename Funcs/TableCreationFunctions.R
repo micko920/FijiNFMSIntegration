@@ -16,9 +16,9 @@ createTable_4_2 <- function(MR) {
   Table4_2 <- data.frame(
     Year = c(MR$year1$year, MR$year2$year, "Total"),
     Deforestation = c(
-      formatNumber(MR$year1$EstEmRemsDefor),
-      formatNumber(MR$year2$EstEmRemsDefor),
-      formatNumber(MR$MpEstEmRemsDefor)
+      formatNumber(MR$year1$GrossEmDefor),
+      formatNumber(MR$year2$GrossEmDefor),
+      formatNumber(MR$MpGrossEmDefor)
     ),
     Degradation = c(
       formatNumber(MR$year1$EstEmRemsFDeg),

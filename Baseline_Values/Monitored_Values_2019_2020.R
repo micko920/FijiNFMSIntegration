@@ -16,12 +16,12 @@ MonitoredValues$year1$DeforAreaUp <- 2681.64 # Area of deforestation in natural 
 MonitoredValues$year1$DeforAreaUp_UCI <- 2889
 MonitoredValues$year1$DeforAreaUp_LCI <- 1627
 
-MonitoredValues$year1$ARArea <- 6180 # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
-# ARAreaLow      #ARArea = Sum of ARAreaLow and ARAreaUp
-# ARAreaUp       #ARArea = Sum of ARAreaLow and ARAreaUp
+MonitoredValues$year1$AReforArea <- 6180 # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
+# AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+# AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
 # data taken from output of FRL Accuracy Assessment
-MonitoredValues$year1$ARArea_UCI <- 8124
-MonitoredValues$year1$ARArea_LCI <- 4415
+MonitoredValues$year1$AReforArea_UCI <- 8124
+MonitoredValues$year1$AReforArea_LCI <- 4415
 
 # Biomass Burned - Area and Average age of forest burned (used FRL data here)
 MonitoredValues$year1$FDegBurnData <- read.table("./Baseline_Values/FRLBurnData.txt", header = T)[, c("year", "area_ha", "age_yrs")]
@@ -51,12 +51,12 @@ MonitoredValues$year2$DeforAreaUp <- 2681.64 # Area of deforestation in natural 
 MonitoredValues$year2$DeforAreaUp_UCI <- 2889
 MonitoredValues$year2$DeforAreaUp_LCI <- 1627
 
-MonitoredValues$year2$ARArea <- 6180 # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
-# ARAreaLow      #ARArea = Sum of ARAreaLow and ARAreaUp
-# ARAreaUp       #ARArea = Sum of ARAreaLow and ARAreaUp
+MonitoredValues$year2$AReforArea <- 6180 # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
+# AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+# AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
 # data taken from output of FRL Accuracy Assessment
-MonitoredValues$year2$ARArea_UCI <- 8124
-MonitoredValues$year2$ARArea_LCI <- 4415
+MonitoredValues$year2$AReforArea_UCI <- 8124
+MonitoredValues$year2$AReforArea_LCI <- 4415
 
 # Biomass Burned - Area and Average age of forest burned (used FRL data here)
 MonitoredValues$year2$FDegBurnData <- read.table("./Baseline_Values/FRLBurnData.txt", header = T)[, c("year", "area_ha", "age_yrs")]
