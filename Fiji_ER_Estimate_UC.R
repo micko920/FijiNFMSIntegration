@@ -4,8 +4,6 @@
 
 # Required source files
 load(file = "./Data/fiji_frl_input.RData")
-source(file = "./Utils/UncertaintyFunc.R")
-# source(file = "./Utils/aaboot.R")
 # Note all CalcFunctions return CO2e values
 
 # new line
@@ -47,10 +45,6 @@ plot_mc_output <- TRUE # Turn on plots for MC samples
 source(file = "./Baseline_Values/Monitored_Values.R")
 #source(file = "./Baseline_Values/Monitored_Values_2019_2020.R")
 
-# results of accuracy assessment for uncertainty analysis
-# aa_boot <- read.table("./Data/aa_boot.txt", header = T) # or use new AccuracyAssessment.R file
-# results of FRL Deforestation Emissions Factors for uncertainty analysis
-# v_dc <- read.table("./Data/v_dc.txt", header = T)
 
 # Calculated in the FRL #####################################################################
 # All values are now in the FijiNFMSCalculations package.
@@ -64,18 +58,6 @@ source(file = "./Baseline_Values/ER_Monitoring_Report_Parameters.R")
 
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
-
-CalcMonteCarlo <- function(title, # Name to use on debug and plots
-                           est, # CO2e estimate
-                           calc, # Function to calculate CO2e from inputs
-                           calcArgs, # function to create #MC runs of CO2e possibilities using uncertainties
-                           iterations = MCRuns,
-                           Confidence = CI, #  confidence interval
-                           previous = vector()) {
-  result <- StableMonteCarloSamples(calc, calcArgs, est, tolerance = MCTolerance, limit = iterations, debug = plot_mc_output)
-  if (plot_mc_output) PlotMonteCarloSamples(result, est, title)
-  return(list(value = EstimateWithBounds(est, result), MCresults = result))
-}
 
 print("Calculating EmRem values....")
 print(date())
@@ -93,35 +75,14 @@ ER_Values <- CalcERValues(
   MonitoringReportParams$ErpaYearlyFRLFDeg
 )
 
-##### Value Models #####
-
-vwuNorm <- function(v, n, ...) {
-  sd <- (diff(range(v)) / (2 * qnorm(p = QUCI))) # LCI,UCI are 90% QCI (5%,95%)
-  return(rnorm(n, mean = ValueWithUncertaintyValue(v), sd = sd))
-}
-
-vwuTriangle <- function(v, n, ...) {
-  return(rtriangle(n = n, theta = ValueWithUncertaintyValue(v), lower = min(v), upper = max(v)))
-}
-
-create_vwuSampled <- function(value_samples) {
-  return(function(v, n, ...) {
-    return(sample(value_samples, size = n, replace = TRUE))
-  })
-}
-
-source(file = "./Funcs/UC_Values.R")
-
 UC_Values <- list()
 UC_Values <- createUC_Values()
 
-source(file = "./Funcs/UC_MV_Values.R")
 
 UC_MV_Values <- list()
 UC_MV_Values$year1 <- createUC_MV_Values(MonitoredValues$year1)
 UC_MV_Values$year2 <- createUC_MV_Values(MonitoredValues$year2)
 
-source(file = "./Funcs/UC_ER_Values.R")
 
 UC_EmRems_Values <- list()
 
@@ -145,11 +106,9 @@ if (debug_er) {
   print(UC_ER_Values)
 }
 
-source(file = "./Funcs/MR_Values.R")
 
 MR_Values <- create_MRValues(UC_ER_Values, ER_Values, EmRems_Values, MonitoredValues, MonitoringReportParams)
 
-source(file = "./Funcs/TableCreationFunctions.R")
 
 Table4_2 <- createTable_4_2(MR_Values)
 
@@ -305,13 +264,13 @@ save(
     "Table7_2",
     "Table8"
   ),
-  file = "Fiji_ER_EstimateResults_UC.Rdata"
+  file = "./Data/Fiji_ER_EstimateResults_UC.Rdata"
 )
 if (debug_er | show_output) {
   old_width <- options("width" = 120)
   #**************************************************************************
   # put results in txt file
-  sink("Fiji_ER_EstimateResults_UC.txt")
+  sink("./chks/Fiji_ER_EstimateResults_UC.txt")
   print(ResultsTables)
   print(MR_Values)
   sink()

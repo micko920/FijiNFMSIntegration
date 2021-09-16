@@ -39,6 +39,9 @@ devtools::install("../ValueWithUncertainty")
 devtools::install("../MonteCarloUtils")
 devtools::install("../FijiNFMSCalculations")
 
+#devtools::install_github("micko920/ValueWithUncertainty@v1.0.0-alpha")
+#devtools::install_github("micko920/MonteCarloUtils@v1.0.0-alpha")
+#devtools::install_github("micko920/FijiNFMSCalculations@v1.0.0-alpha")
 
 library(nlme)
 library(data.table)
@@ -47,3 +50,6 @@ library(VGAM)
 library(ValueWithUncertainty)
 library(MonteCarloUtils)
 library(FijiNFMSCalculations)
+
+
+install.packages('microbenchmark')

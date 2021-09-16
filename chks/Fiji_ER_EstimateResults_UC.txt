@@ -1,0 +1,1669 @@
+list()
+[1] "Calculating EmRem values...."
+[1] "Thu Sep 02 10:15:47 2021"
+[1] "Calculating ER values...."
+[1] "Thu Sep 02 10:15:47 2021"
+$year1
+$year1$year
+[1] 2018
+
+$year1$DeforAreaLow
+[1] 8332.15
+
+$year1$DeforAreaLow_UCI
+[1] 9437
+
+$year1$DeforAreaLow_LCI
+[1] 5531
+
+$year1$DeforAreaUp
+[1] 2681.64
+
+$year1$DeforAreaUp_UCI
+[1] 2889
+
+$year1$DeforAreaUp_LCI
+[1] 1627
+
+$year1$AReforArea
+[1] 6180
+
+$year1$AReforArea_UCI
+[1] 8124
+
+$year1$AReforArea_LCI
+[1] 4415
+
+$year1$FDegBurnData
+    year  area_ha age_yrs
+235 2018  1.70000       1
+236 2018  1.90000       1
+237 2018  2.01000       1
+238 2018  2.40000       1
+239 2018  4.92000       1
+240 2018 15.60000       1
+241 2018 17.60000       1
+242 2018 23.04000       1
+243 2018  0.70000       2
+244 2018  1.71000       2
+245 2018  3.60000       2
+246 2018  0.60000       3
+247 2018  0.63000       3
+248 2018  1.61491       3
+249 2018  3.07000       3
+250 2018  4.11549       3
+251 2018  6.83000       3
+252 2018 14.50000       3
+253 2018 31.20000       3
+254 2018  1.75000       4
+255 2018  3.85000       4
+256 2018  7.40000       4
+257 2018 22.90000       4
+258 2018  3.57000       5
+259 2018  0.57000       6
+260 2018  2.40000       6
+261 2018  4.80000       6
+262 2018 12.50000       6
+263 2018 10.90000       7
+264 2018 12.40000       7
+265 2018 14.04000       7
+266 2018 19.49000       7
+267 2018  4.09000       8
+268 2018  6.48000       8
+269 2018 11.80000       8
+270 2018 15.70000       8
+271 2018 19.20000       8
+272 2018  3.79000      14
+273 2018  8.40000      14
+274 2018 10.46000      14
+275 2018 13.70000      14
+276 2018  0.93000      15
+277 2018  7.75000      15
+278 2018  9.29000      15
+279 2018 22.90000      15
+280 2018 22.70000      17
+281 2018  1.80000      18
+282 2018  2.80000      18
+283 2018  4.70000      18
+284 2018 50.02000      18
+285 2018  4.12000      20
+286 2018 20.40000      20
+287 2018 54.01000      20
+288 2018 14.80000      21
+289 2018 90.90000      21
+290 2018 11.70000      22
+291 2018 18.80000      23
+292 2018  7.63000      27
+293 2018 23.60000      27
+294 2018 12.60000      28
+
+$year1$FPlnVolHarvHwd
+[1] 62199.6
+
+$year1$FPlnAreaStockHwd
+[1] 56950.5
+
+$year1$FPlnAreaPlantHwd
+[1] 3050.3
+
+$year1$FPlnAreaHarvHwd
+[1] 3316.6
+
+$year1$FPlnAreaJustGrowsHwd
+[1] 53633.9
+
+$year1$FPlnVolHarvSwd
+[1] 334463
+
+$year1$FPlnAreaStockSwd
+[1] 49106
+
+$year1$FPlnAreaPlantSwd
+[1] 370.82
+
+$year1$FPlnAreaHarvSwd
+[1] 1282.4
+
+$year1$FPlnAreaJustGrowsSwd
+[1] 47823.6
+
+$year1$FDegFellVol
+[1] 50731.5
+
+$year1$FDegFellArea
+[1] 11669.9
+
+
+$year2
+$year2$year
+[1] 2019
+
+$year2$DeforAreaLow
+[1] 8332.15
+
+$year2$DeforAreaLow_UCI
+[1] 9437
+
+$year2$DeforAreaLow_LCI
+[1] 5531
+
+$year2$DeforAreaUp
+[1] 2681.64
+
+$year2$DeforAreaUp_UCI
+[1] 2889
+
+$year2$DeforAreaUp_LCI
+[1] 1627
+
+$year2$AReforArea
+[1] 6180
+
+$year2$AReforArea_UCI
+[1] 8124
+
+$year2$AReforArea_LCI
+[1] 4415
+
+$year2$FDegBurnData
+    year  area_ha age_yrs
+235 2018  1.70000       1
+236 2018  1.90000       1
+237 2018  2.01000       1
+238 2018  2.40000       1
+239 2018  4.92000       1
+240 2018 15.60000       1
+241 2018 17.60000       1
+242 2018 23.04000       1
+243 2018  0.70000       2
+244 2018  1.71000       2
+245 2018  3.60000       2
+246 2018  0.60000       3
+247 2018  0.63000       3
+248 2018  1.61491       3
+249 2018  3.07000       3
+250 2018  4.11549       3
+251 2018  6.83000       3
+252 2018 14.50000       3
+253 2018 31.20000       3
+254 2018  1.75000       4
+255 2018  3.85000       4
+256 2018  7.40000       4
+257 2018 22.90000       4
+258 2018  3.57000       5
+259 2018  0.57000       6
+260 2018  2.40000       6
+261 2018  4.80000       6
+262 2018 12.50000       6
+263 2018 10.90000       7
+264 2018 12.40000       7
+265 2018 14.04000       7
+266 2018 19.49000       7
+267 2018  4.09000       8
+268 2018  6.48000       8
+269 2018 11.80000       8
+270 2018 15.70000       8
+271 2018 19.20000       8
+272 2018  3.79000      14
+273 2018  8.40000      14
+274 2018 10.46000      14
+275 2018 13.70000      14
+276 2018  0.93000      15
+277 2018  7.75000      15
+278 2018  9.29000      15
+279 2018 22.90000      15
+280 2018 22.70000      17
+281 2018  1.80000      18
+282 2018  2.80000      18
+283 2018  4.70000      18
+284 2018 50.02000      18
+285 2018  4.12000      20
+286 2018 20.40000      20
+287 2018 54.01000      20
+288 2018 14.80000      21
+289 2018 90.90000      21
+290 2018 11.70000      22
+291 2018 18.80000      23
+292 2018  7.63000      27
+293 2018 23.60000      27
+294 2018 12.60000      28
+
+$year2$FPlnVolHarvHwd
+[1] 62199.6
+
+$year2$FPlnAreaStockHwd
+[1] 56950.5
+
+$year2$FPlnAreaPlantHwd
+[1] 3050.3
+
+$year2$FPlnAreaHarvHwd
+[1] 3316.6
+
+$year2$FPlnAreaJustGrowsHwd
+[1] 53633.9
+
+$year2$FPlnVolHarvSwd
+[1] 334463
+
+$year2$FPlnAreaStockSwd
+[1] 49106
+
+$year2$FPlnAreaPlantSwd
+[1] 370.82
+
+$year2$FPlnAreaHarvSwd
+[1] 1282.4
+
+$year2$FPlnAreaJustGrowsSwd
+[1] 47823.6
+
+$year2$FDegFellVol
+[1] 50731.5
+
+$year2$FDegFellArea
+[1] 11669.9
+
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$year1
+$year1$year
+[1] 2018
+
+$year1$DeforAreaLow
+[1] 8332.15
+
+$year1$DeforAreaLow_UCI
+[1] 9437
+
+$year1$DeforAreaLow_LCI
+[1] 5531
+
+$year1$DeforAreaUp
+[1] 2681.64
+
+$year1$DeforAreaUp_UCI
+[1] 2889
+
+$year1$DeforAreaUp_LCI
+[1] 1627
+
+$year1$AReforArea
+[1] 6180
+
+$year1$AReforArea_UCI
+[1] 8124
+
+$year1$AReforArea_LCI
+[1] 4415
+
+$year1$FDegBurnData
+    year  area_ha age_yrs
+235 2018  1.70000       1
+236 2018  1.90000       1
+237 2018  2.01000       1
+238 2018  2.40000       1
+239 2018  4.92000       1
+240 2018 15.60000       1
+241 2018 17.60000       1
+242 2018 23.04000       1
+243 2018  0.70000       2
+244 2018  1.71000       2
+245 2018  3.60000       2
+246 2018  0.60000       3
+247 2018  0.63000       3
+248 2018  1.61491       3
+249 2018  3.07000       3
+250 2018  4.11549       3
+251 2018  6.83000       3
+252 2018 14.50000       3
+253 2018 31.20000       3
+254 2018  1.75000       4
+255 2018  3.85000       4
+256 2018  7.40000       4
+257 2018 22.90000       4
+258 2018  3.57000       5
+259 2018  0.57000       6
+260 2018  2.40000       6
+261 2018  4.80000       6
+262 2018 12.50000       6
+263 2018 10.90000       7
+264 2018 12.40000       7
+265 2018 14.04000       7
+266 2018 19.49000       7
+267 2018  4.09000       8
+268 2018  6.48000       8
+269 2018 11.80000       8
+270 2018 15.70000       8
+271 2018 19.20000       8
+272 2018  3.79000      14
+273 2018  8.40000      14
+274 2018 10.46000      14
+275 2018 13.70000      14
+276 2018  0.93000      15
+277 2018  7.75000      15
+278 2018  9.29000      15
+279 2018 22.90000      15
+280 2018 22.70000      17
+281 2018  1.80000      18
+282 2018  2.80000      18
+283 2018  4.70000      18
+284 2018 50.02000      18
+285 2018  4.12000      20
+286 2018 20.40000      20
+287 2018 54.01000      20
+288 2018 14.80000      21
+289 2018 90.90000      21
+290 2018 11.70000      22
+291 2018 18.80000      23
+292 2018  7.63000      27
+293 2018 23.60000      27
+294 2018 12.60000      28
+
+$year1$FPlnVolHarvHwd
+[1] 62199.6
+
+$year1$FPlnAreaStockHwd
+[1] 56950.5
+
+$year1$FPlnAreaPlantHwd
+[1] 3050.3
+
+$year1$FPlnAreaHarvHwd
+[1] 3316.6
+
+$year1$FPlnAreaJustGrowsHwd
+[1] 53633.9
+
+$year1$FPlnVolHarvSwd
+[1] 334463
+
+$year1$FPlnAreaStockSwd
+[1] 49106
+
+$year1$FPlnAreaPlantSwd
+[1] 370.82
+
+$year1$FPlnAreaHarvSwd
+[1] 1282.4
+
+$year1$FPlnAreaJustGrowsSwd
+[1] 47823.6
+
+$year1$FDegFellVol
+[1] 50731.5
+
+$year1$FDegFellArea
+[1] 11669.9
+
+
+$year2
+$year2$year
+[1] 2019
+
+$year2$DeforAreaLow
+[1] 8332.15
+
+$year2$DeforAreaLow_UCI
+[1] 9437
+
+$year2$DeforAreaLow_LCI
+[1] 5531
+
+$year2$DeforAreaUp
+[1] 2681.64
+
+$year2$DeforAreaUp_UCI
+[1] 2889
+
+$year2$DeforAreaUp_LCI
+[1] 1627
+
+$year2$AReforArea
+[1] 6180
+
+$year2$AReforArea_UCI
+[1] 8124
+
+$year2$AReforArea_LCI
+[1] 4415
+
+$year2$FDegBurnData
+    year  area_ha age_yrs
+235 2018  1.70000       1
+236 2018  1.90000       1
+237 2018  2.01000       1
+238 2018  2.40000       1
+239 2018  4.92000       1
+240 2018 15.60000       1
+241 2018 17.60000       1
+242 2018 23.04000       1
+243 2018  0.70000       2
+244 2018  1.71000       2
+245 2018  3.60000       2
+246 2018  0.60000       3
+247 2018  0.63000       3
+248 2018  1.61491       3
+249 2018  3.07000       3
+250 2018  4.11549       3
+251 2018  6.83000       3
+252 2018 14.50000       3
+253 2018 31.20000       3
+254 2018  1.75000       4
+255 2018  3.85000       4
+256 2018  7.40000       4
+257 2018 22.90000       4
+258 2018  3.57000       5
+259 2018  0.57000       6
+260 2018  2.40000       6
+261 2018  4.80000       6
+262 2018 12.50000       6
+263 2018 10.90000       7
+264 2018 12.40000       7
+265 2018 14.04000       7
+266 2018 19.49000       7
+267 2018  4.09000       8
+268 2018  6.48000       8
+269 2018 11.80000       8
+270 2018 15.70000       8
+271 2018 19.20000       8
+272 2018  3.79000      14
+273 2018  8.40000      14
+274 2018 10.46000      14
+275 2018 13.70000      14
+276 2018  0.93000      15
+277 2018  7.75000      15
+278 2018  9.29000      15
+279 2018 22.90000      15
+280 2018 22.70000      17
+281 2018  1.80000      18
+282 2018  2.80000      18
+283 2018  4.70000      18
+284 2018 50.02000      18
+285 2018  4.12000      20
+286 2018 20.40000      20
+287 2018 54.01000      20
+288 2018 14.80000      21
+289 2018 90.90000      21
+290 2018 11.70000      22
+291 2018 18.80000      23
+292 2018  7.63000      27
+293 2018 23.60000      27
+294 2018 12.60000      28
+
+$year2$FPlnVolHarvHwd
+[1] 62199.6
+
+$year2$FPlnAreaStockHwd
+[1] 56950.5
+
+$year2$FPlnAreaPlantHwd
+[1] 3050.3
+
+$year2$FPlnAreaHarvHwd
+[1] 3316.6
+
+$year2$FPlnAreaJustGrowsHwd
+[1] 53633.9
+
+$year2$FPlnVolHarvSwd
+[1] 334463
+
+$year2$FPlnAreaStockSwd
+[1] 49106
+
+$year2$FPlnAreaPlantSwd
+[1] 370.82
+
+$year2$FPlnAreaHarvSwd
+[1] 1282.4
+
+$year2$FPlnAreaJustGrowsSwd
+[1] 47823.6
+
+$year2$FDegFellVol
+[1] 50731.5
+
+$year2$FDegFellArea
+[1] 11669.9
+
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+[1] "Running..."
+[1] "Status"
+[1] "Cancel"
+[1] "C:\\Users\\David\\AppData\\Local\\Temp\\RtmpIXu53u\\file49b8784961ed"
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$year1
+$year1$year
+[1] 2018
+
+$year1$DeforAreaLow
+[1] 8332.15
+
+$year1$DeforAreaLow_UCI
+[1] 9437
+
+$year1$DeforAreaLow_LCI
+[1] 5531
+
+$year1$DeforAreaUp
+[1] 2681.64
+
+$year1$DeforAreaUp_UCI
+[1] 2889
+
+$year1$DeforAreaUp_LCI
+[1] 1627
+
+$year1$AReforArea
+[1] 6180
+
+$year1$AReforArea_UCI
+[1] 8124
+
+$year1$AReforArea_LCI
+[1] 4415
+
+$year1$FDegBurnData
+    year  area_ha age_yrs
+235 2018  1.70000       1
+236 2018  1.90000       1
+237 2018  2.01000       1
+238 2018  2.40000       1
+239 2018  4.92000       1
+240 2018 15.60000       1
+241 2018 17.60000       1
+242 2018 23.04000       1
+243 2018  0.70000       2
+244 2018  1.71000       2
+245 2018  3.60000       2
+246 2018  0.60000       3
+247 2018  0.63000       3
+248 2018  1.61491       3
+249 2018  3.07000       3
+250 2018  4.11549       3
+251 2018  6.83000       3
+252 2018 14.50000       3
+253 2018 31.20000       3
+254 2018  1.75000       4
+255 2018  3.85000       4
+256 2018  7.40000       4
+257 2018 22.90000       4
+258 2018  3.57000       5
+259 2018  0.57000       6
+260 2018  2.40000       6
+261 2018  4.80000       6
+262 2018 12.50000       6
+263 2018 10.90000       7
+264 2018 12.40000       7
+265 2018 14.04000       7
+266 2018 19.49000       7
+267 2018  4.09000       8
+268 2018  6.48000       8
+269 2018 11.80000       8
+270 2018 15.70000       8
+271 2018 19.20000       8
+272 2018  3.79000      14
+273 2018  8.40000      14
+274 2018 10.46000      14
+275 2018 13.70000      14
+276 2018  0.93000      15
+277 2018  7.75000      15
+278 2018  9.29000      15
+279 2018 22.90000      15
+280 2018 22.70000      17
+281 2018  1.80000      18
+282 2018  2.80000      18
+283 2018  4.70000      18
+284 2018 50.02000      18
+285 2018  4.12000      20
+286 2018 20.40000      20
+287 2018 54.01000      20
+288 2018 14.80000      21
+289 2018 90.90000      21
+290 2018 11.70000      22
+291 2018 18.80000      23
+292 2018  7.63000      27
+293 2018 23.60000      27
+294 2018 12.60000      28
+
+$year1$FPlnVolHarvHwd
+[1] 62199.6
+
+$year1$FPlnAreaStockHwd
+[1] 56950.5
+
+$year1$FPlnAreaPlantHwd
+[1] 3050.3
+
+$year1$FPlnAreaHarvHwd
+[1] 3316.6
+
+$year1$FPlnAreaJustGrowsHwd
+[1] 53633.9
+
+$year1$FPlnVolHarvSwd
+[1] 334463
+
+$year1$FPlnAreaStockSwd
+[1] 49106
+
+$year1$FPlnAreaPlantSwd
+[1] 370.82
+
+$year1$FPlnAreaHarvSwd
+[1] 1282.4
+
+$year1$FPlnAreaJustGrowsSwd
+[1] 47823.6
+
+$year1$FDegFellVol
+[1] 50731.5
+
+$year1$FDegFellArea
+[1] 11669.9
+
+
+$year2
+$year2$year
+[1] 2019
+
+$year2$DeforAreaLow
+[1] 8332.15
+
+$year2$DeforAreaLow_UCI
+[1] 9437
+
+$year2$DeforAreaLow_LCI
+[1] 5531
+
+$year2$DeforAreaUp
+[1] 2681.64
+
+$year2$DeforAreaUp_UCI
+[1] 2889
+
+$year2$DeforAreaUp_LCI
+[1] 1627
+
+$year2$AReforArea
+[1] 6180
+
+$year2$AReforArea_UCI
+[1] 8124
+
+$year2$AReforArea_LCI
+[1] 4415
+
+$year2$FDegBurnData
+    year  area_ha age_yrs
+235 2018  1.70000       1
+236 2018  1.90000       1
+237 2018  2.01000       1
+238 2018  2.40000       1
+239 2018  4.92000       1
+240 2018 15.60000       1
+241 2018 17.60000       1
+242 2018 23.04000       1
+243 2018  0.70000       2
+244 2018  1.71000       2
+245 2018  3.60000       2
+246 2018  0.60000       3
+247 2018  0.63000       3
+248 2018  1.61491       3
+249 2018  3.07000       3
+250 2018  4.11549       3
+251 2018  6.83000       3
+252 2018 14.50000       3
+253 2018 31.20000       3
+254 2018  1.75000       4
+255 2018  3.85000       4
+256 2018  7.40000       4
+257 2018 22.90000       4
+258 2018  3.57000       5
+259 2018  0.57000       6
+260 2018  2.40000       6
+261 2018  4.80000       6
+262 2018 12.50000       6
+263 2018 10.90000       7
+264 2018 12.40000       7
+265 2018 14.04000       7
+266 2018 19.49000       7
+267 2018  4.09000       8
+268 2018  6.48000       8
+269 2018 11.80000       8
+270 2018 15.70000       8
+271 2018 19.20000       8
+272 2018  3.79000      14
+273 2018  8.40000      14
+274 2018 10.46000      14
+275 2018 13.70000      14
+276 2018  0.93000      15
+277 2018  7.75000      15
+278 2018  9.29000      15
+279 2018 22.90000      15
+280 2018 22.70000      17
+281 2018  1.80000      18
+282 2018  2.80000      18
+283 2018  4.70000      18
+284 2018 50.02000      18
+285 2018  4.12000      20
+286 2018 20.40000      20
+287 2018 54.01000      20
+288 2018 14.80000      21
+289 2018 90.90000      21
+290 2018 11.70000      22
+291 2018 18.80000      23
+292 2018  7.63000      27
+293 2018 23.60000      27
+294 2018 12.60000      28
+
+$year2$FPlnVolHarvHwd
+[1] 62199.6
+
+$year2$FPlnAreaStockHwd
+[1] 56950.5
+
+$year2$FPlnAreaPlantHwd
+[1] 3050.3
+
+$year2$FPlnAreaHarvHwd
+[1] 3316.6
+
+$year2$FPlnAreaJustGrowsHwd
+[1] 53633.9
+
+$year2$FPlnVolHarvSwd
+[1] 334463
+
+$year2$FPlnAreaStockSwd
+[1] 49106
+
+$year2$FPlnAreaPlantSwd
+[1] 370.82
+
+$year2$FPlnAreaHarvSwd
+[1] 1282.4
+
+$year2$FPlnAreaJustGrowsSwd
+[1] 47823.6
+
+$year2$FDegFellVol
+[1] 50731.5
+
+$year2$FDegFellArea
+[1] 11669.9
+
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+
+$year1
+$year1$year
+[1] 2018
+
+$year1$DeforAreaLow
+[1] 8332.15
+
+$year1$DeforAreaLow_UCI
+[1] 9437
+
+$year1$DeforAreaLow_LCI
+[1] 5531
+
+$year1$DeforAreaUp
+[1] 2681.64
+
+$year1$DeforAreaUp_UCI
+[1] 2889
+
+$year1$DeforAreaUp_LCI
+[1] 1627
+
+$year1$AReforArea
+[1] 6180
+
+$year1$AReforArea_UCI
+[1] 8124
+
+$year1$AReforArea_LCI
+[1] 4415
+
+$year1$FDegBurnData
+    year  area_ha age_yrs
+235 2018  1.70000       1
+236 2018  1.90000       1
+237 2018  2.01000       1
+238 2018  2.40000       1
+239 2018  4.92000       1
+240 2018 15.60000       1
+241 2018 17.60000       1
+242 2018 23.04000       1
+243 2018  0.70000       2
+244 2018  1.71000       2
+245 2018  3.60000       2
+246 2018  0.60000       3
+247 2018  0.63000       3
+248 2018  1.61491       3
+249 2018  3.07000       3
+250 2018  4.11549       3
+251 2018  6.83000       3
+252 2018 14.50000       3
+253 2018 31.20000       3
+254 2018  1.75000       4
+255 2018  3.85000       4
+256 2018  7.40000       4
+257 2018 22.90000       4
+258 2018  3.57000       5
+259 2018  0.57000       6
+260 2018  2.40000       6
+261 2018  4.80000       6
+262 2018 12.50000       6
+263 2018 10.90000       7
+264 2018 12.40000       7
+265 2018 14.04000       7
+266 2018 19.49000       7
+267 2018  4.09000       8
+268 2018  6.48000       8
+269 2018 11.80000       8
+270 2018 15.70000       8
+271 2018 19.20000       8
+272 2018  3.79000      14
+273 2018  8.40000      14
+274 2018 10.46000      14
+275 2018 13.70000      14
+276 2018  0.93000      15
+277 2018  7.75000      15
+278 2018  9.29000      15
+279 2018 22.90000      15
+280 2018 22.70000      17
+281 2018  1.80000      18
+282 2018  2.80000      18
+283 2018  4.70000      18
+284 2018 50.02000      18
+285 2018  4.12000      20
+286 2018 20.40000      20
+287 2018 54.01000      20
+288 2018 14.80000      21
+289 2018 90.90000      21
+290 2018 11.70000      22
+291 2018 18.80000      23
+292 2018  7.63000      27
+293 2018 23.60000      27
+294 2018 12.60000      28
+
+$year1$FPlnVolHarvHwd
+[1] 62199.6
+
+$year1$FPlnAreaStockHwd
+[1] 56950.5
+
+$year1$FPlnAreaPlantHwd
+[1] 3050.3
+
+$year1$FPlnAreaHarvHwd
+[1] 3316.6
+
+$year1$FPlnAreaJustGrowsHwd
+[1] 53633.9
+
+$year1$FPlnVolHarvSwd
+[1] 334463
+
+$year1$FPlnAreaStockSwd
+[1] 49106
+
+$year1$FPlnAreaPlantSwd
+[1] 370.82
+
+$year1$FPlnAreaHarvSwd
+[1] 1282.4
+
+$year1$FPlnAreaJustGrowsSwd
+[1] 47823.6
+
+$year1$FDegFellVol
+[1] 50731.5
+
+$year1$FDegFellArea
+[1] 11669.9
+
+
+$year2
+$year2$year
+[1] 2019
+
+$year2$DeforAreaLow
+[1] 8332.15
+
+$year2$DeforAreaLow_UCI
+[1] 9437
+
+$year2$DeforAreaLow_LCI
+[1] 5531
+
+$year2$DeforAreaUp
+[1] 2681.64
+
+$year2$DeforAreaUp_UCI
+[1] 2889
+
+$year2$DeforAreaUp_LCI
+[1] 1627
+
+$year2$AReforArea
+[1] 6180
+
+$year2$AReforArea_UCI
+[1] 8124
+
+$year2$AReforArea_LCI
+[1] 4415
+
+$year2$FDegBurnData
+    year  area_ha age_yrs
+235 2018  1.70000       1
+236 2018  1.90000       1
+237 2018  2.01000       1
+238 2018  2.40000       1
+239 2018  4.92000       1
+240 2018 15.60000       1
+241 2018 17.60000       1
+242 2018 23.04000       1
+243 2018  0.70000       2
+244 2018  1.71000       2
+245 2018  3.60000       2
+246 2018  0.60000       3
+247 2018  0.63000       3
+248 2018  1.61491       3
+249 2018  3.07000       3
+250 2018  4.11549       3
+251 2018  6.83000       3
+252 2018 14.50000       3
+253 2018 31.20000       3
+254 2018  1.75000       4
+255 2018  3.85000       4
+256 2018  7.40000       4
+257 2018 22.90000       4
+258 2018  3.57000       5
+259 2018  0.57000       6
+260 2018  2.40000       6
+261 2018  4.80000       6
+262 2018 12.50000       6
+263 2018 10.90000       7
+264 2018 12.40000       7
+265 2018 14.04000       7
+266 2018 19.49000       7
+267 2018  4.09000       8
+268 2018  6.48000       8
+269 2018 11.80000       8
+270 2018 15.70000       8
+271 2018 19.20000       8
+272 2018  3.79000      14
+273 2018  8.40000      14
+274 2018 10.46000      14
+275 2018 13.70000      14
+276 2018  0.93000      15
+277 2018  7.75000      15
+278 2018  9.29000      15
+279 2018 22.90000      15
+280 2018 22.70000      17
+281 2018  1.80000      18
+282 2018  2.80000      18
+283 2018  4.70000      18
+284 2018 50.02000      18
+285 2018  4.12000      20
+286 2018 20.40000      20
+287 2018 54.01000      20
+288 2018 14.80000      21
+289 2018 90.90000      21
+290 2018 11.70000      22
+291 2018 18.80000      23
+292 2018  7.63000      27
+293 2018 23.60000      27
+294 2018 12.60000      28
+
+$year2$FPlnVolHarvHwd
+[1] 62199.6
+
+$year2$FPlnAreaStockHwd
+[1] 56950.5
+
+$year2$FPlnAreaPlantHwd
+[1] 3050.3
+
+$year2$FPlnAreaHarvHwd
+[1] 3316.6
+
+$year2$FPlnAreaJustGrowsHwd
+[1] 53633.9
+
+$year2$FPlnVolHarvSwd
+[1] 334463
+
+$year2$FPlnAreaStockSwd
+[1] 49106
+
+$year2$FPlnAreaPlantSwd
+[1] 370.82
+
+$year2$FPlnAreaHarvSwd
+[1] 1282.4
+
+$year2$FPlnAreaJustGrowsSwd
+[1] 47823.6
+
+$year2$FDegFellVol
+[1] 50731.5
+
+$year2$FDegFellArea
+[1] 11669.9
+
+
+$MpDays
+[1] 730
+
+$RpDays
+[1] 540
+
+$IsRpEqualToMp
+[1] FALSE
+
+$RpMpRatio
+[1] 0.739726
+
+$RpMpProrataYears
+[1] 1.47945
+
+$ErpaYearlyFRL
+[1] 1636800
+
+$ErpaYearlyFRLDefor
+[1] 2696831
+
+$ErpaYearlyFRLFDeg
+[1] 310442
+
+$ErpaYearlyFRLEnh
+[1] -1370474
+
+$ErpaTransferredERs
+[1] 0
+
+$ErpaContestedERs
+[1] 0
+
+$ErpaSoldERs
+[1] 0
+
+$ErpaRiskSetaside
+[1] 0.16
+
+$ErpaPreviousFRL
+[1] 0
+
+$ErpaPreviousEmRems
+[1] 0
+
+$ErpaPreviousERs
+[1] 0
+
+$FDegUncertaintyDiscount
+[1] 0.15
+

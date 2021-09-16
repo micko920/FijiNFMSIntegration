@@ -1,0 +1,2 @@
+[1] "Running NFI calculations and generating emission factors...."
+[1] "Fri Sep  3 07:08:09 2021"

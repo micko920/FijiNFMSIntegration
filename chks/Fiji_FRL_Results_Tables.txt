@@ -1,0 +1,41 @@
+              source      est      lci      uci
+1     FD_Logging_net 152954.5 116906.1 187810.4
+2 FD_Biomass_burning 157487.9  99776.0 223176.6
+3           FD_total 310442.4 242992.2 383361.0
+$rs_fd
+              source      est      lci      uci
+1     FD_Logging_net 152954.5 116906.1 187810.4
+2 FD_Biomass_burning 157487.9  99776.0 223176.6
+3           FD_total 310442.4 242992.2 383361.0
+
+NULL
+R version 4.1.1 (2021-08-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Debian GNU/Linux 11 (bullseye)
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.13.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+ [1] splines   stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] microbenchmark_1.4-7            FijiNFMSCalculations_0.0.0.9000
+ [3] MonteCarloUtils_0.0.0.9000      ValueWithUncertainty_0.0.0.9000
+ [5] VGAM_1.1-5                      survey_4.1-1                   
+ [7] survival_3.2-10                 Matrix_1.3-2                   
+ [9] data.table_1.14.0               nlme_3.1-152                   
+
+loaded via a namespace (and not attached):
+[1] lattice_0.20-41 DBI_1.1.1       magrittr_2.0.1  compiler_4.1.1 
+[5] mitools_2.4    
