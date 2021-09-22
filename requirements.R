@@ -2,16 +2,23 @@
 
 install.packages(
   c(
-    "pkgbuild",
+    "VGAM",
     "callr",
     "data.table",
     "devtools",
+    "devtools",
+    "dplyr",
+    "future",
     "ggplot2",
     "htmlwidgets",
+    "kableExtra",
     "knitr",
     "lintr",
     "magrittr",
     "markdown",
+    "pdftools",
+    "pillar",
+    "pkgbuild",
     "rlang",
     "rmarkdown",
     "roxygen2",
@@ -20,16 +27,12 @@ install.packages(
     "stringr",
     "styler",
     "testthat",
+    "timevis",
     "tinytex",
     "usethis",
     "utf8",
-    "VGAM",
     "xfun",
-    "timevis",
-    "yaml",
-    "devtools",
-    "pillar",
-    "pdftools"
+    "yaml"
   )
 )
 
