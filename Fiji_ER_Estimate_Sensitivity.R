@@ -32,7 +32,7 @@ set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & U
 # MCTolerance <- 0.0025
 # set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
-debug_er <- FALSE # Turn printed output on
+debug_er <- TRUE # Turn printed output on
 show_output <- TRUE # Turn final table printed output on
 plot_mc_output <- FALSE # Turn on plots for MC samples
 
@@ -55,6 +55,31 @@ source(file = "./Baseline_Values/ER_Monitoring_Report_Parameters.R")
 
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
+
+
+# Load all necessary data
+load(file = "./Data/Fiji_ER_EstimateResults_AdjustedAreas.RData")
+
+# AA of AD is done on a monitoring period of 2 years.
+# Area of deforestation in natural forest lowland (ha) # Uncertainty to be considered
+MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
+MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
+MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+# Area of deforestation in natural forest upland (ha) # Uncertainty to be considered
+MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
+MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
+MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+# Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
+# AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+# AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean / 2
+MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean / 2
+MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+
+
 
 formatDecimal <- function(x) {
   return(format(round(x, 4), nsmall = 4))
@@ -174,6 +199,13 @@ for (i in 1:length(UC_MV_Values$year1)) {
   UC_MV_Values$year1[[i]] <- ValueWithUncertaintySampled(UC_MV_Values$year1[[i]])
   UC_MV_Values$year2[[i]] <- ValueWithUncertaintySampled(UC_MV_Values$year2[[i]])
 }
+
+
+TEI_ValuesParamslessFRL <- data.frame(TEI_Values$params [-c(16),])
+TEI_ValuesForFIMS <- rbind(TEI_ValuesParamslessFRL,TEI_Values$activityData)
+TEI_ValuesForFIMSordered <- TEI_ValuesForFIMS[order(TEI_ValuesForFIMS[,2]),]
+
+
 
 
 if (debug_er | show_output) {

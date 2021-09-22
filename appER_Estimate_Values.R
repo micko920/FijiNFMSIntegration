@@ -17,12 +17,9 @@ outputSaveNames <- c(
 "MonitoringReportParams",
 "EmRems_Values",
 "ER_Values",
-"MCRuns",
-"MCTolerance",
-"seed"
-)
+# "UncertaintyParams",
+"AdjustedAreas")
 
-#The MCRuns, MCTolerance and Seed are currently a function and I need them as a value.......,
 
 
 ######
@@ -49,31 +46,20 @@ ui <- fluidPage(
     
     tabPanel(
       "DataUpload",
-      br(),
-      actionButton("ProceedtoRunPage", "Proceed to Run Calculations"),
+      h3("AdjustedAreas From Accuracy Assessment"),
+      fileInput(
+        "PreviousData",
+        "Adjusted Areas From Accuracy Assessment",
+        multiple = FALSE,
+        accept = '.Rdata'
+      ),
       
-      
-      h3("MC Params"),
-      numericInput("MCRuns","MCRuns", 1.5e6),
-      numericInput("MCTolerance","MCTolerance", 0.0115),
-      numericInput("seed","seed", 08121976),
+     tableOutput('rdataNames'),
       
       h3("Monitored Values"),
       p("Year 1"),
       
       numericInput("year1year","Year1 Year", 2018),
-      numericInput("year1DeforAreaLow","Year1 DeforAreaLow",8332.15),
-      numericInput("year1DeforAreaLow_UCI","Year1 DeforAreaLow_UCI",9437),
-      numericInput("year1DeforAreaLow_LCI","Year1 DeforAreaLow_LCI",5531),
-      
-      numericInput("year1DeforAreaUp","Year1 DeforAreaUp",2681.64),
-      numericInput("year1DeforAreaUp_UCI","Year1 DeforAreaUp_UCI",2889),
-      numericInput("year1DeforAreaUp_LCI","Year1 DeforAreaUp_LCI",1627),
-      
-      numericInput("year1AReforArea","Year1 AReforArea",6180),
-      numericInput("year1AReforArea_UCI","Year1 AReforArea_UCI",8124),
-      numericInput("year1AReforArea_LCI","Year1 AReforArea_LCI",4415),
-      
       numericInput("year1FPlnVolHarvHwd","Year1 FPlnVolHarvHwd",62199.6),
       numericInput("year1FPlnAreaStockHwd","Year1 FPlnAreaStockHwd",56950.5),
       numericInput("year1FPlnAreaPlantHwd","Year1 FPlnAreaPlantHwd",3050.30),
@@ -96,18 +82,6 @@ ui <- fluidPage(
       p("Year 2"),
       
       numericInput("year2year","Year2 Year",2019),
-      numericInput("year2DeforAreaLow","Year2 DeforAreaLow",8332.15),
-      numericInput("year2DeforAreaLow_UCI","Year2 DeforAreaLow_UCI",9437),
-      numericInput("year2DeforAreaLow_LCI","Year2 DeforAreaLow_LCI",5531),
-      
-      numericInput("year2DeforAreaUp","Year2 DeforAreaUp",2681.64),
-      numericInput("year2DeforAreaUp_UCI","Year2 DeforAreaUp_UCI",2889),
-      numericInput("year2DeforAreaUp_LCI","Year2 DeforAreaUp_LCI",1627),
-      
-      numericInput("year2AReforArea","Year2 AReforArea",6180),
-      numericInput("year2AReforArea_UCI","Year2 AReforArea_UCI",8124),
-      numericInput("year2AReforArea_LCI","Year2 AReforArea_LCI",4415),
-      
       numericInput("year2FPlnVolHarvHwd","Year2 FPlnVolHarvHwd",62199.6),
       numericInput("year2FPlnAreaStockHwd","Year2 FPlnAreaStockHwd",56950.5),
       numericInput("year2FPlnAreaPlantHwd","Year2 FPlnAreaPlantHwd",3050.30),
@@ -144,31 +118,42 @@ ui <- fluidPage(
       numericInput("mrpErpaPreviousERs","PreviousERs",0),
       numericInput("mrpFDegUncertaintyDiscount","FDegUncertaintyDiscount",0.15),
       
-      hr()
+      hr(),
       
-
-      
+     # h3("Uncertainty Params"),
+     # numericInput("MCRuns","MCRuns", 1.5e6, min= 0),
+     # numericInput("MCTolerance","MCTolerance", 0.0115),
+     # numericInput("seed","seed", 08121976)
+     # 
+     h3('Next'),
+     disabled(actionButton("ProceedtoRunPage", "Proceed to Run Calculations")),
+     textOutput("reviewvaluesvalid"),
+     textOutput("reviewvaluesinvalid"),
+     br(),
     ),
     
     
-    ##### Exit Page #### 
+    ##### Calculate Page #### 
     
    
     tabPanel(
       "Calculate",
       h3('Calculate'),
+      br(),
       actionButton('run', 'Run'),
       actionButton('cancel', 'Cancel'),
       actionButton('status', 'Check Status'),
       hr(),
       h3('Results'),
-      uiOutput("listofhtml"),
+      tableOutput("Table4_2"),
+      hr(),
+      tableOutput("Table4_3"),
+      
       hr(),
       h3('Export'),
       disabled(downloadButton('downloadData',
                      'Download Data (.Rdata file)')),
      
-      
     )
     
   ))
@@ -178,19 +163,54 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   hideTab(inputId = "tabs", target = "Calculate")
   
-  observeEvent(input$ProceedtoRunPage, {
-    hideTab(inputId = "tabs", target = "DataUpload")
-    showTab(inputId = "tabs", target = "Calculate")
-    updateTabsetPanel(session, "tabs", selected = "Calculate")
-    
+  
+###### Import Previous Data Set #################
+  
+  sessionData <- reactiveValues()
+  LoadToEnvironment <- function(RData, localEnv = new.env()) {
+    load(RData, localEnv)
+    return(localEnv)
+  }
+  
+  observeEvent(input$PreviousData$datapath, {
+    if (!is.null(input$PreviousData$datapath)) {
+      # Use a reactiveFileReader to read the file on change, and load the content into a new environment
+      rdataEnv <-
+        reactiveFileReader(1000,
+                           session,
+                           input$PreviousData$datapath,
+                           LoadToEnvironment)
+      
+      # Convert the env into a list to send to the calc Function      
+      sessionData$calcEnv <- as.list(rdataEnv())
+      
+      # What names are in the file.
+      sessionData$rdataNames <- data.frame(rdataNames=names(rdataEnv()))
+      colnames(sessionData$rdataNames) <- c("RData content names")
+      
+      output$rdataNames <- renderTable({
+        sessionData$rdataNames
+      })
+      enable('ProceedtoRunPage')
+    }
   })
   
-  MCRuns <- reactive(input$MCRuns)
-  MCTolerance <- reactive(input$MCTolerance)
-  seed <- reactive(input$seed)
   
+  calcEnv <- reactive({
+    return(sessionData$calcEnv)
+  })
   
-  Y1BD <- reactive({
+  # UncertaintyParams <- reactive({
+  #   UCP <- list()
+  #   UCP$MCRuns <-input$MCRuns
+  #   UCP$MCTolerance <- input$MCTolerance
+  #   UCP$seed <- input$seed
+  #   return(UCP)
+  # })
+  
+########## Import Burn Data ############
+  
+   Y1BD <- reactive({
     
     data <- input$BurnDataYear1
     assign('year1FDegBurnData', data, envir = globalenv()) 
@@ -207,24 +227,15 @@ server <- function(input, output, session) {
     tbl <- read.table(data$datapath, sep="")
     return(tbl)
   })
-  
 
+########### Input Monitored Values or Monitoring Report Parameters ### 
+    
   # Save numeric Inputs into a Reactive List so they can be displayed
   MonitoredValues <- reactive({
     mv <- list()
     mv$year1$year <- input$year1year
-    mv$year1$DeforAreaLow <- input$year1DeforAreaLow
-    mv$year1$DeforAreaLow_UCI <- input$year1DeforAreaLow_UCI
-    mv$year1$DeforAreaLow_LCI  <- input$year1DeforAreaLow_LCI
-    mv$year1$DeforAreaUp <- input$year1DeforAreaUp
-    mv$year1$DeforAreaUp_UCI <- input$year1DeforAreaUp_UCI
-    mv$year1$DeforAreaUp_LCI <- input$year1DeforAreaUp_LCI
-    mv$year1$AReforArea   <- input$year1AReforArea
-    mv$year1$AReforArea_UCI <- input$year1AReforArea_UCI
-    mv$year1$AReforArea_LCI <- input$year1AReforArea_LCI
     #including these in this function causes the output table to have duplicate rows for each other other mv variables - tried to split into separate lists but can't combine them
     mv$year1$FDegBurnData <- Y1BD()
-    
     mv$year1$FPlnVolHarvHwd <- input$year1FPlnVolHarvHwd
     mv$year1$FPlnAreaStockHwd <- input$year1FPlnAreaStockHwd
     mv$year1$FPlnAreaPlantHwd <- input$year1FPlnAreaPlantHwd
@@ -241,18 +252,7 @@ server <- function(input, output, session) {
     #Year2
     
     mv$year2$year <- input$year2year
-    mv$year2$DeforAreaLow <- input$year2DeforAreaLow
-    mv$year2$DeforAreaLow_UCI <- input$year2DeforAreaLow_UCI
-    mv$year2$DeforAreaLow_LCI  <- input$year2DeforAreaLow_LCI
-    mv$year2$DeforAreaUp <- input$year2DeforAreaUp
-    mv$year2$DeforAreaUp_UCI <- input$year2DeforAreaUp_UCI
-    mv$year2$DeforAreaUp_LCI <- input$year2DeforAreaUp_LCI
-    mv$year2$AReforArea   <- input$year2AReforArea
-    mv$year2$AReforArea_UCI <- input$year2AReforArea_UCI
-    mv$year2$AReforArea_LCI <- input$year2AReforArea_LCI
-    
     mv$year2$FDegBurnData <- Y2BD()
-    
     mv$year2$FPlnVolHarvHwd <- input$year2FPlnVolHarvHwd
     mv$year2$FPlnAreaStockHwd <- input$year2FPlnAreaStockHwd
     mv$year2$FPlnAreaPlantHwd <- input$year2FPlnAreaPlantHwd
@@ -265,8 +265,7 @@ server <- function(input, output, session) {
     mv$year2$FPlnAreaJustGrowsSwd <- input$year2FPlnAreaStockSwd - input$year2FPlnAreaHarvSwd
     mv$year2$FDegFellVol <- input$year2FDegFellVol
     mv$year2$FDegFellArea <- input$year2FDegFellArea
-    
-  
+
     return(mv)
   })
 
@@ -295,8 +294,90 @@ server <- function(input, output, session) {
     return(mrp)
   })
   
+############ Validation ################  
+  
+  
+  iv <- InputValidator$new()
+  # 2. Add validation rules
+  iv$add_rule("PreviousData", sv_required())
+  # iv$add_rule("MCRuns", sv_required(message = 'Enter the value or 0 if unused'))
+  # iv$add_rule("MCRuns", ~ if (input$MCRuns< 0)
+  #   "Enter a positive number")
+  # iv$add_rule("MCTolerance", sv_required())
+  # iv$add_rule("seed", sv_required())
+  
+  iv$add_rule("BurnDataYear1", sv_required())
+  iv$add_rule("BurnDataYear2", sv_required())
+  iv$add_rule("year1year", sv_required())
+  iv$add_rule("year1FPlnVolHarvHwd", sv_required())
+  iv$add_rule("year1FPlnAreaStockHwd", sv_required())
+  iv$add_rule("year1FPlnAreaPlantHwd", sv_required())
+  iv$add_rule("year1FPlnAreaHarvHwd", sv_required())
+  iv$add_rule("year1FPlnAreaHarvHwd", sv_required())
+  iv$add_rule("year1FPlnVolHarvSwd", sv_required())
+  iv$add_rule("year1FPlnAreaStockSwd", sv_required())
+  iv$add_rule("year1FPlnAreaPlantSwd", sv_required())
+  iv$add_rule("year1FPlnAreaHarvSwd", sv_required())
+  iv$add_rule("year1FDegFellVol", sv_required())
+  iv$add_rule("year1FDegFellArea", sv_required())
+  iv$add_rule("year2FPlnVolHarvHwd", sv_required())
+  iv$add_rule("year2FPlnAreaStockHwd", sv_required())
+  iv$add_rule("year2FPlnAreaPlantHwd", sv_required())
+  iv$add_rule("year2FPlnAreaHarvHwd", sv_required())
+  iv$add_rule("year2FPlnAreaHarvHwd", sv_required())
+  iv$add_rule("year2FPlnVolHarvSwd", sv_required())
+  iv$add_rule("year2FPlnAreaStockSwd", sv_required())
+  iv$add_rule("year2FPlnAreaPlantSwd", sv_required())
+  iv$add_rule("year2FPlnAreaHarvSwd", sv_required())
+  iv$add_rule("year2FDegFellVol", sv_required())
+  iv$add_rule("year2FDegFellArea", sv_required())
+  iv$add_rule("mrpMpDays", sv_required())
+  iv$add_rule("mrpRpDays", sv_required())
+  iv$add_rule("mrpErpaYearlyFRL", sv_required())
+  iv$add_rule("mrpErpaYearlyFRLDefor", sv_required())
+  iv$add_rule("mrpErpaYearlyFRLFDeg", sv_required())
+  iv$add_rule("mrpErpaYearlyFRLEnh", sv_required())
+  iv$add_rule("mrpErpaTransferredERs", sv_required())
+  iv$add_rule("mrpErpaContestedERs", sv_required())
+  iv$add_rule("mrpErpaSoldERs", sv_required())
+  iv$add_rule("mrpErpaRiskSetaside", sv_required())
+  iv$add_rule("mrpErpaPreviousFRL", sv_required())
+  iv$add_rule("mrpErpaPreviousEmRems", sv_required())
+  iv$add_rule("mrpErpaPreviousERs", sv_required())
+  iv$add_rule("mrpFDegUncertaintyDiscount", sv_required())
 
-  # Status File
+  
+  # 3. Start displaying errors in the UI
+  iv$enable()
+  
+  # Enable proceed if validation met
+  output$reviewvaluesvalid <- renderText({
+    req(iv$is_valid())
+    enable("ProceedtoRunPage")
+    paste0("")
+  })
+  
+  # Error Message if validation not met.
+  output$reviewvaluesinvalid <- renderText({
+    req(!iv$is_valid())
+    disable("ProceedtoRunPage")
+    paste0("All inputs are required before you can proceed.")
+  })
+  
+  
+
+############ Proceed to the Run Page #############
+ 
+ observeEvent(input$ProceedtoRunPage, {
+    hideTab(inputId = "tabs", target = "DataUpload")
+    showTab(inputId = "tabs", target = "Calculate")
+    updateTabsetPanel(session, "tabs", selected = "Calculate")
+    
+  })  
+  
+############# Calculation #################################  
+ 
+   # Status File
   status_file <- tempfile()
   
   get_status <- function(){
@@ -337,20 +418,17 @@ server <- function(input, output, session) {
   # Create Status File
   fire_ready()
   
-  
   nclicks <- reactiveVal(0)
   result_val <- reactiveVal()
   
   observeEvent(input$run,{
-    
-    
     # Don't do anything if analysis is already being run
     if(nclicks() != 0){
       showNotification("Already running analysis")
       return(NULL)
     }
     
-    if ("html" %in% names(result_val())) {
+    if ("env" %in% names(result_val())) {
       result_val(NULL)
       disable("downloadData")
     }
@@ -362,17 +440,19 @@ server <- function(input, output, session) {
     result_val(tagList(div("Running....")))
     
     fire_running()
+
+####### Put all inputs into one list to get passed into function #############    
     
-    calcEnv <<- list()
-    calcEnv$MonitoredValues <<- MonitoredValues()
-    calcEnv$MonitoringReportParams <<- MonitoringReportParams()
-    
+    calcEnv <- calcEnv()
+    calcEnv$MonitoredValues <- MonitoredValues()
+    calcEnv$MonitoringReportParams <- MonitoringReportParams()
+    # calcEnv$MCRuns <- UncertaintyParams()$MCRuns
+    # calcEnv$MCTolerance <- UncertaintyParams()$MCTolerance
+    # calcEnv$seed <- UncertaintyParams()$seed
     
     result <- future({
       
-      
-      Sys.sleep(2)
-      r <- doCalc(fire_running, interrupted, calcEnv)
+      r <- CalcER_Estimate_Values(fire_running, interrupted, calcEnv)
       enable("downloadData")
       return(r)
     }) %...>% result_val()
@@ -396,18 +476,6 @@ server <- function(input, output, session) {
     NULL
   })
   
-
-  output$listofhtml <- renderUI({
-    req(tagList(result_val()$html))
-    if (!is.null(result_val())) {
-      return(tagList(result_val()$html))
-    }
-    else{
-      return(div(""))
-    }
-    })
-  
-
   # Register user interrupt
   observeEvent(input$cancel, {
     print("Cancel")
@@ -420,16 +488,40 @@ server <- function(input, output, session) {
     showNotification(get_status())
   })
   
+################## Outputs to Display on Screen ###########  
+
+  output$Table4_2 <- function() {
+    if(!is.null(result_val()$env))
+      return(
+    result_val()$env$Table4_2 %>%
+      kable("html", caption = 'Monitoring Report Table 4.2') %>%
+      kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left")))
+    else{
+      return(div(""))
+    }
+  }
+  
+  output$Table4_3 <- function() {
+    if(!is.null(result_val()$env))
+      return(
+        result_val()$env$Table4_3 %>%
+          kable("html", caption = 'Monitoring Report Table 4.3') %>%
+          kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left")))
+    else{
+      return(div(""))
+    }
+  }
+  
+
+ 
+######## Download Data #############################  
   output$downloadData <- downloadHandler(
     filename = function() {
       return(outputFilename)
     },
     content = function(file) {
       list2env(result_val()$env,environment())
-      MCRuns
-      MCTolerance
-      seed 
-      
+    
       save(list=outputSaveNames,
           file = file)
     }

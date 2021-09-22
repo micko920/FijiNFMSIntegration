@@ -1,7 +1,3 @@
-# R code to calculate annual emissions(yr-1) for comparison with base FRL
-
-# setwd("C:\eas-2018-prj\FijiGov\NFMSIntegrationFramework\code\calcs")
-
 # Required source files
 load(file = "./Data/fiji_frl_input.RData")
 # Note all CalcFunctions return CO2e values
@@ -24,7 +20,7 @@ pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 
 # This number was used to generate the chk file.
-MCRuns <- 1.5e+06
+MCRuns <- 1.5e+03
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
@@ -58,6 +54,30 @@ source(file = "./Baseline_Values/ER_Monitoring_Report_Parameters.R")
 
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
+
+
+# Load all necessary data
+load(file = "./Data/Fiji_ER_EstimateResults_AdjustedAreas.RData")
+
+# AA of AD is done on a monitoring period of 2 years.
+# Area of deforestation in natural forest lowland (ha) # Uncertainty to be considered
+MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
+MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
+MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+# Area of deforestation in natural forest upland (ha) # Uncertainty to be considered
+MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
+MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
+MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+# Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
+# AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+# AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean / 2
+MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean / 2
+MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+
 
 print("Calculating EmRem values....")
 print(date())

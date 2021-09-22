@@ -1,12 +1,3 @@
-# R code to calculate annual emissions(yr-1) for comparison with base FRL
-
-# setwd("C:\eas-2018-prj\FijiGov\NFMSIntegrationFramework\code\calcs")
-
-# Required source files
-load(file = "./Data/fiji_frl_input.RData")
-# Note all CalcFunctions return CO2e values
-
-# new line
 
 # Required R packages
 library(nlme)
@@ -19,9 +10,9 @@ library(FijiNFMSCalculations)
 
 # This number was used to generate the chk file.
 # MCRuns <- 1.5e+03
-MCRuns <- 100
-MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
-set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
+# MCRuns <- 100
+# MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
+# set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
 
 debug_er <- FALSE # Turn printed output on
@@ -29,10 +20,35 @@ show_output <- TRUE # Turn final table printed output on
 plot_mc_output <- TRUE # Turn on plots for MC samples
 
 ### Start of Calc ####
-CalcERUC <- function(statusCallback, interrupted,calcEnv) {
+CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
   
+  
+  MCRuns <<- calcEnvExtended$MCRuns
+  MCTolerance <<- calcEnvExtended$MCTolerance
   
   list2env(calcEnv,environment())
+  
+  
+  # AA of AD is done on a monitoring period of 2 years.
+  # Area of deforestation in natural forest lowland (ha) # Uncertainty to be considered
+  MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
+  MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+  MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
+  MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+  # Area of deforestation in natural forest upland (ha) # Uncertainty to be considered
+  MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
+  MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+  MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
+  MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+  # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
+  # AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+  # AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+  MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean / 2
+  MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+  MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean / 2
+  MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+  
+  
   
   checkStatus <- function(status, notification) {
     # Check for user interrupts
@@ -234,6 +250,9 @@ CalcERUC <- function(statusCallback, interrupted,calcEnv) {
     "UC_Values",
     "UC_MV_Values",
     "UC_EmRems_Values",
+    "MCRuns",
+    "MCTolerance",
+    "seed",
     "Table4_2",
     "Table4_3",
     "Table5_2_2",
@@ -241,31 +260,6 @@ CalcERUC <- function(statusCallback, interrupted,calcEnv) {
     "Table8"
   ))
 
-   
-  result$html <-list()
-  # result$html$myEnv <- lapply(names(environment()), div)
  
-  
-  result$html$Table4_2 <- as.tags(HTML(Table4_2 %>%
-                                          kable("html") %>%
-                                          kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left"))
-   ))
-  result$html$Table4_3 <- as.tags(HTML(Table4_3 %>%
-                                         kable("html") %>%
-                                         kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left"))
-  ))
-  result$html$Table5_2_2 <- as.tags(HTML(Table5_2_2 %>%
-                                           kable("html") %>%
-                                           kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left"))
-    ))
-  result$html$Table7_2 <- as.tags(HTML(Table7_2 %>%
-                                           kable("html") %>%
-                                           kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left"))
-    ))
-  result$html$Table8 <- as.tags(HTML(Table8 %>%
-                                           kable("html") %>%
-                                           kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left"))
-    ))
-  
   return(result)
 }

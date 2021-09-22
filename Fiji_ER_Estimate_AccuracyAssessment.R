@@ -1,6 +1,10 @@
 
-# Load all necessary data
-load(file = "./Data/Fiji_ER_ActivityData.RData")
+aa_sample <- read.csv(file = "./Data/aa_sample.csv")
+lcc_mapped_areas <- read.csv(file = "./Data/lcc_mapped_areas.csv")
+print(aa_sample)
+
+
+
 
 # Required R packages
 library(nlme)
@@ -9,13 +13,13 @@ library(survey)
 library(VGAM)
 library(FijiNFMSCalculations)
 
-# Set up
+# Set upwarnin
 options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 
 # This number was used to generate the chk file.
-MCRuns <- 10000
+MCRuns <- 1
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
@@ -26,6 +30,8 @@ plot_mc_output <- TRUE # Turn on plots for MC samples
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
+source("./calcER_Estimate_AccuracyAssessment.R")
+
 print("Running Accuracy Assessment and generating adjusted areas....")
 timestamp <- Sys.time()
 print(date())
@@ -34,7 +40,27 @@ print(date())
 
 ## Accuracy Assessment using bootstrap, 2 years is 1 period.
 # Sub Monitoring period pro rata is handled in the report.
-AdjustedAreas <- CalcAdjustedAreas(lcc_mapped_areas, aa_sample,1)
+# AdjustedAreas <- CalcAdjustedAreas(lcc_mapped_areas, aa_sample,1)
+
+statusCallback <- function(perc_complete, notification) {
+    if (missing(notification))
+      msg <- "Running ...."
+    else
+      msg <- notification
+    if (!missing(perc_complete))
+      msg <- paste0(msg, " [", perc_complete, "% Complete]")
+    print(msg)
+}
+
+interrupted <- function() {
+  return(false)
+}
+
+calcEnv <- as.list(environment())
+
+result <- CalcER_Estimate_AccuracyAssessment(statusCallback, interrupted, calcEnv) 
+
+list2env(result$env,environment())
 
 print(date())
 print("Execution time: ")

@@ -1,12 +1,3 @@
-# R code to calculate annual emissions(yr-1) for comparison with base FRL
-
-# setwd("C:\eas-2018-prj\FijiGov\NFMSIntegrationFramework\code\calcs")
-
-# Required source files
-load(file = "./Data/fiji_frl_input.RData")
-# Note all CalcFunctions return CO2e values
-
-
 
 # Required R packages
 library(nlme)
@@ -17,10 +8,31 @@ library(FijiNFMSCalculations)
 
 
 
-doCalc <- function(statusCallback, interrupted,calcEnv) {
+CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
 
 
   list2env(calcEnv,environment())
+  
+  # AA of AD is done on a monitoring period of 2 years.
+  # Area of deforestation in natural forest lowland (ha) # Uncertainty to be considered
+  MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
+  MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+  MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
+  MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+  # Area of deforestation in natural forest upland (ha) # Uncertainty to be considered
+  MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
+  MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+  MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
+  MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+  # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
+  # AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+  # AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
+  MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean / 2
+  MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+  MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean / 2
+  MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+
+
 
   checkStatus <- function(status) {
     # Check for user interrupts
@@ -74,19 +86,10 @@ doCalc <- function(statusCallback, interrupted,calcEnv) {
       EmRems_Values = EmRems_Values,
       ER_Values = ER_Values,
       MonitoredValues = MonitoredValues,
-      MonitoringReportParams = MonitoringReportParams
+      MonitoringReportParams = MonitoringReportParams,
+      # UncertaintyParams = UncertaintyParams,
+      AdjustedAreas = AdjustedAreas
     )
-
-  result$html <-list()
-  result$html$Table4_2 <- as.tags(HTML(Table4_2 %>%
-      kable("html") %>%
-    kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left"))
-    ))
-  result$html$Table4_3 <- as.tags(HTML(Table4_3 %>%
-      kable("html") %>%
-    kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left"))
-    ))
-
 
 
   return(result)

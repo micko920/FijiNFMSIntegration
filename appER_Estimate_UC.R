@@ -6,11 +6,12 @@ library(kableExtra)
 library(promises)
 library(future)
 library(htmltools)
+library(shinyvalidate)
 
 ## Change
 source("./calcER_Estimate_UC.R")
 
-calcFunc <- CalcERUC
+calcFunc <- CalcER_Estimate_UC
 outputFilename <- "Fiji_ER_Estimate_UC.RData"
 outputSaveNames <- c(
   "ResultsTables",
@@ -20,8 +21,12 @@ outputSaveNames <- c(
   "UC_Values",
   "UC_MV_Values",
   "UC_EmRems_Values",
+  "MCRuns",
+  "MCTolerance",
+  "seed",
   "Table4_2",
   "Table4_3",
+  "Table5_2_2",
   "Table7_2",
   "Table8"
 )
@@ -43,48 +48,60 @@ ui <- fluidPage(theme = shinythemes::shinytheme("cerulean"),
                   ########### Data Input Page ##################
                   
                   tabPanel(
-                    "DataUpload",
+                    "DataInput",
+                    h3('Data Input'),
                     fileInput(
                       "PreviousData",
-                      "Import ER_Estimate_Values",
+                      "Input ER_Estimate_Values",
                       multiple = FALSE,
                       accept = '.Rdata'
                     ),
-                    
                     tableOutput('rdataNames'),
-                    disabled(actionButton("ProceedtoRunPage", "Proceed to Run Calculations"))
+                    
+                    hr(),
+                    
+                    h3("Uncertainty Params"),
+                    numericInput("MCRuns","MCRuns", 1.5e6, min=0),
+                    numericInput("MCTolerance","MCTolerance", 0.0115),
+                    numericInput("seed","seed", 08121976),
+                    hr(),
+                    h3('Next'),
+                    disabled(actionButton("ProceedtoRunPage", "Proceed to Run Calculations")),
+                    textOutput("reviewvaluesvalid"),
+                    textOutput("reviewvaluesinvalid"),
+                    br(), 
                   ),
+                  
+                  ##### Calculate Page #### 
+                  
+                  
                   tabPanel(
                     "Calculate",
+                    br(),
                     actionButton('run', 'Run'),
                     actionButton('cancel', 'Cancel'),
                     actionButton('status', 'Check Status'),
                     hr(),
                     h3('Results'),
-                    uiOutput("result"),
+                    tableOutput("Table5_2_2"),
+                    tableOutput("Table7"),
+                    tableOutput("Table8"),
                     hr(),
                     h3('Export'),
                     disabled(downloadButton('downloadData',
                                    'Download Data (.Rdata file)')),
                     br()
-          
                   )
                   
                 )))
 
 
 server <- function(input, output, session) {
-  sessionData <- reactiveValues()
+  
   hideTab(inputId = "tabs", target = "Calculate")
   
-  observeEvent(input$ProceedtoRunPage, {
-    hideTab(inputId = "tabs", target = "DataUpload")
-    showTab(inputId = "tabs", target = "Calculate")
-    updateTabsetPanel(session, "tabs", selected = "Calculate")
-    
-  })
-  
-
+###### Import Previous Data Set #################  
+  sessionData <- reactiveValues()
   LoadToEnvironment <- function(RData, localEnv = new.env()) {
     load(RData, localEnv)
     return(localEnv)
@@ -109,7 +126,7 @@ server <- function(input, output, session) {
       output$rdataNames <- renderTable({
         sessionData$rdataNames
       })
-      enable('ProceedtoRunPage')
+      # enable('ProceedtoRunPage')
     }
   })
 
@@ -117,6 +134,53 @@ server <- function(input, output, session) {
     return(sessionData$calcEnv)
   })
   
+  UncertaintyParams <- reactive({
+    UCP <- list()
+    UCP$MCRuns <-input$MCRuns
+    UCP$MCTolerance <- input$MCTolerance
+    UCP$seed <- input$seed
+    return(UCP)
+    
+  })
+  
+  
+############ Validation ################  
+  
+  iv <- InputValidator$new()
+  # 2. Add validation rules
+  iv$add_rule("PreviousData", sv_required())
+  iv$add_rule("MCRuns", sv_required(message = 'Enter the value or 0 if unused'))
+  iv$add_rule("MCRuns", ~ if (input$MCRuns< 0)
+    "Enter a positive number")
+  iv$add_rule("MCTolerance", sv_required())
+  iv$add_rule("seed", sv_required())
+  
+  # 3. Start displaying errors in the UI
+  iv$enable()
+  
+  # Enable proceed if validation met
+  output$reviewvaluesvalid <- renderText({
+    req(iv$is_valid())
+    enable("ProceedtoRunPage")
+    paste0("")
+  })
+  
+  # Error Message if validation not met.
+  output$reviewvaluesinvalid <- renderText({
+    req(!iv$is_valid())
+    disable("ProceedtoRunPage")
+    paste0("All inputs are required before you can proceed.")
+  })
+  
+  
+############ Proceed to the Run Page ############# 
+  observeEvent(input$ProceedtoRunPage, {
+    hideTab(inputId = "tabs", target = "DataInput")
+    showTab(inputId = "tabs", target = "Calculate")
+    updateTabsetPanel(session, "tabs", selected = "Calculate")
+    
+  })
+############# Calculation #################################    
   # Status File
   status_file <- tempfile()
 
@@ -173,6 +237,15 @@ server <- function(input, output, session) {
       result_val(NULL)
       disable("downloadData")
     }
+
+### Put all inputs into one list to get passed into function    
+    
+    calcEnvExtended <- calcEnv()
+    calcEnvExtended$MCRuns <- UncertaintyParams()$MCRuns
+    calcEnvExtended$MCTolerance <- UncertaintyParams()$MCTolerance
+    calcEnvExtended$seed <- UncertaintyParams()$seed
+    
+    
     
     # Increment clicks and prevent concurrent analyses
     nclicks(nclicks() + 1)
@@ -181,10 +254,9 @@ server <- function(input, output, session) {
     
     fire_running()
     
-    result <- future({
+    result <- future(seed=calcEnvExtended$seed, {
       
-      Sys.sleep(2)
-      r <- do.call(calcFunc, list(fire_running, interrupted, calcEnv()))
+      r <- do.call(calcFunc, list(fire_running, interrupted, calcEnvExtended))
       enable("downloadData")
       return(r)
     }) %...>% result_val()
@@ -221,26 +293,48 @@ server <- function(input, output, session) {
     showNotification(get_status())
   })
   
-  # output$result <- renderUI({
-  #   req(tagList(result_val()$html))
-  # })
 
+
+################## Outputs to Display on Screen ###########    
   
-  output$result <- renderUI({
-    req(tagList(result_val()$html))
-    if (!is.null(result_val())) {
-      return(tagList(result_val()$html))
-    }
+  output$Table5_2_2 <- function() {
+    if(!is.null(result_val()$env))
+      return(
+        result_val()$env$Table5_2_2 %>%
+          kable("html", caption = 'Monitoring Report Table 5.2.2') %>%
+          kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left")))
     else{
       return(div(""))
     }
-  })
+  }
   
+  output$Table7 <- function() {
+    if(!is.null(result_val()$env))
+      return(
+        result_val()$env$Table7 %>%
+          kable("html", caption = 'Monitoring Report Table 7') %>%
+          kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left")))
+    else{
+      return(div(""))
+    }
+  }
+  
+  output$Table8 <- function() {
+    if(!is.null(result_val()$env))
+      return(
+        result_val()$env$Table8 %>%
+          kable("html", caption = 'Monitoring Report Table 8') %>%
+          kable_styling(bootstrap_options = c("striped", "condensed", "hover", full_width = F, position = "left")))
+    else{
+      return(div(""))
+    }
+  }
+  
+
+ ######## Download Data #############################   
   
   output$downloadData <- downloadHandler(
-  
     filename = function() {
-
       return(outputFilename)
     },
     content = function(file) {
