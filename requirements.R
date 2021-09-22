@@ -19,10 +19,13 @@ install.packages(
     "pdftools",
     "pillar",
     "pkgbuild",
+    "promises",
     "rlang",
     "rmarkdown",
     "roxygen2",
     "shiny",
+    "shinythemes",
+    "shinyvalidate",
     "stringi",
     "stringr",
     "styler",
@@ -35,6 +38,8 @@ install.packages(
     "yaml"
   )
 )
+
+
 
 tinytex::install_tinytex()
 
