@@ -60,19 +60,19 @@ ui <- fluidPage(
       h3("Monitored Values"),
       p("Year 1"),
       
-      numericInput("year1year","Year1 Year", 2018),
-      numericInput("year1FPlnVolHarvHwd","Year1 FPlnVolHarvHwd",62199.6),
-      numericInput("year1FPlnAreaStockHwd","Year1 FPlnAreaStockHwd",56950.5),
-      numericInput("year1FPlnAreaPlantHwd","Year1 FPlnAreaPlantHwd",3050.30),
-      numericInput("year1FPlnAreaHarvHwd","Year1 FPlnAreaHarvHwd",3316.60),
+      numericInput("year1year","Year1 Year", 2019),
+      numericInput("year1FPlnVolHarvHwd","Year1 Hardwood Harvested Volume", 19801.647),
+      numericInput("year1FPlnAreaStockHwd","Year1 Stocked Area Hardwood",0),
+      numericInput("year1FPlnAreaPlantHwd","Year1 FPlnAreaPlantHwd",0),
+      numericInput("year1FPlnAreaHarvHwd","Year1 FPlnAreaHarvHwd",132.01),
       
-      numericInput("year1FPlnVolHarvSwd","Year1 FPlnVolHarvSwd",334463),
-      numericInput("year1FPlnAreaStockSwd","Year1 FPlnAreaStockSwd",49106.0),
-      numericInput("year1FPlnAreaPlantSwd","Year1 FPlnAreaPlantSwd",370.820),
-      numericInput("year1FPlnAreaHarvSwd","Year1 FPlnAreaHarvSwd",1282.40),
+      numericInput("year1FPlnVolHarvSwd","Year1 Softwood Harvested Volume",386985),
+      numericInput("year1FPlnAreaStockSwd","Year1 Stocked Area Softwood",26094),
+      numericInput("year1FPlnAreaPlantSwd","Year1 FPlnAreaPlantSwd",2008),
+      numericInput("year1FPlnAreaHarvSwd","Year1 FPlnAreaHarvSwd",909),
       
-      numericInput("year1FDegFellVol","Year1 FDegFellVol",50731.5),
-      numericInput("year1FDegFellArea","Year1 FDegFellArea",11669.9),
+      numericInput("year1FDegFellVol","Year1 Native Harvested Volume",27582.754),
+      numericInput("year1FDegFellArea","Year1 Native Felled Area",1349.88),
       
       p("Import Burn Data from text file"),
       fileInput("BurnDataYear1","Import Burn Data for Year1"),
@@ -82,19 +82,19 @@ ui <- fluidPage(
       
       p("Year 2"),
       
-      numericInput("year2year","Year2 Year",2019),
-      numericInput("year2FPlnVolHarvHwd","Year2 FPlnVolHarvHwd",62199.6),
-      numericInput("year2FPlnAreaStockHwd","Year2 FPlnAreaStockHwd",56950.5),
-      numericInput("year2FPlnAreaPlantHwd","Year2 FPlnAreaPlantHwd",3050.30),
-      numericInput("year2FPlnAreaHarvHwd","Year2 FPlnAreaHarvHwd",3316.60),
+      numericInput("year2year","Year2 Year",2020),
+      numericInput("year2FPlnVolHarvHwd","Year2 Hardwood Harvested Volume",21441.157),
+      numericInput("year2FPlnAreaStockHwd","Year2 Stocked Area Hardwood",0),
+      numericInput("year2FPlnAreaPlantHwd","Year2 FPlnAreaPlantHwd",0),
+      numericInput("year2FPlnAreaHarvHwd","Year2 FPlnAreaHarvHwd",142.94),
       
-      numericInput("year2FPlnVolHarvSwd","Year2 FPlnVolHarvSwd",334463),
-      numericInput("year2FPlnAreaStockSwd","Year2 FPlnAreaStockSwd",49106.0),
-      numericInput("year2FPlnAreaPlantSwd","Year2 FPlnAreaPlantSwd",370.820),
-      numericInput("year2FPlnAreaHarvSwd","Year2 FPlnAreaHarvSwd",1282.40),
+      numericInput("year2FPlnVolHarvSwd","Year2 Softwood Harvested Volume",479959),
+      numericInput("year2FPlnAreaStockSwd","Year2 Stocked Area Softwood",28614),
+      numericInput("year2FPlnAreaPlantSwd","Year2 FPlnAreaPlantSwd",1910),
+      numericInput("year2FPlnAreaHarvSwd","Year2 FPlnAreaHarvSwd",1377),
       
-      numericInput("year2FDegFellVol","Year2 FDegFellVol",50731.5),
-      numericInput("year2FDegFellArea","Year2 FDegFellArea",11669.9),
+      numericInput("year2FDegFellVol","Year2 Native Harvested Volume",22088.296),
+      numericInput("year2FDegFellArea","Year2 Native Felled Area",1082.63),
       
       p("Import Burn Data from text file"),
       fileInput("BurnDataYear2","Import Burn Data for Year 2"),
@@ -106,18 +106,18 @@ ui <- fluidPage(
       
       numericInput("mrpMpDays","Monitoring Period Days",730),
       numericInput("mrpRpDays","Reporting Period Days",540),
-      numericInput("mrpErpaYearlyFRL","FRL",FRL),
-      numericInput("mrpErpaYearlyFRLDefor","FRLDeforestation",FRLDeforestation),
-      numericInput("mrpErpaYearlyFRLFDeg","FRLForestDegradation", FRLForestDegradation),
-      numericInput("mrpErpaYearlyFRLEnh","FRLRemovalsBySinks",0, FRLRemovalsBySinks),
-      numericInput("mrpErpaTransferredERs","TransferredERs",0),
-      numericInput("mrpErpaContestedERs","ContestedERs",0),
-      numericInput("mrpErpaSoldERs","SoldERs",0),
-      numericInput("mrpErpaRiskSetaside","RiskSetaside",0.16),
-      numericInput("mrpErpaPreviousFRL","PreviousFRL",0),
-      numericInput("mrpErpaPreviousEmRems","PreviousEmRems",0),
-      numericInput("mrpErpaPreviousERs","PreviousERs",0),
-      numericInput("mrpFDegUncertaintyDiscount","FDegUncertaintyDiscount",0.15),
+      numericInput("mrpErpaYearlyFRL","Forest Reference Level",FRL),
+      numericInput("mrpErpaYearlyFRLDefor","FRL Deforestation",FRLDeforestation),
+      numericInput("mrpErpaYearlyFRLFDeg","FRL Forest Degradation", FRLForestDegradation),
+      numericInput("mrpErpaYearlyFRLEnh","FRL Removals by Sinks",0, FRLRemovalsBySinks),
+      numericInput("mrpErpaTransferredERs","Transferred Emission Reductions",0),
+      numericInput("mrpErpaContestedERs","Contested Emission Reductions",0),
+      numericInput("mrpErpaSoldERs","Sold Emission Reductions",0),
+      numericInput("mrpErpaRiskSetaside","Risk Set Aside",0.16),
+      numericInput("mrpErpaPreviousFRL","Cumulative Previous Reference Level",0),
+      numericInput("mrpErpaPreviousEmRems","Cumulative Previous Emissions and Removals",0),
+      numericInput("mrpErpaPreviousERs","Cumulative Previous Emission Reductions",0),
+      numericInput("mrpFDegUncertaintyDiscount","Proxy Degradation Uncertainty Discount",0.15),
       
       hr(),
       
@@ -314,7 +314,7 @@ server <- function(input, output, session) {
   iv$add_rule("year1FPlnAreaStockHwd", sv_required())
   iv$add_rule("year1FPlnAreaPlantHwd", sv_required())
   iv$add_rule("year1FPlnAreaHarvHwd", sv_required())
-  iv$add_rule("year1FPlnAreaHarvHwd", sv_required())
+  
   iv$add_rule("year1FPlnVolHarvSwd", sv_required())
   iv$add_rule("year1FPlnAreaStockSwd", sv_required())
   iv$add_rule("year1FPlnAreaPlantSwd", sv_required())
@@ -324,7 +324,6 @@ server <- function(input, output, session) {
   iv$add_rule("year2FPlnVolHarvHwd", sv_required())
   iv$add_rule("year2FPlnAreaStockHwd", sv_required())
   iv$add_rule("year2FPlnAreaPlantHwd", sv_required())
-  iv$add_rule("year2FPlnAreaHarvHwd", sv_required())
   iv$add_rule("year2FPlnAreaHarvHwd", sv_required())
   iv$add_rule("year2FPlnVolHarvSwd", sv_required())
   iv$add_rule("year2FPlnAreaStockSwd", sv_required())

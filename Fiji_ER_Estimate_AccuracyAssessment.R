@@ -1,8 +1,8 @@
 
-aa_sample <- read.csv(file = "./Data/aa_sample.csv")
-lcc_mapped_areas <- read.csv(file = "./Data/lcc_mapped_areas.csv")
-print(aa_sample)
-
+aa_sample <- read.csv(file = "./Baseline_Values/ShinyAppTestData/aa_sampleold.csv")
+lcc_mapped_areas <- read.csv(file = "./Baseline_Values/ShinyAppTestData/areaproportions.csv")
+# print(aa_sample)
+# 
 
 
 
