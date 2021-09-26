@@ -6,7 +6,6 @@ library(promises)
 library(future)
 library(htmltools)
 library(shinyvalidate)
-library(flextable)
 
 
 
