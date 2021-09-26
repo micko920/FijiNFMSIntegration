@@ -2,20 +2,98 @@
 1     FD_Logging_net 152954.5 116906.1 187810.4
 2 FD_Biomass_burning 157487.9  99776.0 223176.6
 3           FD_total 310442.4 242992.2 383361.0
+  sourceSink gross_emissions gross_removals net_emissions
+1         DF           72.32           0.00         60.46
+2        FDL            5.24           2.11          3.43
+3        FDF            4.22           0.00          3.53
+4       FUEL            2.23           0.00          1.86
+5       ECAR            0.00          16.30          7.34
+6       ECHS           15.99          81.59         23.38
+  aa_emissions_tco2e_yr lci_aa_emissions_tco2e_yr uci_aa_emissions_tco2e_yr
+1            2696830.64                2052597.92                 3277078.5
+2             195316.10                 161916.21                  228737.0
+3             157487.87                  99776.00                  223176.6
+4              83096.02                  58995.88                  107538.8
+5                  0.00                      0.00                       0.0
+  aa_removals_tco2e_yr lci_aa_removals_tco2e_yr uci_aa_removals_tco2e_yr
+1                 0.00                     0.00                     0.00
+2            -42361.61                -57728.53                -27754.25
+3                 0.00                     0.00                     0.00
+4                 0.00                     0.00                     0.00
+5           -327540.86               -473996.79               -200992.90
+  aa_net_emissions_tco2e_yr lci_aa_net_emissions_tco2e_yr
+1                2696830.64                    2052597.92
+2                 152954.49                     116906.15
+3                 157487.87                      99776.00
+4                  83096.02                      58995.88
+5                -327540.86                    -473996.79
+  lci_aa_net_emissions_tco2e_yr.1
+1                       3277078.5
+2                        187810.4
+3                        223176.6
+4                        107538.8
+5                       -200992.9
+ [ reached 'max' / getOption("max.print") -- omitted 2 rows ]
+  sourceSink gross_emissions gross_removals net_emissions
+1         DF           73.97           0.00         61.60
+2        FDL            5.36           2.11          3.49
+3        FDF            4.32           0.00          3.60
+4       ECAR            0.00          16.30          7.48
+5       ECHS           16.35          81.59         23.82
+  aa_emissions_tco2e_yr lci_aa_emissions_tco2e_yr uci_aa_emissions_tco2e_yr
+1             2696830.6                 2052597.9                 3277078.5
+2              195316.1                  161916.2                  228737.0
+3              157487.9                   99776.0                  223176.6
+5                   0.0                       0.0                       0.0
+6              596194.9                  508441.4                  698390.6
+  aa_removals_tco2e_yr lci_aa_removals_tco2e_yr uci_aa_removals_tco2e_yr
+1                 0.00                     0.00                     0.00
+2            -42361.61                -57728.53                -27754.25
+3                 0.00                     0.00                     0.00
+5           -327540.86               -473996.79               -200992.90
+6          -1639123.14              -2003425.12              -1284805.89
+  aa_net_emissions_tco2e_yr lci_aa_net_emissions_tco2e_yr
+1                 2696830.6                     2052597.9
+2                  152954.5                      116906.1
+3                  157487.9                       99776.0
+5                 -327540.9                     -473996.8
+6                -1042928.2                    -1422323.3
+  lci_aa_net_emissions_tco2e_yr.1
+1                       3277078.5
+2                        187810.4
+3                        223176.6
+5                       -200992.9
+6                       -660945.9
+ [ reached 'max' / getOption("max.print") -- omitted 1 rows ]
 $rs_fd
               source      est      lci      uci
 1     FD_Logging_net 152954.5 116906.1 187810.4
 2 FD_Biomass_burning 157487.9  99776.0 223176.6
 3           FD_total 310442.4 242992.2 383361.0
 
-NULL
+$frltab
+    source_sink estimate_tco2e_yr lci_tco2e_yr uci_tco2e_yr
+1         aaeDF        2696830.64   2052597.92   3277078.49
+2       aaeFD_L         195316.10    161916.21    228736.98
+3     aaeFD_BSW         157487.87     99776.00    223176.63
+4      aaeEC_HS         596194.92    508441.42    698390.64
+5  aae_Combined        3645829.52   2995279.00   4258581.57
+6       aarFD_L         -42361.61    -57728.53    -27754.25
+7      aarEC_AR        -327540.86   -473996.79   -200992.90
+8      aarEC_HS       -1639123.14  -2003425.12  -1284805.89
+9  aar_Combined       -2009025.61  -1634317.65  -2399744.14
+10       aaneDF        2696830.64   2052597.92   3277078.49
+11       aaneFD         310442.36    242992.18    383361.04
+12       aaneEC       -1370469.09  -1756239.30   -987373.21
+ [ reached 'max' / getOption("max.print") -- omitted 1 rows ]
+
 R version 4.1.1 (2021-08-10)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Debian GNU/Linux 11 (bullseye)
+Running under: Debian GNU/Linux bookworm/sid
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.13.so
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.17.so
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -30,11 +108,11 @@ attached base packages:
  [8] datasets  methods   base     
 
 other attached packages:
- [1] microbenchmark_1.4-7            FijiNFMSCalculations_0.0.0.9000
+ [1] microbenchmark_1.4-7            FijiNFMSCalculations_0.0.0.9001
  [3] MonteCarloUtils_0.0.0.9000      ValueWithUncertainty_0.0.0.9000
  [5] VGAM_1.1-5                      survey_4.1-1                   
  [7] survival_3.2-10                 Matrix_1.3-2                   
- [9] data.table_1.14.0               nlme_3.1-152                   
+ [9] data.table_1.14.0               nlme_3.1-153                   
 
 loaded via a namespace (and not attached):
 [1] lattice_0.20-41 DBI_1.1.1       magrittr_2.0.1  compiler_4.1.1 

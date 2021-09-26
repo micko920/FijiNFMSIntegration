@@ -1,0 +1,51 @@
+---
+title: "Mapped Areas Accuracy Assessment Report"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+always_allow_html: true
+header-includes:
+    - \usepackage{caption}
+---
+
+\captionsetup[table]{labelformat=empty}
+
+
+
+
+# Error Proportions
+```{r echo = FALSE}
+opts <- options(knitr.kable.NA = "")
+t <- round(AdjustedAreas$errorProportions, 5)
+t[t == 0] <- NA
+t %>%
+  kable(fileFormat,
+    caption = "Adjusted Areas",
+    digits = 5, format.args = list(scientific = FALSE)
+  ) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+# Adjusted Areas
+```{r echo = FALSE}
+AdjustedAreas$rs_AA %>%
+  kable(fileFormat, caption = "Adjusted Areas") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+```{r echo = FALSE}
+AdjustedAreas$rs_AA_annual_df %>%
+  kable(fileFormat, caption = "Adjusted Areas Annual Deforestation") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+```{r echo = FALSE}
+AdjustedAreas$rs_AA_annual_ar %>%
+  kable(fileFormat, caption = "Adjusted Areas Annual Aforestation") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```

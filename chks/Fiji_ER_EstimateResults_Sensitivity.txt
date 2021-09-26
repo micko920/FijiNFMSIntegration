@@ -1,29 +1,23 @@
-$params
                          name       v
-1                   EFDeforUp  0.0921
-2                  EFDeforLow  0.0509
-3                         TEF -0.0487
-4                      MAIBsw  0.0459
-5                    MAICFell  0.0445
-6                      MAIVar  0.1561
-7                      MAIVhw  0.1087
-8  BiomassConvExpansionARefor  0.1483
-9      BiomassConvExpansionHW  0.1239
-10  BiomassConvExpansionIncHW  0.0821
-11        RootToShootTropRain  0.1254
-12    RootToShootDryLandSmall -0.0026
-13      RootToShootDryLandBig  0.1118
-14                   Recovery  0.1487
-15                WoodDensity  0.0853
-16                        FRL -0.2131
-17           FRLDeforestation  0.1581
-18       FRLForestDegradation  0.1109
-19         FRLRemovalsBySinks  0.0877
-
-$activityData
-          name       v
-1 DeforAreaLow  0.8241
-2  DeforAreaUp  0.1321
-3   AReforArea -0.0467
-4 FDegFellArea  0.1261
-
+4                      MAIBsw -0.0038
+6                      MAIVar -0.0268
+12    RootToShootDryLandSmall -0.0424
+2                  EFDeforLow  0.0091
+3                         TEF  0.0164
+41               FDegFellArea  0.0310
+15                WoodDensity  0.0347
+18       FRLForestDegradation  0.0396
+9      BiomassConvExpansionHW  0.0442
+5                    MAICFell  0.0447
+13      RootToShootDryLandBig  0.0477
+16               DeforAreaLow  0.0513
+21                DeforAreaUp  0.0588
+10  BiomassConvExpansionIncHW  0.0609
+14                   Recovery  0.0623
+31                 AReforArea  0.0683
+8  BiomassConvExpansionARefor  0.0754
+7                      MAIVhw  0.0778
+1                   EFDeforUp  0.1159
+19         FRLRemovalsBySinks  0.2137
+17           FRLDeforestation  0.6947
+11        RootToShootTropRain   7e-04

@@ -6,31 +6,41 @@ library(survey)
 library(VGAM)
 library(FijiNFMSCalculations)
 
+outputFilename <- "Fiji_ER_Estimate_Values"
+outputSaveNames <- c(
+  "AdjustedAreas",
+  "ER_Values",
+  "MR_Values",
+  "EmRems_Values",
+  "MonitoredValues",
+  "MonitoringReportParams",
+  "Table4_2",
+  "Table4_3"
+)
 
+source("./FRL_VALUE_FIX.R")
 
 CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
+  list2env(calcEnv, environment())
 
-
-  list2env(calcEnv,environment())
-  
   # AA of AD is done on a monitoring period of 2 years.
   # Area of deforestation in natural forest lowland (ha) # Uncertainty to be considered
-  MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
-  MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
-  MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
-  MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+  MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1]
+  MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL
+  MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1]
+  MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL
   # Area of deforestation in natural forest upland (ha) # Uncertainty to be considered
-  MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
-  MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
-  MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
-  MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+  MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2]
+  MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU
+  MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2]
+  MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU
   # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
   # AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
   # AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
-  MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean / 2
-  MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
-  MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean / 2
-  MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
+  MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean
+  MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor)
+  MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean
+  MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor)
 
 
 
@@ -55,19 +65,21 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
   checkStatus(50)
 
   ER_Values <- CalcERValues(
-   EmRems_Values,
-   MonitoringReportParams$ErpaYearlyFRL,
-   MonitoringReportParams$ErpaYearlyFRLFDeg
+    EmRems_Values,
+    MonitoringReportParams$ErpaYearlyFRL,
+    MonitoringReportParams$ErpaYearlyFRLFDeg
   )
 
   checkStatus(60)
 
   MR_Values <-
-   create_EstMRValues(UC_ER_Values,
-                      ER_Values,
-                      EmRems_Values,
-                      MonitoredValues,
-                      MonitoringReportParams)
+    create_EstMRValues(
+      UC_ER_Values,
+      ER_Values,
+      EmRems_Values,
+      MonitoredValues,
+      MonitoringReportParams
+    )
 
   checkStatus(90)
   Table4_2 <- createTable_4_2(MR_Values)
@@ -76,21 +88,10 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
 
   checkStatus(100)
 
-  #Some results
+  # Some results
   result <- list()
-
   result$env <-
-    list(
-      Table4_2 = Table4_2,
-      Table4_3 = Table4_3,
-      EmRems_Values = EmRems_Values,
-      ER_Values = ER_Values,
-      MonitoredValues = MonitoredValues,
-      MonitoringReportParams = MonitoringReportParams,
-      # UncertaintyParams = UncertaintyParams,
-      AdjustedAreas = AdjustedAreas
-    )
-
-
+    list()
+  result$env <- mget(outputSaveNames)
   return(result)
 }

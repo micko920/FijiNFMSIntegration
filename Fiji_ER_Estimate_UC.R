@@ -1,5 +1,4 @@
-# Required source files
-load(file = "./Data/fiji_frl_input.RData")
+
 # Note all CalcFunctions return CO2e values
 
 # new line
@@ -13,7 +12,10 @@ library(ValueWithUncertainty)
 library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
-# Set up
+load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_AccuracyAssessment.RData")
+load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_Params.RData")
+load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_Values.RData")
+
 options(digits = 6)
 options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
@@ -22,7 +24,8 @@ par(mfrow = c(2, 1))
 # This number was used to generate the chk file.
 MCRuns <- 1.5e+03
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
-set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
+seed <- 08121976
+set.seed(seed) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
 #### Values used to calculate 2019-2020 output
 # MCRuns <- 1.5e+06
@@ -32,113 +35,43 @@ set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & U
 
 debug_er <- FALSE # Turn printed output on
 show_output <- TRUE # Turn final table printed output on
-plot_mc_output <- TRUE # Turn on plots for MC samples
-
-
-# Yearly Data (to be input for each year)
-# .....................................................................................
-# Used input data from baseline FRL, actual data to be input for each year
-source(file = "./Baseline_Values/Monitored_Values.R")
-#source(file = "./Baseline_Values/Monitored_Values_2019_2020.R")
-
-
-# Calculated in the FRL #####################################################################
-# All values are now in the FijiNFMSCalculations package.
-
-
-# ER monitoring Report Parameters #################################################################
-
-# External NFMS Inputs
-
-source(file = "./Baseline_Values/ER_Monitoring_Report_Parameters.R")
+plot_mc_output <- FALSE # Turn on plots for MC samples
 
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
+source("./calcER_Estimate_UC.R")
 
-# Load all necessary data
-load(file = "./Data/Fiji_ER_EstimateResults_AdjustedAreas.RData")
-
-# AA of AD is done on a monitoring period of 2 years.
-# Area of deforestation in natural forest lowland (ha) # Uncertainty to be considered
-MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
-MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
-MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
-MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
-# Area of deforestation in natural forest upland (ha) # Uncertainty to be considered
-MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
-MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
-MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
-MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
-# Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
-# AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
-# AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
-MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean / 2
-MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
-MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean / 2
-MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
-
-
-print("Calculating EmRem values....")
+print("Running ER Estimate Uncertainty...")
+timestamp <- Sys.time()
 print(date())
 
-EmRems_Values <- list()
-EmRems_Values$year1 <- CalcEmRemsValues(MonitoredValues$year1)
-EmRems_Values$year2 <- CalcEmRemsValues(MonitoredValues$year2)
+statusCallback <- function(perc_complete, notification) {
+    if (missing(notification))
+      msg <- "Running ...."
+    else
+      msg <- notification
+    if (!missing(perc_complete))
+      msg <- paste0(msg, " [", perc_complete, "% Complete]")
+    print(msg)
+}
 
-print("Calculating ER values....")
-print(date())
-
-ER_Values <- CalcERValues(
-  EmRems_Values,
-  MonitoringReportParams$ErpaYearlyFRL,
-  MonitoringReportParams$ErpaYearlyFRLFDeg
-)
-
-UC_Values <- list()
-UC_Values <- createUC_Values()
-
-
-UC_MV_Values <- list()
-UC_MV_Values$year1 <- createUC_MV_Values(MonitoredValues$year1)
-UC_MV_Values$year2 <- createUC_MV_Values(MonitoredValues$year2)
-
-
-UC_EmRems_Values <- list()
-
-print("Calculating UC year 1 values....")
-print(date())
-
-UC_EmRems_Values$year1 <- createUC_EmRemsValues(UC_Values, UC_MV_Values$year1, EmRems_Values$year1, MonitoredValues$year1)
-
-
-print("Calculating UC year 2 values....")
-print(date())
-
-UC_EmRems_Values$year2 <- createUC_EmRemsValues(UC_Values, UC_MV_Values$year2, EmRems_Values$year2, MonitoredValues$year2)
-
-print("Calculating UC ER values....")
-print(date())
-
-UC_ER_Values <- createUC_ERValues(UC_EmRems_Values, UC_MV_Values, UC_Values, MonitoringReportParams)
-
-if (debug_er) {
-  print(UC_ER_Values)
+interrupted <- function() {
+  return(FALSE)
 }
 
 
-MR_Values <- create_MRValues(UC_ER_Values, ER_Values, EmRems_Values, MonitoredValues, MonitoringReportParams)
+calcEnv <- as.list(environment())
+
+result <- CalcER_Estimate_UC(statusCallback, interrupted, calcEnv)
 
 
-Table4_2 <- createTable_4_2(MR_Values)
+print(date())
+print("Execution time: ")
+print(difftime(Sys.time(), timestamp, unit="auto"))
 
-Table4_3 <- createTable_4_3(MR_Values, MonitoringReportParams)
+list2env(result$env,environment())
 
-Table5_2_2 <- createTable_5_2_2(MR_Values)
-
-Table7_2 <- createTable_7_2(MR_Values, MonitoringReportParams)
-
-Table8 <- createTable_8(MR_Values, MonitoringReportParams)
 
 if (debug_er) {
   print(Table4_2)
@@ -269,23 +202,12 @@ ResultsTables$year2 <- data.frame(
 if (debug_er) {
   print(ResultsTables)
 }
+
 save(
-  list = c(
-    "ResultsTables",
-    "EmRems_Values",
-    "ER_Values",
-    "MR_Values",
-    "UC_Values",
-    "UC_MV_Values",
-    "UC_EmRems_Values",
-    "Table4_2",
-    "Table4_3",
-    "Table5_2_2",
-    "Table7_2",
-    "Table8"
-  ),
-  file = "./Data/Fiji_ER_EstimateResults_UC.Rdata"
+  list = outputSaveNames,
+  file = paste("./Data/MonitoringReport2021", outputFilename, sep="/")
 )
+
 if (debug_er | show_output) {
   old_width <- options("width" = 120)
   #**************************************************************************

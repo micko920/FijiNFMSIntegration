@@ -1,6 +1,7 @@
 
 # Load all necessary data
-load(file = "./Data/fiji_frl_input.RData")
+load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
+#load(file = "./Data/frlCorrection/fiji_frl_input.RData")
 
 # Required R packages
 library(nlme)
@@ -15,6 +16,7 @@ library(FijiNFMSCalculations)
 options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
+options(max.print=50)
 
 # This number was used to generate the chk file.
 MCRuns <- 1.5e+06
@@ -24,7 +26,9 @@ debug_frl <- TRUE # Turn printed output on
 show_output <- TRUE # Turn final table printed output on
 
 
-source(file = "./Baseline_Values/FRL_Parameters.R")
+source(file = "./Data/preMonitoringReport/FRL_Parameters.R")
+
+MCRuns <- FRLParams$runs
 
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
@@ -35,8 +39,9 @@ timestamp <- Sys.time()
 print(date())
 
 # Load all necessary data
-load(file = "./Data/fiji_frl_adjusted_areas.RData")
-load(file = "./Data/fiji_frl_emission_factors.RData")
+load(file = "./Data/preMonitoringReport/fiji_frl_adjusted_areas.RData")
+#load(file = "./Data/frlCorrection/fiji_frl_adjusted_areas.RData")
+load(file = "./Data/preMonitoringReport/fiji_frl_emission_factors.RData")
 
 
 ## Deforestation
@@ -85,5 +90,6 @@ save(
     "FRLSoftwoodPlantations",
     "FRLPlantations"
   ),
-  file = "./Data/fiji_frl_estimate_values.RData"
+  file = "./Data/preMonitoringReport/fiji_frl_estimate_values.RData"
+  #file = "./Data/frlCorrection/fiji_frl_estimate_values.RData"
 )

@@ -993,7 +993,7 @@ these use cases.
 ### 3.2.3 Monitoring Period Report Tasks for new FCPF Report
 
 
-- [] Todo: add detail - Baseline Values files need to be updated for each new
+- [] Todo: add detail - Monitoring Values files need to be updated for each new
   FCPF monitoring report.
   + This can be done in two ways:
     1. directly in the code files
@@ -1023,7 +1023,7 @@ See `?testthat` for more information.
 
 
 There are also `chk` files. These files are the captured output of the drivers
-with a known set of inputs. These inputs are provided in the `Baseline_Values`
+with a known set of inputs. These inputs are provided in the `Data/preMonitoringReport`
 directory. These values are mock data derived from Fiji data.
 
 The output of a driver can be compared with the `chk` file to check weather the

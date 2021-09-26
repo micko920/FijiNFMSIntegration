@@ -1,6 +1,7 @@
 
 # Load all necessary data
-load(file = "./Data/fiji_frl_input.RData")
+#load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
+load(file = "./Data/frlCorrection/fiji_frl_input.RData")
 
 # Required R packages
 library(nlme)
@@ -17,6 +18,7 @@ library(microbenchmark)
 options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
+options(max.print=100)
 
 # This number was used to generate the chk file.
 MCRuns <- 1.5e+06
@@ -26,22 +28,26 @@ debug_frl <- TRUE #Turn printed output on
 show_output <- TRUE #Turn final table printed output on
 
 
-source(file = "./Baseline_Values/FRL_Parameters.R")
+source(file = "./Data/preMonitoringReport/FRL_Parameters.R")
+
+MCRuns <- FRLParams$runs
 
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
 
 # Load all necessary data
-load(file = "./Data/fiji_frl_adjusted_areas.RData")
-load(file = "./Data/fiji_frl_emission_factors.RData")
-load(file = "./Data/fiji_frl_estimate_values.RData")
+load(file = "./Data/preMonitoringReport/fiji_frl_adjusted_areas.RData")
+#load(file = "./Data/frlCorrection/fiji_frl_adjusted_areas.RData")
+load(file = "./Data/preMonitoringReport/fiji_frl_emission_factors.RData")
+load(file = "./Data/preMonitoringReport/fiji_frl_estimate_values.RData")
+#load(file = "./Data/frlCorrection/fiji_frl_estimate_values.RData")
 
 ## Degradation
 FRLDegradation <- calcFRLDegradation()
 
 ## FRL Table
-FRLTable <- debug(calcFRLTable)
+FRLTable <- calcFRLTable()
 
 # The final table ##################################################################
 if (debug_frl | show_output) {
@@ -63,19 +69,10 @@ save(
     "FRLDegradation",
     "FRLTable"
   ),
-  file = "./Data/fiji_frl_tables.RData"
+  file = "./Data/preMonitoringReport/fiji_frl_tables.RData"
+  #file = "./Data/frlCorrection/fiji_frl_tables.RData"
 )
 
-
-# The final FRL table ##################################################################
-if (debug_frl | show_output) {
-  FRLTable$frltab
-  #**************************************************************************
-  # put results in txt file
-  sink("./chks/Fiji_FRL_Results.txt")
-  print(FRLTable$frltab)
-  sink()
-}
 
 # FD = forest degradation
 # EC = enhancement of forest carbon stocks

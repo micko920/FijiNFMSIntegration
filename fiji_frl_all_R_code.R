@@ -1,6 +1,6 @@
 
 # Load all necessary data
-load(file = "./Data/fiji_frl_input.RData")
+load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
 
 # Required R packages
 library(nlme)

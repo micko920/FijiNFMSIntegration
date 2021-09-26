@@ -8,72 +8,79 @@ library(ValueWithUncertainty)
 library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
-# This number was used to generate the chk file.
-# MCRuns <- 1.5e+03
-# MCRuns <- 100
-# MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
-# set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
+outputFilename <- "Fiji_ER_Estimate_UC"
+outputSaveNames <- c(
+  "ResultsTables",
+  "EmRems_Values",
+  "ER_Values",
+  "MR_Values",
+  "UC_Values",
+  "UC_MV_Values",
+  "UC_EmRems_Values",
+  "MCRuns",
+  "MCTolerance",
+  "seed",
+  "Table4_2",
+  "Table4_3",
+  "Table5_2_2",
+  "Table7_2",
+  "Table8"
+)
 
-
-debug_er <- FALSE # Turn printed output on
-show_output <- TRUE # Turn final table printed output on
-plot_mc_output <- TRUE # Turn on plots for MC samples
+source("./FRL_VALUE_FIX.R")
 
 ### Start of Calc ####
 CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
-  
-  
-  MCRuns <<- calcEnvExtended$MCRuns
-  MCTolerance <<- calcEnvExtended$MCTolerance
-  
-  list2env(calcEnv,environment())
-  
-  
-  # AA of AD is done on a monitoring period of 2 years.
+  MCRuns <<- calcEnv$MCRuns
+  MCTolerance <<- calcEnv$MCTolerance
+
+  list2env(calcEnv, environment())
+
+
   # Area of deforestation in natural forest lowland (ha) # Uncertainty to be considered
-  MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
-  MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
-  MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1] / 2
-  MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL / 2
+  MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1]
+  MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL
+  MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1]
+  MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL
   # Area of deforestation in natural forest upland (ha) # Uncertainty to be considered
-  MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
-  MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
-  MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2] / 2
-  MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU / 2
+  MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2]
+  MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU
+  MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2]
+  MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU
   # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
   # AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
   # AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
-  MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean / 2
-  MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
-  MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean / 2
-  MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor) /2
-  
-  
-  
+  MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean
+  MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor)
+  MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean
+  MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor)
+
+
+
   checkStatus <- function(status, notification) {
     # Check for user interrupts
     if (interrupted()) {
       print("Stopping...")
       stop("User Interrupt")
     }
-    
+
     # Notify status file of progress
     statusCallback(status, notification)
   }
-  
-  
+
+
   checkStatus(10, "Calculating EmRem values....")
- 
+
   # print(date())
-  # 
+  #
   EmRems_Values <- list()
   EmRems_Values$year1 <- CalcEmRemsValues(MonitoredValues$year1)
   EmRems_Values$year2 <- CalcEmRemsValues(MonitoredValues$year2)
-  # 
-  # 
+  #
+  #
   checkStatus(30, "Calculating ER values....")
   # print(date())
-  # 
+  #
   ER_Values <- CalcERValues(
     EmRems_Values,
     MonitoringReportParams$ErpaYearlyFRL,
@@ -93,20 +100,20 @@ CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
 
   checkStatus(50, "Calculating UC year 1 values....")
   # print(date())
-  # 
+  #
   UC_EmRems_Values$year1 <- createUC_EmRemsValues(UC_Values, UC_MV_Values$year1, EmRems_Values$year1, MonitoredValues$year1)
-  # 
-  # 
+  #
+  #
   checkStatus(60, "Calculating UC year 2 values....")
   # print(date())
-  # 
+  #
   UC_EmRems_Values$year2 <- createUC_EmRemsValues(UC_Values, UC_MV_Values$year2, EmRems_Values$year2, MonitoredValues$year2)
-  # 
+  #
   checkStatus(80, "Calculating UC ER values....")
   # print(date())
-  # 
+  #
   UC_ER_Values <- createUC_ERValues(UC_EmRems_Values, UC_MV_Values, UC_Values, MonitoringReportParams)
-  # 
+  #
   MR_Values <- create_MRValues(UC_ER_Values, ER_Values, EmRems_Values, MonitoredValues, MonitoringReportParams)
 
 
@@ -183,7 +190,7 @@ CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
       UC_EmRems_Values$year1$McNetEmRems$value[[3]]
     )
   )
-  
+
   ResultsTables$year2 <- data.frame(
     stratum = c(
       "Deforestation", "Forest Deg (felling)", "Forest Deg (fire)",
@@ -236,30 +243,13 @@ CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
       UC_EmRems_Values$year2$McNetEmRems$value[[3]]
     )
   )
-  
-  
 
-  #Some results
+
+
+  # Some results
   result <- list()
-
-  result$env <- mget(c(
-    "ResultsTables",
-    "EmRems_Values",
-    "ER_Values",
-    "MR_Values",
-    "UC_Values",
-    "UC_MV_Values",
-    "UC_EmRems_Values",
-    "MCRuns",
-    "MCTolerance",
-    "seed",
-    "Table4_2",
-    "Table4_3",
-    "Table5_2_2",
-    "Table7_2",
-    "Table8"
-  ))
-
- 
+  result$env <-
+    list()
+  result$env <- mget(outputSaveNames)
   return(result)
 }

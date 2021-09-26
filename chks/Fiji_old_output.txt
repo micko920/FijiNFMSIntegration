@@ -1,5 +1,5 @@
 [1] "Calculating FRL...."
-[1] "Sat Aug  7 12:52:44 2021"
+[1] "Sat Sep 25 12:15:22 2021"
 'data.frame':	7 obs. of  2 variables:
  $ class_code    : int  111 112 171 172 711 712 777
  $ area_mapped_ha: num  670300 229098 54406 9834 33742 ...
@@ -3380,9 +3380,9 @@ NULL
 5                        -204240.9
 6                        -680204.8
 61                       2324875.3
-[1] "Sat Aug  7 12:58:10 2021"
+[1] "Sat Sep 25 12:20:31 2021"
 [1] "Execution time: "
-Time difference of 5.441082 mins
+Time difference of 5.142268 mins
 R version 3.6.3 (2020-02-29)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Debian GNU/Linux 9 (stretch)
@@ -3404,12 +3404,12 @@ attached base packages:
  [8] datasets  methods   base     
 
 other attached packages:
- [1] microbenchmark_1.4-7            FijiNFMSCalculations_0.0.0.9000
+ [1] microbenchmark_1.4-7            FijiNFMSCalculations_0.0.0.9001
  [3] MonteCarloUtils_0.0.0.9000      ValueWithUncertainty_0.0.0.9000
- [5] VGAM_1.1-5                      survey_4.0                     
+ [5] VGAM_1.1-5                      survey_4.1-1                   
  [7] survival_3.1-8                  Matrix_1.2-18                  
  [9] data.table_1.14.0               nlme_3.1-144                   
 
 loaded via a namespace (and not attached):
-[1] lattice_0.20-40 DBI_1.1.0       magrittr_2.0.1  compiler_3.6.3 
+[1] lattice_0.20-40 DBI_1.1.1       magrittr_2.0.1  compiler_3.6.3 
 [5] mitools_2.4    
