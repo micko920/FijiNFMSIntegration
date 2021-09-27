@@ -1,4 +1,4 @@
-Year	Age	 AREA
+Year	Age	AREA
 2019	2	10
 2019	3	3
 2019	4	3

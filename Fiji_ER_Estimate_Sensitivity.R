@@ -68,9 +68,10 @@ print(difftime(Sys.time(), timestamp, unit="auto"))
 
 list2env(result$env,environment())
 
+fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
   list = outputSaveNames,
-  file = paste("./Data/MonitoringReport2021", outputFilename, sep="/")
+  file = paste(paste("./Data/MonitoringReport2021", fullFilename, sep = "/")
 )
 
 if (debug_er | show_output) {

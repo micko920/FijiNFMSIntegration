@@ -361,6 +361,7 @@ server <- function(input, output, session) {
       return(fname)
     },
     content = function(file) {
+      list2env(ADInputs(), environment())
       list2env(result_val()$env, environment())
       fileFormat <- switch(input$format,
         PDF = "latex",
@@ -386,7 +387,7 @@ server <- function(input, output, session) {
 
   output$downloadData <- downloadHandler(
     filename = function() {
-      return(outputFilename)
+      return(paste(outputFilename, "RData", sep = "."))
     },
     content = function(file) {
       list2env(result_val()$env, environment())

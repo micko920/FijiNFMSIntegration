@@ -16,8 +16,8 @@ update-chks:
 
 
 run-test-FRL:
-	#Rscript -e 'source("./fiji_frl_all_R_code.R")' 2>&1  > ./chks/Fiji_old_output.txt
-	#-diff -U 1  ./chks/Fiji_FRL_Results.txt ./chks/Fiji_FRL_Results.chk
+	Rscript -e 'source("./fiji_frl_all_R_code.R")' 2>&1  > ./chks/Fiji_old_output.txt
+	-diff -U 1  ./chks/Fiji_FRL_Results.txt ./chks/Fiji_FRL_Results.chk
 	Rscript -e 'source("./Fiji_FRL_Report.R")' 2>&1 > ./chks/Fiji_new_output.txt
 	-diff -U 1  ./chks/Fiji_FRL_Results.chk ./chks/Fiji_FRL_Results.txt
 	-diff -Bw -U 1  ./chks/Fiji_old_output.txt ./chks/Fiji_new_output.txt

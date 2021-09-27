@@ -9,6 +9,7 @@ library(shinyvalidate)
 
 
 
+
 options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
@@ -98,107 +99,173 @@ ui <- fluidPage(
       tableOutput("rdataNames"),
       h3("Monitored Values"),
       p("Year 1"),
-      numericInput("year1year", "Year1 Year", 2019),
+      numericInput(
+        "year1year", "Year1 Year",
+        0 # default 2019
+      ),
       numericInput(
         "year1FPlnVolHarvHwd",
         "Year1 Hardwood Harvested Volume",
-        19801.647
+        0 # default 19801.647
       ),
       numericInput(
         "year1FPlnAreaStockHwd",
         "Year1 Opening Stocked Area Hardwood",
-        40909.4
+        0 # default 40909.4
       ),
-      numericInput("year1FPlnAreaPlantHwd", "Year1 FPlnAreaPlantHwd", 4007.9),
-      numericInput("year1FPlnAreaHarvHwd", "Year1 FPlnAreaHarvHwd", 103.84),
+      numericInput(
+        "year1FPlnAreaPlantHwd", "Year1 FPlnAreaPlantHwd",
+        0 # default 4007.9
+      ),
+      numericInput(
+        "year1FPlnAreaHarvHwd", "Year1 FPlnAreaHarvHwd",
+        0 # default 103.84
+      ),
       numericInput(
         "year1FPlnVolHarvSwd",
         "Year1 Softwood Harvested Volume",
-        386985
+        0 # default 386985
       ),
       numericInput(
         "year1FPlnAreaStockSwd",
         "Year1 Opening Stocked Area Softwood",
-        24698
+        0 # default 24698
       ),
-      numericInput("year1FPlnAreaPlantSwd", "Year1 FPlnAreaPlantSwd", 2008),
-      numericInput("year1FPlnAreaHarvSwd", "Year1 FPlnAreaHarvSwd", 909),
-      numericInput("year1FDegFellVol", "Year1 Native Harvested Volume", 27582.754),
-      numericInput("year1FDegFellArea", "Year1 Native Felled Area", 1349.88),
+      numericInput(
+        "year1FPlnAreaPlantSwd", "Year1 FPlnAreaPlantSwd",
+        0 # default 2008
+      ),
+      numericInput(
+        "year1FPlnAreaHarvSwd", "Year1 FPlnAreaHarvSwd",
+        0 # default 909
+      ),
+      numericInput(
+        "year1FDegFellVol", "Year1 Native Harvested Volume",
+        0 # default 27582.754
+      ),
+      numericInput(
+        "year1FDegFellArea", "Year1 Native Felled Area",
+        0 # default 1349.88
+      ),
       p("Import Burn Data from text file"),
       fileInput("BurnDataYear1", "Import Burn Data for Year1"),
       hr(),
       p("Year 2"),
-      numericInput("year2year", "Year2 Year", 2020),
+      numericInput(
+        "year2year", "Year2 Year",
+        0 # default 2020
+      ),
       numericInput(
         "year2FPlnVolHarvHwd",
         "Year2 Hardwood Harvested Volume",
-        21441.157
+        0 # default 21441.157
       ),
       numericInput(
         "year2FPlnAreaStockHwd",
         "Year2 Opening Stocked Area Hardwood",
-        44813.46
+        0 # default 44813.46
       ),
-      numericInput("year2FPlnAreaPlantHwd", "Year2 FPlnAreaPlantHwd", 0),
-      numericInput("year2FPlnAreaHarvHwd", "Year2 FPlnAreaHarvHwd", 142.94),
+      numericInput(
+        "year2FPlnAreaPlantHwd", "Year2 FPlnAreaPlantHwd",
+        0 # default 0
+      ),
+      numericInput(
+        "year2FPlnAreaHarvHwd", "Year2 FPlnAreaHarvHwd",
+        0 # default 142.94
+      ),
       numericInput(
         "year2FPlnVolHarvSwd",
         "Year2 Softwood Harvested Volume",
-        479959
+        0 # default 479959
       ),
       numericInput(
         "year2FPlnAreaStockSwd",
         "Year2 Opening Stocked Area Softwood",
-        26094
+        0 # default 26094
       ),
-      numericInput("year2FPlnAreaPlantSwd", "Year2 FPlnAreaPlantSwd", 1910),
-      numericInput("year2FPlnAreaHarvSwd", "Year2 FPlnAreaHarvSwd", 1377),
-      numericInput("year2FDegFellVol", "Year2 Native Harvested Volume", 22088.296),
-      numericInput("year2FDegFellArea", "Year2 Native Felled Area", 1082.63),
+      numericInput(
+        "year2FPlnAreaPlantSwd", "Year2 FPlnAreaPlantSwd",
+        0 # default 1910
+      ),
+      numericInput(
+        "year2FPlnAreaHarvSwd", "Year2 FPlnAreaHarvSwd",
+        0 # default 1377
+      ),
+      numericInput(
+        "year2FDegFellVol", "Year2 Native Harvested Volume",
+        0 # default 22088.296
+      ),
+      numericInput(
+        "year2FDegFellArea", "Year2 Native Felled Area",
+        0 # default 1082.63
+      ),
       p("Import Burn Data from text file"),
       fileInput("BurnDataYear2", "Import Burn Data for Year 2"),
       br(),
 
       # Monitoring Report Params
       p("Monitoring Report Params"),
-      numericInput("mrpMpDays", "Monitoring Period Days", 730),
-      numericInput("mrpRpDays", "Reporting Period Days", 540),
-      numericInput("mrpErpaYearlyFRL", "Forest Reference Level", values_FRL),
+      numericInput(
+        "mrpMpDays", "Monitoring Period Days",
+        0 # default 730
+      ),
+      numericInput(
+        "mrpRpDays", "Reporting Period Days",
+        0 # default 540
+      ),
+      numericInput(
+        "mrpErpaYearlyFRL", "Forest Reference Level",
+        0 # default values_FRL
+      ),
       numericInput(
         "mrpErpaYearlyFRLDefor",
         "FRL Deforestation",
-        values_FRLDeforestation
+        0 # default values_FRLDeforestation
       ),
       numericInput(
         "mrpErpaYearlyFRLFDeg",
         "FRL Forest Degradation",
-        values_FRLForestDegradation
+        0 # default values_FRLForestDegradation
       ),
       numericInput(
         "mrpErpaYearlyFRLEnh",
         "FRL Removals by Sinks",
-        values_FRLRemovalsBySinks
+        0 # default values_FRLRemovalsBySinks
       ),
-      numericInput("mrpErpaTransferredERs", "Transferred Emission Reductions", 0),
-      numericInput("mrpErpaContestedERs", "Contested Emission Reductions", 0),
-      numericInput("mrpErpaSoldERs", "Sold Emission Reductions", 0),
-      numericInput("mrpErpaRiskSetaside", "Risk Set Aside", 0.16),
-      numericInput("mrpErpaPreviousFRL", "Cumulative Previous Reference Level", 0),
+      numericInput(
+        "mrpErpaTransferredERs", "Transferred Emission Reductions",
+        0 # default 0
+      ),
+      numericInput(
+        "mrpErpaContestedERs", "Contested Emission Reductions",
+        0 # default 0
+      ),
+      numericInput(
+        "mrpErpaSoldERs", "Sold Emission Reductions",
+        0 # default 0
+      ),
+      numericInput(
+        "mrpErpaRiskSetaside", "Risk Set Aside",
+        0 # default 0.16
+      ),
+      numericInput(
+        "mrpErpaPreviousFRL", "Cumulative Previous Reference Level",
+        0 # default 0
+      ),
       numericInput(
         "mrpErpaPreviousEmRems",
         "Cumulative Previous Emissions and Removals",
-        0
+        0 # default 0
       ),
       numericInput(
         "mrpErpaPreviousERs",
         "Cumulative Previous Emission Reductions",
-        0
+        0 # default 0
       ),
       numericInput(
         "mrpFDegUncertaintyDiscount",
         "Proxy Degradation Uncertainty Discount",
-        0.15
+        0 # default 0.15
       ),
       hr(),
       h3("Next"),

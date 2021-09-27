@@ -1,4 +1,4 @@
-Year	Age	 AREA
+Year	Age	AREA
 2020	3	8.25
 2020	3	39.2
 2020	3	12.1

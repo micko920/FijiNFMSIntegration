@@ -67,9 +67,10 @@ if (debug_er) {
   print(ER_Values)
 }
 
+fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
   list = outputSaveNames,
-  file = paste("./Data/MonitoringReport2021", outputFilename, sep="/")
+  file = paste(paste("./Data/MonitoringReport2021", fullFilename, sep = "/")
 )
 
 if (debug_er | show_output) {
