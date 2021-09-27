@@ -390,7 +390,7 @@ server <- function(input, output, session) {
 
   output$downloadData <- downloadHandler(
     filename = function() {
-      return(outputFilename)
+      return(paste(outputFilename, "RData", sep = "."))
     },
     content = function(file) {
       list2env(result_val()$env, environment())

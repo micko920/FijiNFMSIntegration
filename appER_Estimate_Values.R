@@ -114,11 +114,11 @@ ui <- fluidPage(
         0 # default 40909.4
       ),
       numericInput(
-        "year1FPlnAreaPlantHwd", "Year1 FPlnAreaPlantHwd",
+        "year1FPlnAreaPlantHwd", "Year1 Hardwood Planted Area",
         0 # default 4007.9
       ),
       numericInput(
-        "year1FPlnAreaHarvHwd", "Year1 FPlnAreaHarvHwd",
+        "year1FPlnAreaHarvHwd", "Year1 Hardwood Harvested Area",
         0 # default 103.84
       ),
       numericInput(
@@ -132,11 +132,11 @@ ui <- fluidPage(
         0 # default 24698
       ),
       numericInput(
-        "year1FPlnAreaPlantSwd", "Year1 FPlnAreaPlantSwd",
+        "year1FPlnAreaPlantSwd", "Year1 Softwood Planted Area",
         0 # default 2008
       ),
       numericInput(
-        "year1FPlnAreaHarvSwd", "Year1 FPlnAreaHarvSwd",
+        "year1FPlnAreaHarvSwd", "Year1 Softwood Harvested Area",
         0 # default 909
       ),
       numericInput(
@@ -166,11 +166,11 @@ ui <- fluidPage(
         0 # default 44813.46
       ),
       numericInput(
-        "year2FPlnAreaPlantHwd", "Year2 FPlnAreaPlantHwd",
+        "year2FPlnAreaPlantHwd", "Year2 Hardwood Planted Area",
         0 # default 0
       ),
       numericInput(
-        "year2FPlnAreaHarvHwd", "Year2 FPlnAreaHarvHwd",
+        "year2FPlnAreaHarvHwd", "Year2 Hardwood Harvested Area",
         0 # default 142.94
       ),
       numericInput(
@@ -184,11 +184,11 @@ ui <- fluidPage(
         0 # default 26094
       ),
       numericInput(
-        "year2FPlnAreaPlantSwd", "Year2 FPlnAreaPlantSwd",
+        "year2FPlnAreaPlantSwd", "Year2 Softwood Planted Area",
         0 # default 1910
       ),
       numericInput(
-        "year2FPlnAreaHarvSwd", "Year2 FPlnAreaHarvSwd",
+        "year2FPlnAreaHarvSwd", "Year2 Softwood Harvested Area",
         0 # default 1377
       ),
       numericInput(
@@ -204,7 +204,7 @@ ui <- fluidPage(
       br(),
 
       # Monitoring Report Params
-      p("Monitoring Report Params"),
+      h3("Monitoring Report Params"),
       numericInput(
         "mrpMpDays", "Monitoring Period Days",
         0 # default 730

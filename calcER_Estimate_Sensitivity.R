@@ -174,7 +174,7 @@ CalcER_Estimate_Sensitivity <- function(statusCallback, interrupted, calcEnv) {
 
   TEI_ValuesParamslessFRL <- data.frame(TEI_Values$params[-c(16), ])
   TEI_ValuesForFIMS <- rbind(TEI_ValuesParamslessFRL, TEI_Values$activityData)
-  TEI_ValuesOrdered <- TEI_ValuesForFIMS[order(TEI_ValuesForFIMS[, 2]), ]
+  TEI_ValuesOrdered <- TEI_ValuesForFIMS[order(TEI_ValuesForFIMS[, 1]), ]
 
 
   # Some results
