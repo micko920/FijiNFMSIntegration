@@ -1,0 +1,53 @@
+---
+title: "Monitoring Report Tables 5.2.2, 7.2, and 8"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+always_allow_html: true
+header-includes:
+    - \usepackage{caption}
+params:
+  file_format: "html"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE,
+                      message=FALSE, warning=FALSE)
+
+library(rlang)
+library(dplyr)
+library(kableExtra)
+if (!exists("fileFormat")) fileFormat <- params$file_format
+```
+
+
+\captionsetup[table]{labelformat=empty}
+
+
+```{r echo = FALSE}
+Table5_2_2 %>%
+  kable(fileFormat, caption = "Monitoring Report Table 5.2.2") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+
+
+
+
+```{r echo = FALSE}
+Table7_2 %>%
+  kable(fileFormat, caption = "Monitoring Report Table 7.2") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+
+```{r echo = FALSE}
+Table8 %>%
+  kable(fileFormat, caption = "Monitoring Report Table 8") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+

@@ -1,0 +1,535 @@
+[1] "Calculating FRL...."
+[1] "Runs --  1000"
+[1] "Sat Sep 25 06:47:40 2021"
+'data.frame':	7 obs. of  2 variables:
+ $ class_code    : int  111 112 171 172 711 712 777
+ $ area_mapped_ha: num  670300 229098 54406 9834 33742 ...
+NULL
+  class_code area_mapped_ha
+1        111      670299.93
+2        112      229097.52
+3        171       54405.99
+4        172        9834.30
+5        711       33742.26
+6        712        3489.21
+7        777      502343.55
+'data.frame':	1948 obs. of  2 variables:
+ $ predicted: int  111 111 111 111 111 111 111 111 111 111 ...
+ $ observed : int  111 111 111 111 111 111 111 111 111 111 ...
+NULL
+    predicted observed
+507       111      111
+509       111      111
+516       111      111
+526       111      111
+527       111      111
+529       111      111
+
+111 112 171 172 711 712 777 
+248 244 233 254 253 236 480 
+         observed
+predicted 111 112 171 172 711 712 777
+      111 218   0  14   0   8   0   8
+      112   0 232   0   7   0   3   2
+      171  68   0 137   0   6   0  22
+      172   0  77   0 141   0   8  28
+      711  81   0   7   0 144   0  21
+      712   0  88   0   9   0 121  18
+      777  13  21  12  14   7   7 406
+         observed
+predicted     111     112     171     172     711     712     777
+      111 0.39197 0.00000 0.02517 0.00000 0.01438 0.00000 0.01438
+      112 0.00000 0.14491 0.00000 0.00437 0.00000 0.00187 0.00125
+      171 0.01056 0.00000 0.02128 0.00000 0.00093 0.00000 0.00342
+      172 0.00000 0.00198 0.00000 0.00363 0.00000 0.00021 0.00072
+      711 0.00719 0.00000 0.00062 0.00000 0.01278 0.00000 0.00186
+      712 0.00000 0.00087 0.00000 0.00009 0.00000 0.00119 0.00018
+      777 0.00905 0.01462 0.00835 0.00975 0.00487 0.00487 0.28266
+  class_code class_desc area_mapped_ha area_est_ha aaboot_mean lci_area_ha
+1        111  Stable LF      670299.93   629501.40   629639.39  606777.345
+2        112  Stable UF      229097.52   244090.28   244466.93  234974.347
+3        171 DF Lowland       54405.99    83321.47    83744.55   67017.452
+4        172  DF Upland        9834.30    26816.42    26961.70   19106.092
+5        711 AR Lowland       33742.26    49554.52    49442.04   36637.114
+6        712  AR Upland        3489.21    12241.32    12171.52    7035.426
+7        777  Stable NF      502343.55   457687.36   456786.62  439460.589
+  uci_area_ha
+1   653418.61
+2   254261.75
+3   100831.66
+4    34698.00
+5    64382.62
+6    17568.49
+7   475231.05
+  class_code class_desc area_mapped_ha area_est_ha aaboot_mean lci_area_ha
+1        171 DF Lowland       5440.599    8332.147    8374.455   6701.7452
+2        172  DF Upland        983.430    2681.642    2696.170   1910.6092
+3        711 AR Lowland       3374.226    4955.452    4944.204   3663.7114
+4        712  AR Upland        348.921    1224.132    1217.152    703.5426
+5        777  Stable NF      50234.355   45768.736   45678.662  43946.0589
+  uci_area_ha
+1   10083.166
+2    3469.800
+3    6438.262
+4    1756.849
+5   47523.105
+  class_desc area_est_ha aaboot_mean lci_area_ha uci_area_ha
+1 DF Lowland    8332.147    8374.455    6701.745    10083.17
+2  DF Upland    2681.642    2696.170    1910.609     3469.80
+3      Total   11013.789   11070.625    9197.529    12928.42
+   class_desc area_est_ha aaboot_mean lci_area_ha uci_area_ha
+3  AR Lowland    4955.452    4944.204   3663.7114    6438.262
+4   AR Upland    1224.132    1217.152    703.5426    1756.849
+31      Total    6179.583    6161.356   4709.7206    7659.706
+   cid    agb3p    agb2p
+1 1000 30.68153 1.851231
+2 1001 37.64374 1.465327
+3 1002 26.08222 1.147241
+4 1003 21.49312 1.475354
+5 1004 26.89004 2.145698
+6 1005 22.79760 1.011937
+      asl       tc       se     ci_l     ci_u
+2 Lowland 87.85927 1.647556 84.63012 91.08842
+3  Upland 71.57142 3.431607 64.84560 78.29725
+'data.frame':	1023 obs. of  1006 variables:
+ $ cid    : chr  "1000" "1001" "1002" "1003" ...
+ $ fpc    : num  697624 227984 697624 227984 697624 ...
+ $ w      : num  954 781 954 781 954 ...
+ $ redd   : Factor w/ 2 levels "no","yes": 2 2 2 2 2 2 2 2 2 2 ...
+ $ asl    : chr  "Lowland" "Lowland" "Lowland" "Lowland" ...
+ $ stratum: Factor w/ 2 levels "CLOSED","OPEN": 1 2 1 2 1 1 2 2 1 1 ...
+ $ tb1    : num  256 273 203 180 261 ...
+ $ tb2    : num  282 285 237 139 206 ...
+ $ tb3    : num  272 247 190 173 244 ...
+ $ tb4    : num  240 299 259 181 267 ...
+ $ tb5    : num  233 333 247 208 239 ...
+ $ tb6    : num  323 270 232 134 225 ...
+ $ tb7    : num  222 294 184 165 207 ...
+ $ tb8    : num  233 334 183 161 216 ...
+ $ tb9    : num  266 341 223 141 232 ...
+ $ tb10   : num  259 303 205 175 203 ...
+ $ tb11   : num  292 278 251 168 237 ...
+ $ tb12   : num  231 231 216 215 200 ...
+ $ tb13   : num  247 237 198 140 207 ...
+ $ tb14   : num  281 377 178 175 231 ...
+ $ tb15   : num  303 276 180 118 231 ...
+ $ tb16   : num  266 311 203 168 222 ...
+ $ tb17   : num  268 276 174 146 226 ...
+ $ tb18   : num  265 273 236 162 277 ...
+ $ tb19   : num  258 271 210 143 214 ...
+ $ tb20   : num  257 250 215 180 246 ...
+ $ tb21   : num  233 339 203 209 240 ...
+ $ tb22   : num  285 305 253 154 289 ...
+ $ tb23   : num  249 347 206 133 239 ...
+ $ tb24   : num  231 276 186 170 243 ...
+ $ tb25   : num  249 319 223 184 232 ...
+ $ tb26   : num  292 226 206 162 226 ...
+ $ tb27   : num  265 243 177 208 220 ...
+ $ tb28   : num  243 353 220 197 224 ...
+ $ tb29   : num  245 221 167 129 231 ...
+ $ tb30   : num  224 252 227 174 207 ...
+ $ tb31   : num  262 298 229 135 251 ...
+ $ tb32   : num  238 337 201 111 229 ...
+ $ tb33   : num  264 300 189 174 241 ...
+ $ tb34   : num  240 243 171 176 200 ...
+ $ tb35   : num  290 287 157 202 216 ...
+ $ tb36   : num  252 280 207 184 249 ...
+ $ tb37   : num  284 230 199 189 220 ...
+ $ tb38   : num  240 310 196 186 234 ...
+ $ tb39   : num  279 378 157 129 229 ...
+ $ tb40   : num  223 214 224 120 219 ...
+ $ tb41   : num  255 293 276 126 267 ...
+ $ tb42   : num  289 213 216 128 227 ...
+ $ tb43   : num  271 303 212 207 222 ...
+ $ tb44   : num  250 296 201 164 263 ...
+ $ tb45   : num  252 265 232 186 267 ...
+ $ tb46   : num  261 244 217 145 245 ...
+ $ tb47   : num  248 239 207 195 237 ...
+ $ tb48   : num  240 302 231 126 229 ...
+ $ tb49   : num  277 360 226 143 254 ...
+ $ tb50   : num  214 248 194 153 235 ...
+ $ tb51   : num  319 288 185 170 222 ...
+ $ tb52   : num  251 335 198 187 239 ...
+ $ tb53   : num  275 310 223 185 277 ...
+ $ tb54   : num  233 276 186 147 258 ...
+ $ tb55   : num  274 215 209 179 230 ...
+ $ tb56   : num  284 260 198 195 267 ...
+ $ tb57   : num  278 286 175 163 223 ...
+ $ tb58   : num  278 355 230 187 233 ...
+ $ tb59   : num  222 298 195 177 249 ...
+ $ tb60   : num  312 235 258 134 261 ...
+ $ tb61   : num  223 295 224 143 256 ...
+ $ tb62   : num  263 231 183 166 251 ...
+ $ tb63   : num  287 356 226 178 261 ...
+ $ tb64   : num  278 353 173 144 199 ...
+ $ tb65   : num  242 295 210 163 218 ...
+ $ tb66   : num  254 302 222 130 218 ...
+ $ tb67   : num  254 297 204 205 242 ...
+ $ tb68   : num  265 334 238 145 252 ...
+ $ tb69   : num  246 335 177 197 250 ...
+ $ tb70   : num  267 240 201 161 211 ...
+ $ tb71   : num  235 280 214 147 216 ...
+ $ tb72   : num  238 245 185 136 255 ...
+ $ tb73   : num  256 342 216 122 247 ...
+ $ tb74   : num  268 268 190 146 256 ...
+ $ tb75   : num  259 381 227 180 224 ...
+ $ tb76   : num  270 268 222 144 233 ...
+ $ tb77   : num  213 249 180 140 202 ...
+ $ tb78   : num  252 254 203 219 219 ...
+ $ tb79   : num  229 215 220 180 227 ...
+ $ tb80   : num  252 278 225 185 261 ...
+ $ tb81   : num  261 223 190 162 221 ...
+ $ tb82   : num  266 301 194 144 227 ...
+ $ tb83   : num  257 351 214 137 253 ...
+ $ tb84   : num  247 304 188 127 221 ...
+ $ tb85   : num  246 215 147 140 230 ...
+ $ tb86   : num  259 270 204 203 236 ...
+ $ tb87   : num  256 309 186 165 251 ...
+ $ tb88   : num  280 325 140 162 235 ...
+ $ tb89   : num  245 251 226 124 224 ...
+ $ tb90   : num  258 216 197 172 214 ...
+ $ tb91   : num  254 289 165 136 260 ...
+ $ tb92   : num  271 301 235 125 223 ...
+ $ tb93   : num  294 231 196 154 249 ...
+  [list output truncated]
+NULL
+     cid fpc w redd asl stratum tb1 tb2 tb3 tb4 tb5 tb6 tb7 tb8 tb9 tb10 tb11
+     tb12 tb13 tb14 tb15 tb16 tb17 tb18 tb19 tb20 tb21 tb22 tb23 tb24 tb25 tb26
+     tb27 tb28 tb29 tb30 tb31 tb32 tb33 tb34 tb35 tb36 tb37 tb38 tb39 tb40 tb41
+     tb42 tb43 tb44 tb45 tb46 tb47 tb48 tb49 tb50 tb51 tb52 tb53 tb54 tb55 tb56
+     tb57 tb58 tb59 tb60 tb61 tb62 tb63 tb64 tb65 tb66 tb67 tb68 tb69 tb70 tb71
+     tb72 tb73 tb74 tb75 tb76 tb77 tb78 tb79 tb80 tb81 tb82 tb83 tb84 tb85 tb86
+     tb87 tb88 tb89 tb90 tb91 tb92 tb93 tb94 tb95 tb96 tb97 tb98 tb99 tb100
+     tb101 tb102 tb103 tb104 tb105 tb106 tb107 tb108 tb109 tb110 tb111 tb112
+     tb113 tb114 tb115 tb116 tb117 tb118 tb119 tb120 tb121 tb122 tb123 tb124
+     tb125 tb126 tb127 tb128 tb129 tb130 tb131 tb132 tb133 tb134 tb135 tb136
+     tb137 tb138 tb139 tb140 tb141 tb142 tb143 tb144 tb145 tb146 tb147 tb148
+     tb149 tb150 tb151 tb152 tb153 tb154 tb155 tb156 tb157 tb158 tb159 tb160
+     tb161 tb162 tb163 tb164 tb165 tb166 tb167 tb168 tb169 tb170 tb171 tb172
+     tb173 tb174 tb175 tb176 tb177 tb178 tb179 tb180 tb181 tb182 tb183 tb184
+     tb185 tb186 tb187 tb188 tb189 tb190 tb191 tb192 tb193 tb194 tb195 tb196
+     tb197 tb198 tb199 tb200 tb201 tb202 tb203 tb204 tb205 tb206 tb207 tb208
+     tb209 tb210 tb211 tb212 tb213 tb214 tb215 tb216 tb217 tb218 tb219 tb220
+     tb221 tb222 tb223 tb224 tb225 tb226 tb227 tb228 tb229 tb230 tb231 tb232
+     tb233 tb234 tb235 tb236 tb237 tb238 tb239 tb240 tb241 tb242 tb243 tb244
+     tb245 tb246 tb247 tb248 tb249 tb250 tb251 tb252 tb253 tb254 tb255 tb256
+     tb257 tb258 tb259 tb260 tb261 tb262 tb263 tb264 tb265 tb266 tb267 tb268
+     tb269 tb270 tb271 tb272 tb273 tb274 tb275 tb276 tb277 tb278 tb279 tb280
+     tb281 tb282 tb283 tb284 tb285 tb286 tb287 tb288 tb289 tb290 tb291 tb292
+     tb293 tb294 tb295 tb296 tb297 tb298 tb299 tb300 tb301 tb302 tb303 tb304
+     tb305 tb306 tb307 tb308 tb309 tb310 tb311 tb312 tb313 tb314 tb315 tb316
+     tb317 tb318 tb319 tb320 tb321 tb322 tb323 tb324 tb325 tb326 tb327 tb328
+     tb329 tb330 tb331 tb332 tb333 tb334 tb335 tb336 tb337 tb338 tb339 tb340
+     tb341 tb342 tb343 tb344 tb345 tb346 tb347 tb348 tb349 tb350 tb351 tb352
+     tb353 tb354 tb355 tb356 tb357 tb358 tb359 tb360 tb361 tb362 tb363 tb364
+     tb365 tb366 tb367 tb368 tb369 tb370 tb371 tb372 tb373 tb374 tb375 tb376
+     tb377 tb378 tb379 tb380 tb381 tb382 tb383 tb384 tb385 tb386 tb387 tb388
+     tb389 tb390 tb391 tb392 tb393 tb394 tb395 tb396 tb397 tb398 tb399 tb400
+     tb401 tb402 tb403 tb404 tb405 tb406 tb407 tb408 tb409 tb410 tb411 tb412
+     tb413 tb414 tb415 tb416 tb417 tb418 tb419 tb420 tb421 tb422 tb423 tb424
+     tb425 tb426 tb427 tb428 tb429 tb430 tb431 tb432 tb433 tb434 tb435 tb436
+     tb437 tb438 tb439 tb440 tb441 tb442 tb443 tb444 tb445 tb446 tb447 tb448
+     tb449 tb450 tb451 tb452 tb453 tb454 tb455 tb456 tb457 tb458 tb459 tb460
+     tb461 tb462 tb463 tb464 tb465 tb466 tb467 tb468 tb469 tb470 tb471 tb472
+     tb473 tb474 tb475 tb476 tb477 tb478 tb479 tb480 tb481 tb482 tb483 tb484
+     tb485 tb486 tb487 tb488 tb489 tb490 tb491 tb492 tb493 tb494 tb495 tb496
+     tb497 tb498 tb499 tb500 tb501 tb502 tb503 tb504 tb505 tb506 tb507 tb508
+     tb509 tb510 tb511 tb512 tb513 tb514 tb515 tb516 tb517 tb518 tb519 tb520
+     tb521 tb522 tb523 tb524 tb525 tb526 tb527 tb528 tb529 tb530 tb531 tb532
+     tb533 tb534 tb535 tb536 tb537 tb538 tb539 tb540 tb541 tb542 tb543 tb544
+     tb545 tb546 tb547 tb548 tb549 tb550 tb551 tb552 tb553 tb554 tb555 tb556
+     tb557 tb558 tb559 tb560 tb561 tb562 tb563 tb564 tb565 tb566 tb567 tb568
+     tb569 tb570 tb571 tb572 tb573 tb574 tb575 tb576 tb577 tb578 tb579 tb580
+     tb581 tb582 tb583 tb584 tb585 tb586 tb587 tb588 tb589 tb590 tb591 tb592
+     tb593 tb594 tb595 tb596 tb597 tb598 tb599 tb600 tb601 tb602 tb603 tb604
+     tb605 tb606 tb607 tb608 tb609 tb610 tb611 tb612 tb613 tb614 tb615 tb616
+     tb617 tb618 tb619 tb620 tb621 tb622 tb623 tb624 tb625 tb626 tb627 tb628
+     tb629 tb630 tb631 tb632 tb633 tb634 tb635 tb636 tb637 tb638 tb639 tb640
+     tb641 tb642 tb643 tb644 tb645 tb646 tb647 tb648 tb649 tb650 tb651 tb652
+     tb653 tb654 tb655 tb656 tb657 tb658 tb659 tb660 tb661 tb662 tb663 tb664
+     tb665 tb666 tb667 tb668 tb669 tb670 tb671 tb672 tb673 tb674 tb675 tb676
+     tb677 tb678 tb679 tb680 tb681 tb682 tb683 tb684 tb685 tb686 tb687 tb688
+     tb689 tb690 tb691 tb692 tb693 tb694 tb695 tb696 tb697 tb698 tb699 tb700
+     tb701 tb702 tb703 tb704 tb705 tb706 tb707 tb708 tb709 tb710 tb711 tb712
+     tb713 tb714 tb715 tb716 tb717 tb718 tb719 tb720 tb721 tb722 tb723 tb724
+     tb725 tb726 tb727 tb728 tb729 tb730 tb731 tb732 tb733 tb734 tb735 tb736
+     tb737 tb738 tb739 tb740 tb741 tb742 tb743 tb744 tb745 tb746 tb747 tb748
+     tb749 tb750 tb751 tb752 tb753 tb754 tb755 tb756 tb757 tb758 tb759 tb760
+     tb761 tb762 tb763 tb764 tb765 tb766 tb767 tb768 tb769 tb770 tb771 tb772
+     tb773 tb774 tb775 tb776 tb777 tb778 tb779 tb780 tb781 tb782 tb783 tb784
+     tb785 tb786 tb787 tb788 tb789 tb790 tb791 tb792 tb793 tb794 tb795 tb796
+     tb797 tb798 tb799 tb800 tb801 tb802 tb803 tb804 tb805 tb806 tb807 tb808
+     tb809 tb810 tb811 tb812 tb813 tb814 tb815 tb816 tb817 tb818 tb819 tb820
+     tb821 tb822 tb823 tb824 tb825 tb826 tb827 tb828 tb829 tb830 tb831 tb832
+     tb833 tb834 tb835 tb836 tb837 tb838 tb839 tb840 tb841 tb842 tb843 tb844
+     tb845 tb846 tb847 tb848 tb849 tb850 tb851 tb852 tb853 tb854 tb855 tb856
+     tb857 tb858 tb859 tb860 tb861 tb862 tb863 tb864 tb865 tb866 tb867 tb868
+     tb869 tb870 tb871 tb872 tb873 tb874 tb875 tb876 tb877 tb878 tb879 tb880
+     tb881 tb882 tb883 tb884 tb885 tb886 tb887 tb888 tb889 tb890 tb891 tb892
+     tb893 tb894 tb895 tb896 tb897 tb898 tb899 tb900 tb901 tb902 tb903 tb904
+     tb905 tb906 tb907 tb908 tb909 tb910 tb911 tb912 tb913 tb914 tb915 tb916
+     tb917 tb918 tb919 tb920 tb921 tb922 tb923 tb924 tb925 tb926 tb927 tb928
+     tb929 tb930 tb931 tb932 tb933 tb934 tb935 tb936 tb937 tb938 tb939 tb940
+     tb941 tb942 tb943 tb944 tb945 tb946 tb947 tb948 tb949 tb950 tb951 tb952
+     tb953 tb954 tb955 tb956 tb957 tb958 tb959 tb960 tb961 tb962 tb963 tb964
+     tb965 tb966 tb967 tb968 tb969 tb970 tb971 tb972 tb973 tb974 tb975 tb976
+     tb977 tb978 tb979 tb980 tb981 tb982 tb983 tb984 tb985 tb986 tb987 tb988
+     tb989 tb990 tb991 tb992 tb993 tb994 tb995 tb996 tb997 tb998 tb999 tb1000
+ [ reached 'max' / getOption("max.print") -- omitted 6 rows ]
+         run       pm       mL       mU
+   [1,]    1 174.7107 179.7383 153.1110
+   [2,]    2 173.0951 179.0704 150.3126
+   [3,]    3 173.2038 180.5991 138.7112
+   [4,]    4 169.1380 173.6434 149.4386
+   [5,]    5 176.8089 183.8760 144.2387
+   [6,]    6 181.0416 184.4399 167.4703
+   [7,]    7 176.1764 185.7973 139.6838
+   [8,]    8 165.0828 171.7146 141.0274
+   [9,]    9 174.8395 182.4034 152.9983
+  [10,]   10 173.7161 180.2160 145.9291
+  [11,]   11 184.6224 195.2623 135.4029
+  [12,]   12 162.9097 169.7950 137.4668
+ [ reached getOption("max.print") -- omitted 988 rows ]
+  stratum carbon_t_ha lci_carbon_t_ha uci_carbon_t_ha
+1 Lowland    87.85927        80.44057        91.06424
+2  Upland    71.57142        64.05546        76.73094
+[1] 0.75
+ [1] 10.450934 10.870643 11.568463  8.251058 17.766791 14.584261 20.481842
+ [8] 22.413328 10.305383 17.654037 14.344991 12.336655 22.246241 18.038577
+[15] 21.414118  8.515083 14.226905 13.325256  9.924051 14.116035 22.276896
+[22] 16.746248 10.778174 20.111248 16.541617 26.937101  8.609948 16.902452
+[29] 15.707712 18.677034 18.458480 14.486373 23.895094 27.634518  5.478253
+[36] 21.033742 27.603482 16.577958 17.988022 11.446540 20.070467  8.301370
+[43] 10.303011 14.318867 10.157429 13.634839  6.254328 14.492102 16.574010
+[50] 11.046847
+ [ reached getOption("max.print") -- omitted 950 entries ]
+  carbon_t_ha lci_carbon_t_ha uci_carbon_t_ha
+1    17.11364        8.381195        25.75352
+  stratum carbon_loss_t_ha lci_carbon_loss_t_ha uci_carbon_loss_t_ha
+1 Lowland         70.74563             58.01491             78.46841
+2  Upland         54.45778             43.02033             63.77021
+  stratum ef_tco2e_ha lci_ef_tco2e_ha uci_ef_tco2e_ha
+1 Lowland    259.4006        212.7213        287.7175
+2  Upland    199.6785        157.7412        233.8241
+  stratum aa_em_tco2e_yr lci_aa_em_tco2e_yr uci_aa_em_tco2e_yr
+1 Lowland      2161364.3          1593874.6          2637528.4
+2  Upland       535466.3           352942.2           711317.7
+3   Total      2696830.6          2048865.4          3235754.1
+   year volume
+1  2006  79480
+2  2007  45122
+3  2008  81706
+4  2009  59614
+5  2010  49814
+6  2011  36499
+7  2012  30517
+8  2013  26947
+9  2014  46431
+10 2015  51091
+11 2016  50825
+   year volume_logged_m3 area_logged_ha emissions_tco2e removals_tco2e
+1  2006            79480      3512.9920        305998.0    -133897.690
+2  2007            45122      2545.5650        173719.7     -87783.810
+3  2008            81706      3258.5530        314568.1    -100542.653
+4  2009            59614      1165.1907        229513.9     -31722.316
+5  2010            49814      1641.1664        191783.9     -38723.322
+6  2011            36499       905.4313        140521.2     -18076.937
+7  2012            30517       795.6560        117490.4     -12997.041
+8  2013            26947      1354.0213        103745.9     -17202.840
+9  2014            46431      1427.7555        178759.4     -12956.882
+10 2015            51091      1738.0354        196700.4      -9463.603
+ [ reached 'max' / getOption("max.print") -- omitted 1 rows ]
+'data.frame':	294 obs. of  3 variables:
+ $ year   : int  2015 2015 2015 2015 2015 2015 2015 2015 2015 2015 ...
+ $ area_ha: num  2.4 9.7 11.3 19.9 21.7 ...
+ $ age_yrs: int  4 4 4 4 4 4 5 5 5 5 ...
+NULL
+  year count   area_ha avg_age_yrs
+1 2015    79 1447.0300    17.46835
+2 2016    33  830.4200    16.27273
+3 2017   122 2709.3500    10.21311
+4 2018    60  729.3804     9.75000
+  GHG combustion_factor emission_factor global_warming_potential
+1 co2              0.46          1580.0                        1
+2 ch4              0.46             6.8                       28
+3 n2o              0.46             0.2                      265
+  year    co2agb   co2bgb       ch4      n2o     total
+1 2015 143565.53 37581.46 17300.555 4815.806 203263.35
+2 2016  71023.50 18591.97  8558.781 2382.434 100556.69
+3 2017 171842.47 44983.57 20708.106 5764.336 243298.49
+4 2018  58505.17 15315.02  7050.243 1962.515  82832.95
+  aa_em_tco2e_yr lci_aa_em_tco2e_yr uci_aa_em_tco2e_yr
+1       157487.9           98282.75           219940.8
+[1] 83096.02
+  aa_em_tco2e_yr lci_aa_em_tco2e_yr uci_aa_em_tco2e_yr
+1       83096.02           60424.14           108826.1
+              source      est       lci      uci
+1     FD_Logging_net 152954.5 117146.48 190623.0
+2 FD_Biomass_burning 157487.9  98282.75 219940.8
+3           FD_total 310442.4 241484.14 386813.3
+   interval   C_gain_t
+1      2006 170537.806
+2      2007 154296.110
+3      2008 138054.414
+4      2009 121812.718
+5      2010 105571.023
+6      2011  89329.327
+7      2012  73087.631
+8      2013  56845.935
+9      2014  40604.239
+10     2015  24362.544
+11     2016   8120.848
+[1] 89329.33
+  aa_removals_tco2e_yr lci_aa_removals_tco2e_yr uci_aa_removals_tco2e_yr
+1            -327540.9                -476575.4                -204240.9
+   year vol_m3
+1  2006  37216
+2  2007  50092
+3  2008  79869
+4  2009  63758
+5  2010  92283
+6  2011  91025
+7  2012  53737
+8  2013  63251
+9  2014  58542
+10 2015  54568
+11 2016  39854
+   year vol_m3
+1  2006 282102
+2  2007 294685
+3  2008 265046
+4  2009 249769
+5  2010 256040
+6  2011 306684
+7  2012 158214
+8  2013 668833
+9  2014 544902
+10 2015 393519
+11 2016 259301
+[1] 146360.6
+[1] "original model of softwood growth"
+               5%      95%          
+774224.8 643035.0 905553.9   1000.0 
+[1] "new data provided by fiji for softwood plantations"
+               5%      95%          
+536655.4 445720.9 627686.4   1000.0 
+          plantations aa_em_tco2e_yr lci_aa_em_tco2e_yr uci_aa_em_tco2e_yr
+2    Gross em. Hardw.      154193.61           127021.6          181387.37
+1    Gross em. Softw.      442001.31           359142.6          537094.40
+3    Gross em. Plant.      596194.92           509970.6          696124.21
+21  Gross rem. Hardw.     -864898.30         -1211310.4         -533002.99
+11  Gross rem. Softw.     -536655.40          -627686.4         -445720.92
+31  Gross rem. Plant.    -1401553.70         -1766180.2        -1068538.20
+22     Net em. Hardw.     -710704.69         -1067692.6         -377438.13
+12     Net em. Softw.      -94654.09          -218810.3           32272.38
+32     Net em. Plant.     -805358.79         -1157197.7         -457219.02
+  sourceSink gross_emissions gross_removals net_emissions
+1         DF           72.32           0.00         63.86
+2        FDL            5.24           2.39          3.62
+3        FDF            4.22           0.00          3.73
+4       FUEL            2.23           0.00          1.97
+5       ECAR            0.00          18.49          7.76
+6       ECHS           15.99          79.12         19.07
+  aa_emissions_tco2e_yr lci_aa_emissions_tco2e_yr uci_aa_emissions_tco2e_yr
+1            2696830.64                2048865.42                 3235754.1
+2             195316.10                 161696.56                  228831.8
+3             157487.87                  98282.75                  219940.8
+4              83096.02                  60424.14                  108826.1
+5                  0.00                      0.00                       0.0
+  aa_removals_tco2e_yr lci_aa_removals_tco2e_yr uci_aa_removals_tco2e_yr
+1                 0.00                      0.0                     0.00
+2            -42361.61                 -57133.3                -27326.55
+3                 0.00                      0.0                     0.00
+4                 0.00                      0.0                     0.00
+5           -327540.86                -476575.4               -204240.94
+  aa_net_emissions_tco2e_yr lci_aa_net_emissions_tco2e_yr
+1                2696830.64                    2048865.42
+2                 152954.49                     117146.48
+3                 157487.87                      98282.75
+4                  83096.02                      60424.14
+5                -327540.86                    -476575.36
+  lci_aa_net_emissions_tco2e_yr.1
+1                       3235754.1
+2                        190623.0
+3                        219940.8
+4                        108826.1
+5                       -204240.9
+ [ reached 'max' / getOption("max.print") -- omitted 2 rows ]
+  sourceSink gross_emissions gross_removals net_emissions
+1         DF           73.97           0.00         65.14
+2        FDL            5.36           2.39          3.69
+3        FDF            4.32           0.00          3.80
+4       ECAR            0.00          18.49          7.91
+5       ECHS           16.35          79.12         19.45
+  aa_emissions_tco2e_yr lci_aa_emissions_tco2e_yr uci_aa_emissions_tco2e_yr
+1             2696830.6                2048865.42                 3235754.1
+2              195316.1                 161696.56                  228831.8
+3              157487.9                  98282.75                  219940.8
+5                   0.0                      0.00                       0.0
+6              596194.9                 509970.62                  696124.2
+  aa_removals_tco2e_yr lci_aa_removals_tco2e_yr uci_aa_removals_tco2e_yr
+1                 0.00                      0.0                     0.00
+2            -42361.61                 -57133.3                -27326.55
+3                 0.00                      0.0                     0.00
+5           -327540.86                -476575.4               -204240.94
+6          -1401553.70               -1766180.2              -1068538.20
+  aa_net_emissions_tco2e_yr lci_aa_net_emissions_tco2e_yr
+1                 2696830.6                    2048865.42
+2                  152954.5                     117146.48
+3                  157487.9                      98282.75
+5                 -327540.9                    -476575.36
+6                 -805358.8                   -1157197.69
+  lci_aa_net_emissions_tco2e_yr.1
+1                       3235754.1
+2                        190623.0
+3                        219940.8
+5                       -204240.9
+6                       -457219.0
+ [ reached 'max' / getOption("max.print") -- omitted 1 rows ]
+[1] "Sat Sep 25 06:55:57 2021"
+[1] "Execution time: "
+Time difference of 8.282533 mins
+    source_sink estimate_tco2e_yr lci_tco2e_yr uci_tco2e_yr
+1         aaeDF        2696830.64   2048865.42   3235754.11
+2       aaeFD_L         195316.10    161696.56    228831.76
+3     aaeFD_BSW         157487.87     98282.75    219940.81
+4      aaeEC_HS         596194.92    509970.62    696124.21
+5  aae_Combined        3645829.52   2973262.63   4200659.59
+6       aarFD_L         -42361.61    -57133.30    -27326.55
+7      aarEC_AR        -327540.86   -476575.36   -204240.94
+8      aarEC_HS       -1401553.70  -1766180.20  -1068538.20
+9  aar_Combined       -1771456.18  -1406060.59  -2138674.88
+10       aaneDF        2696830.64   2048865.42   3235754.11
+11       aaneFD         310442.36    241484.14    386813.34
+12       aaneEC       -1132899.65  -1503117.89   -749307.50
+ [ reached 'max' / getOption("max.print") -- omitted 1 rows ]
+R version 4.1.1 (2021-08-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Debian GNU/Linux bookworm/sid
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.17.so
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+ [1] splines   stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] microbenchmark_1.4-7            FijiNFMSCalculations_0.0.0.9001
+ [3] MonteCarloUtils_0.0.0.9000      ValueWithUncertainty_0.0.0.9000
+ [5] VGAM_1.1-5                      survey_4.1-1                   
+ [7] survival_3.2-10                 Matrix_1.3-2                   
+ [9] data.table_1.14.0               nlme_3.1-153                   
+
+loaded via a namespace (and not attached):
+[1] lattice_0.20-41 DBI_1.1.1       magrittr_2.0.1  compiler_4.1.1 
+[5] mitools_2.4    

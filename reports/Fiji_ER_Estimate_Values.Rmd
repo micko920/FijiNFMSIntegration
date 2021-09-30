@@ -1,0 +1,49 @@
+---
+title: "Monitoring Report Tables Section 4"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+always_allow_html: true
+header-includes:
+    - \usepackage{caption}
+params:
+  file_format: "html"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE,
+                      message=FALSE, warning=FALSE)
+
+library(rlang)
+library(dplyr)
+library(kableExtra)
+if (!exists("fileFormat")) fileFormat <- params$file_format
+```
+
+
+\captionsetup[table]{labelformat=empty}
+
+
+
+```{r echo = FALSE}
+Table4_2 %>%
+  kable(fileFormat, caption = "Monitoring Report Table 4.2") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+# %>%
+#  column_spec(1, color = "black",width = "30em", background = "green") %>%
+#  column_spec(2, color = "black",width = "30em", background = "green")
+```
+
+
+
+
+
+```{r echo = FALSE}
+Table4_3 %>%
+  kable(fileFormat, caption = "Monitoring Report Table 4.3") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+

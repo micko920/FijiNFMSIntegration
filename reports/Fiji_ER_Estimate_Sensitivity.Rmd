@@ -1,0 +1,165 @@
+---
+title: "Monitoring Report Tables Section 5.3"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+always_allow_html: true
+header-includes:
+    - \usepackage{caption}
+params:
+  file_format: "html"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE,
+                      message=FALSE, warning=FALSE)
+
+library(rlang)
+library(dplyr)
+library(kableExtra)
+if (!exists("fileFormat")) fileFormat <- params$file_format
+```
+
+
+\captionsetup[table]{labelformat=empty}
+
+# Sensivity Analysis
+
+
+**Purpose**
+
+The Sensitivity Analysis produces a report which assesses the Total Effect
+Index of parameters for which uncertainty is included in the calculations.  Not
+all parameters and sources of uncertainty are assessed.
+
+- [] Todo: Reference Uncertainty list and list of assessed parameters.
+- [] Todo: Reference (Word document with value with uncertainty defined) either
+  in CG document (link) or coding table with parameter and code name........
+
+The Fiji Code uses the Total Effect Index method for ranking the parameters
+effects on the overall uncertainty. The ranking of the parameters allows
+prioritizing improvements to those which will have the biggest impact to
+reducing the overall uncertainty.
+
+This method has been implemented from guidance provided from the FCPF.
+
+- [] Todo: Reference World Bank UC guidance document received from Rama
+- [] Todo: Reference World Bank UC Power Point presentation from Andres
+
+The following description provides a basis for explaining design decisions
+related to the implementation of the Sensitivity Analysis. More information
+about the implementation and the algorithm can be found in the package
+documentation.
+
+**Total-effect index:**
+
+- [] Todo: Needs more work, this was extracted from wiki pages. But provides
+  the knowledge needed to understand the results!!
+[Wikipedia_Sensitvity_Analysis]:https://en.wikipedia.org/wiki/Sensitivity_analysis
+[Wikipedia_Variance_Based_Sensitvity_Analysis]:https://en.wikipedia.org/wiki/Variance-based_sensitivity_analysis
+[Python_Sensitvity_Analysis]:https://uncertainpy.readthedocs.io/en/latest/theory/sa.html
+
+*First-order indices*
+
+A direct variance-based measure of sensitivity S~i~, called the "first-order
+sensitivity index", or "main effect index" is stated as follows,[1]
+
+$$ S_{i}={\frac  {V_{i}}{\operatorname {Var}(Y)}} $$
+
+This is the contribution to the output variance of the main effect of X~i~,
+therefore it measures the effect of varying X~i~ alone, but averaged over
+variations in other input parameters. It is standardised by the total variance
+to provide a fractional contribution. Higher-order interaction indices S~ij~,
+S~ijk~ and so on can be formed by dividing other terms in the variance
+decomposition by Var(Y). Note that this has the implication that,
+
+$$ \sum _{{i=1}}^{d}S_{i}+\sum _{{i<j}}^{{d}}S_{{ij}}+\cdots +S_{{12\dots d}}=1 $$
+
+
+Using the S~i~, S~ij~ and higher-order indices given above, one can build a picture
+of the importance of each variable in determining the output variance. However,
+when the number of variables is large, this requires the evaluation of 2d-1
+indices, which can be too computationally demanding. For this reason, a measure
+known as the "Total Effect index" or "Total Order index", S~Ti~, is used.[2] This
+measures the contribution to the output variance of X~i~, including all variance
+caused by its interactions, of any order, with any other input variables. It is
+given as,
+
+$$ S_{Ti}=\frac {E_{{\textbf {X}}_{\sim i}}\left(\operatorname {Var}_{X_{i}}(Y\mid \mathbf {X}_{\sim i})\right)}{\operatorname {Var} (Y)}=1-\frac {\operatorname {Var}_{{\textbf {X}}_{\sim i}}\left(E_{X_{i}}(Y\mid \mathbf {X}_{\sim i})\right)}{\operatorname {Var} (Y)} $$
+
+
+Note that unlike the S~i~,
+
+$$ \sum_{{i=1}}^{d}S_{{Ti}}\geq 1 $$
+
+due to the fact that the interaction effect between e.g. X~i~ and X~j~ is counted
+in both S~Ti~ and S~Tj~ In fact, the sum of the S~Ti~ will only be equal to 1 when
+the model is purely additive.
+
+[1] Sobol’, I. (1990). Sensitivity estimates for nonlinear mathematical models.
+Matematicheskoe Modelirovanie 2, 112–118. in Russian, translated in English in
+Sobol’ , I. (1993). Sensitivity analysis for non-linear mathematical models.
+Mathematical Modeling & Computational Experiment (Engl. Transl.), 1993, 1,
+407–414.
+
+[2] Homma, T. and A. Saltelli (1996). Importance measures in global sensitivity
+analysis of nonlinear models. Reliability Engineering and System Safety, 52,
+1–17.
+
+
+*Fiji Method:*
+
+The sensitivity value selected for Fiji is the S~Ti~, the Total Effect Index of
+X~i~.
+
+This sensitivity value was selected to be reported for variables as it will
+have larger values for S~Ti~ (approaching 1) being candidates, rather than
+smaller (approaching 0) values, for reducing overall variance and therefore
+uncertainty of the estimate calculations.
+
+The total effect index of X~i~ is given by the following equations:
+
+$$ S_{Ti}=\frac {E_{{\textbf {X}}_{\sim i}}\left(\operatorname {Var} _{X_{i}}(Y\mid \mathbf {X}_{\sim i})\right)}{\operatorname {Var} (Y)}=1-\frac {\operatorname {Var}_{{\textbf {X}}_{\sim i}}\left(E_{X_{i}}(Y\mid \mathbf {X}_{\sim i})\right)}{\operatorname {Var} (Y)} $$
+
+As the effect of the uncertainty of X~i~ gets larger the $Var_{X_{~i}}$ gets
+smaller so the remaining variance approaches 1.
+
+- $Var_{X_{\sim i}}$: Variance of Y without the variance of X~i~, X~i~ is held
+  at its nominal value
+- ${\operatorname {Var} (Y)}$: variance of the Y model including the variance
+  on all variables.
+- $S_{Ti}$: Contribution of the uncertainty of X~i~ to the total variance
+
+
+The second form of the equation was used:
+$$
+ S_{Ti}=1-\frac {\operatorname {Var}_{{\textbf {X}}_{\sim i}}\left(E_{X_{i}}(Y\mid \mathbf {X}_{\sim i})\right)}{\operatorname {Var} (Y)}
+$$
+
+In other words, the contribution of the variance of X~i~ standardised by the
+total variance is equal to 1 minus the variance of the final estimate
+calculation with the value of X~i~ fixed divided by the variance of the
+original estimate calculation including the uncertainty of all variables.
+
+Note: The sum of S~Ti~ for all variable analysed will not equal 1. So a
+percentage will not be reported, just a fraction without a unit.
+
+
+**Output**
+
+- `TEI_Values`: The Total Effect Index values for each assessed parameter.
+
+Produces a table which is used in section 5.3 Sensitivity Analysis of the FCPF
+Monitoring Report.
+
+
+Sources of uncertaity with bigger (closer to 1) values have more impact on the
+overall uncertainty.
+
+
+```{r echo = FALSE}
+TEI_ValuesOrdered %>%
+  kable(fileFormat, caption = "Monitoring Report Section 5.3") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+

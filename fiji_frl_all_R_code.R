@@ -1,19 +1,26 @@
 
 # Load all necessary data
-load(file = "./Data/fiji_frl_input.RData")
+load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
 
 # Required R packages
 library(nlme)
 library(data.table)
 library(survey)
 library(VGAM)
+library(ValueWithUncertainty)
+library(MonteCarloUtils)
+library(FijiNFMSCalculations)
 
-debug_frl <- FALSE #Turn printed output on
+library(microbenchmark)
+
+set.seed(08121976) # Seed set to remove random nature of MC Analysis for LCI & UCI
+
+debug_frl <- TRUE #Turn printed output on
 show_output <- TRUE #Turn final table printed output on
 
 
 # Generic ..............................................................................
-param.runs          = 10        # Number of Monte-Carlo runs
+param.runs          = 1000      # Number of Monte-Carlo runs
 param.qlci          = 0.05      # Lower quantile (confidence bounds, 0.05 = 90% CI)
 param.quci          = 0.95      # Upper quantile (confidence bounds, 0.95 = 90% CI)
 param.etacf         = 0.47      # Biomass to carbon conversion (IPCC default)
@@ -61,21 +68,29 @@ param.maibp         = 10       # Mean annual biomass increment in Softwood Plant
 param.errmaibp      = 0.25     # Relative error in 'maibp'
 param.cuttingc      = 20       # Rotation length in year in Softwood Plantations
 param.errcuttingc   = 5        # Error in 'cuttingc'
+
+
+# End of Parameters -- Start of calculations #######################################################
+####################################################################################################
+
+print("Calculating FRL....")
+timestamp <- Sys.time()
+print(date())
+
 # Structure of 'lcc_mapped_areas'
-if (debug_frl) str(lcc_mapped_areas)
+if (debug_frl) print(str(lcc_mapped_areas))
 
 # Print object 'lcc_mapped_areas'
-if (debug_frl) lcc_mapped_areas
+if (debug_frl) print(lcc_mapped_areas)
 
 # Structure of 'aa_sample'
-if (debug_frl) str(aa_sample)
+if (debug_frl) print(str(aa_sample))
 
 # Head of 'aa_sample'
-if (debug_frl) head(aa_sample)
+if (debug_frl) print(head(aa_sample))
 
 # Number of sample points in the mapped classes
-if (debug_frl) table(aa_sample$predicted)
-
+if (debug_frl) print(table(aa_sample$predicted))
 # Get the total area mapped [ha]
 A_mapped <- sum(lcc_mapped_areas[,2])
 
@@ -95,22 +110,114 @@ round(errp <- rep(W_i, length.out = length(W_i)^2) * (err / rowSums(err)), 5)
 # Estimate class areas [ha]
 (aa_est_areas <- A_mapped * colSums(errp))
 
-# Load AA bootstrap function
-source(file = "./Utils/aaboot.R")
+# Load AA bootstrap function, this was originally in a separate file. This has
+# been merged prior to replacement with new functions in library.
+# source(file = "./Utils/aaboot.R")
+aaboot <- function( # A data.frame. The original accuracy assessment sample. First
+                   # column gives the predicted class, second column gives the observed
+                   # ('true') class.
+                   aa_sample = NULL,
+                   # A data.frame. First column gives the class codes, second column
+                   # gives the total area mapped of the class.
+                   areas_mapped = NULL,
+                   # Number of bootstrap runs (i.e., iterations)
+                   iterations = 1000,
+                   # Progress bar?
+                   progress_bar = TRUE) {
+  # Check if all necessary data are provided. If not, stop!
+  if (is.null(aa_sample)) {
+    stop("Accuracy assessment sample is missing.")
+  }
+  if (is.null(areas_mapped)) {
+    stop("Total areas missing (provide 'areas_mapped').")
+  }
+
+  # AA sample size in strata (strata = change class)
+  n1 <- table(aa_sample[, 1])
+  # Sort AA sample by change class (mapped class = predicted)
+  names(aa_sample) <- c("predicted", "observed")
+  aa_sample <- with(aa_sample, aa_sample[order(predicted), ])
+
+  # Total area mapped and area weight of class i
+  names(areas_mapped) <- c("lcc_code", "area_mapped")
+  areas_mapped <- with(areas_mapped, areas_mapped[order(lcc_code), ])
+  total_area_mapped <- sum(areas_mapped[, 2])
+  weight_class_i <- areas_mapped[, 2] / total_area_mapped
+
+
+  # Create data.frame that collects the results of the bootstrap runs
+  Ais1 <- rep(0, length(unique(aa_sample[, 1])))
+  names(Ais1) <- paste0("class_", unique(aa_sample[, 1]))
+
+  # Vector to select rows from the AA sample (see 'n1' above)
+  ns <- c(rbind(c(1, cumsum(n1) + 1)[-(length(n1) + 1)], cumsum(n1)))
+
+  # Progress bar for simulation
+  if (progress_bar == TRUE) {
+    pb <- txtProgressBar(min = 0, max = iterations, style = 3)
+  }
+
+  # Start bootstrap...
+  for (i in 1:iterations) {
+    for (k in 1:length(n1)) {
+      # Simple random sample with replacement from stratum k
+      if (k == 1) {
+        rsi <- aa_sample[sample(ns[k]:ns[k + 1], n1[k], replace = TRUE), ]
+      } else {
+        # Simple random sample with replacement from stratum k + 1
+        rsi <- rbind(
+          rsi,
+          aa_sample[sample(ns[k + k - 1]:ns[k + k], n1[k],
+            replace = TRUE
+          ), ]
+        )
+      }
+    }
+
+    # Compute error matrix
+    emi <- table(rsi[, 1], rsi[, 2])
+
+    # Compute error matrix with estimated area proportions
+    empi <- rep(weight_class_i, length.out = length(weight_class_i)^2) *
+      (emi / rowSums(emi))
+
+    # Estimate bias-adjusted areas for run i
+    Aisi <- total_area_mapped * colSums(empi, na.rm = TRUE)
+
+    # Bind results together
+    Ais1 <- rbind(Ais1, Aisi)
+
+    if (progress_bar == TRUE) {
+      setTxtProgressBar(pb, i)
+    }
+  }
+
+  if (progress_bar == TRUE) {
+    close(pb)
+  }
+
+  Ais1 <- Ais1[-1, ] # Remove first dummy row
+  aab <- data.frame(Ais1) # Rename to aab
+  row.names(aab) <- 1:nrow(aab) # Change row names (starting at 1)
+  names(aab) <- areas_mapped[, 1]
+  return(aab) # Return data frame
+}
 
 # Take bootstrap sample and estimate areas (iterations = 10 times)
+# Change this to param runs to so it does not cause an error later in code.
 aa_boot <- aaboot(aa_sample = aa_sample,               # AA sample
                   areas_mapped = lcc_mapped_areas,      # Mapped areas of change
-                  iterations = 10,                      # Number of iterations
+                  iterations = param.runs,              # Number of iterations
                   progress_bar = FALSE)                 # Want a progress bar?
 
 # Output of the function 'aaboot' with iterations = 10 runs
-if (debug_frl) aa_boot
-
-# Lower 90%-confidence bound
-quantile(aa_boot[,"171"], probs = 0.05)
-# Upper 90%-confidence bound
-quantile(aa_boot[,"171"], probs = 0.95)
+if (debug_frl) {
+  print(aa_boot)
+  # Lower 90%-confidence bound
+  print(quantile(aa_boot[,"171"], probs = 0.05))
+  # Upper 90%-confidence bound
+  print(quantile(aa_boot[,"171"], probs = 0.95))
+}
 
 # Results of the accuracy assessment
 rs_AA <- data.frame(
@@ -137,7 +244,7 @@ rs_AA <- data.frame(
                     )
 # Rename rows
 row.names(rs_AA) <- 1:nrow(rs_AA)
-if (debug_frl) rs_AA # Print results
+if (debug_frl) print(rs_AA) # Print results
 
 # Extract change classes (remove stable classes)
 rs_AA_annual <- rs_AA[3:6,]
@@ -147,7 +254,7 @@ rs_AA_annual[,3:6] <- rs_AA_annual[,3:6] / 10
 row.names(rs_AA_annual) <- 1:nrow(rs_AA_annual)
 
 # DF = deforestation; AR = afforestation/reforestation
-if (debug_frl) rs_AA_annual # Print
+if (debug_frl) print(rs_AA_annual) # Print
 
 # Result table for deforestation (AD)
 rs_AA_annual_df <- rs_AA_annual[1:2, c(2, 4:6)]
@@ -161,7 +268,21 @@ rs_AA_annual_df_total <- c(NA,
 rs_AA_annual_df <- rbind(rs_AA_annual_df, rs_AA_annual_df_total)
 rs_AA_annual_df[,1] <- as.character(rs_AA_annual_df[,1])
 rs_AA_annual_df[3,1] <- "Total"
-if (debug_frl) rs_AA_annual_df # Print
+if (debug_frl) print(rs_AA_annual_df) # Print
+
+# Extract data for AR
+rs_AA_annual_ar <- rs_AA_annual[3:4, c(2, 4:6)]
+# Create row for the total (sum of Low- and Upland Natural Forest)
+rs_AA_annual_ar_total <- c(NA,
+                           sum(rs_AA_annual_ar[,2]),
+                           quantile(aa_boot[,5] + aa_boot[,6], probs = param.qlci) / 10,
+                           quantile(aa_boot[,5] + aa_boot[,6], probs = param.quci) / 10
+                           )
+# Merge results
+rs_AA_annual_ar <- rbind(rs_AA_annual_ar, rs_AA_annual_ar_total)
+rs_AA_annual_ar[,1] <- as.character(rs_AA_annual_ar[,1])
+rs_AA_annual_ar[3,1] <- "Total"
+if (debug_frl) print(rs_AA_annual_ar) # Print
 
 # Merge tree data from the small and large concentric circles
 trees <- rbind(nfi_r3, nfi_r2)
@@ -310,7 +431,7 @@ names(nfi)[2] <- "agb3p"
 nfi$agb2p <- cid_r2[,"agb2"]
 
 # Head of 'nfi'
-if (debug_frl) head(nfi)
+if (debug_frl) print(head(nfi))
 
 # Plot expansion factors for large and small circles
 EF3 <- 10000 / 400 / 5  # 1 hectare / circle area [m^2] / number of cluster sub-plots
@@ -428,7 +549,7 @@ closedopen <- svyby(formula = ~tc, by = ~redd+stratum, design = svy, FUN = svyme
                     keep.names = FALSE, vartype = c("se", "ci"))
 
 # Average total carbon stock (AGB and BGB) per hectare
-if (debug_frl) nfi_tc_ha
+if (debug_frl) print(nfi_tc_ha)
 
 # Select data needed for the MC simulation
 trees3MC <- trees_r3        # NFI 2006 trees (large circle)
@@ -464,21 +585,32 @@ for(k in 1:param.runs){ # k <- 1
 
     # Predict tree heights of NFI 2006 trees ###########################################
     # Take a sample from the PSP plots (not trees!) with replacement
-    Sph <- sample(length(unique(phMC$PSPPlotNo)),
-                  length(unique(phMC$PSPPlotNo)), replace = TRUE)
+    # Sph <- sort(sample(length(unique(phMC$PSPPlotNo)),
+    #               length(unique(phMC$PSPPlotNo)), replace = TRUE))
     # Select variables from PSP tree dataset and create 'phi'
     phi <- phMC[,c("PSPPlotNo","dbh","height")]
     # Select tress from PSP plots (select plots from 'Sph')
-    for(l in 1:length(Sph)){ # l <- 1
-        if(l == 1){
-            # Create data.frame with trees from first PSP plot in 'Sph'
-            Sphi <- phi[phi$PSPPlotNo == Sph[l],]
-        } else {
-            # Attach tree data from PSP plot l in 'Sph'
-            Sphii <- phi[phi$PSPPlotNo == Sph[l],]
-            Sphi <- rbind(Sphi, Sphii)
-        }
-    }
+    # for(l in 1:length(Sph)){ # l <- 1
+    #     if(l == 1){
+    #         # Create data.frame with trees from first PSP plot in 'Sph'
+    #         Sphi <- phi[phi$PSPPlotNo == Sph[l],]
+    #     } else {
+    #         # Attach tree data from PSP plot l in 'Sph'
+    #         Sphii <- phi[phi$PSPPlotNo == Sph[l],]
+    #         Sphi <- rbind(Sphi, Sphii)
+    #     }
+    # }
+    # This is much faster, tested to be the same
+    Sphi <- merge(
+    data.frame(
+      PSPPlotNo = sort(sample(length(unique(phMC$PSPPlotNo)),
+                              length(unique(phMC$PSPPlotNo)),
+                              replace = TRUE
+                             ))
+              ),
+    phi,
+    by = c("PSPPlotNo")
+  )
     # The data.frame 'phMCk' is a bootstrap sample of trees from the PSP plots (some
     # trees may appear more than once, because a 'with replacement' sample was drawn
     # from the PSP plots).
@@ -712,9 +844,9 @@ for(k in 1:param.runs){ # k <- 1
 # close(pb)
 
 # Structure of 'MC'
-if (debug_frl) str(MC)
+if (debug_frl) print(str(MC))
 # First six rows of 'MC'
-if (debug_frl) head(MC)
+if (debug_frl) print(head(MC))
 
 # Reset the index 'i'
 i <- 1
@@ -783,7 +915,7 @@ for(i in 1:param.runs){ # i <- 2
 # close(pb)
 
 # MC estimates of average total biomass per hectare
-if (debug_frl) res
+if (debug_frl) print(res)
 
 # Convert matrix to data.frame
 c_stock_mc <- as.data.frame(res)        # Low- and Upland Natural Forest
@@ -816,13 +948,13 @@ rs_nfi_mc <- data.frame(stratum = c("Lowland", "Upland"),
 # Rename rows
 row.names(rs_nfi_mc) <- 1:nrow(rs_nfi_mc)
 # Print results
-if (debug_frl) rs_nfi_mc
+if (debug_frl) print(rs_nfi_mc)
 
 # Carbon stocks in grassland [tC ha^-1]
 (c_grass <- param.cgrass)
 
 # Relative error in the estimate of carbon stocks in grassland
-if (debug_frl) param.errcgrass
+if (debug_frl) print(param.errcgrass)
 
 # Simulate MC estimates of carbon stocks in grassland
 v_c_grass <- rtriangle(n = param.runs,
@@ -831,7 +963,7 @@ v_c_grass <- rtriangle(n = param.runs,
                        upper = c_grass + c_grass * param.errcgrass
                       )
 # Show simulated values
-if (debug_frl) v_c_grass
+if (debug_frl) print(v_c_grass)
 
 # Result table for carbon stocks in Fijian grasslands
 rs_c_grass <- data.frame(carbon_t_ha = c_grass,
@@ -839,7 +971,7 @@ rs_c_grass <- data.frame(carbon_t_ha = c_grass,
                          uci_carbon_t_ha = quantile(v_c_grass, probs = param.quci))
 row.names(rs_c_grass) <- 1
 # Show result table
-if (debug_frl) rs_c_grass
+if (debug_frl) print(rs_c_grass)
 
 # Carbon stock change (deforestation) for Low- and Upland Natural Forest
 (dc <- as.vector(nfi_tc_ha[1:2, 2]) - c_grass)
@@ -860,7 +992,7 @@ rs_nfi_carbonloss <- data.frame(stratum = c("Lowland","Upland"),
 # Rename rows
 row.names(rs_nfi_carbonloss) <- 1:nrow(rs_nfi_carbonloss)
 # Show result table
-if (debug_frl) rs_nfi_carbonloss
+if (debug_frl) print(rs_nfi_carbonloss)
 
 # Emission factors for deforestation in Low- and Upland Natural Forest
 df_ef <- data.frame(
@@ -874,7 +1006,7 @@ df_ef <- data.frame(
 # Rename rows
 row.names(df_ef) <- 1:nrow(df_ef)
 # Show result table
-if (debug_frl) df_ef
+if (debug_frl) print(df_ef)
 
 # Average annual area of deforestation in Low- and Upland Natural Forest
 (resAADefor <- data.frame(stratum = c("Lowland","Upland"),
@@ -923,9 +1055,9 @@ rs_df_all <- rs_df          # Strata and aggregated strata
 rs_df_strata <- rs_df[-3,]  # Strata only
 rs_df <- rs_df[3,-1]        # Aggregated strata only
 # Show result table
-if (debug_frl) rs_df_all
+if (debug_frl) print(rs_df_all)
 # Volumes logged [m^3] in Natural Forest
-if (debug_frl) lnf_volume
+if (debug_frl) print(lnf_volume)
 # Average annual volume extracted from Natural Forest [m^3]
 (avg_vol_lnf <- mean(lnf_volume$volume))
 
@@ -1094,7 +1226,7 @@ names(fd) <- c("year",
 rs_fd_table <- fd
 fdtab <- fd
 # Show annual data
-if (debug_frl) fd[,-c(4,6)]
+if (debug_frl) print(fd[,-c(4,6)])
 
 # Copy result table (annual average)
 rsfd <- rs_fd_logging
@@ -1111,7 +1243,7 @@ rsfdtab$uci <- unlist(c(rsfd[1,c(3,6,9)]))
 (rs_fd_lg <- rsfdtab)
 
 # Structure of 'sw_barea'
-if (debug_frl) str(sw_barea)
+if (debug_frl) print(str(sw_barea))
 
 
 # Aggregate compartment data for the years 2015 to 2018 ................................
@@ -1124,7 +1256,7 @@ sw_barea_agg$count <- aggregate(age_yrs ~ year, sw_barea, length)[,2]
 # Rearrange columns
 sw_barea_agg <- sw_barea_agg[,c(1,4,2,3)]
 # Show
-if (debug_frl) sw_barea_agg
+if (debug_frl) print(sw_barea_agg)
 
 # Mean annual (total) biomass increment in Softwood Plantations (Waterloo, 1994)
 (maibsw <- param.maibp)
@@ -1138,7 +1270,7 @@ sw_barea$bgb <- sw_barea$age_yrs * (maibsw * 0.2)        # BGB
 names(bioburn_ghgs)[1] <- "GHG"
 
 # Table of greenhouse gases
-if (debug_frl) bioburn_ghgs
+if (debug_frl) print(bioburn_ghgs)
 
 # Emissions (in tCO2e) for each gas (and each compartment)
 # CO_2 (above-ground biomass)
@@ -1159,7 +1291,7 @@ swfiret <- aggregate(. ~ year, sw_barea[,c(1, 6:9)], sum)
 
 # Compute totals of gases for each year
 swfiret$total <- rowSums(swfiret[,-1])
-if (debug_frl) swfiret
+if (debug_frl) print(swfiret)
 
 # Average annual emissions [tCO2e yr^-1] from biomass burning in Softwood Plantations .
 fdfswaae <- mean(swfiret$total)
@@ -1262,7 +1394,7 @@ rs_fd_fire <- data.frame(aa_em_tco2e_yr = fdfswaae,
 rs_fd_bb <- rs_fd_fire
 row.names(rs_fd_bb) <- "1"
 # Show result table
-if (debug_frl) rs_fd_bb
+if (debug_frl) print(rs_fd_bb)
 
 # Rename
 fd_bb_aae <- fdfswaae
@@ -1280,7 +1412,7 @@ fuelwch <- data.frame(year = c(2007, 2017),
 
 # Emissions from fuelwood consumption
 aaefuelc <- mean(rowSums(fuelwhh[,-1] * fuelwch[,-1]) * param.etacf * param.etacc)
-if (debug_frl) aaefuelc
+if (debug_frl) print(aaefuelc)
 
 # Uncertainty analysis
 # Create vector
@@ -1329,7 +1461,7 @@ rs_fuelc <- data.frame(aa_em_tco2e_yr = aaefuelc,
 rs_fd_fu <- rs_fuelc
 row.names(rs_fd_fu) <- "1"
 # Show result table for fuelwood
-if (debug_frl) rs_fd_fu
+if (debug_frl) print(rs_fd_fu)
 
 # Rename
 fd_fu_aae <- aaefuelc
@@ -1366,22 +1498,7 @@ rs_fd <- data.frame(source = c("FD_Logging_net", "FD_Biomass_burning", "FD_total
                       )
                       )
 # Show results: forest degaradtion
-if (debug_frl) rs_fd
-# AA results for afforestation/reforestation (AR); see Chapter on 'deforestation' (AD)
-if (debug_frl) rs_AA_annual
-# Extract data for AR
-rs_AA_annual_ar <- rs_AA_annual[3:4, c(2, 4:6)]
-# Create row for the total (sum of Low- and Upland Natural Forest)
-rs_AA_annual_ar_total <- c(NA,
-                           sum(rs_AA_annual_ar[,2]),
-                           quantile(aa_boot[,5] + aa_boot[,6], probs = param.qlci) / 10,
-                           quantile(aa_boot[,5] + aa_boot[,6], probs = param.quci) / 10
-                           )
-# Merge results
-rs_AA_annual_ar <- rbind(rs_AA_annual_ar, rs_AA_annual_ar_total)
-rs_AA_annual_ar[,1] <- as.character(rs_AA_annual_ar[,1])
-rs_AA_annual_ar[3,1] <- "Total"
-if (debug_frl) rs_AA_annual_ar # Print
+if (debug_frl) print(rs_fd)
 
 # Mean annual carbon increment in Hardwood Plantations
 (maicn <- param.maicar)
@@ -1410,13 +1527,16 @@ ARareas <- sum(aa_est_areas[5:6]) / 10
 # Carbon gains on areas afforested/reforested in year t (over the Reference Period)
 arcgainst <- seq(10.5, .5, -1) * ARareas * armaic
 
+if (debug_frl) {
 # Create a data frame of C gains over the Reference Period
 arcgains <- data.frame(interval = as.character(2006:2016),
                        C_gain_t = arcgainst)
+print(arcgains)
+}
 
 # Average annual C gains (AR) over the Reference Period
 araacg <- sum(arcgainst) / 11
-if (debug_frl) araacg
+if (debug_frl) print(araacg)
 
 # Uncertainty analysis
 # Create vector
@@ -1448,13 +1568,13 @@ rs_ar <- data.frame(aa_removals_tco2e_yr = ec_ar_aar * -1,
 rs_ec_ar <- rs_ar
 row.names(rs_ec_ar) <- "1"
 # Show result table
-if (debug_frl) rs_ec_ar
+if (debug_frl) print(rs_ec_ar)
 
 # Volumes extracted from Hardwood Plantations
 # These data were provided by Fiji Hardwood Corporation Limited (FHCL)
 hw <- hwsw_volharv[, 1:2]               # Hardwood data
 names(hw) <- c("year","vol_m3")         # Rename columns
-if (debug_frl) hw                                      # Print 'hw'
+if (debug_frl) print(hw)                                      # Print 'hw'
 
 # Biomass conversion and expansion factor (IPCC, 2006; Vol. 4, Chap. 4, Tab. 4.5 value
 # for humid tropical natural forest >200 m^3)
@@ -1612,7 +1732,7 @@ v_ec_hw_aane <- v_ec_hw_aae - v_ec_hw_aar   # MC estimates
 # Volumes extracted from Softwood Plantations
 sw <- hwsw_volharv[, c(1, 3)]           # Softwood data
 names(sw) <- c("year","vol_m3")         # Rename columns
-if (debug_frl) sw                                      # Print 'sw'
+if (debug_frl) print(sw)                                      # Print 'sw'
 
 # Wood density of pine (softwoods); see Cown (1981). Pine plantations are mostly located
 # below 300 m a.s.l.
@@ -1907,7 +2027,7 @@ rs_ec_plantations_tab[,1] <- ests
 # Create a copy
 rs_ec_pl <- rs_ec_plantations_tab
 # Show result table for Forest Plantations
-if (debug_frl) rs_ec_pl
+if (debug_frl) print(rs_ec_pl)
 # Fiji's Forest Reference Level (FRL) ##################################################
 # FRL table (including all sources and sinks) ..........................................
 frl_table <- data.frame(source_sink = c(
@@ -2166,7 +2286,9 @@ contributions <- data.frame(sourceSink = c("DF","FDL","FDF","FUEL","ECAR","ECHS"
 # Contributions (including emissions from fuelwood consumption)
 contributionsfuel <- contributions
 # Contributions of all sources and sinks in percent (including fuelwood)
-if (debug_frl) contributionsfuel
+if (debug_frl) print(contributionsfuel)
+
+if (debug_frl) print(frl_table_data)
 
 # DF    = deforestation
 # FDL   = forest degradation (logging)
@@ -2264,7 +2386,9 @@ contributions <- data.frame(sourceSink = c("DF","FDL","FDF","ECAR","ECHS"),
                             net_emissions = contributionn[,1])
 
 # The contribution of all sources and sinks in percent (excluding fuelwood)
-if (debug_frl) contributions
+if (debug_frl) print(contributions)
+
+if (debug_frl) print(frl_table_data)
 
 # DF    = deforestation
 # FDL   = forest degradation (logging)
@@ -2357,12 +2481,16 @@ frltab <- data.frame(
            )
 
 
+print(date())
+print("Execution time: ")
+print(difftime(Sys.time(), timestamp, unit="auto"))
+
 # The final FRL table ##################################################################
 if (debug_frl | show_output) {
   frltab
   #**************************************************************************
   # put results in txt file
-  sink("Fiji_FRL_Results.txt")
+  sink("./chks/Fiji_FRL_Results.txt")
   print(frltab)
   sink()
 }
@@ -2388,4 +2516,4 @@ if (debug_frl | show_output) {
 # aaneFD        # Net emissions forest degradation
 # aaneEC        # Net emissions EC
 
-if (debug_frl) sessionInfo()
+if (debug_frl) print(sessionInfo())

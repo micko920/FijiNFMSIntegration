@@ -1,0 +1,212 @@
+[1] "***** EmRems_Values *******"
+$year1
+$year1$EstEmDeforUp
+[1] 1023.55
+
+$year1$EstEmDeforLow
+[1] 89237.9
+
+$year1$GrossEmDefor
+[1] 90261.4
+
+$year1$EstEmFell
+[1] 106194
+
+$year1$EstRemFell
+[1] -4900.06
+
+$year1$NetEmRemsFell
+[1] 101294
+
+$year1$EstEmFire
+[1] 3556.98
+
+$year1$EstRemARefor
+[1] -111.752
+
+$year1$EstEmFPlnHwd
+[1] 49088.6
+
+$year1$EstEmFPlnSwd
+[1] 511410
+
+$year1$EstRemFPlnHwd
+[1] -682420
+
+$year1$EstRemFPlnSwd
+[1] -460233
+
+$year1$GrossEmFPln
+[1] 560499
+
+$year1$GrossRemFPln
+[1] -1142654
+
+$year1$NetEmRemsFPln
+[1] -582155
+
+$year1$GrossEm
+[1] 760511
+
+$year1$GrossRem
+[1] -1147666
+
+$year1$EstEmRemsFDeg
+[1] 104851
+
+$year1$EstEmRemsEnh
+[1] -582267
+
+$year1$NetEmRems
+[1] -387155
+
+
+$year2
+$year2$EstEmDeforUp
+[1] 1023.55
+
+$year2$EstEmDeforLow
+[1] 89237.9
+
+$year2$GrossEmDefor
+[1] 90261.4
+
+$year2$EstEmFell
+[1] 85039.9
+
+$year2$EstRemFell
+[1] -3929.95
+
+$year2$NetEmRemsFell
+[1] 81110
+
+$year2$EstEmFire
+[1] 4334.2
+
+$year2$EstRemARefor
+[1] -111.752
+
+$year2$EstEmFPlnHwd
+[1] 53152.9
+
+$year2$EstEmFPlnSwd
+[1] 634278
+
+$year2$EstRemFPlnHwd
+[1] -680843
+
+$year2$EstRemFPlnSwd
+[1] -482602
+
+$year2$GrossEmFPln
+[1] 687431
+
+$year2$GrossRemFPln
+[1] -1163445
+
+$year2$NetEmRemsFPln
+[1] -476015
+
+$year2$GrossEm
+[1] 867066
+
+$year2$GrossRem
+[1] -1167487
+
+$year2$EstEmRemsFDeg
+[1] 85444.2
+
+$year2$EstEmRemsEnh
+[1] -476126
+
+$year2$NetEmRems
+[1] -300421
+
+
+[1] "****** ER_Values *******"
+$MpGrossEmDefor
+[1] 180523
+
+$MpEstEmRemsFDeg
+[1] 190295
+
+$MpEstEmRemsEnh
+[1] -1058393
+
+$MpNetEmRems
+[1] -687576
+
+$MpEstFRL
+[1] 3748746
+
+$MpEstERs
+[1] 4436322
+
+$MpEstFRLFDeg
+[1] 620884
+
+$MpEstERsFDeg
+[1] 430589
+
+[1] "***** MR_Values ********"
+$year1
+$year1$year
+[1] 2019
+
+$year1$GrossEmDefor
+[1] 90261.4
+
+$year1$EstEmRemsFDeg
+[1] 104851
+
+$year1$EstEmRemsEnh
+[1] -582267
+
+$year1$NetEmRems
+[1] -387155
+
+
+$year2
+$year2$year
+[1] 2020
+
+$year2$GrossEmDefor
+[1] 90261.4
+
+$year2$EstEmRemsFDeg
+[1] 85444.2
+
+$year2$EstEmRemsEnh
+[1] -476126
+
+$year2$NetEmRems
+[1] -300421
+
+
+$MpGrossEmDefor
+[1] 180523
+
+$MpEstEmRemsFDeg
+[1] 190295
+
+$MpEstEmRemsEnh
+[1] -1058393
+
+$MpNetEmRems
+[1] -687576
+
+$RpNetEmRems
+[1] -508618
+
+$MpEstFRL
+[1] 3748746
+
+$RpEstFRL
+[1] 2773045
+
+$MpEstERs
+[1] 4436322
+
+$RpEstERs
+[1] 3281663
+
