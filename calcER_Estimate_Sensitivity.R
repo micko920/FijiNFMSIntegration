@@ -14,7 +14,7 @@ outputSaveNames <- c(
   "TEI_ValuesOrdered"
 )
 
-source("./FRL_VALUE_FIX.R")
+
 
 ### Start of Calc ####
 CalcER_Estimate_Sensitivity <- function(statusCallback, interrupted, calcEnv) {
@@ -76,7 +76,7 @@ CalcER_Estimate_Sensitivity <- function(statusCallback, interrupted, calcEnv) {
   )
 
   UC_Values <- list()
-  UC_Values <- createUC_Values()
+  UC_Values <- createUC_Values(MonitoringReportParams)
 
 
   UC_MV_Values <- list()

@@ -1,10 +1,21 @@
 ---
 title: "Mapped Areas Accuracy Assessment Report"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-always_allow_html: true
-header-includes:
-    - \usepackage{caption}
+header-includes: \usepackage{caption}
+always_allow_html: yes
+params:
+  file_format: "html"
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE,
+                      message=FALSE, warning=FALSE)
+
+library(rlang)
+library(dplyr)
+library(kableExtra)
+if (!exists("fileFormat")) fileFormat <- params$file_format
+```
 
 \captionsetup[table]{labelformat=empty}
 
@@ -69,7 +80,7 @@ AdjustedAreas$rs_AA_annual_ar %>%
 ```{r echo = FALSE}
 print(AdjustedAreas$ARareas)
 ```
-## AF area
+## DF area
 ```{r echo = FALSE}
 print(AdjustedAreas$areaLoss)
 ```

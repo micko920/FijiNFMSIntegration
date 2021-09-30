@@ -16,11 +16,11 @@ update-chks:
 
 
 run-test-FRL:
-	Rscript -e 'source("./fiji_frl_all_R_code.R")' 2>&1  > ./chks/Fiji_old_output.txt
-	-diff -U 1  ./chks/Fiji_FRL_Results.txt ./chks/Fiji_FRL_Results.chk
-	Rscript -e 'source("./Fiji_FRL_Report.R")' 2>&1 > ./chks/Fiji_new_output.txt
-	-diff -U 1  ./chks/Fiji_FRL_Results.chk ./chks/Fiji_FRL_Results.txt
-	-diff -Bw -U 1  ./chks/Fiji_old_output.txt ./chks/Fiji_new_output.txt
+	#Rscript -e 'source("./fiji_frl_all_R_code.R")' 2>&1  > ./chks/Fiji_old_output.txt
+	#-diff -U 1  ./chks/Fiji_FRL_Results.txt ./chks/Fiji_FRL_Results.chk
+	#Rscript -e 'source("./Fiji_FRL_Report.R")' 2>&1 > ./chks/Fiji_new_output.txt
+	#-diff -U 1  ./chks/Fiji_FRL_Results.chk ./chks/Fiji_FRL_Results.txt
+	#-diff -Bw -U 1  ./chks/Fiji_old_output.txt ./chks/Fiji_new_output.txt
 	Rscript -e 'source("./Fiji_FRL_AccuracyAssessment.R")' 2>&1 > ./chks/Fiji_FRL_Results_AccuracyAssessment.txt
 	-diff -U 1  ./chks/Fiji_FRL_Results_AccuracyAssessment.chk ./chks/Fiji_FRL_Results_AccuracyAssessment.txt
 	Rscript -e 'source("./Fiji_FRL_NFIEmissionFactors.R")' 2>&1 > ./chks/Fiji_FRL_Results_NFIEmissionFactors.txt
@@ -45,5 +45,4 @@ run-test-ER_EST:
 	-diff -U 1  ./chks/Fiji_ER_EstimateResults_UC.chk ./chks/Fiji_ER_EstimateResults_UC.txt
 	Rscript -e 'source("./Fiji_ER_Estimate_Sensitivity.R")'
 	-diff -U 1  ./chks/Fiji_ER_EstimateResults_Sensitivity.chk ./chks/Fiji_ER_EstimateResults_Sensitivity.txt
-	Rscript -e 'source("./Drivers/run_tests.R")'
 

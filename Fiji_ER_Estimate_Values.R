@@ -21,7 +21,7 @@ MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 seed <- 08121976
 set.seed(seed) # Seed set to remove random nature of MC Analysis for LCI & UCI
 
-debug_er <- FALSE # Turn printed output on
+debug_er <- TRUE # Turn printed output on
 show_output <- TRUE # Turn final table printed output on
 plot_mc_output <- FALSE # Turn on plots for MC samples
 
@@ -35,17 +35,19 @@ timestamp <- Sys.time()
 print(date())
 
 statusCallback <- function(perc_complete, notification) {
-    if (missing(notification))
-      msg <- "Running ...."
-    else
-      msg <- notification
-    if (!missing(perc_complete))
-      msg <- paste0(msg, " [", perc_complete, "% Complete]")
-    print(msg)
+        if (missing(notification)) {
+                      msg <- "Running ...."
+              } else {
+                      msg <- notification
+              }
+        if (!missing(perc_complete)) {
+                      msg <- paste0(msg, " [", perc_complete, "% Complete]")
+              }
+        print(msg)
 }
 
 interrupted <- function() {
-  return(FALSE)
+        return(FALSE)
 }
 
 
@@ -55,39 +57,38 @@ result <- CalcER_Estimate_Values(statusCallback, interrupted, calcEnv)
 
 print(date())
 print("Execution time: ")
-print(difftime(Sys.time(), timestamp, unit="auto"))
+print(difftime(Sys.time(), timestamp, unit = "auto"))
 
-list2env(result$env,environment())
+list2env(result$env, environment())
 
 if (debug_er) {
-  print(Table4_2)
-  print(Table4_3)
-  print(MonitoredValues)
-  print(EmRems_Values)
-  print(ER_Values)
+        print(Table4_2)
+        print(Table4_3)
+        print(MonitoredValues)
+        print(EmRems_Values)
+        print(ER_Values)
 }
 
 fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
-  list = outputSaveNames,
-  file = paste(paste("./Data/MonitoringReport2021", fullFilename, sep = "/")
+        list = outputSaveNames,
+        file = paste(paste("./Data/MonitoringReport2021", fullFilename, sep = "/"))
 )
 
 if (debug_er | show_output) {
-  old_width <- options("width" = 120)
-  print(MR_Values)
-  #**************************************************************************
-  # put results in txt file
-  sink("./chks/Fiji_ER_EstimateResults_Values.txt")
-  #print(MonitoredValues)
+        old_width <- options("width" = 120)
+        print(MR_Values)
+        #**************************************************************************
+        # put results in txt file
+        sink("./chks/Fiji_ER_EstimateResults_Values.txt")
+        # print(MonitoredValues)
 
-  print("***** EmRems_Values *******")
-  print(EmRems_Values)
-  print("****** ER_Values *******")
-  print(ER_Values)
-  print("***** MR_Values ********")
-  print(MR_Values)
-  sink()
-  options(old_width)
+        print("***** EmRems_Values *******")
+        print(EmRems_Values)
+        print("****** ER_Values *******")
+        print(ER_Values)
+        print("***** MR_Values ********")
+        print(MR_Values)
+        sink()
+        options(old_width)
 }
-

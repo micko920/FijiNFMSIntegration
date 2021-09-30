@@ -1,34 +1,34 @@
 $year1
                 stratum     Estimate          LCI        UCI
-1         Deforestation    90261.450    73762.275  108314.02
-2  Forest Deg (felling)   106193.603    87972.125  124427.74
-3     Forest Deg (fire)        0.000        0.000       0.00
-4    Forest Plantations   560498.762   487327.681  659160.35
-5         Sum Emissions   756953.815   679725.542  858489.69
-6  Forest Deg (felling)    -4900.064    -6842.848   -3115.23
-7         Afforestation     -111.448     -338.164       0.00
-8    Forest Plantations -1142653.876 -1330759.942 -965245.11
-9          Sum Removals -1147665.389 -1335341.520 -970503.60
-10        Deforestation    90261.450    73762.275  108314.02
-11   Forest Degradation   101293.539    82887.658  119541.70
-12          Enhancement  -582266.562  -775699.249 -374313.45
-13                Total  -390711.574  -586569.791 -180802.81
+1         Deforestation    90261.450    74145.304  106822.48
+2  Forest Deg (felling)   106193.603    87975.221  124428.08
+3     Forest Deg (fire)     3556.977     2988.763    4112.44
+4    Forest Plantations   560498.762   487628.736  658344.39
+5         Sum Emissions   760510.792   683794.951  861530.84
+6  Forest Deg (felling)    -4900.064    -6839.920   -3117.28
+7         Afforestation     -111.752     -333.726       0.00
+8    Forest Plantations -1142653.876 -1330824.708 -966064.74
+9          Sum Removals -1147665.693 -1335492.394 -972157.01
+10        Deforestation    90261.450    74145.304  106822.48
+11   Forest Degradation   104850.515    86455.830  123173.72
+12          Enhancement  -582266.866  -778328.016 -374442.81
+13                Total  -387154.901  -582711.959 -178563.48
 
 $year2
-                stratum     Estimate          LCI       UCI
-1         Deforestation    90261.450    73642.987  108738.0
-2  Forest Deg (felling)    85039.940    70486.774   99580.6
-3     Forest Deg (fire)        0.000        0.000       0.0
-4    Forest Plantations   687430.557   596799.490  809073.3
-5         Sum Emissions   862731.946   769756.008  986705.5
-6  Forest Deg (felling)    -3929.947    -5483.340   -2497.9
-7         Afforestation     -111.448     -337.967       0.0
-8    Forest Plantations -1163445.120 -1354687.256 -984671.4
-9          Sum Removals -1167486.516 -1358083.569 -988283.9
-10        Deforestation    90261.450    73642.987  108738.0
-11   Forest Degradation    81109.993    66466.967   95696.3
-12          Enhancement  -476126.012  -680858.366 -254489.2
-13                Total  -304754.569  -508823.268  -80075.1
+                stratum     Estimate          LCI        UCI
+1         Deforestation    90261.450    74158.364  106825.06
+2  Forest Deg (felling)    85039.940    70489.760   99618.59
+3     Forest Deg (fire)     4334.199     3647.244    5006.62
+4    Forest Plantations   687430.557   596411.108  809221.86
+5         Sum Emissions   867066.145   774388.763  991444.25
+6  Forest Deg (felling)    -3929.947    -5484.004   -2500.20
+7         Afforestation     -111.752     -335.181       0.00
+8    Forest Plantations -1163445.120 -1353556.693 -985995.79
+9          Sum Removals -1167486.819 -1357568.712 -991477.55
+10        Deforestation    90261.450    74158.364  106825.06
+11   Forest Degradation    85444.192    70835.703  100078.48
+12          Enhancement  -476126.316  -679768.557 -255870.62
+13                Total  -300420.674  -505044.127  -77733.04
 
 $year1
 $year1$year
@@ -38,13 +38,13 @@ $year1$GrossEmDefor
 [1] 90261.4
 
 $year1$EstEmRemsFDeg
-[1] 101294
+[1] 104851
 
 $year1$EstEmRemsEnh
 [1] -582267
 
 $year1$NetEmRems
-[1] -390712
+[1] -387155
 
 
 $year2
@@ -55,61 +55,61 @@ $year2$GrossEmDefor
 [1] 90261.4
 
 $year2$EstEmRemsFDeg
-[1] 81110
+[1] 85444.2
 
 $year2$EstEmRemsEnh
 [1] -476126
 
 $year2$NetEmRems
-[1] -304755
+[1] -300421
 
 
 $MpGrossEmDefor
 [1] 180523
 
 $MpEstEmRemsFDeg
-[1] 182404
+[1] 190295
 
 $MpEstEmRemsEnh
 [1] -1058393
 
 $MpNetEmRems
-[1] -695466
+[1] -687576
 
 $RpNetEmRems
-[1] -514454
+[1] -508618
 
 $MpEstFRL
-[1] 3556843
+[1] 3748746
 
 $RpEstFRL
-[1] 2631089
+[1] 2773045
 
 $MpEstERs
-[1] 4252309
+[1] 4436322
 
 $RpEstERs
-[1] 3145544
+[1] 3281663
 
 $MpEstERsDefEnh
 $MpEstERsDefEnh$median
-[1] 3753626
+[1] 3911505
 
 $MpEstERsDefEnh$UCI
     UCI 
-4767678 
+4908672 
 
 $MpEstERsDefEnh$LCI
     LCI 
-2711722 
+2879563 
 
 $MpEstERsDefEnh$halfWidth
     UCI 
-1027978 
+1014555 
 
 $MpEstERsDefEnh$relativeMargin
      UCI 
-0.273863 
+0.259377 
 
 $MpEstERsDefEnh$conserFactor
 [1] 0.04
@@ -117,39 +117,39 @@ $MpEstERsDefEnh$conserFactor
 
 $MpEstERsFDeg
 $MpEstERsFDeg$median
-[1] 445018
+[1] 431941
 
 $MpEstERsFDeg$UCI
    UCI 
-509790 
+531249 
 
 $MpEstERsFDeg$LCI
    LCI 
-386321 
+334950 
 
 $MpEstERsFDeg$halfWidth
     UCI 
-61734.5 
+98149.5 
 
 $MpEstERsFDeg$relativeMargin
      UCI 
-0.138724 
+0.227229 
 
 $MpEstERsFDeg$conserFactor
-[1] 0
+[1] 0.04
 
 
 $ErpaCurrentFRL
-[1] 2631089
+[1] 2773045
 
 $ErpaCurrentEmRems
-[1] -514454
+[1] -508618
 
 $ErpaCurrentERs
-[1] 3145544
+[1] 3281663
 
 $ErpaCurrentBalance
-[1] 3145544
+[1] 3281663
 
 $IsReversal
 [1] FALSE
@@ -158,23 +158,23 @@ $RpCanceledERs
 [1] 0
 
 $RpEstERsFDeg
-[1] 324355
+[1] 318518
 
 $RpEstERsDefEnh
-[1] 2821188
+[1] 2963144
 
 $RpSetaside
-[1] 112848
+[1] 131267
 
 $RpAdjERs
-[1] 3032696
+[1] 3150396
 
 $RpPotentialERs
-[1] 3032696
+[1] 3150396
 
 $RpBufferedERs
-[1] 485231
+[1] 504063
 
 $RpERs
-[1] 2547465
+[1] 2646333
 

@@ -1,7 +1,8 @@
 
 # Load all necessary data
-load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
+#load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
 #load(file = "./Data/frlCorrection/fiji_frl_input.RData")
+load(file = "./Data/swCorrection/fiji_frl_input.RData")
 #aa_sample <- read.csv(file = "./Data/frlCorrection/aa_sample.csv")
 #lcc_mapped_areas <- read.csv(file = "./Data/frlCorrection/lcc_mapped_areas.csv")
 
@@ -25,11 +26,14 @@ options(max.print=50)
 # This number was used to generate the chk file.
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 
-debug_frl <- TRUE #Turn printed output on
+debug_frl <- TRUE # Turn printed output on
+debug_er <- TRUE # Turn printed output on
 show_output <- TRUE #Turn final table printed output on
 
 
-source(file = "./Data/preMonitoringReport/FRL_Parameters.R")
+#source(file = "./Data/preMonitoringReport/FRL_Parameters.R")
+#source(file = "./Data/frlCorrection/FRL_Parameters.R")
+source(file = "./Data/swCorrection/FRL_Parameters.R")
 
 MCRuns <- FRLParams$runs
 

@@ -19,10 +19,10 @@ $year1$NetEmRemsFell
 [1] 101294
 
 $year1$EstEmFire
-[1] 0
+[1] 3556.98
 
 $year1$EstRemARefor
-[1] -111.786
+[1] -111.752
 
 $year1$EstEmFPlnHwd
 [1] 49088.6
@@ -46,19 +46,19 @@ $year1$NetEmRemsFPln
 [1] -582155
 
 $year1$GrossEm
-[1] 756954
+[1] 760511
 
 $year1$GrossRem
 [1] -1147666
 
 $year1$EstEmRemsFDeg
-[1] 101294
+[1] 104851
 
 $year1$EstEmRemsEnh
 [1] -582267
 
 $year1$NetEmRems
-[1] -390712
+[1] -387155
 
 
 $year2
@@ -81,10 +81,10 @@ $year2$NetEmRemsFell
 [1] 81110
 
 $year2$EstEmFire
-[1] 0
+[1] 4334.2
 
 $year2$EstRemARefor
-[1] -111.786
+[1] -111.752
 
 $year2$EstEmFPlnHwd
 [1] 53152.9
@@ -108,19 +108,19 @@ $year2$NetEmRemsFPln
 [1] -476015
 
 $year2$GrossEm
-[1] 862732
+[1] 867066
 
 $year2$GrossRem
 [1] -1167487
 
 $year2$EstEmRemsFDeg
-[1] 81110
+[1] 85444.2
 
 $year2$EstEmRemsEnh
 [1] -476126
 
 $year2$NetEmRems
-[1] -304755
+[1] -300421
 
 
 [1] "****** ER_Values *******"
@@ -128,25 +128,25 @@ $MpGrossEmDefor
 [1] 180523
 
 $MpEstEmRemsFDeg
-[1] 182404
+[1] 190295
 
 $MpEstEmRemsEnh
 [1] -1058393
 
 $MpNetEmRems
-[1] -695467
+[1] -687576
 
 $MpEstFRL
-[1] 3273600
+[1] 3748746
 
 $MpEstERs
-[1] 3969067
+[1] 4436322
 
 $MpEstFRLFDeg
 [1] 620884
 
 $MpEstERsFDeg
-[1] 438480
+[1] 430589
 
 [1] "***** MR_Values ********"
 $year1
@@ -157,13 +157,13 @@ $year1$GrossEmDefor
 [1] 90261.4
 
 $year1$EstEmRemsFDeg
-[1] 101294
+[1] 104851
 
 $year1$EstEmRemsEnh
 [1] -582267
 
 $year1$NetEmRems
-[1] -390712
+[1] -387155
 
 
 $year2
@@ -174,39 +174,39 @@ $year2$GrossEmDefor
 [1] 90261.4
 
 $year2$EstEmRemsFDeg
-[1] 81110
+[1] 85444.2
 
 $year2$EstEmRemsEnh
 [1] -476126
 
 $year2$NetEmRems
-[1] -304755
+[1] -300421
 
 
 $MpGrossEmDefor
 [1] 180523
 
 $MpEstEmRemsFDeg
-[1] 182404
+[1] 190295
 
 $MpEstEmRemsEnh
 [1] -1058393
 
 $MpNetEmRems
-[1] -695467
+[1] -687576
 
 $RpNetEmRems
-[1] -514455
+[1] -508618
 
 $MpEstFRL
-[1] 3273600
+[1] 3748746
 
 $RpEstFRL
-[1] 2421567
+[1] 2773045
 
 $MpEstERs
-[1] 3969067
+[1] 4436322
 
 $RpEstERs
-[1] 2936022
+[1] 3281663
 

@@ -13,7 +13,7 @@ outputSaveNames <- c(
 
 
 
-source("./FRL_VALUE_FIX.R")
+
 
 ### Start of Calc ####
 CalcER_Estimate_AccuracyAssessment <- function(statusCallback, interrupted, calcEnv) {

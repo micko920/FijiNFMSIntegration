@@ -74,7 +74,7 @@ ui <- fluidPage(
         "PreviousData",
         "Input ER_Estimate_Values",
         multiple = FALSE,
-        accept = ".Rdata"
+        accept = ".RData"
       ),
       tableOutput("rdataNames"),
       hr(),
