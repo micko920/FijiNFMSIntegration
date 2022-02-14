@@ -1,10 +1,12 @@
 
+
+getDataPath<-function(filename) {
+  return(paste0("./Data/frlUpdate14Feb22/", filename))
+}
+
+
 # Load all necessary data
-#load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
-#load(file = "./Data/frlCorrection/fiji_frl_input.RData")
-load(file = "./Data/swCorrection/fiji_frl_input.RData")
-#aa_sample <- read.csv(file = "./Data/frlCorrection/aa_sample.csv")
-#lcc_mapped_areas <- read.csv(file = "./Data/frlCorrection/lcc_mapped_areas.csv")
+load(file = getDataPath("fiji_frl_input.RData"))
 
 # Required R packages
 library(nlme)
@@ -31,9 +33,7 @@ debug_er <- TRUE # Turn printed output on
 show_output <- TRUE #Turn final table printed output on
 
 
-#source(file = "./Data/preMonitoringReport/FRL_Parameters.R")
-#source(file = "./Data/frlCorrection/FRL_Parameters.R")
-source(file = "./Data/swCorrection/FRL_Parameters.R")
+source(file = getDataPath("FRL_Parameters.R"))
 
 MCRuns <- FRLParams$runs
 

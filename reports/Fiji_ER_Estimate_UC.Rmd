@@ -25,10 +25,13 @@ if (!exists("fileFormat")) fileFormat <- params$file_format
 ```{r echo = FALSE}
 Table5_2_2 %>%
   kable(fileFormat, caption = "Monitoring Report Table 5.2.2") %>%
+  footnote(symbol = 
+  "Total Emissions Reductions column does not include Forest Degradation emissions as they are estimated with proxy data.", threeparttable = True) %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )
 ```
+
 
 
 

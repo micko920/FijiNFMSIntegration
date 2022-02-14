@@ -1,0 +1,127 @@
+---
+title: "R Setup"
+author: "Tim Graham, Carly Green, Michael Green"
+date: "November 2021"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '5'
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  word_document:
+    toc: yes
+    toc_depth: '5'
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  echo = TRUE
+)
+```
+
+# 1. Introduction
+
+## 1.1 Purpose of Document
+
+This document will guide you on how to install and setup R, RStudio and Rtools
+on your machine, so that the Fiji FNMS project can be run on your machine.
+
+## 1.2 Systems to be Installed
+
+* **R** is the programming language that this project is written in, this must 
+be installed for the project to run on your machine.
+* **RStudio** is an integrated development environment (IDE) which is commonly 
+used by R developers, this will be used to navigate the project's code base.
+* **Rtools** is a set of programs that is required on Windows to build R 
+packages from source.
+
+# 2. Pre-requisites
+
+* Windows 64-bit machine
+* Admin privileges on your user account
+* R and Rstudio not currently installed on your machine
+
+
+# 3. Installing R
+
+To start with, you must download the appropriate distribution of R. To do this
+visit [Comprehensive R Archive Network](https://cran.rstudio.com/) and click on 
+**Download R for the first time** and then click on 
+**Download R 4.1.2 for Windows** an exe file will then download to your machine. 
+**Note R version may have changed since time of writing**
+
+![][RSetup1]
+
+![][RSetup2]
+
+Run the .exe file that has downloaded to your machine. Ensuring that your user 
+account has administrator privileges.
+
+![][RSetup3]
+
+Proceed through the installation wizard, accepting all default settings. Once 
+you have done this, R is installed and you can proceed to the installation of
+RStudio.
+
+# 4. Installing RStudio
+
+Start by downloading the latest version of Rstudio from the [RStudio website](https://www.rstudio.com/products/rstudio/download/#download). This will
+download a .exe file to your machine.
+
+![][RSetup4]
+
+Open the .exe file, this will launch the RStudio installation wizard, proceed
+through the installation wizard, accepting all default settings.
+
+![][RSetup5]
+
+# 5. Installing Rtools
+
+## 5.1 Installation
+
+To install Rtools please visit the [R for Windows Build Tools Archive](https://cran.r-project.org/bin/windows/Rtools/history.html) and 
+download the version which corresponds to the version of R that you installed 
+in section 3 of this manual. This will download a .exe file to your machine.
+
+![][RSetup6]
+
+Open the .exe file, this will launch the Rtools installation wizard, proceed
+through the installation wizard, accepting all default settings.
+
+![][RSetup7]
+
+## 5.2 System Settings
+
+In order for Rtools to work on your machine you must update your Windows System
+Variables. To do this:
+
+1. Go to Windows settings
+2. System
+3. About
+4. Advanced system settings
+5. Environment variables
+
+![][RSetup8]
+
+6. Select **Path** under System Variables and click edit
+7. Click **New** and paste the following **C:\\rtools40\\usr\\bin**
+8. Click **OK** and you are finished
+
+![][RSetup9]
+
+[RSetup1]:images/RSetup1_InstallRFirstTime.png
+[RSetup2]:images/RSetup2_DownloadR.png
+[RSetup3]:images/RSetup3_Rexe.png
+[RSetup4]:images/RSetup4_DownloadRStudio.png
+[RSetup5]:images/RSetup5_RStudioexe.png
+[RSetup6]:images/RSetup6_DownloadR-Tools.png
+[RSetup7]:images/RSetup7_Rtoolsexe.png
+[RSetup8]:images/RSetup8_EnvironmentVariables.png
+[RSetup9]:images/RSetup9_EditEnvironmentVariables.png

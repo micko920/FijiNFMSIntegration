@@ -1,8 +1,12 @@
 
+
+getDataPath<-function(filename) {
+  return(paste0("./Data/frlUpdate14Feb22/", filename))
+}
+
+
 # Load all necessary data
-#load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
-#load(file = "./Data/frlCorrection/fiji_frl_input.RData")
-load(file = "./Data/swCorrection/fiji_frl_input.RData")
+load(file = getDataPath("fiji_frl_input.RData"))
 
 # Required R packages
 library(nlme)
@@ -30,9 +34,7 @@ debug_er <- TRUE # Turn printed output on
 show_output <- TRUE #Turn final table printed output on
 
 
-#source(file = "./Data/preMonitoringReport/FRL_Parameters.R")
-#source(file = "./Data/frlCorrection/FRL_Parameters.R")
-source(file = "./Data/swCorrection/FRL_Parameters.R")
+source(file = getDataPath("FRL_Parameters.R"))
 
 MCRuns <- FRLParams$runs
 
@@ -41,15 +43,9 @@ MCRuns <- FRLParams$runs
 
 
 # Load all necessary data
-#load(file = "./Data/preMonitoringReport/fiji_frl_adjusted_areas.RData")
-#load(file = "./Data/frlCorrection/fiji_frl_adjusted_areas.RData")
-load(file = "./Data/swCorrection/fiji_frl_adjusted_areas.RData")
-#load(file = "./Data/preMonitoringReport/fiji_frl_emission_factors.RData")
-#load(file = "./Data/frlCorrection/fiji_frl_emission_factors.RData")
-load(file = "./Data/swCorrection/fiji_frl_emission_factors.RData")
-#load(file = "./Data/preMonitoringReport/fiji_frl_estimate_values.RData")
-#load(file = "./Data/frlCorrection/fiji_frl_estimate_values.RData")
-load(file = "./Data/swCorrection/fiji_frl_estimate_values.RData")
+load(file = getDataPath("fiji_frl_adjusted_areas.RData"))
+load(file = getDataPath("fiji_frl_emission_factors.RData"))
+load(file = getDataPath("fiji_frl_estimate_values.RData"))
 
 ## Degradation
 FRLDegradation <- calcFRLDegradation()
@@ -77,9 +73,7 @@ save(
     "FRLDegradation",
     "FRLTable"
   ),
-  #file = "./Data/preMonitoringReport/fiji_frl_tables.RData"
-  #file = "./Data/frlCorrection/fiji_frl_tables.RData"
-  file = "./Data/swCorrection/fiji_frl_tables.RData"
+  file = getDataPath("fiji_frl_tables.RData")
 )
 
 

@@ -67,7 +67,9 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
   ER_Values <- CalcERValues(
     EmRems_Values,
     MonitoringReportParams$ErpaYearlyFRL,
-    MonitoringReportParams$ErpaYearlyFRLFDeg
+    MonitoringReportParams$ErpaYearlyFRLFDeg,
+    MonitoringReportParams$ErpaYearlyFRLDefor,
+    MonitoringReportParams$ErpaYearlyFRLEnh
   )
 
   checkStatus(60)

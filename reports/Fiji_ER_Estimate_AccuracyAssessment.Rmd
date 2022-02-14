@@ -23,6 +23,8 @@ if (!exists("fileFormat")) fileFormat <- params$file_format
 ```{r echo = FALSE}
 opts <- options(knitr.kable.NA = "")
 t <- round(AdjustedAreas$errorMatrix, 5)
+t <- rbind(t,totals=colSums(t))
+t <- cbind(t,totals=rowSums(t))
 t[t == 0] <- NA
 t %>%
   kable(fileFormat,
@@ -39,6 +41,8 @@ t %>%
 ```{r echo = FALSE}
 opts <- options(knitr.kable.NA = "")
 t <- round(AdjustedAreas$errorProportions, 5)
+t <- rbind(t,totals=colSums(t))
+t <- cbind(t,totals=rowSums(t))
 t[t == 0] <- NA
 t %>%
   kable(fileFormat,
@@ -50,9 +54,11 @@ t %>%
   )
 ```
 
-# Adjusted Areas
+# Adjusted Areas - 90% Confidence Interval
 ```{r echo = FALSE}
-AdjustedAreas$rs_AA %>%
+
+t <- cbind(AdjustedAreas$rs_AA, 'halfwidth_%'=round(100*(AdjustedAreas$rs_AA$uci_area_ha - AdjustedAreas$rs_AA$lci_area_ha)/2/AdjustedAreas$rs_AA$aaboot_mean,1)) 
+t %>%
   kable(fileFormat, caption = "Adjusted Areas") %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
@@ -60,14 +66,16 @@ AdjustedAreas$rs_AA %>%
 ```
 
 ```{r echo = FALSE}
-AdjustedAreas$rs_AA_annual_df %>%
+t <- cbind(AdjustedAreas$rs_AA_annual_df, 'halfwidth_%'=round(100*(AdjustedAreas$rs_AA_annual_df$uci_area_ha - AdjustedAreas$rs_AA_annual_df$lci_area_ha)/2/AdjustedAreas$rs_AA_annual_df$aaboot_mean,1)) 
+t %>%
   kable(fileFormat, caption = "Adjusted Areas Annual Deforestation") %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )
 ```
 ```{r echo = FALSE}
-AdjustedAreas$rs_AA_annual_ar %>%
+t <- cbind(AdjustedAreas$rs_AA_annual_ar, 'halfwidth_%'=round(100*(AdjustedAreas$rs_AA_annual_ar$uci_area_ha - AdjustedAreas$rs_AA_annual_ar$lci_area_ha)/2/AdjustedAreas$rs_AA_annual_ar$aaboot_mean,1)) 
+t %>% 
   kable(fileFormat, caption = "Adjusted Areas Annual Aforestation") %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")

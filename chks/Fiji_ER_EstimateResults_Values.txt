@@ -133,6 +133,9 @@ $MpEstEmRemsFDeg
 $MpEstEmRemsEnh
 [1] -1058393
 
+$MpEstEmRemsDefEnh
+[1] -877870
+
 $MpNetEmRems
 [1] -687576
 
@@ -147,6 +150,12 @@ $MpEstFRLFDeg
 
 $MpEstERsFDeg
 [1] 430589
+
+$MpEstFRLDefEnh
+[1] 3127860
+
+$MpEstERsDefEnh
+[1] 4005730
 
 [1] "***** MR_Values ********"
 $year1
@@ -209,4 +218,37 @@ $MpEstERs
 
 $RpEstERs
 [1] 3281663
+
+$RpEstEmRemsFDeg
+[1] 140766
+
+$MpEstFRLFDeg
+[1] 620884
+
+$RpEstFRLFDeg
+[1] 459284
+
+$MpEstERsFDeg
+[1] 430589
+
+$RpEstERsFDeg
+[1] 318518
+
+$MpEstEmRemsDefEnh
+[1] -877870
+
+$RpEstEmRemsDefEnh
+[1] -649383
+
+$MpEstFRLDefEnh
+[1] 3127860
+
+$RpEstFRLDefEnh
+[1] 2313759
+
+$MpEstERsDefEnh
+[1] 4005730
+
+$RpEstERsDefEnh
+[1] 2963143
 
