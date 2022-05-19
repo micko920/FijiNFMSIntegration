@@ -3,6 +3,9 @@ title: "R Setup"
 author: "Tim Graham, Carly Green, Michael Green"
 date: "November 2021"
 output:
+  word_document:
+    toc: yes
+    toc_depth: '5'
   pdf_document:
     toc: yes
     toc_depth: '5'
@@ -12,9 +15,6 @@ output:
     toc_float:
       collapsed: no
       smooth_scroll: yes
-  word_document:
-    toc: yes
-    toc_depth: '5'
 ---
 
 ```{r, include = FALSE}
@@ -116,6 +116,29 @@ Variables. To do this:
 
 ![][RSetup9]
 
+# 6. Installing Github Desktop
+
+## 6.1 Instillation
+
+To install Github Desktop please go to [Github Desktop](https://desktop.github.com), pressing the purple button will start the download of a .exe file.
+
+![][RSetup10]
+
+This needs to be executed when the download is completed.
+
+![][RSetup11]
+
+## 6.2 Login
+
+Once the program has been executed the user will be prompted to login or create an account.
+
+![][Rsetup12]
+
+Do what is valid for you;
+  - Already have an account: Login
+  - Dont have an account: Create account
+
+
 [RSetup1]:images/RSetup1_InstallRFirstTime.png
 [RSetup2]:images/RSetup2_DownloadR.png
 [RSetup3]:images/RSetup3_Rexe.png
@@ -125,3 +148,6 @@ Variables. To do this:
 [RSetup7]:images/RSetup7_Rtoolsexe.png
 [RSetup8]:images/RSetup8_EnvironmentVariables.png
 [RSetup9]:images/RSetup9_EditEnvironmentVariables.png
+[RSetup10]:images/RSetup10_GithubDownloadPage.png
+[RSetup11]:images/RSetup11_GithubDownloadPrompt.png
+[Rsetup12]:images/RSetup12_GithubLogin.png

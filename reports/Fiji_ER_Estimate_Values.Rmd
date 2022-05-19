@@ -39,7 +39,7 @@ Table4_2 %>%
 Table4_3 %>%
   kable(fileFormat, caption = "Monitoring Report Table 4.3", digits = 4) %>%
   footnote(symbol = 
-  "Total Emissions Reductions column does not include Forest Degradation emissions as they are estimated with proxy data.", threeparttable = True) %>%
+  "Total Emissions Reductions column does not include Forest Degradation emissions as they are estimated with proxy data.", threeparttable = FALSE) %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )

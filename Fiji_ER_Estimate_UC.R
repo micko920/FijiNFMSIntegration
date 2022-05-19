@@ -12,9 +12,13 @@ library(ValueWithUncertainty)
 library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_AccuracyAssessment.RData")
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_Params.RData")
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_Values.RData")
+getDataPath<-function(filename) {
+  return(paste0("./Data/mrUpdate14Feb22/", filename))
+}
+
+load(file = getDataPath("Fiji_ER_Estimate_AccuracyAssessment.RData"))
+load(file = getDataPath("Fiji_ER_Estimate_Params.RData"))
+load(file = getDataPath("Fiji_ER_Estimate_Values.RData"))
 
 options(digits = 6)
 options(show.error.locations = TRUE)
@@ -58,6 +62,22 @@ interrupted <- function() {
         return(FALSE)
 }
 
+formatPercent <- function(x) {
+  return(paste(format(round(x * 100, 2), nsmall = 2), "%"))
+}
+
+halfwidth <- function(value) {
+  return( abs(
+            ifelse(value[[2]] > value[[3]],
+                 (value[[2]] - value[[3]]),
+                 (value[[3]] - value[[2]]))/ 2
+            )
+  )
+}
+
+relativeMargin <- function(value) {
+  return( abs(halfwidth(value) / value[[1]]) )
+}
 
 calcEnv <- as.list(environment())
 
@@ -140,7 +160,37 @@ ResultsTables$year1 <- data.frame(
                 UC_EmRems_Values$year1$McFDeg$value[[3]],
                 UC_EmRems_Values$year1$McEnh$value[[3]],
                 UC_EmRems_Values$year1$McNetEmRems$value[[3]]
-        )
+        ),
+        HW = c(
+               halfwidth(UC_EmRems_Values$year1$McGrossEmDefor$value),
+               halfwidth(UC_EmRems_Values$year1$McEstEmFell$value),
+               halfwidth(UC_EmRems_Values$year1$McEstEmFire$value),
+               halfwidth(UC_EmRems_Values$year1$McGrossEmFPln$value),
+               halfwidth(UC_EmRems_Values$year1$McGrossEm$value),
+               halfwidth(UC_EmRems_Values$year1$McEstRemFell$value),
+               halfwidth(UC_EmRems_Values$year1$McEstRemARefor$value),
+               halfwidth(UC_EmRems_Values$year1$McGrossRemFPln$value),
+               halfwidth(UC_EmRems_Values$year1$McGrossRem$value),
+               halfwidth(UC_EmRems_Values$year1$McGrossEmDefor$value),
+               halfwidth(UC_EmRems_Values$year1$McFDeg$value),
+               halfwidth(UC_EmRems_Values$year1$McEnh$value),
+               halfwidth(UC_EmRems_Values$year1$McNetEmRems$value)
+               ),
+        RM = c(
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McGrossEmDefor$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McEstEmFell$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McEstEmFire$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McGrossEmFPln$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McGrossEm$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McEstRemFell$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McEstRemARefor$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McGrossRemFPln$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McGrossRem$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McGrossEmDefor$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McFDeg$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McEnh$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year1$McNetEmRems$value))
+               )
 )
 
 ResultsTables$year2 <- data.frame(
@@ -193,7 +243,37 @@ ResultsTables$year2 <- data.frame(
                 UC_EmRems_Values$year2$McFDeg$value[[3]],
                 UC_EmRems_Values$year2$McEnh$value[[3]],
                 UC_EmRems_Values$year2$McNetEmRems$value[[3]]
-        )
+        ),
+        HW = c(
+               halfwidth(UC_EmRems_Values$year2$McGrossEmDefor$value),
+               halfwidth(UC_EmRems_Values$year2$McEstEmFell$value),
+               halfwidth(UC_EmRems_Values$year2$McEstEmFire$value),
+               halfwidth(UC_EmRems_Values$year2$McGrossEmFPln$value),
+               halfwidth(UC_EmRems_Values$year2$McGrossEm$value),
+               halfwidth(UC_EmRems_Values$year2$McEstRemFell$value),
+               halfwidth(UC_EmRems_Values$year2$McEstRemARefor$value),
+               halfwidth(UC_EmRems_Values$year2$McGrossRemFPln$value),
+               halfwidth(UC_EmRems_Values$year2$McGrossRem$value),
+               halfwidth(UC_EmRems_Values$year2$McGrossEmDefor$value),
+               halfwidth(UC_EmRems_Values$year2$McFDeg$value),
+               halfwidth(UC_EmRems_Values$year2$McEnh$value),
+               halfwidth(UC_EmRems_Values$year2$McNetEmRems$value)
+               ),
+        RM = c(
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McGrossEmDefor$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McEstEmFell$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McEstEmFire$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McGrossEmFPln$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McGrossEm$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McEstRemFell$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McEstRemARefor$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McGrossRemFPln$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McGrossRem$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McGrossEmDefor$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McFDeg$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McEnh$value)),
+               formatPercent(relativeMargin(UC_EmRems_Values$year2$McNetEmRems$value))
+               )
 )
 
 
@@ -205,7 +285,7 @@ if (debug_er) {
 fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
         list = outputSaveNames,
-        file = paste(paste("./Data/MonitoringReport2021", fullFilename, sep = "/"))
+        file = paste(getDataPath(fullFilename))
 )
 
 

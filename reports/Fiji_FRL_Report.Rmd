@@ -1,0 +1,101 @@
+---
+title: "Fiji FRL Report"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+header-includes: \usepackage{caption}
+always_allow_html: yes
+params:
+  file_format: "html"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE,
+                      message=FALSE, warning=FALSE)
+
+library(rlang)
+library(dplyr)
+library(kableExtra)
+if (!exists("fileFormat")) fileFormat <- params$file_format
+```
+
+\captionsetup[table]{labelformat=empty}
+
+# Error Matrix
+```{r echo = FALSE}
+opts <- options(knitr.kable.NA = "")
+t <- round(AdjustedAreas$errorMatrix, 5)
+t <- rbind(t,totals=colSums(t))
+t <- cbind(t,totals=rowSums(t))
+t[t == 0] <- NA
+t %>%
+  kable(fileFormat,
+    caption = "Adjusted Areas",
+    digits = 5, format.args = list(scientific = FALSE)
+  ) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+
+# Error Proportions
+```{r echo = FALSE}
+opts <- options(knitr.kable.NA = "")
+t <- round(AdjustedAreas$errorProportions, 5)
+t <- rbind(t,totals=colSums(t))
+t <- cbind(t,totals=rowSums(t))
+t[t == 0] <- NA
+t %>%
+  kable(fileFormat,
+    caption = "Adjusted Areas",
+    digits = 5, format.args = list(scientific = FALSE)
+  ) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+# Adjusted Areas - 90% Confidence Interval
+```{r echo = FALSE}
+
+t <- cbind(AdjustedAreas$rs_AA, 'halfwidth_%'=round(100*(AdjustedAreas$rs_AA$uci_area_ha - AdjustedAreas$rs_AA$lci_area_ha)/2/AdjustedAreas$rs_AA$aaboot_mean,1)) 
+t %>%
+  kable(fileFormat, caption = "Adjusted Areas") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+```{r echo = FALSE}
+t <- cbind(AdjustedAreas$rs_AA_annual_df, 'halfwidth_%'=round(100*(AdjustedAreas$rs_AA_annual_df$uci_area_ha - AdjustedAreas$rs_AA_annual_df$lci_area_ha)/2/AdjustedAreas$rs_AA_annual_df$aaboot_mean,1)) 
+t %>%
+  kable(fileFormat, caption = "Adjusted Areas Annual Deforestation") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+```{r echo = FALSE}
+t <- cbind(AdjustedAreas$rs_AA_annual_ar, 'halfwidth_%'=round(100*(AdjustedAreas$rs_AA_annual_ar$uci_area_ha - AdjustedAreas$rs_AA_annual_ar$lci_area_ha)/2/AdjustedAreas$rs_AA_annual_ar$aaboot_mean,1)) 
+t %>% 
+  kable(fileFormat, caption = "Adjusted Areas Annual Aforestation") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+```
+
+# Activity Data
+
+## AF area
+```{r echo = FALSE}
+print(AdjustedAreas$ARareas)
+```
+## DF area
+```{r echo = FALSE}
+print(AdjustedAreas$areaLoss)
+```
+
+
+# FRL Results Table
+```{r echo = FALSE}
+print(FRLTable$frltab)
+```
+

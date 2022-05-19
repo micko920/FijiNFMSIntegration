@@ -7,8 +7,12 @@ library(survey)
 library(VGAM)
 library(FijiNFMSCalculations)
 
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_AccuracyAssessment.RData")
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_Params.RData")
+getDataPath<-function(filename) {
+  return(paste0("./Data/mrUpdate14Feb22/", filename))
+}
+
+load(file = getDataPath("Fiji_ER_Estimate_AccuracyAssessment.RData"))
+load(file = getDataPath("Fiji_ER_Estimate_Params.RData"))
 
 options(digits = 6)
 options(show.error.locations = TRUE)
@@ -72,7 +76,7 @@ if (debug_er) {
 fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
         list = outputSaveNames,
-        file = paste(paste("./Data/MonitoringReport2021", fullFilename, sep = "/"))
+        file = paste(getDataPath(fullFilename))
 )
 
 if (debug_er | show_output) {
