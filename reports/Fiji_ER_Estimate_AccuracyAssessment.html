@@ -478,6 +478,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -499,6 +500,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
 pre code {
   padding: 0;
 }
@@ -518,8 +522,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -527,16 +531,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -582,7 +579,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Mapped Areas Accuracy Assessment Report</h1>
-<h4 class="date">18 February, 2022</h4>
+<h4 class="date">20 December, 2022</h4>
 
 </div>
 
@@ -629,7 +626,7 @@ totals
 111
 </td>
 <td style="text-align:right;">
-52
+51
 </td>
 <td style="text-align:right;">
 </td>
@@ -642,10 +639,10 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-3
+5
 </td>
 <td style="text-align:right;">
-55
+56
 </td>
 </tr>
 <tr>
@@ -677,12 +674,12 @@ totals
 171
 </td>
 <td style="text-align:right;">
-435
+353
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-13
+29
 </td>
 <td style="text-align:right;">
 </td>
@@ -691,10 +688,10 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-117
+110
 </td>
 <td style="text-align:right;">
-565
+492
 </td>
 </tr>
 <tr>
@@ -704,22 +701,22 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-270
+262
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-5
+10
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-8
+10
 </td>
 <td style="text-align:right;">
-283
+282
 </td>
 </tr>
 <tr>
@@ -727,13 +724,13 @@ totals
 555
 </td>
 <td style="text-align:right;">
-452
+359
 </td>
 <td style="text-align:right;">
 15
 </td>
 <td style="text-align:right;">
-7
+6
 </td>
 <td style="text-align:right;">
 </td>
@@ -742,10 +739,10 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-91
+163
 </td>
 <td style="text-align:right;">
-565
+543
 </td>
 </tr>
 <tr>
@@ -753,11 +750,7 @@ totals
 711
 </td>
 <td style="text-align:right;">
-498
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
+368
 </td>
 <td style="text-align:right;">
 </td>
@@ -767,10 +760,14 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-244
 </td>
 <td style="text-align:right;">
-743
+</td>
+<td style="text-align:right;">
+367
+</td>
+<td style="text-align:right;">
+736
 </td>
 </tr>
 <tr>
@@ -780,7 +777,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-42
+32
 </td>
 <td style="text-align:right;">
 </td>
@@ -791,7 +788,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-13
+23
 </td>
 <td style="text-align:right;">
 55
@@ -802,40 +799,13 @@ totals
 777
 </td>
 <td style="text-align:right;">
-16
+9
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-42
-</td>
-<td style="text-align:right;">
-58
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-totals
-</td>
-<td style="text-align:right;">
-1453
-</td>
-<td style="text-align:right;">
-381
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:right;">
-5
 </td>
 <td style="text-align:right;">
 1
@@ -843,10 +813,38 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-519
+47
 </td>
 <td style="text-align:right;">
-2379
+57
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+totals
+</td>
+<td style="text-align:right;">
+1140
+</td>
+<td style="text-align:right;">
+363
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+726
+</td>
+<td style="text-align:right;">
+2276
 </td>
 </tr>
 </tbody>
@@ -894,7 +892,7 @@ totals
 111
 </td>
 <td style="text-align:right;">
-0.51603
+0.49689
 </td>
 <td style="text-align:right;">
 </td>
@@ -907,10 +905,10 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.02977
+0.04872
 </td>
 <td style="text-align:right;">
-0.54580
+0.54561
 </td>
 </tr>
 <tr>
@@ -920,7 +918,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.06859
+0.06898
 </td>
 <td style="text-align:right;">
 </td>
@@ -931,10 +929,10 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00127
+0.00128
 </td>
 <td style="text-align:right;">
-0.06986
+0.07026
 </td>
 </tr>
 <tr>
@@ -942,9 +940,60 @@ totals
 171
 </td>
 <td style="text-align:right;">
-0.00318
+0.00269
 </td>
 <td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.00022
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.00084
+</td>
+<td style="text-align:right;">
+0.00375
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+172
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.00014
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.00001
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.00001
+</td>
+<td style="text-align:right;">
+0.00016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+555
+</td>
+<td style="text-align:right;">
+0.00619
+</td>
+<td style="text-align:right;">
+0.00026
 </td>
 <td style="text-align:right;">
 0.00010
@@ -956,59 +1005,10 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00086
+0.00281
 </td>
 <td style="text-align:right;">
-0.00414
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-172
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-0.00015
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-0.00015
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-555
-</td>
-<td style="text-align:right;">
-0.00765
-</td>
-<td style="text-align:right;">
-0.00025
-</td>
-<td style="text-align:right;">
-0.00012
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-0.00154
-</td>
-<td style="text-align:right;">
-0.00956
+0.00936
 </td>
 </tr>
 <tr>
@@ -1016,11 +1016,7 @@ totals
 711
 </td>
 <td style="text-align:right;">
-0.00784
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
+0.00581
 </td>
 <td style="text-align:right;">
 </td>
@@ -1030,10 +1026,14 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00384
 </td>
 <td style="text-align:right;">
-0.01170
+</td>
+<td style="text-align:right;">
+0.00580
+</td>
+<td style="text-align:right;">
+0.01163
 </td>
 </tr>
 <tr>
@@ -1043,7 +1043,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00038
+0.00029
 </td>
 <td style="text-align:right;">
 </td>
@@ -1054,7 +1054,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00012
+0.00021
 </td>
 <td style="text-align:right;">
 0.00050
@@ -1065,7 +1065,7 @@ totals
 777
 </td>
 <td style="text-align:right;">
-0.09884
+0.05664
 </td>
 <td style="text-align:right;">
 </td>
@@ -1074,14 +1074,15 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
+0.00629
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.25945
+0.29580
 </td>
 <td style="text-align:right;">
-0.35829
+0.35873
 </td>
 </tr>
 <tr>
@@ -1089,23 +1090,24 @@ totals
 totals
 </td>
 <td style="text-align:right;">
-0.63354
+0.56822
 </td>
 <td style="text-align:right;">
-0.06937
+0.06967
 </td>
 <td style="text-align:right;">
-0.00022
+0.00034
+</td>
+<td style="text-align:right;">
+0.00001
+</td>
+<td style="text-align:right;">
+0.00629
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00002
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-0.29685
+0.35547
 </td>
 <td style="text-align:right;">
 1.00000
@@ -1157,22 +1159,22 @@ halfwidth_%
 Stable LF
 </td>
 <td style="text-align:right;">
-814278.96
+809464.05
 </td>
 <td style="text-align:right;">
-9.451797e+05
+8.43023e+05
 </td>
 <td style="text-align:right;">
-9.453336e+05
+8.42806e+05
 </td>
 <td style="text-align:right;">
-8.784746e+05
+7.75555e+05
 </td>
 <td style="text-align:right;">
-1.011745e+06
+907710.9366
 </td>
 <td style="text-align:right;">
-7.0
+7.8
 </td>
 </tr>
 <tr>
@@ -1183,19 +1185,19 @@ Stable LF
 Stable UF
 </td>
 <td style="text-align:right;">
-104219.37
+104232.96
 </td>
 <td style="text-align:right;">
-1.034932e+05
+1.03370e+05
 </td>
 <td style="text-align:right;">
-1.034666e+05
+1.03345e+05
 </td>
 <td style="text-align:right;">
-9.969981e+04
+9.95789e+04
 </td>
 <td style="text-align:right;">
-1.055015e+05
+105385.2208
 </td>
 <td style="text-align:right;">
 2.8
@@ -1209,22 +1211,22 @@ Stable UF
 DF Lowland
 </td>
 <td style="text-align:right;">
-6165.90
+5570.91
 </td>
 <td style="text-align:right;">
-3.186104e+02
+5.05177e+02
 </td>
 <td style="text-align:right;">
-3.193046e+02
+5.05470e+02
 </td>
 <td style="text-align:right;">
-1.992122e+02
+3.65597e+02
 </td>
 <td style="text-align:right;">
-4.523440e+02
+654.5052
 </td>
 <td style="text-align:right;">
-39.6
+28.6
 </td>
 </tr>
 <tr>
@@ -1235,22 +1237,22 @@ DF Lowland
 DF Upland
 </td>
 <td style="text-align:right;">
-228.60
+228.69
 </td>
 <td style="text-align:right;">
-4.038869e+00
+8.10957e+00
 </td>
 <td style="text-align:right;">
-4.043474e+00
+8.09368e+00
 </td>
 <td style="text-align:right;">
-1.615548e+00
+4.05479e+00
 </td>
 <td style="text-align:right;">
-7.269965e+00
+12.1644
 </td>
 <td style="text-align:right;">
-69.9
+50.1
 </td>
 </tr>
 <tr>
@@ -1261,22 +1263,22 @@ DF Upland
 AR Lowland
 </td>
 <td style="text-align:right;">
-17461.62
+17246.97
 </td>
 <td style="text-align:right;">
-2.350151e+01
+9.33725e+03
 </td>
 <td style="text-align:right;">
-2.377648e+01
+9.42502e+03
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.00000e+00
 </td>
 <td style="text-align:right;">
-7.050452e+01
+28011.7468
 </td>
 <td style="text-align:right;">
-148.3
+148.6
 </td>
 </tr>
 <tr>
@@ -1287,19 +1289,19 @@ AR Lowland
 AR Upland
 </td>
 <td style="text-align:right;">
-748.98
+750.51
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.00000e+00
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.00000e+00
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.00000e+00
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.0000
 </td>
 <td style="text-align:right;">
 </td>
@@ -1312,22 +1314,22 @@ AR Upland
 Stable NF
 </td>
 <td style="text-align:right;">
-534516.03
+532223.19
 </td>
 <td style="text-align:right;">
-4.428658e+05
+5.27354e+05
 </td>
 <td style="text-align:right;">
-4.427376e+05
+5.27509e+05
 </td>
 <td style="text-align:right;">
-3.761216e+05
+4.61557e+05
 </td>
 <td style="text-align:right;">
-5.097960e+05
+596638.8763
 </td>
 <td style="text-align:right;">
-15.1
+12.8
 </td>
 </tr>
 </tbody>
@@ -1364,19 +1366,19 @@ halfwidth_%
 DF Lowland
 </td>
 <td style="text-align:right;">
-159.305177
+252.58847
 </td>
 <td style="text-align:right;">
-159.652314
+252.73479
 </td>
 <td style="text-align:right;">
-99.6061062
+182.79842
 </td>
 <td style="text-align:right;">
-226.171991
+327.25261
 </td>
 <td style="text-align:right;">
-39.6
+28.6
 </td>
 </tr>
 <tr>
@@ -1384,19 +1386,19 @@ DF Lowland
 DF Upland
 </td>
 <td style="text-align:right;">
-2.019435
+4.05479
 </td>
 <td style="text-align:right;">
-2.021737
+4.04684
 </td>
 <td style="text-align:right;">
-0.8077739
+2.02739
 </td>
 <td style="text-align:right;">
-3.634982
+6.08218
 </td>
 <td style="text-align:right;">
-69.9
+50.1
 </td>
 </tr>
 <tr>
@@ -1404,19 +1406,19 @@ DF Upland
 Total
 </td>
 <td style="text-align:right;">
-161.324612
+256.64326
 </td>
 <td style="text-align:right;">
-161.674050
+256.78163
 </td>
 <td style="text-align:right;">
-101.6255408
+187.08300
 </td>
 <td style="text-align:right;">
-228.191426
+331.05071
 </td>
 <td style="text-align:right;">
-39.1
+28.0
 </td>
 </tr>
 </tbody>
@@ -1458,19 +1460,19 @@ halfwidth_%
 AR Lowland
 </td>
 <td style="text-align:right;">
-11.75075
+4668.62
 </td>
 <td style="text-align:right;">
-11.88824
+4712.51
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-35.25226
+14005.9
 </td>
 <td style="text-align:right;">
-148.3
+148.6
 </td>
 </tr>
 <tr>
@@ -1481,16 +1483,16 @@ AR Lowland
 AR Upland
 </td>
 <td style="text-align:right;">
-0.00000
+0.00
 </td>
 <td style="text-align:right;">
-0.00000
+0.00
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0.00000
+0.0
 </td>
 <td style="text-align:right;">
 </td>
@@ -1503,19 +1505,19 @@ AR Upland
 Total
 </td>
 <td style="text-align:right;">
-11.75075
+4668.62
 </td>
 <td style="text-align:right;">
-11.88824
+4712.51
 </td>
 <td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-35.25226
+14005.9
 </td>
 <td style="text-align:right;">
-148.3
+148.6
 </td>
 </tr>
 </tbody>
@@ -1525,11 +1527,11 @@ Total
 <h1>Activity Data</h1>
 <div id="af-area" class="section level2">
 <h2>AF area</h2>
-<pre><code>## [1] 11.75075</code></pre>
+<pre><code>## [1] 4668.62</code></pre>
 </div>
 <div id="df-area" class="section level2">
 <h2>DF area</h2>
-<pre><code>## [1] 159.305177   2.019435</code></pre>
+<pre><code>## [1] 252.58847   4.05479</code></pre>
 </div>
 </div>
 

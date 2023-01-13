@@ -48,7 +48,7 @@ Table7_2 %>%
 
 ```{r echo = FALSE}
 Table8 %>%
-  kable(fileFormat, caption = "Monitoring Report Table 8") %>%
+  kable(fileFormat, caption = "Monitoring Report Table 8", escape= TRUE) %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )

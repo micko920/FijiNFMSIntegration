@@ -26,40 +26,54 @@ MonitoringReportParams$RpMpProrataYears<- (2 * MonitoringReportParams$RpMpRatio)
 
 
 #MonitoringReportParams$ErpaYearlyFRL<- 1874373
-MonitoringReportParams$ErpaYearlyFRL<- -200708.4
+#MonitoringReportParams$ErpaYearlyFRL<- -200708.4
+MonitoringReportParams$ErpaYearlyFRL<- -253587.98
 
 # MonitoringReportParams$ErpaYearlyFRLUCI<- 2548813
-MonitoringReportParams$ErpaYearlyFRLUCI<- 74751.6
+# MonitoringReportParams$ErpaYearlyFRLUCI<- 74751.6
+MonitoringReportParams$ErpaYearlyFRLUCI<-42011.71
 
 # MonitoringReportParams$ErpaYearlyFRLLCI<- 1101724
-MonitoringReportParams$ErpaYearlyFRLLCI<- -494362.8
+# MonitoringReportParams$ErpaYearlyFRLLCI<- -494362.8
+MonitoringReportParams$ErpaYearlyFRLLCI<- -568704.06
 
 # MonitoringReportParams$ErpaYearlyFRLDefor<- 2696830
-MonitoringReportParams$ErpaYearlyFRLDefor<- 369186.7
+# MonitoringReportParams$ErpaYearlyFRLDefor<- 369186.7
+MonitoringReportParams$ErpaYearlyFRLDefor<- 394120.60    
+    
 
 # MonitoringReportParams$ErpaYearlyFRLDeforUCI<- 3252371
-MonitoringReportParams$ErpaYearlyFRLDeforUCI<- 471427.9
+# MonitoringReportParams$ErpaYearlyFRLDeforUCI<- 471427.9
+MonitoringReportParams$ErpaYearlyFRLDeforUCI<- 501546.49
 
 # MonitoringReportParams$ErpaYearlyFRLDeforLCI<- 2048439
-MonitoringReportParams$ErpaYearlyFRLDeforLCI<- 253519.3
+# MonitoringReportParams$ErpaYearlyFRLDeforLCI<- 253519.3
+MonitoringReportParams$ErpaYearlyFRLDeforLCI<-277648.10
 
+    
 # MonitoringReportParams$ErpaYearlyFRLFDeg<- 310442
-MonitoringReportParams$ErpaYearlyFRLFDeg<- 310442.4
-
+# MonitoringReportParams$ErpaYearlyFRLFDeg<- 310442.4
+MonitoringReportParams$ErpaYearlyFRLFDeg<- 310442.36
+  
 # MonitoringReportParams$ErpaYearlyFRLFDegUCI<- 381777
-MonitoringReportParams$ErpaYearlyFRLFDegUCI<- 355432.8
-
+# MonitoringReportParams$ErpaYearlyFRLFDegUCI<- 355432.8
+MonitoringReportParams$ErpaYearlyFRLFDegUCI<- 355423.83
+  
 # MonitoringReportParams$ErpaYearlyFRLFDegLCI<- 241687
-MonitoringReportParams$ErpaYearlyFRLFDegLCI<- 263812.9
-
+# MonitoringReportParams$ErpaYearlyFRLFDegLCI<- 263812.9
+MonitoringReportParams$ErpaYearlyFRLFDegLCI<- 263812.85
+  
 # MonitoringReportParams$ErpaYearlyFRLEnh<- -1132900
-MonitoringReportParams$ErpaYearlyFRLEnh<- -880337.4
+# MonitoringReportParams$ErpaYearlyFRLEnh<- -880337.4
+MonitoringReportParams$ErpaYearlyFRLEnh<- -958150.93
 
 # MonitoringReportParams$ErpaYearlyFRLEnhUCI<- -751898
-MonitoringReportParams$ErpaYearlyFRLEnhUCI<- -623452.1
+# MonitoringReportParams$ErpaYearlyFRLEnhUCI<- -623452.1
+MonitoringReportParams$ErpaYearlyFRLEnhUCI<- -679223.46
 
 # MonitoringReportParams$ErpaYearlyFRLEnhLCI<- -1538545
-MonitoringReportParams$ErpaYearlyFRLEnhLCI<- -1136858.4
+# MonitoringReportParams$ErpaYearlyFRLEnhLCI<- -1136858.4
+MonitoringReportParams$ErpaYearlyFRLEnhLCI<- -1236148.26
 
 MonitoringReportParams$ErpaTransferredERs<- 0
 

@@ -1,7 +1,7 @@
 
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/frlUpdate14Feb22/", filename))
+  return(paste0("./Data/frlUpdateOct22/", filename))
 }
 
 
@@ -24,9 +24,8 @@ options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 options(max.print=150)
+options("width" = 320)
 
-# This number was used to generate the chk file.
-#MCRuns <- 1.5e+06
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 
 debug_frl <- TRUE # Turn printed output on
@@ -65,8 +64,10 @@ save(
     "EmissionFactors",
     "FRLDeforestation",
     "FRLFelling",
+    "FRLNaturalForestDegradation",
     "FRLBurning",
     "FRLFuelwood",
+    "FRLAfforestation",
     "FRLHardwoodPlantations",
     "FRLSoftwoodPlantations",
     "FRLPlantations",

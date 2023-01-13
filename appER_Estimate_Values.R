@@ -77,16 +77,28 @@ ui <- fluidPage(
                         h3("AdjustedAreas From Accuracy Assessment"),
                         fileInput(
                                 "PreviousData",
-                                "Adjusted Areas From Accuracy Assessment",
+                                  "Adjusted Areas From Accuracy Assessment",
                                 multiple = FALSE,
                                 accept = ".RData"
                         ),
                         tableOutput("rdataNames"),
+                        h3("Reload previous monitored values"),
+                        fileInput(
+                                "PreviousMV",
+                                "Previous Monitored Values",
+                                multiple = FALSE,
+                                accept = ".RData"
+                        ),
                         h3("Monitored Values"),
                         p("Year 1"),
                         numericInput(
                                 "year1year", "Year1 Year",
                                 0 # default 2019
+                        ),
+                        numericInput(
+                                "year1AReforSurveyArea",
+                                "Year1 Afforestation Survey Area",
+                                0 # default 2800
                         ),
                         numericInput(
                                 "year1FPlnVolHarvHwd",
@@ -141,6 +153,11 @@ ui <- fluidPage(
                                 0 # default 2020
                         ),
                         numericInput(
+                                "year2AReforSurveyArea",
+                                "Year2 Afforestation Survey Area",
+                                0 # default 2800
+                        ),
+                        numericInput(
                                 "year2FPlnVolHarvHwd",
                                 "Year2 Hardwood Harvested Volume",
                                 0 # default 21441.157
@@ -188,6 +205,13 @@ ui <- fluidPage(
                         fileInput("BurnDataYear2", "Import Burn Data for Year 2"),
                         br(),
 
+                        h3("Reload previous report params"),
+                        fileInput(
+                                "PreviousMRP",
+                                "Previous Report Params",
+                                multiple = FALSE,
+                                accept = ".RData"
+                        ),
                         # Monitoring Report Params
                         h3("Monitoring Report Params"),
                         numericInput(
@@ -362,6 +386,81 @@ server <- function(input, output, session) {
                 }
         })
 
+        observeEvent(input$PreviousMV$datapath, {
+                if (!is.null(input$PreviousMV$datapath)) {
+                        # Use a reactiveFileReader to read the file on change, and load the content into a new environment
+                        pmvdataEnv <-
+                                reactiveFileReader(
+                                        1000,
+                                        session,
+                                        input$PreviousMV$datapath,
+                                        LoadToEnvironment
+                                )
+                        pmvdata <- as.list(pmvdataEnv())
+                        updateTextInput(session, "year1year", value = pmvdata$MonitoredValues$year1$year)
+                        updateTextInput(session, "year1AReforSurveyArea", value = pmvdata$MonitoredValues$year1$AReforSurveyArea)
+                        updateTextInput(session, "year1FPlnVolHarvHwd", value = pmvdata$MonitoredValues$year1$FPlnVolHarvHwd)
+                        updateTextInput(session, "year1FPlnAreaStockHwd", value = pmvdata$MonitoredValues$year1$FPlnAreaStockHwd)
+                        updateTextInput(session, "year1FPlnAreaPlantHwd", value = pmvdata$MonitoredValues$year1$FPlnAreaPlantHwd)
+                        updateTextInput(session, "year1FPlnAreaHarvHwd", value = pmvdata$MonitoredValues$year1$FPlnAreaHarvHwd)
+                        updateTextInput(session, "year1FPlnVolHarvSwd", value = pmvdata$MonitoredValues$year1$FPlnVolHarvSwd)
+                        updateTextInput(session, "year1FPlnAreaStockSwd", value = pmvdata$MonitoredValues$year1$FPlnAreaStockSwd)
+                        updateTextInput(session, "year1FPlnAreaPlantSwd", value = pmvdata$MonitoredValues$year1$FPlnAreaPlantSwd)
+                        updateTextInput(session, "year1FPlnAreaHarvSwd", value = pmvdata$MonitoredValues$year1$FPlnAreaHarvSwd)
+                        updateTextInput(session, "year1FDegFellVol", value = pmvdata$MonitoredValues$year1$FDegFellVol)
+                        updateTextInput(session, "year1FDegFellArea", value = pmvdata$MonitoredValues$year1$FDegFellArea)
+
+                        updateTextInput(session, "year2year", value = pmvdata$MonitoredValues$year2$year)
+                        updateTextInput(session, "year2AReforSurveyArea", value = pmvdata$MonitoredValues$year2$AReforSurveyArea)
+                        updateTextInput(session, "year2FPlnVolHarvHwd", value = pmvdata$MonitoredValues$year2$FPlnVolHarvHwd)
+                        updateTextInput(session, "year2FPlnAreaStockHwd", value = pmvdata$MonitoredValues$year2$FPlnAreaStockHwd)
+                        updateTextInput(session, "year2FPlnAreaPlantHwd", value = pmvdata$MonitoredValues$year2$FPlnAreaPlantHwd)
+                        updateTextInput(session, "year2FPlnAreaHarvHwd", value = pmvdata$MonitoredValues$year2$FPlnAreaHarvHwd)
+                        updateTextInput(session, "year2FPlnVolHarvSwd", value = pmvdata$MonitoredValues$year2$FPlnVolHarvSwd)
+                        updateTextInput(session, "year2FPlnAreaStockSwd", value = pmvdata$MonitoredValues$year2$FPlnAreaStockSwd)
+                        updateTextInput(session, "year2FPlnAreaPlantSwd", value = pmvdata$MonitoredValues$year2$FPlnAreaPlantSwd)
+                        updateTextInput(session, "year2FPlnAreaHarvSwd", value = pmvdata$MonitoredValues$year2$FPlnAreaHarvSwd)
+                        updateTextInput(session, "year2FDegFellVol", value = pmvdata$MonitoredValues$year2$FDegFellVol)
+                        updateTextInput(session, "year2FDegFellArea", value = pmvdata$MonitoredValues$year2$FDegFellArea)
+                }
+        })
+
+        observeEvent(input$PreviousMRP$datapath, {
+                if (!is.null(input$PreviousMRP$datapath)) {
+                        # Use a reactiveFileReader to read the file on change, and load the content into a new environment
+                        pmrpdataEnv <-
+                                reactiveFileReader(
+                                        1000,
+                                        session,
+                                        input$PreviousMV$datapath,
+                                        LoadToEnvironment
+                                )
+                        pmrpdata <- as.list(pmrpdataEnv())$MonitoringReportParams
+
+                        updateTextInput(session, "mrpMpDays", value = pmrpdata$MpDays)
+                        updateTextInput(session, "mrpRpDays", value = pmrpdata$RpDays)
+                        updateTextInput(session, "mrpErpaYearlyFRL", value = pmrpdata$ErpaYearlyFRL)
+                        updateTextInput(session, "mrpErpaYearlyFRLUCI", value = pmrpdata$ErpaYearlyFRLUCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLLCI", value = pmrpdata$ErpaYearlyFRLLCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLDefor", value = pmrpdata$ErpaYearlyFRLDefor)
+                        updateTextInput(session, "mrpErpaYearlyFRLDeforUCI", value = pmrpdata$ErpaYearlyFRLDeforUCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLDeforLCI", value = pmrpdata$ErpaYearlyFRLDeforLCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLFDeg", value = pmrpdata$ErpaYearlyFRLFDeg)
+                        updateTextInput(session, "mrpErpaYearlyFRLFDegUCI", value = pmrpdata$ErpaYearlyFRLFDegUCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLFDegLCI", value = pmrpdata$ErpaYearlyFRLFDegLCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLEnh", value = pmrpdata$ErpaYearlyFRLEnh)
+                        updateTextInput(session, "mrpErpaYearlyFRLEnhUCI", value = pmrpdata$ErpaYearlyFRLEnhUCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLEnhLCI", value = pmrpdata$ErpaYearlyFRLEnhLCI)
+                        updateTextInput(session, "mrpErpaTransferredERs", value = pmrpdata$ErpaTransferredERs)
+                        updateTextInput(session, "mrpErpaContestedERs", value = pmrpdata$ErpaContestedERs)
+                        updateTextInput(session, "mrpErpaSoldERs", value = pmrpdata$ErpaSoldERs)
+                        updateTextInput(session, "mrpErpaRiskSetaside", value = pmrpdata$ErpaRiskSetaside)
+                        updateTextInput(session, "mrpErpaPreviousFRL", value = pmrpdata$ErpaPreviousFRL)
+                        updateTextInput(session, "mrpErpaPreviousEmRems", value = pmrpdata$ErpaPreviousEmRems)
+                        updateTextInput(session, "mrpErpaPreviousERs", value = pmrpdata$ErpaPreviousERs)
+                        updateTextInput(session, "mrpFDegUncertaintyDiscount", value = pmrpdata$FDegUncertaintyDiscount)
+                }
+        })
 
         calcEnv <- reactive({
                 return(sessionData$calcEnv)
@@ -390,6 +489,8 @@ server <- function(input, output, session) {
                 mv$year1$year <- input$year1year
                 # including these in this function causes the output table to have duplicate rows for each other other mv variables - tried to split into separate lists but can't combine them
                 mv$year1$FDegBurnData <- Y1BD()
+                mv$year1$AReforSurveyArea <-
+                        input$year1AReforSurveyArea
                 mv$year1$FPlnVolHarvHwd <-
                         input$year1FPlnVolHarvHwd
                 mv$year1$FPlnAreaStockHwd <-
@@ -417,6 +518,8 @@ server <- function(input, output, session) {
 
                 mv$year2$year <- input$year2year
                 mv$year2$FDegBurnData <- Y2BD()
+                mv$year2$AReforSurveyArea <-
+                        input$year2AReforSurveyArea
                 mv$year2$FPlnVolHarvHwd <-
                         input$year2FPlnVolHarvHwd
                 mv$year2$FPlnAreaStockHwd <-
@@ -492,6 +595,7 @@ server <- function(input, output, session) {
         iv$add_rule("BurnDataYear1", sv_required())
         iv$add_rule("BurnDataYear2", sv_required())
         iv$add_rule("year1year", sv_required())
+        iv$add_rule("year1AReforSurveyArea", sv_required())
         iv$add_rule("year1FPlnVolHarvHwd", sv_required())
         iv$add_rule("year1FPlnAreaStockHwd", sv_required())
         iv$add_rule("year1FPlnAreaPlantHwd", sv_required())
@@ -503,6 +607,7 @@ server <- function(input, output, session) {
         iv$add_rule("year1FPlnAreaHarvSwd", sv_required())
         iv$add_rule("year1FDegFellVol", sv_required())
         iv$add_rule("year1FDegFellArea", sv_required())
+        iv$add_rule("year2AReforSurveyArea", sv_required())
         iv$add_rule("year2FPlnVolHarvHwd", sv_required())
         iv$add_rule("year2FPlnAreaStockHwd", sv_required())
         iv$add_rule("year2FPlnAreaPlantHwd", sv_required())

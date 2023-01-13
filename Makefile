@@ -6,6 +6,7 @@ run-Fiji-FRL:
 	Rscript -e 'source("./Fiji_FRL_NFIEmissionFactors.R")'
 	Rscript -e 'source("./Fiji_FRL_Estimate_Values.R")'
 	Rscript -e 'source("./Fiji_FRL_Tables.R")'
+	Rscript -e 'source("./Fiji_FRL_Report.R")'
 
 
 update-chks:
@@ -13,14 +14,11 @@ update-chks:
 	cp ./chks/Fiji_FRL_Results_NFIEmissionFactors.txt ./chks/Fiji_FRL_Results_NFIEmissionFactors.chk
 	cp ./chks/Fiji_FRL_Results_Values.txt ./chks/Fiji_FRL_Results_Values.chk
 	cp ./chks/Fiji_FRL_Results_Tables.txt ./chks/Fiji_FRL_Results_Tables.chk
+	cp ./chks/Fiji_ER_EstimateResults_UC.txt ./chks/Fiji_ER_EstimateResults_UC.chk
+	cp ./chks/Fiji_ER_EstimateResults_Sensitivity.txt ./chks/Fiji_ER_EstimateResults_Sensitivity.chk
 
 
 run-test-FRL:
-	#Rscript -e 'source("./fiji_frl_all_R_code.R")' 2>&1  > ./chks/Fiji_old_output.txt
-	#-diff -U 1  ./chks/Fiji_FRL_Results.txt ./chks/Fiji_FRL_Results.chk
-	#Rscript -e 'source("./Fiji_FRL_Report.R")' 2>&1 > ./chks/Fiji_new_output.txt
-	#-diff -U 1  ./chks/Fiji_FRL_Results.chk ./chks/Fiji_FRL_Results.txt
-	#-diff -Bw -U 1  ./chks/Fiji_old_output.txt ./chks/Fiji_new_output.txt
 	Rscript -e 'source("./Fiji_FRL_AccuracyAssessment.R")' 2>&1 > ./chks/Fiji_FRL_Results_AccuracyAssessment.txt
 	-diff -U 1  ./chks/Fiji_FRL_Results_AccuracyAssessment.chk ./chks/Fiji_FRL_Results_AccuracyAssessment.txt
 	Rscript -e 'source("./Fiji_FRL_NFIEmissionFactors.R")' 2>&1 > ./chks/Fiji_FRL_Results_NFIEmissionFactors.txt
@@ -31,10 +29,18 @@ run-test-FRL:
 	-diff -U 1  ./chks/Fiji_FRL_Results_Tables.chk ./chks/Fiji_FRL_Results_Tables.txt
 
 run-Fiji-ER_EST:
+	Rscript -e 'devtools::install("../ValueWithUncertainty")'
+	Rscript -e 'devtools::install("../FijiNFMSCalculations")'
 	Rscript -e 'source("./Fiji_ER_Estimate_AccuracyAssessment.R")'
 	Rscript -e 'source("./Fiji_ER_Estimate_Values.R")'
 	Rscript -e 'source("./Fiji_ER_Estimate_UC.R")'
 	Rscript -e 'source("./Fiji_ER_Estimate_Sensitivity.R")'
+
+run-create-reports:
+	Rscript -e 'source("./createReport_FRL.R")'
+	Rscript -e 'source("./createReport_ER.R")'
+	rm -rf reports/*_cache
+
 
 run-test-ER_EST:
 	Rscript -e 'source("./Fiji_ER_Estimate_AccuracyAssessment.R")'

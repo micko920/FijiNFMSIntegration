@@ -2,9 +2,9 @@
 title: "Fiji FRL Report"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 header-includes: \usepackage{caption}
-always_allow_html: yes
 params:
-  file_format: "html"
+  file_format: html
+always_allow_html: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +14,9 @@ knitr::opts_chunk$set(cache=TRUE,
 library(rlang)
 library(dplyr)
 library(kableExtra)
+library(FijiNFMSCalculations)
 if (!exists("fileFormat")) fileFormat <- params$file_format
+getOption("max.print")
 ```
 
 \captionsetup[table]{labelformat=empty}
@@ -76,7 +78,7 @@ t %>%
 ```{r echo = FALSE}
 t <- cbind(AdjustedAreas$rs_AA_annual_ar, 'halfwidth_%'=round(100*(AdjustedAreas$rs_AA_annual_ar$uci_area_ha - AdjustedAreas$rs_AA_annual_ar$lci_area_ha)/2/AdjustedAreas$rs_AA_annual_ar$aaboot_mean,1)) 
 t %>% 
-  kable(fileFormat, caption = "Adjusted Areas Annual Aforestation") %>%
+  kable(fileFormat, caption = "Adjusted Areas Annual Afforestation") %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )
@@ -93,9 +95,130 @@ print(AdjustedAreas$ARareas)
 print(AdjustedAreas$areaLoss)
 ```
 
+# Growth Tables
+Note: The growth projection only allows for 6 months in the first year (0.5) of planting.
+
+## Afforestation
+```{r echo = FALSE}
+
+
+print(FRLAfforestation$ar_aa_area)
+
+t <- FRLAfforestation$rs_ec_ar_cstock 
+t %>% 
+  kable(fileFormat, caption = "Growth Annual Afforestation") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+```
+## Native Forest Regrowth
+```{r echo = FALSE}
+
+print(FRLFelling$fd_lg_area)
+print(mean(FRLFelling$fd_lg_area))
+
+t <- FRLFelling$rs_ec_lnf_cstock
+t %>% 
+  kable(fileFormat, caption = "Growth Native Forest regrowth") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+```
+## Hardwood Plantations
+```{r echo = FALSE}
+
+print(FRLHardwoodPlantations$hw_p_area)
+print(mean(FRLHardwoodPlantations$hw_p_area))
+ 
+t <- FRLHardwoodPlantations$rs_ec_hw_cstock 
+t %>% 
+  kable(fileFormat, caption = "Growth Hardwood Plantations") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+
+
+```
+## Softwood Plantations
+```{r echo = FALSE}
+
+print(FRLSoftwoodPlantations$sw_p_area)
+print(mean(FRLSoftwoodPlantations$sw_p_area))
+
+
+t <- FRLSoftwoodPlantations$rs_ec_sw_cstock
+t %>% 
+  kable(fileFormat, caption = "Growth Softwood Plantations") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+```
+
 
 # FRL Results Table
 ```{r echo = FALSE}
+options(max.print=1000000)
 print(FRLTable$frltab)
 ```
 
+
+# FRL Monitoring Report Input Data
+
+## Overall FRL
+```{r echo = FALSE}
+options(max.print=1000000)
+
+
+t <- ErpaYearlyFRL$erpa_yearly$yearly
+t %>% 
+  kable(fileFormat, caption = "Monitoring Period FRL values") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+
+```
+## Uncertainty FRL - LCI
+```{r echo = FALSE}
+options(max.print=1000000)
+
+
+t <- ErpaYearlyFRL$erpa_yearly$uc_yearly$lci
+t %>% 
+  kable(fileFormat, caption = "Monitoring Period FRL LCI") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+
+```
+## Uncertainty FRL - UCI
+```{r echo = FALSE}
+options(max.print=1000000)
+
+t <- ErpaYearlyFRL$erpa_yearly$uc_yearly$uci
+t %>% 
+  kable(fileFormat, caption = "Monitoring Period FRL UCI") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+
+```
+## Monitoring Period 2019 to 2020
+```{r echo = FALSE}
+options(max.print=1000000)
+
+t <- ErpaYearlyFRL$erpa_yearly$mp_frl
+t %>% 
+  kable(fileFormat, caption = "Monitoring Period FRL 2019 to 2020") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+
+```

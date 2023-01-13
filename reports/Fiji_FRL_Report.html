@@ -478,6 +478,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -499,6 +500,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
 pre code {
   padding: 0;
 }
@@ -518,8 +522,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -527,16 +531,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -582,7 +579,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Fiji FRL Report</h1>
-<h4 class="date">25 February, 2022</h4>
+<h4 class="date">20 December, 2022</h4>
 
 </div>
 
@@ -629,7 +626,7 @@ totals
 111
 </td>
 <td style="text-align:right;">
-53
+51
 </td>
 <td style="text-align:right;">
 </td>
@@ -638,6 +635,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
+1
 </td>
 <td style="text-align:right;">
 </td>
@@ -645,7 +643,7 @@ totals
 2
 </td>
 <td style="text-align:right;">
-55
+54
 </td>
 </tr>
 <tr>
@@ -655,7 +653,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-55
+54
 </td>
 <td style="text-align:right;">
 </td>
@@ -666,6 +664,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
+1
 </td>
 <td style="text-align:right;">
 55
@@ -676,25 +675,25 @@ totals
 171
 </td>
 <td style="text-align:right;">
-222
+187
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-15
+18
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-5
+8
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-57
+83
 </td>
 <td style="text-align:right;">
-299
+296
 </td>
 </tr>
 <tr>
@@ -704,23 +703,23 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-677
+645
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-29
+43
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-1
+3
 </td>
 <td style="text-align:right;">
-49
+62
 </td>
 <td style="text-align:right;">
-756
+753
 </td>
 </tr>
 <tr>
@@ -728,10 +727,10 @@ totals
 555
 </td>
 <td style="text-align:right;">
-258
+242
 </td>
 <td style="text-align:right;">
-18
+17
 </td>
 <td style="text-align:right;">
 10
@@ -740,15 +739,15 @@ totals
 1
 </td>
 <td style="text-align:right;">
-7
+10
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-107
+118
 </td>
 <td style="text-align:right;">
-401
+398
 </td>
 </tr>
 <tr>
@@ -756,7 +755,7 @@ totals
 711
 </td>
 <td style="text-align:right;">
-60
+50
 </td>
 <td style="text-align:right;">
 </td>
@@ -765,15 +764,15 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-5
+11
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-19
+21
 </td>
 <td style="text-align:right;">
-84
+82
 </td>
 </tr>
 <tr>
@@ -805,26 +804,26 @@ totals
 777
 </td>
 <td style="text-align:right;">
-176
+100
 </td>
 <td style="text-align:right;">
 9
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-18
+15
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-717
+790
 </td>
 <td style="text-align:right;">
-930
+922
 </td>
 </tr>
 <tr>
@@ -879,13 +878,13 @@ totals
 7775
 </td>
 <td style="text-align:right;">
-19
+18
 </td>
 <td style="text-align:right;">
 8
 </td>
 <td style="text-align:right;">
-2
+6
 </td>
 <td style="text-align:right;">
 </td>
@@ -894,7 +893,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-26
+23
 </td>
 <td style="text-align:right;">
 55
@@ -905,28 +904,28 @@ totals
 totals
 </td>
 <td style="text-align:right;">
-842
+702
 </td>
 <td style="text-align:right;">
-875
+841
 </td>
 <td style="text-align:right;">
-37
+42
 </td>
 <td style="text-align:right;">
-30
+44
 </td>
 <td style="text-align:right;">
-35
+45
 </td>
 <td style="text-align:right;">
-1
+3
 </td>
 <td style="text-align:right;">
-980
+1103
 </td>
 <td style="text-align:right;">
-2800
+2780
 </td>
 </tr>
 </tbody>
@@ -974,7 +973,7 @@ totals
 111
 </td>
 <td style="text-align:right;">
-0.40689
+0.39895
 </td>
 <td style="text-align:right;">
 </td>
@@ -983,14 +982,15 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
+0.00782
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.01535
+0.01565
 </td>
 <td style="text-align:right;">
-0.42224
+0.42242
 </td>
 </tr>
 <tr>
@@ -1000,7 +1000,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.05395
+0.05308
 </td>
 <td style="text-align:right;">
 </td>
@@ -1011,9 +1011,10 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
+0.00098
 </td>
 <td style="text-align:right;">
-0.05395
+0.05406
 </td>
 </tr>
 <tr>
@@ -1021,25 +1022,25 @@ totals
 171
 </td>
 <td style="text-align:right;">
-0.05013
+0.04246
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00339
+0.00409
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00113
+0.00182
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.01287
+0.01885
 </td>
 <td style="text-align:right;">
-0.06752
+0.06722
 </td>
 </tr>
 <tr>
@@ -1049,23 +1050,23 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00408
+0.00389
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00017
+0.00026
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00001
+0.00002
 </td>
 <td style="text-align:right;">
-0.00030
+0.00037
 </td>
 <td style="text-align:right;">
-0.00456
+0.00454
 </td>
 </tr>
 <tr>
@@ -1073,27 +1074,27 @@ totals
 555
 </td>
 <td style="text-align:right;">
-0.07062
+0.06670
 </td>
 <td style="text-align:right;">
-0.00493
+0.00469
 </td>
 <td style="text-align:right;">
-0.00274
+0.00276
 </td>
 <td style="text-align:right;">
-0.00027
+0.00028
 </td>
 <td style="text-align:right;">
-0.00192
+0.00276
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.02929
+0.03252
 </td>
 <td style="text-align:right;">
-0.10977
+0.10971
 </td>
 </tr>
 <tr>
@@ -1101,7 +1102,7 @@ totals
 711
 </td>
 <td style="text-align:right;">
-0.01454
+0.01238
 </td>
 <td style="text-align:right;">
 </td>
@@ -1110,15 +1111,15 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00121
+0.00272
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00460
+0.00520
 </td>
 <td style="text-align:right;">
-0.02035
+0.02030
 </td>
 </tr>
 <tr>
@@ -1150,26 +1151,26 @@ totals
 777
 </td>
 <td style="text-align:right;">
-0.05234
+0.03000
 </td>
 <td style="text-align:right;">
-0.00268
+0.00270
 </td>
 <td style="text-align:right;">
-0.00297
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
-0.00535
+0.00240
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.21321
+0.00450
 </td>
 <td style="text-align:right;">
-0.27655
+</td>
+<td style="text-align:right;">
+0.23703
+</td>
+<td style="text-align:right;">
+0.27663
 </td>
 </tr>
 <tr>
@@ -1177,7 +1178,7 @@ totals
 1115
 </td>
 <td style="text-align:right;">
-0.02875
+0.02881
 </td>
 <td style="text-align:right;">
 </td>
@@ -1193,7 +1194,7 @@ totals
 0.00053
 </td>
 <td style="text-align:right;">
-0.02928
+0.02934
 </td>
 </tr>
 <tr>
@@ -1203,7 +1204,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00868
+0.00870
 </td>
 <td style="text-align:right;">
 </td>
@@ -1216,7 +1217,7 @@ totals
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00868
+0.00870
 </td>
 </tr>
 <tr>
@@ -1224,25 +1225,25 @@ totals
 7775
 </td>
 <td style="text-align:right;">
-0.00219
+0.00208
 </td>
 <td style="text-align:right;">
-0.00092
+0.00093
 </td>
 <td style="text-align:right;">
-0.00023
-</td>
-<td style="text-align:right;">
-</td>
-<td style="text-align:right;">
+0.00069
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.00300
 </td>
 <td style="text-align:right;">
-0.00634
+</td>
+<td style="text-align:right;">
+0.00266
+</td>
+<td style="text-align:right;">
+0.00636
 </td>
 </tr>
 <tr>
@@ -1250,28 +1251,28 @@ totals
 totals
 </td>
 <td style="text-align:right;">
-0.62546
+0.58138
 </td>
 <td style="text-align:right;">
-0.07595
+0.07470
 </td>
 <td style="text-align:right;">
-0.00933
+0.00994
 </td>
 <td style="text-align:right;">
-0.00044
+0.00054
 </td>
 <td style="text-align:right;">
-0.00961
+0.01962
 </td>
 <td style="text-align:right;">
-0.00001
+0.00002
 </td>
 <td style="text-align:right;">
-0.27918
+0.31382
 </td>
 <td style="text-align:right;">
-0.99998
+1.00002
 </td>
 </tr>
 </tbody>
@@ -1320,22 +1321,22 @@ halfwidth_%
 Stable LF
 </td>
 <td style="text-align:right;">
-621188.46
+620115.57
 </td>
 <td style="text-align:right;">
-9.201542e+05
+853480.47641
 </td>
 <td style="text-align:right;">
-9.204292e+05
+853758.91686
 </td>
 <td style="text-align:right;">
-889681.1052
+8.178977e+05
 </td>
 <td style="text-align:right;">
-945984.87148
+884586.17318
 </td>
 <td style="text-align:right;">
-3.1
+3.9
 </td>
 </tr>
 <tr>
@@ -1346,22 +1347,22 @@ Stable LF
 Stable UF
 </td>
 <td style="text-align:right;">
-79374.78
+79358.67
 </td>
 <td style="text-align:right;">
-1.117346e+05
+109636.69220
 </td>
 <td style="text-align:right;">
-1.117399e+05
+109642.36027
 </td>
 <td style="text-align:right;">
-108285.9326
+1.053695e+05
 </td>
 <td style="text-align:right;">
-115441.23995
+113795.83824
 </td>
 <td style="text-align:right;">
-3.2
+3.8
 </td>
 </tr>
 <tr>
@@ -1372,22 +1373,22 @@ Stable UF
 DF Lowland
 </td>
 <td style="text-align:right;">
-99334.98
+98667.72
 </td>
 <td style="text-align:right;">
-1.372449e+04
+14588.96664
 </td>
 <td style="text-align:right;">
-1.368258e+04
+14605.85650
 </td>
 <td style="text-align:right;">
-10096.2217
+1.093465e+04
 </td>
 <td style="text-align:right;">
-17544.90544
+18553.99781
 </td>
 <td style="text-align:right;">
-27.2
+26.1
 </td>
 </tr>
 <tr>
@@ -1398,22 +1399,22 @@ DF Lowland
 DF Upland
 </td>
 <td style="text-align:right;">
-6699.96
+6667.47
 </td>
 <td style="text-align:right;">
-6.596841e+02
+785.35500
 </td>
 <td style="text-align:right;">
-6.536745e+02
+787.44603
 </td>
 <td style="text-align:right;">
-203.8348
+3.187635e+02
 </td>
 <td style="text-align:right;">
-1456.17178
+1585.71985
 </td>
 <td style="text-align:right;">
-95.8
+80.4
 </td>
 </tr>
 <tr>
@@ -1424,22 +1425,22 @@ DF Upland
 AR Lowland
 </td>
 <td style="text-align:right;">
-29950.83
+29794.14
 </td>
 <td style="text-align:right;">
-1.413705e+04
+28800.12234
 </td>
 <td style="text-align:right;">
-1.415699e+04
+28771.39139
 </td>
 <td style="text-align:right;">
-10375.4950
+1.446345e+04
 </td>
 <td style="text-align:right;">
-18169.26410
+51379.01953
 </td>
 <td style="text-align:right;">
-27.5
+64.2
 </td>
 </tr>
 <tr>
@@ -1450,22 +1451,22 @@ AR Lowland
 AR Upland
 </td>
 <td style="text-align:right;">
-1085.40
+1077.66
 </td>
 <td style="text-align:right;">
-8.862381e+00
+26.56363
 </td>
 <td style="text-align:right;">
-8.748943e+00
+26.72124
 </td>
 <td style="text-align:right;">
-0.0000
+8.854542e+00
 </td>
 <td style="text-align:right;">
-26.58714
+53.12725
 </td>
 <td style="text-align:right;">
-151.9
+82.8
 </td>
 </tr>
 <tr>
@@ -1476,22 +1477,22 @@ AR Upland
 Stable NF
 </td>
 <td style="text-align:right;">
-406845.09
+406106.19
 </td>
 <td style="text-align:right;">
-4.107238e+05
+460694.41379
 </td>
 <td style="text-align:right;">
-4.104717e+05
+460419.89771
 </td>
 <td style="text-align:right;">
-384770.6253
+4.348415e+05
 </td>
 <td style="text-align:right;">
-440746.20483
+491418.97936
 </td>
 <td style="text-align:right;">
-6.8
+6.1
 </td>
 </tr>
 </tbody>
@@ -1528,19 +1529,19 @@ halfwidth_%
 DF Lowland
 </td>
 <td style="text-align:right;">
-1372.44915
+1458.8967
 </td>
 <td style="text-align:right;">
-1368.25760
+1460.5856
 </td>
 <td style="text-align:right;">
-1009.62217
+1093.46539
 </td>
 <td style="text-align:right;">
-1754.4905
+1855.400
 </td>
 <td style="text-align:right;">
-27.2
+26.1
 </td>
 </tr>
 <tr>
@@ -1548,19 +1549,19 @@ DF Lowland
 DF Upland
 </td>
 <td style="text-align:right;">
-65.96841
+78.5355
 </td>
 <td style="text-align:right;">
-65.36745
+78.7446
 </td>
 <td style="text-align:right;">
-20.38348
+31.87635
 </td>
 <td style="text-align:right;">
-145.6172
+158.572
 </td>
 <td style="text-align:right;">
-95.8
+80.4
 </td>
 </tr>
 <tr>
@@ -1568,26 +1569,26 @@ DF Upland
 Total
 </td>
 <td style="text-align:right;">
-1438.41756
+1537.4322
 </td>
 <td style="text-align:right;">
-1433.62505
+1539.3303
 </td>
 <td style="text-align:right;">
-1069.72710
+1168.92279
 </td>
 <td style="text-align:right;">
-1824.5346
+1932.659
 </td>
 <td style="text-align:right;">
-26.3
+24.8
 </td>
 </tr>
 </tbody>
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-Adjusted Areas Annual Aforestation
+Adjusted Areas Annual Afforestation
 </caption>
 <thead>
 <tr>
@@ -1622,19 +1623,19 @@ halfwidth_%
 AR Lowland
 </td>
 <td style="text-align:right;">
-1413.7053926
+2880.012234
 </td>
 <td style="text-align:right;">
-1415.6989543
+2877.139139
 </td>
 <td style="text-align:right;">
-1037.549
+1446.3452662
 </td>
 <td style="text-align:right;">
-1816.926410
+5137.901953
 </td>
 <td style="text-align:right;">
-27.5
+64.2
 </td>
 </tr>
 <tr>
@@ -1645,19 +1646,19 @@ AR Lowland
 AR Upland
 </td>
 <td style="text-align:right;">
-0.8862381
+2.656363
 </td>
 <td style="text-align:right;">
-0.8748942
+2.672124
 </td>
 <td style="text-align:right;">
-0.000
+0.8854542
 </td>
 <td style="text-align:right;">
-2.658714
+5.312725
 </td>
 <td style="text-align:right;">
-151.9
+82.8
 </td>
 </tr>
 <tr>
@@ -1668,19 +1669,19 @@ AR Upland
 Total
 </td>
 <td style="text-align:right;">
-1414.5916306
+2882.668597
 </td>
 <td style="text-align:right;">
-1416.5738485
+2879.811263
 </td>
 <td style="text-align:right;">
-1038.354
+1449.6646708
 </td>
 <td style="text-align:right;">
-1818.225266
+5140.559360
 </td>
 <td style="text-align:right;">
-27.5
+64.1
 </td>
 </tr>
 </tbody>
@@ -1690,29 +1691,2138 @@ Total
 <h1>Activity Data</h1>
 <div id="af-area" class="section level2">
 <h2>AF area</h2>
-<pre><code>## [1] 1414.592</code></pre>
+<pre><code>## [1] 2882.669</code></pre>
 </div>
 <div id="df-area" class="section level2">
 <h2>DF area</h2>
-<pre><code>## [1] 1372.44915   65.96841</code></pre>
+<pre><code>## [1] 1458.8967   78.5355</code></pre>
+</div>
+</div>
+<div id="growth-tables" class="section level1">
+<h1>Growth Tables</h1>
+<p>Note: The growth projection only allows for 6 months in the first year (0.5) of planting.</p>
+<div id="afforestation" class="section level2">
+<h2>Afforestation</h2>
+<pre><code>## [1] 2882.669</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Growth Annual Afforestation
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+2019
+</th>
+<th style="text-align:right;">
+2020
+</th>
+<th style="text-align:right;">
+2021
+</th>
+<th style="text-align:right;">
+2022
+</th>
+<th style="text-align:right;">
+2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.14
+</td>
+<td style="text-align:right;">
+-13890.195
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.15
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-13890.19
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.16
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+-13890.19
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.17
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+-13890.19
+</td>
+<td style="text-align:right;">
+-27780.39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.18
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+-13890.19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.6
+</td>
+<td style="text-align:right;">
+-13890.195
+</td>
+<td style="text-align:right;">
+-41670.58
+</td>
+<td style="text-align:right;">
+-69450.97
+</td>
+<td style="text-align:right;">
+-97231.36
+</td>
+<td style="text-align:right;">
+-125011.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lci_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-5960.057
+</td>
+<td style="text-align:right;">
+-19074.08
+</td>
+<td style="text-align:right;">
+-32853.30
+</td>
+<td style="text-align:right;">
+-47003.89
+</td>
+<td style="text-align:right;">
+-60534.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+uci_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-25813.213
+</td>
+<td style="text-align:right;">
+-75679.64
+</td>
+<td style="text-align:right;">
+-124187.19
+</td>
+<td style="text-align:right;">
+-173582.74
+</td>
+<td style="text-align:right;">
+-223538.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mu_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-13875.408
+</td>
+<td style="text-align:right;">
+-41575.75
+</td>
+<td style="text-align:right;">
+-69457.65
+</td>
+<td style="text-align:right;">
+-96992.87
+</td>
+<td style="text-align:right;">
+-124970.67
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="native-forest-regrowth" class="section level2">
+<h2>Native Forest Regrowth</h2>
+<pre><code>##  [1] 3512.9920 2545.5650 3258.5530 1165.1907 1641.1664  905.4313  795.6560
+##  [8] 1354.0213 1427.7555 1738.0354 1438.3702</code></pre>
+<pre><code>## [1] 1798.431</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Growth Native Forest regrowth
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+2019
+</th>
+<th style="text-align:right;">
+2020
+</th>
+<th style="text-align:right;">
+2021
+</th>
+<th style="text-align:right;">
+2022
+</th>
+<th style="text-align:right;">
+2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.1
+</td>
+<td style="text-align:right;">
+-3264.152
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.2
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-3264.152
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.3
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-3264.152
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.4
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-3264.152
+</td>
+<td style="text-align:right;">
+-6528.303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.5
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-3264.152
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.6
+</td>
+<td style="text-align:right;">
+-3264.152
+</td>
+<td style="text-align:right;">
+-9792.455
+</td>
+<td style="text-align:right;">
+-16320.758
+</td>
+<td style="text-align:right;">
+-22849.061
+</td>
+<td style="text-align:right;">
+-29377.364
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lci_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-4551.986
+</td>
+<td style="text-align:right;">
+-13655.958
+</td>
+<td style="text-align:right;">
+-22759.931
+</td>
+<td style="text-align:right;">
+-31863.903
+</td>
+<td style="text-align:right;">
+-40967.875
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+uci_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-2073.790
+</td>
+<td style="text-align:right;">
+-6221.371
+</td>
+<td style="text-align:right;">
+-10368.952
+</td>
+<td style="text-align:right;">
+-14516.532
+</td>
+<td style="text-align:right;">
+-18664.113
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mu_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-3262.610
+</td>
+<td style="text-align:right;">
+-9787.831
+</td>
+<td style="text-align:right;">
+-16313.051
+</td>
+<td style="text-align:right;">
+-22838.272
+</td>
+<td style="text-align:right;">
+-29363.492
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="hardwood-plantations" class="section level2">
+<h2>Hardwood Plantations</h2>
+<pre><code>##  [1]  305.03  305.03  305.03  305.03  305.03  228.00 1000.00    0.00    0.00
+## [10]    0.00  300.00</code></pre>
+<pre><code>## [1] 277.5591</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Growth Hardwood Plantations
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+2019
+</th>
+<th style="text-align:right;">
+2020
+</th>
+<th style="text-align:right;">
+2021
+</th>
+<th style="text-align:right;">
+2022
+</th>
+<th style="text-align:right;">
+2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.14
+</td>
+<td style="text-align:right;">
+-2108.453
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.15
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-2108.453
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.16
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-2108.453
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.17
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-2108.453
+</td>
+<td style="text-align:right;">
+-4216.905
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.18
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-2108.453
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.6
+</td>
+<td style="text-align:right;">
+-2108.453
+</td>
+<td style="text-align:right;">
+-6325.358
+</td>
+<td style="text-align:right;">
+-10542.264
+</td>
+<td style="text-align:right;">
+-14759.169
+</td>
+<td style="text-align:right;">
+-18976.075
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lci_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-1614.644
+</td>
+<td style="text-align:right;">
+-4843.933
+</td>
+<td style="text-align:right;">
+-8073.221
+</td>
+<td style="text-align:right;">
+-11302.510
+</td>
+<td style="text-align:right;">
+-14531.799
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+uci_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-2670.793
+</td>
+<td style="text-align:right;">
+-8012.378
+</td>
+<td style="text-align:right;">
+-13353.964
+</td>
+<td style="text-align:right;">
+-18695.549
+</td>
+<td style="text-align:right;">
+-24037.134
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mu_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-2108.692
+</td>
+<td style="text-align:right;">
+-6326.075
+</td>
+<td style="text-align:right;">
+-10543.458
+</td>
+<td style="text-align:right;">
+-14760.841
+</td>
+<td style="text-align:right;">
+-18978.224
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="softwood-plantations" class="section level2">
+<h2>Softwood Plantations</h2>
+<pre><code>##  [1] 1477.79896    2.87459   14.08712   16.70341  177.39551  273.11634
+##  [7]  871.01912   12.50842  201.71242 1031.90640    0.00000</code></pre>
+<pre><code>## [1] 370.8293</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Growth Softwood Plantations
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+2019
+</th>
+<th style="text-align:right;">
+2020
+</th>
+<th style="text-align:right;">
+2021
+</th>
+<th style="text-align:right;">
+2022
+</th>
+<th style="text-align:right;">
+2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.14
+</td>
+<td style="text-align:right;">
+-3195.312
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.15
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-3195.312
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.16
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-3195.312
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.17
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-3195.312
+</td>
+<td style="text-align:right;">
+-6390.625
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.18
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+-3195.312
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+removals_tco2e_yr.6
+</td>
+<td style="text-align:right;">
+-3195.312
+</td>
+<td style="text-align:right;">
+-9585.937
+</td>
+<td style="text-align:right;">
+-15976.562
+</td>
+<td style="text-align:right;">
+-22367.187
+</td>
+<td style="text-align:right;">
+-28757.812
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lci_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-2629.986
+</td>
+<td style="text-align:right;">
+-8202.943
+</td>
+<td style="text-align:right;">
+-14067.505
+</td>
+<td style="text-align:right;">
+-19963.875
+</td>
+<td style="text-align:right;">
+-25858.297
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+uci_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-3790.137
+</td>
+<td style="text-align:right;">
+-10992.400
+</td>
+<td style="text-align:right;">
+-17957.050
+</td>
+<td style="text-align:right;">
+-24849.999
+</td>
+<td style="text-align:right;">
+-31759.460
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mu_removals_tco2e_yr
+</td>
+<td style="text-align:right;">
+-3195.884
+</td>
+<td style="text-align:right;">
+-9581.885
+</td>
+<td style="text-align:right;">
+-15975.666
+</td>
+<td style="text-align:right;">
+-22343.615
+</td>
+<td style="text-align:right;">
+-28772.975
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="frl-results-table" class="section level1">
 <h1>FRL Results Table</h1>
 <pre><code>##     source_sink estimate_tco2e_yr lci_tco2e_yr uci_tco2e_yr
-## 1         aaeDF         369186.68    253519.32    471427.92
+## 1         aaeDF         394120.60    277648.10    501546.49
 ## 2       aaeFD_L         195316.10    162062.70    228393.71
-## 3     aaeFD_BSW         157487.87    128030.89    185551.72
-## 4      aaeEC_HS         596194.92    515290.97    701113.27
-## 5  aae_Combined        1318185.56   1169335.05   1466544.80
-## 6       aarFD_L         -42361.61    -57150.46    -27790.04
-## 7      aarEC_AR         -74978.61   -110515.00    -44657.77
-## 8      aarEC_HS       -1401553.70  -1645934.07  -1174501.00
-## 9  aar_Combined       -1518893.92  -1288283.81  -1765646.56
-## 10       aaneDF         369186.68    253519.32    471427.92
-## 11       aaneFD         310442.36    263812.85    355423.83
-## 12       aaneEC        -880337.40  -1136858.38   -623452.08
-## 13          FRL        -200708.36   -494362.75     74751.64</code></pre>
+## 3     aaeFD_BSW         157487.87    128485.79    185916.03
+## 4      aaeFD_NF         146114.33     75595.46    224285.63
+## 5      aaeEC_HS         596194.92    513044.64    701031.53
+## 6  aae_Combined        1489233.81   1319435.77   1660938.70
+## 7       aarFD_L         -42361.61    -57150.46    -27790.04
+## 8      aarEC_AR        -152792.14   -287089.35    -65784.28
+## 9      aarEC_HS       -1401553.70  -1641709.64  -1171075.01
+## 10 aar_Combined       -1596707.46  -1343288.76  -1865867.82
+## 11       aaneDF         394120.60    277648.10    501546.49
+## 12       aaneFD         456556.68    370540.39    544839.94
+## 13       aaneEC        -958150.93  -1236015.90   -682541.94
+## 14          FRL        -107473.65   -430854.93    194853.49</code></pre>
+</div>
+<div id="frl-monitoring-report-input-data" class="section level1">
+<h1>FRL Monitoring Report Input Data</h1>
+<div id="overall-frl" class="section level2">
+<h2>Overall FRL</h2>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Monitoring Period FRL values
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+value
+</th>
+<th style="text-align:right;">
+2019
+</th>
+<th style="text-align:right;">
+2020
+</th>
+<th style="text-align:right;">
+2021
+</th>
+<th style="text-align:right;">
+2022
+</th>
+<th style="text-align:right;">
+2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+FRLDeforestation Em
+</td>
+<td style="text-align:right;">
+394120.595
+</td>
+<td style="text-align:right;">
+394120.595
+</td>
+<td style="text-align:right;">
+394120.60
+</td>
+<td style="text-align:right;">
+394120.60
+</td>
+<td style="text-align:right;">
+394120.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLBurning Em
+</td>
+<td style="text-align:right;">
+157487.869
+</td>
+<td style="text-align:right;">
+157487.869
+</td>
+<td style="text-align:right;">
+157487.87
+</td>
+<td style="text-align:right;">
+157487.87
+</td>
+<td style="text-align:right;">
+157487.87
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLFelling Em
+</td>
+<td style="text-align:right;">
+195316.100
+</td>
+<td style="text-align:right;">
+195316.100
+</td>
+<td style="text-align:right;">
+195316.10
+</td>
+<td style="text-align:right;">
+195316.10
+</td>
+<td style="text-align:right;">
+195316.10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLNaturalForestDegradation Em
+</td>
+<td style="text-align:right;">
+146114.328
+</td>
+<td style="text-align:right;">
+146114.328
+</td>
+<td style="text-align:right;">
+146114.33
+</td>
+<td style="text-align:right;">
+146114.33
+</td>
+<td style="text-align:right;">
+146114.33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLHardwoodPlantations Em
+</td>
+<td style="text-align:right;">
+154193.606
+</td>
+<td style="text-align:right;">
+154193.606
+</td>
+<td style="text-align:right;">
+154193.61
+</td>
+<td style="text-align:right;">
+154193.61
+</td>
+<td style="text-align:right;">
+154193.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLSoftwoodPlantations Em
+</td>
+<td style="text-align:right;">
+442001.310
+</td>
+<td style="text-align:right;">
+442001.310
+</td>
+<td style="text-align:right;">
+442001.31
+</td>
+<td style="text-align:right;">
+442001.31
+</td>
+<td style="text-align:right;">
+442001.31
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLAfforestation Rem
+</td>
+<td style="text-align:right;">
+-13890.195
+</td>
+<td style="text-align:right;">
+-41670.584
+</td>
+<td style="text-align:right;">
+-69450.97
+</td>
+<td style="text-align:right;">
+-97231.36
+</td>
+<td style="text-align:right;">
+-125011.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLFelling Rem
+</td>
+<td style="text-align:right;">
+-3264.152
+</td>
+<td style="text-align:right;">
+-9792.455
+</td>
+<td style="text-align:right;">
+-16320.76
+</td>
+<td style="text-align:right;">
+-22849.06
+</td>
+<td style="text-align:right;">
+-29377.36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLHardwoodPlantations Rem
+</td>
+<td style="text-align:right;">
+-2108.453
+</td>
+<td style="text-align:right;">
+-6325.358
+</td>
+<td style="text-align:right;">
+-10542.26
+</td>
+<td style="text-align:right;">
+-14759.17
+</td>
+<td style="text-align:right;">
+-18976.07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLSoftwoodPlantations Rem
+</td>
+<td style="text-align:right;">
+-3195.312
+</td>
+<td style="text-align:right;">
+-9585.937
+</td>
+<td style="text-align:right;">
+-15976.56
+</td>
+<td style="text-align:right;">
+-22367.19
+</td>
+<td style="text-align:right;">
+-28757.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Deforestation
+</td>
+<td style="text-align:right;">
+394120.595
+</td>
+<td style="text-align:right;">
+394120.595
+</td>
+<td style="text-align:right;">
+394120.60
+</td>
+<td style="text-align:right;">
+394120.60
+</td>
+<td style="text-align:right;">
+394120.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Degradation
+</td>
+<td style="text-align:right;">
+495654.145
+</td>
+<td style="text-align:right;">
+489125.842
+</td>
+<td style="text-align:right;">
+482597.54
+</td>
+<td style="text-align:right;">
+476069.24
+</td>
+<td style="text-align:right;">
+469540.93
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Sinks
+</td>
+<td style="text-align:right;">
+577000.956
+</td>
+<td style="text-align:right;">
+538613.036
+</td>
+<td style="text-align:right;">
+500225.12
+</td>
+<td style="text-align:right;">
+461837.20
+</td>
+<td style="text-align:right;">
+423449.28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Net Yearly Referenece Level
+</td>
+<td style="text-align:right;">
+1466775.696
+</td>
+<td style="text-align:right;">
+1421859.473
+</td>
+<td style="text-align:right;">
+1376943.25
+</td>
+<td style="text-align:right;">
+1332027.03
+</td>
+<td style="text-align:right;">
+1287110.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FDeg
+</td>
+<td style="text-align:right;">
+349539.818
+</td>
+<td style="text-align:right;">
+343011.514
+</td>
+<td style="text-align:right;">
+336483.21
+</td>
+<td style="text-align:right;">
+329954.91
+</td>
+<td style="text-align:right;">
+323426.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Defor
+</td>
+<td style="text-align:right;">
+540234.923
+</td>
+<td style="text-align:right;">
+540234.923
+</td>
+<td style="text-align:right;">
+540234.92
+</td>
+<td style="text-align:right;">
+540234.92
+</td>
+<td style="text-align:right;">
+540234.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FDegNonProxy
+</td>
+<td style="text-align:right;">
+146114.328
+</td>
+<td style="text-align:right;">
+146114.328
+</td>
+<td style="text-align:right;">
+146114.33
+</td>
+<td style="text-align:right;">
+146114.33
+</td>
+<td style="text-align:right;">
+146114.33
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="uncertainty-frl---lci" class="section level2">
+<h2>Uncertainty FRL - LCI</h2>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Monitoring Period FRL LCI
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+value
+</th>
+<th style="text-align:right;">
+2019
+</th>
+<th style="text-align:right;">
+2020
+</th>
+<th style="text-align:right;">
+2021
+</th>
+<th style="text-align:right;">
+2022
+</th>
+<th style="text-align:right;">
+2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+FRLDeforestation Em
+</td>
+<td style="text-align:right;">
+277648.098
+</td>
+<td style="text-align:right;">
+277648.098
+</td>
+<td style="text-align:right;">
+277648.098
+</td>
+<td style="text-align:right;">
+277648.10
+</td>
+<td style="text-align:right;">
+277648.10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLBurning Em
+</td>
+<td style="text-align:right;">
+128485.792
+</td>
+<td style="text-align:right;">
+128485.792
+</td>
+<td style="text-align:right;">
+128485.792
+</td>
+<td style="text-align:right;">
+128485.79
+</td>
+<td style="text-align:right;">
+128485.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLFelling Em
+</td>
+<td style="text-align:right;">
+162062.699
+</td>
+<td style="text-align:right;">
+162062.699
+</td>
+<td style="text-align:right;">
+162062.699
+</td>
+<td style="text-align:right;">
+162062.70
+</td>
+<td style="text-align:right;">
+162062.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLNaturalForestDegradation Em
+</td>
+<td style="text-align:right;">
+75595.455
+</td>
+<td style="text-align:right;">
+75595.455
+</td>
+<td style="text-align:right;">
+75595.455
+</td>
+<td style="text-align:right;">
+75595.46
+</td>
+<td style="text-align:right;">
+75595.46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLHardwoodPlantations Em
+</td>
+<td style="text-align:right;">
+127162.585
+</td>
+<td style="text-align:right;">
+127162.585
+</td>
+<td style="text-align:right;">
+127162.585
+</td>
+<td style="text-align:right;">
+127162.58
+</td>
+<td style="text-align:right;">
+127162.58
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLSoftwoodPlantations Em
+</td>
+<td style="text-align:right;">
+364018.170
+</td>
+<td style="text-align:right;">
+364018.170
+</td>
+<td style="text-align:right;">
+364018.170
+</td>
+<td style="text-align:right;">
+364018.17
+</td>
+<td style="text-align:right;">
+364018.17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLAfforestation Rem
+</td>
+<td style="text-align:right;">
+-5960.057
+</td>
+<td style="text-align:right;">
+-19074.075
+</td>
+<td style="text-align:right;">
+-32853.300
+</td>
+<td style="text-align:right;">
+-47003.89
+</td>
+<td style="text-align:right;">
+-60534.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLFelling Rem
+</td>
+<td style="text-align:right;">
+-4551.986
+</td>
+<td style="text-align:right;">
+-13655.958
+</td>
+<td style="text-align:right;">
+-22759.931
+</td>
+<td style="text-align:right;">
+-31863.90
+</td>
+<td style="text-align:right;">
+-40967.88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLHardwoodPlantations Rem
+</td>
+<td style="text-align:right;">
+-1614.644
+</td>
+<td style="text-align:right;">
+-4843.933
+</td>
+<td style="text-align:right;">
+-8073.221
+</td>
+<td style="text-align:right;">
+-11302.51
+</td>
+<td style="text-align:right;">
+-14531.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLSoftwoodPlantations Rem
+</td>
+<td style="text-align:right;">
+-2629.986
+</td>
+<td style="text-align:right;">
+-8202.943
+</td>
+<td style="text-align:right;">
+-14067.505
+</td>
+<td style="text-align:right;">
+-19963.88
+</td>
+<td style="text-align:right;">
+-25858.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Deforestation
+</td>
+<td style="text-align:right;">
+277648.098
+</td>
+<td style="text-align:right;">
+277648.098
+</td>
+<td style="text-align:right;">
+277648.098
+</td>
+<td style="text-align:right;">
+277648.10
+</td>
+<td style="text-align:right;">
+277648.10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Degradation
+</td>
+<td style="text-align:right;">
+412169.413
+</td>
+<td style="text-align:right;">
+405422.535
+</td>
+<td style="text-align:right;">
+398622.006
+</td>
+<td style="text-align:right;">
+391906.36
+</td>
+<td style="text-align:right;">
+384648.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Sinks
+</td>
+<td style="text-align:right;">
+521005.262
+</td>
+<td style="text-align:right;">
+534376.740
+</td>
+<td style="text-align:right;">
+546439.715
+</td>
+<td style="text-align:right;">
+554579.83
+</td>
+<td style="text-align:right;">
+563663.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Net Yearly Referenece Level
+</td>
+<td style="text-align:right;">
+1324397.988
+</td>
+<td style="text-align:right;">
+1332049.436
+</td>
+<td style="text-align:right;">
+1341976.615
+</td>
+<td style="text-align:right;">
+1348553.90
+</td>
+<td style="text-align:right;">
+1352435.21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FDeg
+</td>
+<td style="text-align:right;">
+305828.570
+</td>
+<td style="text-align:right;">
+299113.811
+</td>
+<td style="text-align:right;">
+292168.311
+</td>
+<td style="text-align:right;">
+285227.09
+</td>
+<td style="text-align:right;">
+277865.49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Defor
+</td>
+<td style="text-align:right;">
+398468.713
+</td>
+<td style="text-align:right;">
+398468.713
+</td>
+<td style="text-align:right;">
+398468.713
+</td>
+<td style="text-align:right;">
+398468.71
+</td>
+<td style="text-align:right;">
+398468.71
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FDegNonProxy
+</td>
+<td style="text-align:right;">
+75595.455
+</td>
+<td style="text-align:right;">
+75595.455
+</td>
+<td style="text-align:right;">
+75595.455
+</td>
+<td style="text-align:right;">
+75595.46
+</td>
+<td style="text-align:right;">
+75595.46
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="uncertainty-frl---uci" class="section level2">
+<h2>Uncertainty FRL - UCI</h2>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Monitoring Period FRL UCI
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+value
+</th>
+<th style="text-align:right;">
+2019
+</th>
+<th style="text-align:right;">
+2020
+</th>
+<th style="text-align:right;">
+2021
+</th>
+<th style="text-align:right;">
+2022
+</th>
+<th style="text-align:right;">
+2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+FRLDeforestation Em
+</td>
+<td style="text-align:right;">
+501546.494
+</td>
+<td style="text-align:right;">
+501546.494
+</td>
+<td style="text-align:right;">
+501546.49
+</td>
+<td style="text-align:right;">
+501546.49
+</td>
+<td style="text-align:right;">
+501546.49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLBurning Em
+</td>
+<td style="text-align:right;">
+185916.026
+</td>
+<td style="text-align:right;">
+185916.026
+</td>
+<td style="text-align:right;">
+185916.03
+</td>
+<td style="text-align:right;">
+185916.03
+</td>
+<td style="text-align:right;">
+185916.03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLFelling Em
+</td>
+<td style="text-align:right;">
+228393.707
+</td>
+<td style="text-align:right;">
+228393.707
+</td>
+<td style="text-align:right;">
+228393.71
+</td>
+<td style="text-align:right;">
+228393.71
+</td>
+<td style="text-align:right;">
+228393.71
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLNaturalForestDegradation Em
+</td>
+<td style="text-align:right;">
+224285.627
+</td>
+<td style="text-align:right;">
+224285.627
+</td>
+<td style="text-align:right;">
+224285.63
+</td>
+<td style="text-align:right;">
+224285.63
+</td>
+<td style="text-align:right;">
+224285.63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLHardwoodPlantations Em
+</td>
+<td style="text-align:right;">
+181028.836
+</td>
+<td style="text-align:right;">
+181028.836
+</td>
+<td style="text-align:right;">
+181028.84
+</td>
+<td style="text-align:right;">
+181028.84
+</td>
+<td style="text-align:right;">
+181028.84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLSoftwoodPlantations Em
+</td>
+<td style="text-align:right;">
+544540.654
+</td>
+<td style="text-align:right;">
+544540.654
+</td>
+<td style="text-align:right;">
+544540.65
+</td>
+<td style="text-align:right;">
+544540.65
+</td>
+<td style="text-align:right;">
+544540.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLAfforestation Rem
+</td>
+<td style="text-align:right;">
+-25813.213
+</td>
+<td style="text-align:right;">
+-75679.641
+</td>
+<td style="text-align:right;">
+-124187.19
+</td>
+<td style="text-align:right;">
+-173582.74
+</td>
+<td style="text-align:right;">
+-223538.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLFelling Rem
+</td>
+<td style="text-align:right;">
+-2073.790
+</td>
+<td style="text-align:right;">
+-6221.371
+</td>
+<td style="text-align:right;">
+-10368.95
+</td>
+<td style="text-align:right;">
+-14516.53
+</td>
+<td style="text-align:right;">
+-18664.11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLHardwoodPlantations Rem
+</td>
+<td style="text-align:right;">
+-2670.793
+</td>
+<td style="text-align:right;">
+-8012.378
+</td>
+<td style="text-align:right;">
+-13353.96
+</td>
+<td style="text-align:right;">
+-18695.55
+</td>
+<td style="text-align:right;">
+-24037.13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRLSoftwoodPlantations Rem
+</td>
+<td style="text-align:right;">
+-3790.137
+</td>
+<td style="text-align:right;">
+-10992.400
+</td>
+<td style="text-align:right;">
+-17957.05
+</td>
+<td style="text-align:right;">
+-24850.00
+</td>
+<td style="text-align:right;">
+-31759.46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Deforestation
+</td>
+<td style="text-align:right;">
+501546.494
+</td>
+<td style="text-align:right;">
+501546.494
+</td>
+<td style="text-align:right;">
+501546.49
+</td>
+<td style="text-align:right;">
+501546.49
+</td>
+<td style="text-align:right;">
+501546.49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Degradation
+</td>
+<td style="text-align:right;">
+583737.459
+</td>
+<td style="text-align:right;">
+577505.823
+</td>
+<td style="text-align:right;">
+571096.88
+</td>
+<td style="text-align:right;">
+565160.58
+</td>
+<td style="text-align:right;">
+558987.91
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Sinks
+</td>
+<td style="text-align:right;">
+711159.336
+</td>
+<td style="text-align:right;">
+732877.175
+</td>
+<td style="text-align:right;">
+756940.60
+</td>
+<td style="text-align:right;">
+786084.73
+</td>
+<td style="text-align:right;">
+818530.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCPF 4.1 Net Yearly Referenece Level
+</td>
+<td style="text-align:right;">
+1665809.257
+</td>
+<td style="text-align:right;">
+1678971.249
+</td>
+<td style="text-align:right;">
+1693873.21
+</td>
+<td style="text-align:right;">
+1709216.86
+</td>
+<td style="text-align:right;">
+1726889.24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FDeg
+</td>
+<td style="text-align:right;">
+392309.700
+</td>
+<td style="text-align:right;">
+385943.892
+</td>
+<td style="text-align:right;">
+379602.68
+</td>
+<td style="text-align:right;">
+373722.66
+</td>
+<td style="text-align:right;">
+367738.54
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Defor
+</td>
+<td style="text-align:right;">
+671442.556
+</td>
+<td style="text-align:right;">
+671442.556
+</td>
+<td style="text-align:right;">
+671442.56
+</td>
+<td style="text-align:right;">
+671442.56
+</td>
+<td style="text-align:right;">
+671442.56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FDegNonProxy
+</td>
+<td style="text-align:right;">
+224285.627
+</td>
+<td style="text-align:right;">
+224285.627
+</td>
+<td style="text-align:right;">
+224285.63
+</td>
+<td style="text-align:right;">
+224285.63
+</td>
+<td style="text-align:right;">
+224285.63
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="monitoring-period-2019-to-2020" class="section level2">
+<h2>Monitoring Period 2019 to 2020</h2>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Monitoring Period FRL 2019 to 2020
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+MP_FRL
+</th>
+<th style="text-align:right;">
+MU
+</th>
+<th style="text-align:right;">
+LCI
+</th>
+<th style="text-align:right;">
+UCI
+</th>
+<th style="text-align:left;">
+halfwidth
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Enh
+</td>
+<td style="text-align:right;">
+1115614.0
+</td>
+<td style="text-align:right;">
+1279459.4
+</td>
+<td style="text-align:right;">
+1081120.5
+</td>
+<td style="text-align:right;">
+1489683.8
+</td>
+<td style="text-align:left;">
+16.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NetFRL
+</td>
+<td style="text-align:right;">
+2888635.2
+</td>
+<td style="text-align:right;">
+3014635.9
+</td>
+<td style="text-align:right;">
+2676752.7
+</td>
+<td style="text-align:right;">
+3372091.6
+</td>
+<td style="text-align:left;">
+11.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FDeg
+</td>
+<td style="text-align:right;">
+692551.3
+</td>
+<td style="text-align:right;">
+678340.3
+</td>
+<td style="text-align:right;">
+591155.8
+</td>
+<td style="text-align:right;">
+765766.4
+</td>
+<td style="text-align:left;">
+12.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Defor
+</td>
+<td style="text-align:right;">
+1080469.8
+</td>
+<td style="text-align:right;">
+1056836.1
+</td>
+<td style="text-align:right;">
+796937.4
+</td>
+<td style="text-align:right;">
+1342885.1
+</td>
+<td style="text-align:left;">
+25.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FDegNonProxy
+</td>
+<td style="text-align:right;">
+292228.7
+</td>
+<td style="text-align:right;">
+291324.8
+</td>
+<td style="text-align:right;">
+151190.9
+</td>
+<td style="text-align:right;">
+448571.3
+</td>
+<td style="text-align:left;">
+51.0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 

@@ -1,7 +1,7 @@
 
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/frlUpdate14Feb22/", filename))
+  return(paste0("./Data/frlUpdateOct22/", filename))
 }
 
   
@@ -22,9 +22,8 @@ options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 options(max.print=50)
+options("width" = 320)
 
-# This number was used to generate the chk file.
-#MCRuns <- 1.5e+06
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 
 debug_frl <- TRUE # Turn printed output on
@@ -55,11 +54,20 @@ FRLDeforestation <- calcFRLDeforestation()
 ## Felling in Natural Forest
 FRLFelling <- calcFRLFelling()
 
+## Degradation in Natural Forest
+FRLNaturalForestDegradation <- calcFRLNaturalForestDegradation()
+
 ## Burning
 FRLBurning <- calcFRLBurning()
 
 ## Fuelwood
 FRLFuelwood <- calcFRLFuelwood()
+
+## Degradation
+calcFRLDegradation()
+
+## Afforestation
+FRLAfforestation <- calcFRLAfforestation()
 
 ## Hardwood Plantations
 FRLHardwoodPlantations <- calcFRLHardwoodPlantations()
@@ -78,8 +86,10 @@ print(difftime(Sys.time(), timestamp, unit = "auto"))
 if (debug_frl | show_output) {
     print(FRLDeforestation)
     print(FRLFelling)
+    print(FRLNaturalForestDegradation)
     print(FRLBurning)
     print(FRLFuelwood)
+    print(FRLAfforestation)
     print(FRLHardwoodPlantations)
     print(FRLSoftwoodPlantations)
     print(FRLPlantations)
@@ -89,8 +99,10 @@ save(
   list = c(
     "FRLDeforestation",
     "FRLFelling",
+    "FRLNaturalForestDegradation",
     "FRLBurning",
     "FRLFuelwood",
+    "FRLAfforestation",
     "FRLHardwoodPlantations",
     "FRLSoftwoodPlantations",
     "FRLPlantations"

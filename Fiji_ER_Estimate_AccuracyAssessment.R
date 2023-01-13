@@ -8,7 +8,7 @@ library(VGAM)
 library(FijiNFMSCalculations)
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/mrUpdate14Feb22/", filename))
+  return(paste0("./Data/mrUpdateOct22/", filename))
 }
 
 aa_sample <- read.csv(file = getDataPath("aa_sample.csv"))
@@ -20,10 +20,10 @@ options(digits = 6)
 options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
-options(max.print = 350)
 
 # This number was used to generate the chk file.
 MCRuns <- 10000
+#MCRuns <- 100
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 seed <- 08121976
 set.seed(seed) # Seed set to remove random nature of MC Analysis for LCI & UCI

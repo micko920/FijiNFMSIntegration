@@ -7,12 +7,17 @@ library(survey)
 library(VGAM)
 library(FijiNFMSCalculations)
 
+
+
+
+
 getDataPath<-function(filename) {
-  return(paste0("./Data/mrUpdate14Feb22/", filename))
+  return(paste0("./Data/mrUpdateOct22/", filename))
 }
 
 load(file = getDataPath("Fiji_ER_Estimate_AccuracyAssessment.RData"))
 load(file = getDataPath("Fiji_ER_Estimate_Params.RData"))
+load(file = getDataPath("fiji_frl_overall_years.RData"))
 
 options(digits = 6)
 options(show.error.locations = TRUE)
@@ -20,7 +25,8 @@ pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 
 # This number was used to generate the chk file.
-MCRuns <- 1000
+#MCRuns <- 1000
+MCRuns <- 10000
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 seed <- 08121976
 set.seed(seed) # Seed set to remove random nature of MC Analysis for LCI & UCI
@@ -73,6 +79,7 @@ if (debug_er) {
         print(ER_Values)
 }
 
+print(outputFilename)
 fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
         list = outputSaveNames,
