@@ -1,10 +1,12 @@
 
+
+getDataPath<-function(filename) {
+  return(paste0("./Data/frlUpdateOct22/", filename))
+}
+
+
 # Load all necessary data
-#load(file = "./Data/preMonitoringReport/fiji_frl_input.RData")
-#load(file = "./Data/frlCorrection/fiji_frl_input.RData")
-load(file = "./Data/swCorrection/fiji_frl_input.RData")
-#aa_sample <- read.csv(file = "./Data/frlCorrection/aa_sample.csv")
-#lcc_mapped_areas <- read.csv(file = "./Data/frlCorrection/lcc_mapped_areas.csv")
+load(file = getDataPath("fiji_frl_input.RData"))
 
 # Required R packages
 library(nlme)
@@ -22,8 +24,8 @@ options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 options(max.print=50)
+options("width" = 320)
 
-# This number was used to generate the chk file.
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 
 debug_frl <- TRUE # Turn printed output on
@@ -31,9 +33,7 @@ debug_er <- TRUE # Turn printed output on
 show_output <- TRUE #Turn final table printed output on
 
 
-#source(file = "./Data/preMonitoringReport/FRL_Parameters.R")
-#source(file = "./Data/frlCorrection/FRL_Parameters.R")
-source(file = "./Data/swCorrection/FRL_Parameters.R")
+source(file = getDataPath("FRL_Parameters.R"))
 
 MCRuns <- FRLParams$runs
 
@@ -46,40 +46,17 @@ print(paste("Runs -- ", FRLParams$runs))
 timestamp <- Sys.time()
 print(date())
 
-# DF = deforestation; AR = afforestation/reforestation
+# Load all necessary data
+load(file = getDataPath("fiji_frl_adjusted_areas.RData"))
+load(file = getDataPath("fiji_frl_emission_factors.RData"))
+load(file = getDataPath("fiji_frl_estimate_values.RData"))
 
-## Accuracy Assessment using bootstrap
-AdjustedAreas <- calcFRLAdjustedAreas()
-
-## Emissions Factors calculated from NFI
-EmissionFactors <- calcEmissionFactors()
-
-## Deforestation
-FRLDeforestation <- calcFRLDeforestation()
-
-## Felling in Natural Forest
-FRLFelling <- calcFRLFelling()
-
-## Burning
-FRLBurning <- calcFRLBurning()
-
-## Fuelwood
-FRLFuelwood <- calcFRLFuelwood()
-
-## Degradation
-calcFRLDegradation()
-
-## Hardwood Plantations
-FRLHardwoodPlantations <- calcFRLHardwoodPlantations()
-
-## Softwood Plantations
-FRLSoftwoodPlantations <- calcFRLSoftwoodPlantations()
-
-## Gross and Net Calc for Hardwood and Softwood Plantations
-FRLPlantations <- calcFRLPlantations()
 
 ## FRL Table
 FRLTable <- calcFRLTable()
+
+## FRL Table
+ErpaYearlyFRL  <- calcFRLMonitoringPeriodProjection()
 
 print(date())
 print("Execution time: ")
@@ -88,6 +65,7 @@ print(difftime(Sys.time(), timestamp, unit="auto"))
 # The final FRL table ##################################################################
 if (debug_frl | show_output) {
   print(FRLTable$frltab)
+  print(ErpaYearlyFRL$Projections)
 }
 
 # FD = forest degradation
@@ -110,5 +88,13 @@ if (debug_frl | show_output) {
 # aaneDF        # Net emissions deforestation
 # aaneFD        # Net emissions forest degradation
 # aaneEC        # Net emissions EC
+
+save(
+  list = c(
+    "FRLTable",
+    "ErpaYearlyFRL"
+  ),
+  file = getDataPath("fiji_frl_overall_years.RData")
+)
 
 if (debug_frl) print(sessionInfo())

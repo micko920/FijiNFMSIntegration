@@ -1,10 +1,5 @@
 
-# TODO:
-
-# FRL_VALUE_FIX
-# This file is a hack to allow the command line tools to work.
-# It needs to be removed in favour of using a RData file with a pdf based on
-# sample of samples from the FRL Monte Carlo set.
+# Updated 14 Feb 2022 - Changes for RS data, pixel buffer and other method changes
 
 # Updated 30 Sep 2021, Carly and Michael Green
 # Update included changes to original FRL for Software harvesting only
@@ -16,86 +11,82 @@
 
 # Original data from published FRL values in the ER-PD, Dated June 14 2019
 
-############### Forest Reference Level
-#
-# Updated 30 Sep 2021
-# Updated 25 Sep 2021
-#
-# FRL <- 1636800 # (tCO2e/yr) Sum of Net Emissions from Fiji Baseline (FRL) to 6 significant figures
-# FRL <- 1778421.58 # Update 25 Sep 2021
-FRL <- 1874373.34 # Update 30 Sep 2021
+burn_data_2019 <- read.table( "./Data/mrUpdate14Feb22/Burn2019.txt", sep="\t", header=TRUE)
+burn_data_2020 <- read.table( "./Data/mrUpdate14Feb22/Burn2020.txt", sep="\t", header=TRUE)
 
-# FRL_UCI <- 2444030
-# FRL_UCI <- 2492427.05 # Update 25 Sep 2021
-FRL_UCI <- 2548813.33 # Update 30 Sep 2021
+MonitoringReportParams$MpDays<- 730
 
-# FRL_LCI <- 953460
-# FRL_LCI <- 997407.34 # Update 25 Sep 2021
-FRL_LCI <- 1101723.67 # Update 30 Sep 2021
+MonitoringReportParams$RpDays<- 540
+
+MonitoringReportParams$IsRpEqualToMp<- (MonitoringReportParams$MpDays == MonitoringReportParams$RpDays)
+
+MonitoringReportParams$RpMpRatio<- (MonitoringReportParams$RpDays / MonitoringReportParams$MpDays)
+
+MonitoringReportParams$RpMpProrataYears<- (2 * MonitoringReportParams$RpMpRatio)
 
 
-############### Defororestation
-#
-# Updated 30 Sep 2021
-# Updated 25 Sep 2021
-#
-# FRLDeforestation <- 2696831 # from Table12.5 of ER-PD
-# FRLDeforestation <- 2650382.22 # Update 25 Sep 2021
-FRLDeforestation <- 2696830.64 # Update 30 Sep 2021
+#MonitoringReportParams$ErpaYearlyFRL<- 1874373
+#MonitoringReportParams$ErpaYearlyFRL<- -200708.4
+MonitoringReportParams$ErpaYearlyFRL<- -253587.98
 
-# FRLDeforestation_UCI <- 3373850
-# FRLDeforestation_UCI <- 3248409.49 # Update 25 Sep 2021
-FRLDeforestation_UCI <- 3252371.26 # Update 30 Sep 2021
+# MonitoringReportParams$ErpaYearlyFRLUCI<- 2548813
+# MonitoringReportParams$ErpaYearlyFRLUCI<- 74751.6
+MonitoringReportParams$ErpaYearlyFRLUCI<-42011.71
 
-# FRLDeforestation_LCI <- 2143830
-# FRLDeforestation_LCI <- 1987568.49 # Update 25 Sep 2021
-FRLDeforestation_LCI <- 2048438.97 # Update 30 Sep 2021
+# MonitoringReportParams$ErpaYearlyFRLLCI<- 1101724
+# MonitoringReportParams$ErpaYearlyFRLLCI<- -494362.8
+MonitoringReportParams$ErpaYearlyFRLLCI<- -568704.06
 
+# MonitoringReportParams$ErpaYearlyFRLDefor<- 2696830
+# MonitoringReportParams$ErpaYearlyFRLDefor<- 369186.7
+MonitoringReportParams$ErpaYearlyFRLDefor<- 394120.60    
+    
 
-############### Forest Degradation
-#
-# Updated 30 Sep 2021
-#
-# Original Values:
-### There is a mistake in the value reported in the ER-PD The value (310442) is outside (less than) the LCI(321925).
-# This was recalculated and checked.
-# From Table12.5 of ER-PD  - Net emissions forest degradation aanefd frltab[11,2]
-# FRLForestDegradation <- 310442
-FRLForestDegradation <- 310442.36 # Update 30 Sep 2021
+# MonitoringReportParams$ErpaYearlyFRLDeforUCI<- 3252371
+# MonitoringReportParams$ErpaYearlyFRLDeforUCI<- 471427.9
+MonitoringReportParams$ErpaYearlyFRLDeforUCI<- 501546.49
 
-# FRLForestDegradation_UCI <- 358537
-FRLForestDegradation_UCI <- 381776.61 # Update 30 Sep 2021
+# MonitoringReportParams$ErpaYearlyFRLDeforLCI<- 2048439
+# MonitoringReportParams$ErpaYearlyFRLDeforLCI<- 253519.3
+MonitoringReportParams$ErpaYearlyFRLDeforLCI<-277648.10
 
-# This value was replaced via recalculation. See Note above.
-# FRLForestDegradation_LCI <- 321925
-# FRLForestDegradation_LCI <- 274025
-FRLForestDegradation_LCI <- 241686.83 # Update 30 Sep 2021
+    
+# MonitoringReportParams$ErpaYearlyFRLFDeg<- 310442
+# MonitoringReportParams$ErpaYearlyFRLFDeg<- 310442.4
+MonitoringReportParams$ErpaYearlyFRLFDeg<- 310442.36
+  
+# MonitoringReportParams$ErpaYearlyFRLFDegUCI<- 381777
+# MonitoringReportParams$ErpaYearlyFRLFDegUCI<- 355432.8
+MonitoringReportParams$ErpaYearlyFRLFDegUCI<- 355423.83
+  
+# MonitoringReportParams$ErpaYearlyFRLFDegLCI<- 241687
+# MonitoringReportParams$ErpaYearlyFRLFDegLCI<- 263812.9
+MonitoringReportParams$ErpaYearlyFRLFDegLCI<- 263812.85
+  
+# MonitoringReportParams$ErpaYearlyFRLEnh<- -1132900
+# MonitoringReportParams$ErpaYearlyFRLEnh<- -880337.4
+MonitoringReportParams$ErpaYearlyFRLEnh<- -958150.93
 
+# MonitoringReportParams$ErpaYearlyFRLEnhUCI<- -751898
+# MonitoringReportParams$ErpaYearlyFRLEnhUCI<- -623452.1
+MonitoringReportParams$ErpaYearlyFRLEnhUCI<- -679223.46
 
-############### Removals by Sink
-# Net emissions enhancement of forest carbon stocks (EC). Includes Aforestation
-# and Hardword and Softwood Plantations aaneec frltab[12,2]
-#
-#
-# Updated 30 Sep 2021
-# Updated 25 Sep 2021
-#
-# Original Values:
-### Note: UCI and LCI incorrectly swapped in ER-PD
-# from Table12.5 of ER-PD
+# MonitoringReportParams$ErpaYearlyFRLEnhLCI<- -1538545
+# MonitoringReportParams$ErpaYearlyFRLEnhLCI<- -1136858.4
+MonitoringReportParams$ErpaYearlyFRLEnhLCI<- -1236148.26
 
-# FRLRemovalsBySinks <- -1370469
-# FRLRemovalsBySinks <- -1182402.99 # Update 25 Sep 2021
-FRLRemovalsBySinks <- -1132899.65 # Update 30 Sep 2021
+MonitoringReportParams$ErpaTransferredERs<- 0
 
-# FRLRemovalsBySinks_UCI <- -975054
-# FRLRemovalsBySinks_UCI <- -804802.25 # Update 25 Sep 2021
-FRLRemovalsBySinks_UCI <- -751897.61 # Update 30 Sep 2021
+MonitoringReportParams$ErpaContestedERs<- 0
 
-# FRLRemovalsBySinks_LCI <- -1661630
-# FRLRemovalsBySinks_LCI <- -1555230.62 # Update 25 Sep 2021
-FRLRemovalsBySinks_LCI <- -1538544.58 # Update 30 Sep 2021
+MonitoringReportParams$ErpaSoldERs<- 0
 
+MonitoringReportParams$ErpaRiskSetaside<- 0.16
 
-############### FRL Adjustments
-FRLAdjustments <- 0 # Always zero
+MonitoringReportParams$ErpaPreviousFRL<- 0
+
+MonitoringReportParams$ErpaPreviousEmRems<- 0
+
+MonitoringReportParams$ErpaPreviousERs<- 0
+
+MonitoringReportParams$FDegUncertaintyDiscount<- 0.15

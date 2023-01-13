@@ -1,0 +1,713 @@
+---
+title: "Fiji NFMS ER Docker Summary"
+author: "Eamon Green, Michael Green"
+date: "Nov 2021"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: "5"
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  word_document:
+    toc: yes
+    toc_depth: "5"
+---
+
+# Docker Setup Course
+
+This will repo go over the instructions and examples for the Docker Course.
+
+## information
+
+This course goes over "3 days" focusing on buidling the users skill to be able to use docker for the current projects intended purpose. <br><br>
+
+| Title                 | Link                                                | Details                                                                           | Example Files                                       |
+| --------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------- |
+| How to install docker | [**Install Docker**](Fiji-NFMS-ER-Docker-Setup.Rmd) | This goes through setting yourself up to start working with docker on your system | [**Install Docker**](Fiji-NFMS-ER-Docker-Setup.Rmd) |
+| Training 1            | [**Training 1**](Fiji-NFMS-ER-Docker-Tutorial1.Rmd) | This goes through setting yourself up to start working with docker on your system | [**Session 1 Examples**](/Example1/examples)        |
+| Training 2            | [**Training 2**](Fiji-NFMS-ER-Docker-Tutorial2.Rmd) | This takes you through the next steps after setting up docker                     | [**Session 2 Examples**](/Example2/examples)        |
+| Training 3            | [**Training 3**](Fiji-NFMS-ER-Docker-Tutorial3.Rmd) | This takes you through the next steps after setting up docker                     | [**Session 3 Examples**](/Example3/examples)        |
+
+## Training 1
+
+### <br> Pre-Requisites
+
+Note: To run docker on Windows 10 Home, you must:
+
+- be operating as the machine administrator user profile
+- Have WSL2 Linux Kernel installed and updated [here](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+### Overview:
+
+- https://hub.docker.com/_/hello-world
+
+- This checks docker is correctly installed and operational
+
+- Running use command prompt. Windows key + R, cmd opens the command prompt
+
+- Run in command line –> `docker run hello-world`
+
+### <br> Step 1: Installing Docker
+
+Installing Docker on a windows machine.
+<br><br>
+
+1. Follow the link [here](https://docs.docker.com/docker-for-windows/install/) to go to the docker website and download it.
+2. Select Download from Docker hub and click on this button (this is a free download) <br><br><button name="button" onclick="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" style="background-color:#2697ed; border:none; color: #ffffff; padding:1%; border-radius: 5px;">Docker Download for Windows</button><br><br>
+3. Once the download has been completed open the installer and follow the prompts to completed the installation of Docker. Once installed you will be required to restart your computer before running the Docker software.
+4. After the restart, open Docker Desktop. The Docker Whale Symbol should also appear in your bottom toolbar.
+
+### <br> Step 2: Hosting Liferay – Docker Compose
+
+The FIMS is operated on a software platform called Liferay. The next step is to host the Liferay platform through docker using Docker Compose
+
+**Familiarization with Docker Compose and Hosting of Liferay**
+
+1. Open Docker Desktop and command prompt
+2. Follow the instructions given on the following link to carry out an exercise to practice using [Docker Compose](https://docs.docker.com/compose/gettingstarted/#step-3-define-services-in-a-compose-file).
+
+**Download Files from Drop Box**
+
+1. Download the `docker-compose.yml` file, `Backup` and `Volumes` folder onto your local directory with the same directory structure as on the dropbox
+
+**Hosting Liferay**
+
+1. Open Docker Desktop
+2. Open Command prompt and navigate to the directory (cd prompt) containing the saved files from step 1 (docker-compose, backup, volumes)
+3. In command prompt, start the application by running `docker-compose up -d`
+4. Goto [Local Host](http://localhost:8080/) in a browser to see the application running. At this stage this will show the Liferay platform home screen. Part 3 will explain how to install/restore the Forest Information Management System onto the Liferay platform.
+
+### <br> Step 3: Configuration and Installation of FIMS
+
+[**Configuration and Installation of FIMS**](../FIM/FIM.md)
+
+### <br> Step 4: Adding New Users
+
+[**Adding New Users**](../User.md)
+
+### <br> Step 5: Accessing FIMS
+
+**Access site from another computer on local LAN**
+
+1. Enter IP address of the host computer into browser followed by port 8080. e.g 192.168.x.xx:8080 and confirm FIMS loads. This confirms the site is being hosted on the local LAN.
+
+### <br> Step 6: Ending Docker Session
+
+1. Return to the docker interface and select the ‘Stop’ Button, or in the command prompt Ctrl + C or <br>`docker-compose stop` command.
+
+![][dockermenu]
+
+### <br> Step 7: FIMS Full Sysyem - End Goal
+
+![][exampleurl]
+![][lucidchart1]
+
+## Training 1
+
+## Session info:
+
+- Download the example files in this directory of the Repo
+- Code that inclues `##:` are refering to the line number it resides on. Do not copy this into the code.
+
+<br>
+
+### Docker; 1 - Run
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Pull
+   - Image
+   - Run
+
+<br>
+
+2. Process
+   1. Open command prompt
+   2. Change directory to directory where the zip file was extracted to (e.g docker-1-run) (cd)
+   3. Type -> notepad.exe command.txt to open the command text file
+   4. Select first command line with mouse and copy
+   5. Paste into command prompt
+   6. Where a line starts with a # this is an instruction rather than a command e.g visit a browser and copy in the URL e.g [`localhost:5678`](https://localhost:5678)
+
+<br>
+
+3. Output
+   1. Terminal Output<br><br>
+      ![][helloworld]
+      <br><br>
+   1. Web Solution<br><br>
+   ![][webouthelloworld]
+   </details>
+   <br>
+
+### Docker; 2 - Run + PS + Kill
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Run
+     - Detach/interactive (-d/-it)
+     - Ports - Publish/Expose
+   - PS – lists instances that are running on the server
+   - Kill – removes running image
+
+<br><br>
+
+![][lucidchart2]
+
+<br><br>
+
+1. Process
+
+   1. `docker docker run -d -p 5678:5678 hashicorp/http-echo -text="hello world"`<br><br>
+      ![][viewdockerimages]
+
+   1. `docker docker run -d -p 8765:5678 hashicorp/http-echo -text="hello world"`<br><br>docker ps<br><br>
+      ![][containerid]
+
+   1. `docker docker run -d -p 8888:5678 hashicorp/http-echo -text="hello world"`<br><br>
+      ![][helloworldoutput]
+
+</details>
+<br>
+
+### Docker; 3 - Run + Network
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Run
+     - Network
+
+<br><br>
+
+![][lucidchart3]
+
+<br><br>
+
+1. Process
+   1. `docker network create --driver=bridge --subnet=172.28.5.0/24 --ip-range=172.28.5.0/24 --gateway=172.28.5.254 mynet`
+      <br><br>
+
+![][dockernetwork]
+
+<br><br>
+
+2.  `docker run -d -p 5678:5678 --network=mynet --ip="172.28.5.2" hashicorp/http-echo -text="hello world A - Publish local port 5678“`
+3.  `docker run -d -p 8888:5678 --network=mynet --ip="172.28.5.3" hashicorp/http-echo -text="hello world B - Redirect to public 8888“`
+4.  `docker run -d --expose 5678 --network=mynet --ip="172.28.5.4" hashicorp/http-echo -text="hello world C - Exposed port 5678 only”`<br><br>`docker ps`<br><br>
+    ![][imagestats]
+    <br><br>
+
+5.  Exposed port accessed through external IP address<br><br>
+![][differntports]
+</details>
+<br>
+
+### Docker; 4 - Build
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Build
+
+<br><br>
+
+![][lucidchart4]
+
+<br><br>
+
+1. Process
+   1. `docker build -t php-hello-world`
+   2. `docker image`
+   3. `docker run -d -p 8888:80 php-hello-world`
+   4. `docker ps`
+
+Use your desired browser and enter [`localhost:8888`](https://localhost:8888) into the search bar
+
+1. `docker run -d -p 5678:5678 --network=mynet --ip="172.28.5.2" hashicorp/http-echo -text="hello world A - Publish local port 5678“`<br><br><br>`docker run -d -p 8888:5678 --network=mynet --ip="172.28.5.3" hashicorp/http-echo -text="hello world B - Redirect to public 8888“`<br><br><br>`docker run -d --expose 5678 --network=mynet --ip="172.28.5.4" hashicorp/http-echo -text="hello world C - Exposed port 5678 only”`<br><br>`docker ps`<br><br>
+   ![][imagestats]
+   <br><br>
+
+1. Output<br><br>![][phpdockeroutput]
+
+</details>
+<br>
+
+### Compose; 1 - Compose + Up
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Up
+   - Down
+   - Start
+   - Stop
+
+<br><br>
+
+![][lucidchart2]
+![][composeyml]
+
+<br><br>
+
+1. Process
+
+   1. `docker-compose up -d`
+   2. `docker ps`<br><br>![][composeupexample1]<br><br>![][webouthelloworld]
+   3. Browse [`localhost:8888`](https://localhost:8888)
+
+   4. Now up, start, stop, stop<br><br>`docker-compose up -d`<br><br>
+   5. `docker ps`
+   6. `docker-compose start`
+   7. `docker ps`
+   8. `docker-compose down`
+   9. `docker ps` <br><br>![][redoimage][//]: # Re do image
+
+</details>
+<br>
+
+### Compose; 2 - Compose + Build
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Up
+   - Down
+   - Start
+   - Stop
+   - Build
+
+<br><br>
+
+![][lucidchart5]
+
+<br><br>
+
+1. Process
+   1. `docker-compose build`
+   2. `docker-compose up -d`
+   3. Browse [`localhost:8888`](https://localhost:8888) Notice there is no "down"<br><br>![][buildexample3]<br><br>![][phpdockeroutput]<br><br>
+   4. Change the content in bula-fiji/src/index.php to;
+   5. `3: echo "Hello, World from php in Docker!<br>";`
+   6. `3: echo "Bula Fiji from php in Docker!<br>";`
+   7. Browse [`localhost:8888`](https://localhost:8888)<br><br>![][fijiphpwebbuild]
+
+</details>
+<br>
+
+### Compose; 3 - Compose + Network
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Up
+   - Down
+   - Start
+   - Stop
+
+<br><br>
+
+![][lucidchart3]
+
+<br><br>
+
+1. Process
+   1. `docker-compose up -d`
+   2. `docker ps`
+   3. Browse (A) [`localhost:5678`](https://localhost:5678)<br><br>Browse (B) [`localhost:8888`](https://localhost:8888)<br><br>![][composeexample3]<br><br>![][weboutputdifferntports]<br><br>
+   4. Now open these ports in someone elses browser<br><br>![][weboutputdifferntports]
+
+</details>
+<br>
+
+### Compose; 4 - Compose + Volume
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Up
+   - Down
+   - Start
+   - Stop
+   - Build
+
+<br><br>
+
+![][lucidchart5]
+
+<br><br>
+
+1. Process
+   1. `docker-compose build`
+   2. `docker-compose up -d`
+   3. [`localhost:8888`](https://localhost:8888)<br><br>![][buildexample4]<br><br>![][phpdockeroutput]<br><br>
+   4. Change the content in volumes/bula-fiji-node/index.php to;
+   5. `3: echo "Hello, World from php in Docker!<br>";`<br><br>`3: echo "Bula Fiji from php in Docker!<br>";`<br><br>There is no need to rebuild
+   6. [`localhost:8888`](https://localhost:8888)<br><br>![][phpdockeroutput]
+
+</details>
+<br>
+
+### Compose; 1 - Skeleton System
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Run
+     - Network
+
+<br><br>
+
+![][lucidchart6]
+
+<br><br>
+
+1. Process
+   1. `docker-compose build`
+   2. `docker-compose up -d`
+   3. [`localhost:8888`](https://localhost:8888)
+   4. <br><br>![][buildexample4]<br><br>![][phpdockeroutput]<br><br>
+   5. Change the content in volumes/bula-fiji-node/index.php to;
+   6. `3: echo "Hello, World from php in Docker!<br>";`<br><br>`3: echo "Bula Fiji from php in Docker!<br>";`<br><br>There is no need to rebuild
+   7. [`localhost:8888`](https://localhost:8888)<br><br>![][fijiphpwebbuild]
+
+</details>
+<br>
+
+### Terminology
+
+<br>
+<details>
+
+1. Proxy
+   - Rev Proxy
+   - Switch (Name/IP/Portal)
+   - SSL
+2. Images
+   - Postgresql
+   - Liferay
+   - Caddy
+   - Shiny Proxy
+   - Hello World
+   - Http Echo
+
+</details>
+<br>
+
+### Skeleton System
+
+<br>
+<details>
+
+![][example3]
+
+1. Images
+   - Postgresql
+   - Liferay
+   - Shiny Proxy
+     - Rimages
+
+</details>
+<br>
+
+### Traffic Routing (inc Liferay)
+
+<br>
+<details>
+<br><br>
+
+![][exampleurl]
+![][example2]
+
+</details>
+<br>
+
+### Traffic Routing (Full Complexity)
+
+<br>
+<details>
+
+![][example1]
+
+</details>
+<br>
+
+## Training 2
+
+### Skeleton; 1 - System
+
+<br>
+<details>
+
+1. Neccesary Commands
+   - Run
+     - Network
+
+<br><br>
+
+![][lucidchart6]
+
+<br><br>
+
+1. Images
+   - Lifray
+   - Postgresql
+   - Shiny Proxy
+     - Rimages
+
+<br>
+
+1. System
+   <br><br>
+
+![][example3]
+
+<br><br>
+
+</details>
+
+### Traffic Routing (inc Liferay)
+
+<br><br>
+
+![][exampleurl]
+![][example2]
+
+<br><br>
+
+### Traffic Routing (Full Complexity)
+
+<br><br>
+
+![][example4]
+
+<br><br>
+
+### Terminology
+
+1. Proxy
+   - Rev Proxy
+   - Switch (Name/IP/Portal)
+   - SSL
+2. Images
+   - Postgresql
+   - Liferay
+   - Caddy
+   - Shiny Proxy
+   - Hello World
+   - Http Echo
+
+<br><br>
+
+### Key Learning Outcomes
+
+- Backup
+  - Volumes
+  - Database
+  - Liferay
+- Trials and Upgrades
+- Skeleton System – (Local System in ITC Context)
+  - Firewall
+  - Active Directory
+  - DNS Names
+  - IP/Ports
+- Security
+  - User Authentication
+  - Firewall
+
+## Training 3
+
+## Objectives
+
+1. Install FIMS
+2. Continuation of more advanced Docker
+   - Trails
+   - Upgrades
+   - Backup
+3. Production installation plan
+
+<br>
+
+### Install FIMS Liferay
+
+[Install Presentaion](/)
+
+<br><br>
+
+## FIM System Design
+
+<br>
+
+![][exampleurl]
+
+<details>
+<br>
+
+- ### Logical Design
+
+    <br>
+    <details>
+
+  ![][example4]
+
+    </details>
+    <br>
+
+- ### Physical Connection
+
+    <br>E:\Work\eas-prj\FijiGov\NFMSIntegrationFramework\code\calcs\FijiNFMSIntegration\Vignette\Fiji-NFMS-ER-Docker-Universe.Rmd
+    <details>
+
+  ![][lucidchart7]
+
+    </details>
+
+    </details>
+
+<br><br>
+
+## More Advanced Docker
+
+- Backup: docker-4-volumes
+- Upgrades: skeleton-5-upgrades
+- Trials (blue/green): skeleton-6-trials
+
+<br><br>
+
+## Docker; 4 - Volumes
+
+<br>
+
+<details>
+
+### Commands:
+
+1. `docker-compose build`
+2. `docker-compose up -d`
+3. [`localhost:8888`](https://localhost:8888)
+4. `docker cp docker-4-volumes_webapp_1:/var/www/html .\`
+5. You should now have a new directory called html, navigate to index.php within the directory and open with your desired editor.<br> (e.g. `notepad.exe html/index.php`)
+6. Change the content from;<br>
+
+    - `3: echo "Hello, World from php in Docker! <br>";`
+    <br>to<br>
+    - `3: echo "Bula Fiji from php in Docker! <br>";`
+
+7. `docker cp .\html docker-4-volumes_webapp_1:/var/www/`
+8. There is no need to rebuild, browse [`localhost:8888`](https://localhost:8888)
+9. `docker-compose down`
+
+</details>
+<br>
+
+## Skeleton; 5 - Upgrades
+
+<br>
+
+<details>
+
+### Commands:
+
+1. `docker build -t bula-fiji:v1 .\bula-fiji`
+2. `docker-compose up -d`
+3. `docker ps`
+4. browser (A) [`localhost:5678`](https://localhost:5678)
+5. browser (B) [`localhost:8888`](https://localhost:8888)
+6. browser (bula-fiji) [`localhost:8222`](https://localhost:8222)
+7. `docker cp docker-4-volumes_webapp_1:/var/www/html .\`
+8. Using `notepad.exe bula-fiji\src\index.php` change the content in bula-fiji\src\index.php from;<br>
+
+
+    - `3: echo "Hello, World from php in Docker! <br>";`
+    <br>to<br>
+    - `3: echo "Bula Fiji from php in Docker! <br>";`
+
+9.  `docker build -t bula-fiji:v2 .\bula-fiji`
+10. Change the content in docker-compose.yml from;<br>
+
+    - `28: image: bula-fiji:v1`
+    <br>to<br>
+    - `28: image: bula-fiji:v2`
+
+11. `docker-compose up -d`
+12. Browse [`localhost:8888`](https://localhost:8888)
+13. `docker-compose down`
+
+</details>
+<br>
+
+## Skeleton; 6 - Trails
+
+<br>
+
+<details>
+
+### Commands:
+
+1. `docker-compose build`
+2. `docker-compose up -d`
+3. Browse [`localhost:8080`](https://localhost:8080)
+4. Check that it identifies itself as (A)
+5. Now change volumes/proxy-node/caddy/Caddyfile from;<br>
+
+    - `24:      reverse_proxy http://172.28.5.2:5678 {`
+    <br>to<br>
+    - `24:      reverse_proxy http://172.28.5.2:5678 http://172.28.5.3:5678 {`
+
+6.  `docker-compose restart proxy-node`
+7.  Change the content in docker-compose.yml from;<br>
+
+    - `28: image: bula-fiji:v1`
+    <br>to<br>
+    - `28: image: bula-fiji:v2`
+
+8.  Browse [`localhost:8080`](https://localhost:8080)<br>Check that it identifies itself as (A) or possibly (B)<br>If you keep refresh the page it will change
+9.  `docker-compose down`
+
+</details>
+
+[helloworld]: images/Docker/Fiji-NFMS-ER-Docker-HelWod.png
+[webouthelloworld]: images/Docker/Fiji-NFMS-ER-Docker-Ex1Out.png
+[viewdockerimages]: images/Docker/Fiji-NFMS-ER-Docker-ImageView.png
+[containerid]: images/Docker/Fiji-NFMS-ER-Docker-ContID.png
+[helloworldoutput]: images/Docker/Fiji-NFMS-ER-Docker-HelWodOut.png
+[dockernetwork]: images/Docker/Fiji-NFMS-ER-Docker-Network.png
+[imagestats]: images/Docker/Fiji-NFMS-ER-Docker-ImgStats.png
+[differntports]: images/Docker/Fiji-NFMS-ER-Docker-DifPort.png
+[phpdockeroutput]: images/Docker/Fiji-NFMS-ER-Docker-Ex3Out.png
+[composeupexample1]: images/Docker/Fiji-NFMS-ER-Docker-Ex1Up.png
+[redoimage]: images/Docker/Picture40.png
+[buildexample3]: images/Docker/Fiji-NFMS-ER-Docker-Ex3Build.png
+[fijiphpwebbuild]: images/Docker/Fiji-NFMS-ER-Docker-PHPFiji.png
+[composeexample3]: images/Docker/Fiji-NFMS-ER-Docker-Ex3Up.png
+[weboutputdifferntports]: images/Docker/Fiji-NFMS-ER-Docker-DifPort.png
+[buildexample4]: images/Docker/Fiji-NFMS-ER-Docker-Build.png
+[exampleurl]: images/Docker/Fiji-NFMS-ER-Docker-URL.png
+[dockermenu]: images/Docker/Fiji-NFMS-ER-Docker-Menu.png
+[lucidchart1]: images/Docker/Fiji-NFMS-ER-Docker-Sys1.png
+[lucidchart2]: images/Docker/Fiji-NFMS-ER-Docker-Sys2.png
+[lucidchart3]: images/Docker/Fiji-NFMS-ER-Docker-Sys3.png
+[lucidchart4]: images/Docker/Fiji-NFMS-ER-Docker-Sys4.png
+[composeyml]: images/Docker/Fiji-NFMS-ER-Docker-YMLCompose.png
+[lucidchart5]: images/Docker/Fiji-NFMS-ER-Docker-Sys5.png
+[lucidchart6]: images/Docker/Fiji-NFMS-ER-Docker-Sys6.png
+[lucidchart7]: images/Docker/Fiji-NFMS-ER-Docker-Sys7.png
+[example3]: images/Docker/Fiji-NFMS-ER-Docker-Example3.png
+[example2]: images/Docker/Fiji-NFMS-ER-Docker-Example2.png
+[example1]: images/Docker/Fiji-NFMS-ER-Docker-Example1.png
+[example4]: images/Docker/Fiji-NFMS-ER-Docker-Example4.png

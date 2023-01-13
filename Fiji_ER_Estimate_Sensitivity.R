@@ -9,9 +9,14 @@ library(ValueWithUncertainty)
 library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_AccuracyAssessment.RData")
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_Params.RData")
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_Values.RData")
+getDataPath<-function(filename) {
+  return(paste0("./Data/mrUpdateOct22/", filename))
+}
+
+load(file = getDataPath("/Fiji_ER_Estimate_AccuracyAssessment.RData"))
+load(file = getDataPath("/Fiji_ER_Estimate_Params.RData"))
+load(file = getDataPath("fiji_frl_overall_years.RData"))
+load(file = getDataPath("Fiji_ER_Estimate_Values.RData"))
 
 options(digits = 8)
 options(show.error.locations = TRUE)
@@ -21,6 +26,7 @@ par(mfrow = c(2, 1))
 # This number was used to generate the chk file.
 #### Values used to calculate 2019-2020 output - about 4 hours
 MCRuns <- 1.5e+06 #  number of runs in MC simulation - change as required
+#MCRuns <- 100
 MCTolerance <- 0.0025
 seed <- 08121976
 set.seed(seed) # Seed set to remove random nature of MC Analysis for LCI & UCI
@@ -69,7 +75,7 @@ list2env(result$env, environment())
 fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
         list = outputSaveNames,
-        file = paste(paste("./Data/MonitoringReport2021", fullFilename, sep = "/"))
+        file = paste(getDataPath(fullFilename))
 )
 
 if (debug_er | show_output) {

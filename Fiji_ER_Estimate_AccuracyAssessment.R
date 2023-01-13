@@ -7,19 +7,23 @@ library(survey)
 library(VGAM)
 library(FijiNFMSCalculations)
 
-aa_sample <- read.csv(file = "./Data/MonitoringReport2021/aa_sample.csv")
-lcc_mapped_areas <- read.csv(file = "./Data/MonitoringReport2021/lcc_mapped_areas.csv")
-load(file = "./Data/MonitoringReport2021/Fiji_ER_Estimate_Params.RData")
+getDataPath<-function(filename) {
+  return(paste0("./Data/mrUpdateOct22/", filename))
+}
+
+aa_sample <- read.csv(file = getDataPath("aa_sample.csv"))
+lcc_mapped_areas <- read.csv(file = getDataPath("lcc_mapped_areas.csv"))
+load(file = getDataPath("Fiji_ER_Estimate_Params.RData"))
 
 options("width" = 220)
 options(digits = 6)
 options(show.error.locations = TRUE)
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
-options(max.print = 50)
 
 # This number was used to generate the chk file.
 MCRuns <- 10000
+#MCRuns <- 100
 MCTolerance <- 0.0115 # how stable the UCI and LCI should be before stopping
 seed <- 08121976
 set.seed(seed) # Seed set to remove random nature of MC Analysis for LCI & UCI
@@ -30,6 +34,8 @@ plot_mc_output <- FALSE # Turn on plots for MC samples
 
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
+
+
 
 source("./calcER_Estimate_AccuracyAssessment.R")
 
@@ -72,7 +78,7 @@ list2env(result$env, environment())
 fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
         list = outputSaveNames,
-        file = paste(paste("./Data/MonitoringReport2021", fullFilename, sep = "/"))
+        file = paste(getDataPath(fullFilename))
 )
 
 

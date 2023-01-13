@@ -1,0 +1,184 @@
+---
+title: "Fiji NFMS R Script Manual"
+author: "David Chambers, Carly Green, Michael Green"
+date: "May 2021"
+output:
+  word_document:
+    toc: yes
+    toc_depth: '5'
+  pdf_document:
+    toc: yes
+    toc_depth: '5'
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  echo = TRUE
+)
+
+```
+
+
+# 1. Purpose of Document
+
+This document details the process of running the Fiji NFMS R Script for 
+generating the FCPF monitoring report. 
+
+
+# 2. Pre-requisites
+
+* RStudio installed 
+* Rtools installed
+* Github account
+* GitHub Desktop installed
+
+# 3. Request Access
+
+The source code  for this script is stored on Github so in order to access 
+it, a Github account is required (free)
+
+3.1. Those who require access need to send their GitHub login to the project 
+administrator. 
+
+3.2. The Github project administrator will then invite you to collaborate with two
+repositories, (the invites will be sent to the email address linked to your
+GitHub Account):
+
+- FijiNFMSCalculations
+- FijiNFMSIntegration
+
+# 4. Clone Repositories
+
+First, let's consider the FIJI NFMS Calculations Repository: 
+
+4.1. Open your email invite and click on the green View Invitation button. This
+will automatically open a the Github website
+
+4.2. Log in to GitHub and accept the invitation. This will open the repository 
+
+4.3. Select the green code button and select **Open with GitHubDesktop**
+
+![][OpenwithGHD]
+
+4.4. GitHub Desktop desktop will open.
+
+- You may have to accept a browser request to use Github desktop for these 
+actions. To do so, select GitHubDesktop.exe and then 'Open Link'
+
+![][ChooseApplication]
+
+4.5. You will be prompted to clone the
+[Fiji NFMS Calculations repository](https://github.com/micko920/FijiNFMSCalculations)
+
+- You will need to choose a local path. Select 'Choose', then navigate to your
+local Documents directory and create a new a folder 'FijiNFMSRCode' and click
+select to choose this as the path.
+- Finally, select 'Clone'.
+
+4.6. Now repeat steps 1-5 for the
+[FIJI NFMS Integration repository](https://github.com/micko920/FijiNFMSIntegration)
+
+- **Ensure you choose the same folder path at step 5.**
+
+
+# 5. Running the script
+
+5.1.  Open R Studio
+
+![][OpenRStudio]
+
+5.2. Set working directory to the new
+./FIJINFMSRCode/FijiNFMSIntegration directory
+
+![][SetWorkingDirectory]
+
+5.3 Open and run **requirements.R**
+(Accept Packages Update if notified. You only need to do this once. You can
+click 'No' the second time.) You may also have to Accept using compiled code as
+well as binaries. 
+
+5.4. Open and run **Fiji_ER_Estimate_Values.R**
+
+5.5. This must be completed first before you can start to generate reports. 
+
+5.6. To generate the report you must run the following command in the console:
+
+```{r eval=FALSE}
+rmarkdown::render('./reports/Fiji_ER_Estimate_Values.Rmd')
+```
+
+5.7 You can now open the generated .html file which will be saved in the 
+./reports directory.
+
+# 6. Using the Shiny App 
+
+**Example: ER Estimate Values** 
+
+6.1. Copy and paste the following code into the console
+
+```{r eval=FALSE}
+library('shinyjs')
+```
+
+6.2. To run the app, copy the following into the console: 
+
+```{r eval=FALSE}
+shiny::runApp('./appER_Estimate_Values.R')
+```
+
+6.3. Enter data into the text boxes and file input files on the Data Upload tab.
+
+All the required data is located in: 
+./FijiNFMSIntegration/Data/MonitoringReport2021
+
+| Inputs                                  | Source                                      |
+|-----------------------------------------|---------------------------------------------|
+| AdjustedAreas From Accuracy Assessment  | Fiji_ER_Estimate_AccuracyAssessment.Rdata   |
+| Monitored Values - year 1 and 2         | 2020ERMonitoredValuesSummary.xls, Sheet 1   |
+| Monitored Values - burn data for year 1 | Burn2019.txt                                |
+| Monitored Values - burn data for year 2 | Burn2020.txt                                |
+| Monitoring Report Params                | 2020ERMonitoredValuesSummary.xls, Sheet 2   |
+
+![][DataLoad] 
+ 
+6.4. Once all data is loaded select 'Proceed to Run Calculations'
+
+6.5. Click 'Run' to start calculations. When completed the results tables will 
+appear on screen under the Results heading. 
+
+![][RunCalc] 
+
+6.6. You can now save the R Data file and Export the Report Tables in both html 
+and pdf format.
+
+
+**Please refer to SOP 415 (Located on FIMS) for the procedure for using these tools for FCPF monitoring report generation.**
+
+
+
+[ChooseApplication]: images/RScriptManual1_ChooseApplication.png
+[OpenwithGHD]: images/RScriptManual2_OpenwithGHD.png
+[OpenRStudio]:images/1RStudioOpeningPage.png
+[SetWorkingDirectory]:images/2SetWorkingDirectory.png
+[DataLoad]:images/RScriptManual3_DataLoad.png
+[RunCalc]:images/RScriptManual4_RunCalc.png
+[SaveandExport]:images/RScriptManual5_SaveandExport.png
+
+
+
+
+
+
+
+
+
+

@@ -1,20 +1,21 @@
 ---
+runtime: shiny
 title: "Fiji NFMS ER Calculations Summary"
 author: "David Chambers, Carly Green, Michael Green"
 date: "May 2021"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: '5'
-  word_document:
-    toc: yes
-    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
     toc_float:
       collapsed: no
       smooth_scroll: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '5'
+  word_document:
+    toc: yes
+    toc_depth: '5'
 ---
 
 ```{r, include = FALSE}

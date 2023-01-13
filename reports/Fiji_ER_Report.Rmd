@@ -1,0 +1,89 @@
+---
+title: "Fiji ER Report"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+header-includes: \usepackage{caption}
+params:
+  file_format: html
+always_allow_html: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE,
+                      message=FALSE, warning=FALSE)
+
+library(rlang)
+library(dplyr)
+library(kableExtra)
+library(FijiNFMSCalculations)
+if (!exists("fileFormat")) fileFormat <- params$file_format
+getOption("max.print")
+```
+
+\captionsetup[table]{labelformat=empty}
+
+
+
+# Monitoring Period yearly chart of accounts FRL and Monitored Em/Rems
+```{r echo = FALSE}
+options(max.print=1000000)
+
+mp_yearly <- 
+  cbind(
+    t(rbind(as.data.frame(EmRems_Values$year1),as.data.frame(EmRems_Values$year2))),
+    as.data.frame(replicate(3, rep.int(0,22))))
+  
+mp_yearly <- mp_yearly[order(row.names(mp_yearly)),]
+      
+names(mp_yearly) <- c(2019:2023)
+
+
+
+overall_frl <- rbind( 
+  ErpaYearlyFRL$erpa_yearly$yearly[2:6],
+  mp_yearly[1:5]
+)
+
+
+row.names(overall_frl) <- NULL
+
+overall_frl <- cbind(
+  data.frame(value = c(t(ErpaYearlyFRL$erpa_yearly$yearly[1]), row.names(mp_yearly))),
+  overall_frl
+)
+
+row.names(overall_frl) <- NULL
+t <- overall_frl
+t %>% 
+  kable(fileFormat, caption = "Monitoring Period FRL and Monitored values",  
+        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
+  
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+
+```
+# Year Monitoring Period Results Tables
+## Year 1
+```{r echo = FALSE}
+t <- ResultsTables$year1
+t %>% 
+  kable(fileFormat, caption = "Monitoring Period values: year 1",
+        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+```
+
+## Year 2
+```{r echo = FALSE}
+t <- ResultsTables$year2
+t %>% 
+  kable(fileFormat, caption = "Monitoring Period values: year 2",
+        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+```

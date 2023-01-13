@@ -1,11 +1,10 @@
 ---
 title: "Monitoring Report Tables Section 4"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-always_allow_html: true
-header-includes:
-    - \usepackage{caption}
+header-includes: \usepackage{caption}
 params:
-  file_format: "html"
+  file_format: html
+always_allow_html: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -25,7 +24,7 @@ if (!exists("fileFormat")) fileFormat <- params$file_format
 
 ```{r echo = FALSE}
 Table4_2 %>%
-  kable(fileFormat, caption = "Monitoring Report Table 4.2") %>%
+  kable(fileFormat, caption = "Monitoring Report Table 4.2", digits = 4) %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )
@@ -36,14 +35,13 @@ Table4_2 %>%
 
 
 
-
-
 ```{r echo = FALSE}
 Table4_3 %>%
-  kable(fileFormat, caption = "Monitoring Report Table 4.3") %>%
+  kable(fileFormat, caption = "Monitoring Report Table 4.3", digits = 4) %>%
+  footnote(symbol = 
+  "Total Emissions Reductions column does not include Forest Degradation emissions as they are estimated with proxy data.", threeparttable = FALSE) %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )
 ```
-
 

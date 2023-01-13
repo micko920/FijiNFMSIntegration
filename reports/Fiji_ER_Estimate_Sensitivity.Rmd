@@ -156,10 +156,29 @@ overall uncertainty.
 
 
 ```{r echo = FALSE}
-TEI_ValuesOrdered %>%
-  kable(fileFormat, caption = "Monitoring Report Section 5.3") %>%
+t <- TEI_ValuesOrdered[order(abs(as.numeric(TEI_ValuesOrdered[,2])),decreasing = T),]
+row.names(t) <- c(1:length(t[,1]))
+
+
+t[order(t[,1]),] %>%
+  kable(fileFormat, caption = "Monitoring Report Section 5.3 - Alphabetical order",
+        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )
+
+```
+```{r echo = FALSE}
+t <- TEI_ValuesOrdered[order(abs(as.numeric(TEI_ValuesOrdered[,2])),decreasing = T),]
+row.names(t) <- c(1:length(t[,1]))
+
+
+t %>%
+  kable(fileFormat, caption = "Monitoring Report Section 5.3 - Rank order largerst first",
+        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
 ```
 
