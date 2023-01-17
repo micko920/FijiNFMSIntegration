@@ -41,7 +41,7 @@ install.packages(
 
 
 
-tinytex::install_tinytex()
+tinytex::install_tinytex(force = TRUE)
 
 # devtools::install("../ValueWithUncertainty")
 # devtools::install("../MonteCarloUtils")
@@ -49,6 +49,6 @@ devtools::install("../FijiNFMSCalculations")
 
 devtools::install_github("micko920/ValueWithUncertainty@v1.0.0")
 devtools::install_github("micko920/MonteCarloUtils@v1.0.0")
-devtools::install_github("micko920/FijiNFMSCalculations@v1.0.3")
+#devtools::install_github("micko920/FijiNFMSCalculations@v1.0.3")
 
 library(shinyjs)
