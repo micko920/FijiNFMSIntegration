@@ -16,6 +16,8 @@ update-chks:
 	cp ./chks/Fiji_FRL_Results_Tables.txt ./chks/Fiji_FRL_Results_Tables.chk
 	cp ./chks/Fiji_ER_EstimateResults_UC.txt ./chks/Fiji_ER_EstimateResults_UC.chk
 	cp ./chks/Fiji_ER_EstimateResults_Sensitivity.txt ./chks/Fiji_ER_EstimateResults_Sensitivity.chk
+	cp ./chks/Fiji_ER_EstimateResults_AccuracyAssessment.txt ./chks/Fiji_ER_EstimateResults_AccuracyAssessment.chk  
+	cp ./chks/Fiji_ER_EstimateResults_Values.txt ./chks/Fiji_ER_EstimateResults_Values.chk
 
 
 run-test-FRL:
