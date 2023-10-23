@@ -134,7 +134,7 @@ ER_DEF_2019
 
 $$ 
 \begin{align}
-ER_{FDeg,2019} &= ER_{NFH,2019,vol} + ER_{NFH,2019,fell} + ER_{NFF,2019} + ER_{FSW,2019} 
+ER_{FDeg,2019} &= ER_{NFH,2019,vol} + ER_{NFH,2019,rem} + ER_{NFF,2019} + ER_{FSW,2019} 
 \end{align}
 $$
 
@@ -171,8 +171,8 @@ $$
 \begin{align}
 AD_{NFH,2019,area} &= `r MonitoredValues$year1$FDegFellArea$area_ha` \\
 AD_{NFH,2019,age}  &= `r MonitoredValues$year1$FDegFellArea$age_yrs` \\
-MAIC_{NFHfell}    &= `r MAICFell` \\
-ER_{NFH,2019,fell} &=  AD_{NFH,2019,area} \times AD_{NFH,2019,age} \times MAIC_{NFHfell} \times \frac{44}{12} \times -1\\
+MAIC_{NFHrem}    &= `r MAICFell` \\
+ER_{NFH,2019,rem} &=  AD_{NFH,2019,area} \times AD_{NFH,2019,age} \times MAIC_{NFHrem} \times \frac{44}{12} \times -1\\
                   &= ( `r MonitoredValues$year1$FDegFellArea$area_ha` \times 
      `r MonitoredValues$year1$FDegFellArea$age_yrs` \times `r MAICFell` ) \times 
      \frac{44}{12} \times -1\\
@@ -195,8 +195,8 @@ $$
 \begin{align}
 AD_{NFDeg,2019} &= `r MonitoredValues$year1$NFDegArea` \\
 ABGBC_{NFDeg} &= `r EFNFDeg` \\
-RootToShootRatio_{TropRain} &= `r RootToShootTropRain` \\
-ER_{NFF,2019}  &= AD_{NFDeg,2019} \times ABGBC_{NFDeg} \times (1 + RootToShootRatio_{TropRain}) \times 0.47 \times \frac{44}{12}\\
+RootToShootRatio_{wl} &= `r RootToShootTropRain` \\
+ER_{NFF,2019}  &= AD_{NFDeg,2019} \times ABGBC_{NFDeg} \times (1 + RootToShootRatio_{wl}) \times 0.47 \times \frac{44}{12}\\
   &= `r MonitoredValues$year1$NFDegArea` \times `r EFNFDeg` \times (1 + `r RootToShootTropRain`)  
       \times 0.47 \times \frac{44}{12}\\
   &= `r ConvBiomassToCO2e(MonitoredValues$year1$NFDegArea * EFNFDeg * (1 + RootToShootTropRain))`
@@ -225,7 +225,7 @@ $$
 AD_{FDegBurnData,2019,age,i}    &= `r MonitoredValues$year1$FDegBurnData$age_yrs` \\
 AD_{FDegBurnData,2019,area,i}   &= `r MonitoredValues$year1$FDegBurnData$area_ha` \\
 MAIB_{sw}                       &= `r MAIBsw` \\
-RootToShootRatio_{DryLandSmall} &= `r RootToShootDryLandSmall` \\
+RootToShootRatio_{dll} &= `r RootToShootDryLandSmall` \\
 CombustFactor                   &= `r CombustFactor` \\
 GWP_{CO_2}  &= `r GWPCO2` \\
 GWP_{CH_4}  &= `r GWPCH4` \\
@@ -233,9 +233,9 @@ GWP_{N_2O}  &= `r GWPN2O` \\
 EF_{CO_2}   &= `r EFCO2` \\
 EF_{CH_4}   &= `r EFCH4` \\
 EF_{N_2O}   &= `r EFN2O` \\
-AGB_{i} &= AD_{FDegBurnData,2019,age,i} \times \frac{MAIB_{sw}}{1 + RootToShootRatio_{DryLandSmall}} \\
+AGB_{i} &= AD_{FDegBurnData,2019,age,i} \times \frac{MAIB_{sw}}{1 + RootToShootRatio_{dll}} \\
     &= \{`r MonitoredValues$year1$FDegBurnData$age_yrs`\} \times \frac{`r MAIBsw`}{1 + `r RootToShootDryLandSmall`} \\
-BGB_{i} &= AD_{FDegBurnData,2019,age,i} \times MAIB_{sw} \times RootToShootRatio_{DryLandSmall} \\
+BGB_{i} &= AD_{FDegBurnData,2019,age,i} \times MAIB_{sw} \times RootToShootRatio_{dll} \\
     &= \{`r MonitoredValues$year1$FDegBurnData$age_yrs`\} \times `r MAIBsw` \times `r RootToShootDryLandSmall`\\
 EmCO_2AGB_{i} &= AD_{FDegBurnData,2019,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
              &= \{`r formatDecimal(MonitoredValues$year1$FDegBurnData$area_ha)`\} \\
@@ -354,8 +354,8 @@ $$
 #### Monitoring Period, Year 2019, Emissions from forest plantation Hardwood
 $$
 \begin{align}
-Em_{FPln,2019,Hardwood} &= (AD_{FPln,2019,vol,hardwoord} \times BiomassConvExpansion_{Hardwood} \\
-  & + AD_{FPln,2019,vol,hardwoord} \times BiomassConvExpansion_{Hardwood} \times RootToShoot_{TropRain}) \\
+Em_{FPln,2019,Hardwood} &= (AD_{FPln,2019,vol,hardwood} \times BiomassConvExpansion_{Hardwood} \\
+  & + AD_{FPln,2019,vol,hardwoord} \times BiomassConvExpansion_{Hardwood} \times RootToShootRatio_{wl}) \\
   & \times 0.47 \times \frac{44}{12} \\
   &= (`r MonitoredValues$year1$FPlnVolHarvHwd` \times `r BiomassConvExpansionHW` 
     + `r MonitoredValues$year1$FPlnVolHarvHwd` \times `r BiomassConvExpansionHW` \times `r RootToShootTropRain`)
@@ -387,8 +387,8 @@ AD_{FPln,2019,age,Hardwood}   &= `r MonitoredValues$year1$FPlnAreaPlantHwd$age_y
 AD_{FPln,2019,area,Hardwood}  &= `r MonitoredValues$year1$FPlnAreaPlantHwd$area_ha` \\
 MAIV_{Hardwood}               &= `r MAIVhw` \\
 BiomassConvExpansion_{IncHW}  &= `r BiomassConvExpansionIncHW` \\
-RootToShootRatio_{TropRain}   &= `r RootToShootTropRain` \\
-MAIB_{Hardwood}               &= MAIV_{Hardwood} \times BiomassConvExpansion_{IncHW} \times (1 + RootToShoot_{TropRain}) \\
+RootToShootRatio_{wl}   &= `r RootToShootTropRain` \\
+MAIB_{Hardwood}               &= MAIV_{Hardwood} \times BiomassConvExpansion_{IncHW} \times (1 + RootToShootRatio_{wl}) \\
                               &= `r MAIVhw` \times `r BiomassConvExpansionIncHW` \times (1 + `r RootToShootTropRain`) \\
                               &= `r MAIVhw * BiomassConvExpansionIncHW * (1 + RootToShootTropRain)` \\
 Rem_{FPln,2019,Hardwood} &=  AD_{FPln,2019,age,Hardwood} \times AD_{FPln,2019,area,Hardwood} \times MAIB_{Hardwood} \times 0.47 \times \frac{44}{12} \times -1 \\
@@ -439,10 +439,10 @@ $$
 AD_{FPln,2019,vol,Softwood}   &= `r MonitoredValues$year1$FPlnVolHarvSwd` \\
 RecoveryRate_{Softwood}       &= `r RecoveryRateSW` \\
 WoodDensity_{Softwood}        &= `r WoodDensitySW` \\
-RootToShootRatio_{DryLandBig} &= `r RootToShootDryLandBig` \\
+RootToShootRatio_{dlh} &= `r RootToShootDryLandBig` \\
 Em_{FPln,2019,Softwood} &= (AD_{FPln,2019,vol,Softwood} \times \frac{1}{RecoveryRate_{Softwood}} \times WoodDensity_{Softwood} \\
    & + AD_{FPln,2019,vol,Softwood} \times \frac{1}{RecoveryRate_{Softwood}} \\
-   & \times WoodDensity_{Softwood} \times RootToShootRatio_{DryLandBig}) \\
+   & \times WoodDensity_{Softwood} \times RootToShootRatio_{dlh}) \\
    & \times  0.47 \times \frac{44}{12} \\
    &= (`r MonitoredValues$year1$FPlnVolHarvSwd` \times \frac{1}{`r RecoveryRateSW`} \times `r WoodDensitySW` \\
    & +`r MonitoredValues$year1$FPlnVolHarvSwd` \times \frac{1}{`r RecoveryRateSW`} \times `r WoodDensitySW` \times  
@@ -542,8 +542,8 @@ AD_{AR,2019,age,i}          &= `r MonitoredValues$year1$AReforArea$age_yrs` \\
 AD_{AR,2019,area,i}         &= `r MonitoredValues$year1$AReforArea$area_ha` \\
 MAIV_{AR}                   &= `r MAIVar` \\
 BiomassConvExpansion_{AR}   &= `r BiomassConvExpansionARefor` \\
-RootToShootRatio_{TropRain} &= `r RootToShootTropRain` \\
-MAIC_{AR}                   &= MAIV_{AR} \times  BiomassConvExpansion_{AR} \times (1 + RootToShootRatio_{TropTain}) \\
+RootToShootRatio_{wl} &= `r RootToShootTropRain` \\
+MAIC_{AR}                   &= MAIV_{AR} \times  BiomassConvExpansion_{AR} \times (1 + RootToShootRatio_{wl}) \\
                             &= `r MAIVar` \times  `r BiomassConvExpansionARefor` \times (1 + `r RootToShootTropRain`) \\
                             &= `r MAIVar * BiomassConvExpansionARefor * (1 + RootToShootTropRain)` \\
 Rem_{AR,2019}  &= AD_{AR,2019,age} \times AD_{AR,2019,area} \times MAIC_{AR} \times 0.47 \times \frac{44}{12} \times -1 \\

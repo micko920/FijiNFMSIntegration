@@ -46,8 +46,3 @@ rmarkdown::render(
   "./reports/Fiji_ER_MonitoringReportExtraTables.Rmd",
   output_dir = "./reports",
   output_format = "html_document")
-
-rmarkdown::render(
-  "./reports/Fiji_ER_MonitoringReportExtraTables.Rmd",
-  output_dir = "./reports",
-  output_format = "pdf_document")
