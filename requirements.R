@@ -55,12 +55,12 @@ install.packages("microbenchmark")
 
 tinytex::install_tinytex(force = TRUE)
 
-#devtools::install("../ValueWithUncertainty")
-#devtools::install("../MonteCarloUtils")
-#devtools::install("../FijiNFMSCalculations")
+devtools::install("../ValueWithUncertainty")
+devtools::install("../MonteCarloUtils")
+devtools::install("../FijiNFMSCalculations")
 
-devtools::install_github("micko920/ValueWithUncertainty@v1.0.1")
-devtools::install_github("micko920/MonteCarloUtils@v1.0.1")
-devtools::install_github("micko920/FijiNFMSCalculations@v1.0.5")
+#devtools::install_github("micko920/ValueWithUncertainty@v1.0.1")
+#devtools::install_github("micko920/MonteCarloUtils@v1.0.1")
+#devtools::install_github("micko920/FijiNFMSCalculations@v1.0.5")
 
 library(shinyjs)
