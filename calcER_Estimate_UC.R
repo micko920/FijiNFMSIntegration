@@ -8,6 +8,8 @@ library(ValueWithUncertainty)
 library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
+
+
 outputFilename <- "Fiji_ER_Estimate_UC"
 outputSaveNames <- c(
   "ResultsTables",
@@ -193,7 +195,8 @@ CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
     MonitoringReportParams$ErpaYearlyFRL,
     MonitoringReportParams$ErpaYearlyFRLFDeg,
     MonitoringReportParams$ErpaYearlyFRLDefor,
-    MonitoringReportParams$ErpaYearlyFRLEnh
+    MonitoringReportParams$ErpaYearlyFRLEnh,
+    MonitoringReportParams$ErpaYearlyFRLFDegNonProxy 
   )
 
   UC_Values <- list()

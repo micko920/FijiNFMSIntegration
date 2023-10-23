@@ -267,6 +267,21 @@ ui <- fluidPage(
                                 0
                         ),
                         numericInput(
+                                "mrpErpaYearlyFRLFDegNonProxy",
+                                "FRL Forest Degradation Non Proxy",
+                                0
+                        ),
+                        numericInput(
+                                "mrpErpaYearlyFRLFDegNonProxyUCI",
+                                "FRL Forest Degradation Non Proxy UCI",
+                                0
+                        ),
+                        numericInput(
+                                "mrpErpaYearlyFRLFDegNonProxyLCI",
+                                "FRL Forest Degradation Non Proxy LCI",
+                                0
+                        ),
+                        numericInput(
                                 "mrpErpaYearlyFRLEnh",
                                 "FRL Removals by Sinks",
                                 0
@@ -448,6 +463,9 @@ server <- function(input, output, session) {
                         updateTextInput(session, "mrpErpaYearlyFRLFDeg", value = pmrpdata$ErpaYearlyFRLFDeg)
                         updateTextInput(session, "mrpErpaYearlyFRLFDegUCI", value = pmrpdata$ErpaYearlyFRLFDegUCI)
                         updateTextInput(session, "mrpErpaYearlyFRLFDegLCI", value = pmrpdata$ErpaYearlyFRLFDegLCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLFDegNonProxy", value = pmrpdata$ErpaYearlyFRLFDegNonProxy)
+                        updateTextInput(session, "mrpErpaYearlyFRLFDegNonProxyUCI", value = pmrpdata$ErpaYearlyFRLFDegNonProxyUCI)
+                        updateTextInput(session, "mrpErpaYearlyFRLFDegNonProxyLCI", value = pmrpdata$ErpaYearlyFRLFDegNonProxyLCI)
                         updateTextInput(session, "mrpErpaYearlyFRLEnh", value = pmrpdata$ErpaYearlyFRLEnh)
                         updateTextInput(session, "mrpErpaYearlyFRLEnhUCI", value = pmrpdata$ErpaYearlyFRLEnhUCI)
                         updateTextInput(session, "mrpErpaYearlyFRLEnhLCI", value = pmrpdata$ErpaYearlyFRLEnhLCI)
@@ -565,6 +583,9 @@ server <- function(input, output, session) {
                 mrp$ErpaYearlyFRLFDeg <- input$mrpErpaYearlyFRLFDeg
                 mrp$ErpaYearlyFRLFDegUCI <- input$mrpErpaYearlyFRLFDegUCI
                 mrp$ErpaYearlyFRLFDegLCI <- input$mrpErpaYearlyFRLFDegLCI
+                mrp$ErpaYearlyFRLFDegNonProxy <- input$mrpErpaYearlyFRLFDegNonProxy
+                mrp$ErpaYearlyFRLFDegNonProxyUCI <- input$mrpErpaYearlyFRLFDegNonProxyUCI
+                mrp$ErpaYearlyFRLFDegNonProxyLCI <- input$mrpErpaYearlyFRLFDegNonProxyLCI
                 mrp$ErpaYearlyFRLEnh <- input$mrpErpaYearlyFRLEnh
                 mrp$ErpaYearlyFRLEnhUCI <- input$mrpErpaYearlyFRLEnhUCI
                 mrp$ErpaYearlyFRLEnhLCI <- input$mrpErpaYearlyFRLEnhLCI
@@ -629,6 +650,9 @@ server <- function(input, output, session) {
         iv$add_rule("mrpErpaYearlyFRLFDeg", sv_required())
         iv$add_rule("mrpErpaYearlyFRLFDegUCI", sv_required())
         iv$add_rule("mrpErpaYearlyFRLFDegLCI", sv_required())
+        iv$add_rule("mrpErpaYearlyFRLFDegNonProxy", sv_required())
+        iv$add_rule("mrpErpaYearlyFRLFDegNonProxyUCI", sv_required())
+        iv$add_rule("mrpErpaYearlyFRLFDegNonProxyLCI", sv_required())
         iv$add_rule("mrpErpaYearlyFRLEnh", sv_required())
         iv$add_rule("mrpErpaYearlyFRLEnhUCI", sv_required())
         iv$add_rule("mrpErpaYearlyFRLEnhLCI", sv_required())

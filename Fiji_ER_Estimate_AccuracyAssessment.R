@@ -8,7 +8,7 @@ library(VGAM)
 library(FijiNFMSCalculations)
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/mrUpdateOct22/", filename))
+  return(paste0("./Data/mrUpdateOct23/", filename))
 }
 
 aa_sample <- read.csv(file = getDataPath("aa_sample.csv"))
@@ -38,6 +38,8 @@ plot_mc_output <- FALSE # Turn on plots for MC samples
 
 
 source("./calcER_Estimate_AccuracyAssessment.R")
+
+pdf(paste0(outputFilename, ".pdf"))
 
 print("Running Accuracy Assessment and generating adjusted areas....")
 timestamp <- Sys.time()

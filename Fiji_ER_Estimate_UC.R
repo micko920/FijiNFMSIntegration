@@ -13,7 +13,7 @@ library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/mrUpdateOct22/", filename))
+  return(paste0("./Data/mrUpdateOct23/", filename))
 }
 
 load(file = getDataPath("Fiji_ER_Estimate_AccuracyAssessment.RData"))
@@ -43,6 +43,8 @@ plot_mc_output <- TRUE # Turn on plots for MC samples
 ####################################################################################################
 
 source("./calcER_Estimate_UC.R")
+
+pdf(paste0(outputFilename, ".pdf"))
 
 print("Running ER Estimate Uncertainty...")
 timestamp <- Sys.time()
