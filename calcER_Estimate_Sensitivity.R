@@ -180,7 +180,8 @@ CalcER_Estimate_Sensitivity <- function(statusCallback, interrupted, calcEnv) {
     MonitoringReportParams$ErpaYearlyFRL,
     MonitoringReportParams$ErpaYearlyFRLFDeg,
     MonitoringReportParams$ErpaYearlyFRLDefor,
-    MonitoringReportParams$ErpaYearlyFRLEnh
+    MonitoringReportParams$ErpaYearlyFRLEnh,
+    MonitoringReportParams$ErpaYearlyFRLFDegNonProxy 
   )
 
   UC_Values <- list()

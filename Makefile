@@ -37,9 +37,16 @@ run-Fiji-ER_EST:
 	Rscript -e 'source("./Fiji_ER_Estimate_Sensitivity.R")'
 
 run-create-reports:
+	-rm -rf reports/*_cache
+	-rm \
+		reports/Fiji_FRL_Report.html \
+		reports/Fiji_ER_Report.html \
+		reports/Fiji_ER_Estimate_UC.html \
+		reports/Fiji_ER_Estimate_Values.html \
+		reports/Fiji_ER_Estimate_AccuracyAssesment.html \
+		reports/Fiji_MonitoringReportExtraTables.html
 	Rscript -e 'source("./createReport_FRL.R")'
 	Rscript -e 'source("./createReport_ER.R")'
-	rm -rf reports/*_cache
 
 
 run-test-ER_EST:
@@ -52,3 +59,7 @@ run-test-ER_EST:
 	Rscript -e 'source("./Fiji_ER_Estimate_Sensitivity.R")'
 	-diff -U 1  ./chks/Fiji_ER_EstimateResults_Sensitivity.chk ./chks/Fiji_ER_EstimateResults_Sensitivity.txt
 
+run-install-requirements:
+	Rscript -e 'source("./requirements.R")'
+	
+	

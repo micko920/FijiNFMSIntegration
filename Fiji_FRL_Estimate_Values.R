@@ -1,7 +1,7 @@
 
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/frlUpdateOct22/", filename))
+  return(paste0("./Data/frlUpdateOct23/", filename))
 }
 
   
@@ -38,6 +38,8 @@ MCRuns <- FRLParams$runs
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
+outputFilename <- "Fiji_FRL_Estimate_Values"
+pdf(paste0(outputFilename, ".pdf"))
 
 print("Running FRL Estimate Calculations...")
 timestamp <- Sys.time()

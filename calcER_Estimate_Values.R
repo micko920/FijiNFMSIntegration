@@ -161,13 +161,14 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
 
   checkStatus(50)
 
-  browser()
+
   ER_Values <- CalcERValues(
     EmRems_Values,
     MonitoringReportParams$ErpaYearlyFRL,
     MonitoringReportParams$ErpaYearlyFRLFDeg,
     MonitoringReportParams$ErpaYearlyFRLDefor,
-    MonitoringReportParams$ErpaYearlyFRLEnh
+    MonitoringReportParams$ErpaYearlyFRLEnh,
+    MonitoringReportParams$ErpaYearlyFRLFDegNonProxy
   )
 
   checkStatus(60)
@@ -183,7 +184,8 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
 
   checkStatus(90)
   Table4_2 <- createTable_4_2(MR_Values)
-
+ 
+  
   Table4_3 <- createTable_4_3(MR_Values, MonitoringReportParams)
 
   checkStatus(100)

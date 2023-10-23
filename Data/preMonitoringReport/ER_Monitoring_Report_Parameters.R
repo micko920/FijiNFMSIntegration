@@ -2,7 +2,7 @@
 
 MonitoringReportParams <- list()
 MonitoringReportParams$MpDays <- 730 # number of days in the Monitoring Period # Always 2 years (365*2) Don't change this...
-MonitoringReportParams$RpDays <- 540 # number of days in the Reporting Period
+MonitoringReportParams$RpDays <- 539 # number of days in the Reporting Period
 MonitoringReportParams$IsRpEqualToMp <- (MonitoringReportParams$MpDays == MonitoringReportParams$RpDays)
 MonitoringReportParams$RpMpRatio <- (MonitoringReportParams$RpDays / MonitoringReportParams$MpDays)
 MonitoringReportParams$RpMpProrataYears <- 2 * MonitoringReportParams$RpMpRatio
@@ -10,7 +10,7 @@ MonitoringReportParams$ErpaYearlyFRL <-  FRL
 MonitoringReportParams$ErpaYearlyFRLDefor <-  FRLDeforestation
 MonitoringReportParams$ErpaYearlyFRLFDeg <-  FRLForestDegradation
 MonitoringReportParams$ErpaYearlyFRLEnh <-  FRLRemovalsBySinks
-
+MonitoringReportParams$ErpaYearlyFRLFDegNonProxy <-  FRLForestDegradationNonProxy
 
 MonitoringReportParams$ErpaTransferredERs <- 0 # Amount of ERs that have been previously transferred to the
 # Carbon Fund, as Contract ERs and Additional ERs
