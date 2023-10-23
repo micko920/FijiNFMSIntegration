@@ -7,7 +7,6 @@ packageVersion("rlang") # ‘1.0.6’
 
 install.packages(
   c(
-    "VGAM",
     "callr",
     "data.table",
     "devtools",
@@ -44,6 +43,9 @@ install.packages(
     "yaml"
   )
 )
+
+devtools::install_version("VGAM","1.1.7")
+devtools::install_version("microbenchmark","1.4.7")
 
 tinytex::install_tinytex(force = TRUE)
 
