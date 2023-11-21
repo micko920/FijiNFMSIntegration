@@ -77,6 +77,14 @@ ui <- fluidPage(
         accept = ".RData"
       ),
       tableOutput("rdataNames"),
+      h3("FRL vaules"),
+      fileInput(
+        "ErpaYearlyFRL",
+        "ERPA Yearly FRL data",
+        multiple = FALSE,
+        accept = ".RData"
+      ),
+      tableOutput("frlNames"),
       hr(),
       h3("Uncertainty Params"),
       numericInput("MCRuns", "MCRuns", 1.5e6, min = 0),
@@ -143,9 +151,40 @@ server <- function(input, output, session) {
       # enable('ProceedtoRunPage')
     }
   })
+  observeEvent(input$ErpaYearlyFRL$datapath, {
+    if (!is.null(input$ErpaYearlyFRL$datapath)) {
+      # Use a reactiveFileReader to read the file on change, and load the content into a new environment
+      rdataEnv <-
+        reactiveFileReader(
+          1000,
+          session,
+          input$ErpaYearlyFRL$datapath,
+          LoadToEnvironment
+        )
+      
+      # Convert the env into a list to send to the calc Function
+      sessionData$frlEnv <- as.list(rdataEnv())
+      
+      
+      # What names are in the file.
+      sessionData$frlNames <-
+        data.frame(frlNames = names(rdataEnv()))
+      colnames(sessionData$frlNames) <-
+        c("RData content names")
+      
+      output$frlNames <- renderTable({
+        sessionData$frlNames
+      })
+      
+    }
+  })
 
   calcEnv <- reactive({
     return(sessionData$calcEnv)
+  })
+  
+  frlEnv <- reactive({
+    return(sessionData$frlEnv)
   })
 
   UncertaintyParams <- reactive({
@@ -162,6 +201,8 @@ server <- function(input, output, session) {
   iv <- InputValidator$new()
   # 2. Add validation rules
   iv$add_rule("PreviousData", sv_required())
+  iv$add_rule("ErpaYearlyFRL", sv_required())
+  
   iv$add_rule("MCRuns", sv_required(message = "Enter the value or 0 if unused"))
   iv$add_rule("MCRuns", ~ if (input$MCRuns < 0) {
     "Enter a positive number"
@@ -257,7 +298,7 @@ server <- function(input, output, session) {
 
     ### Put all inputs into one list to get passed into function
 
-    calcEnvExtended <- calcEnv()
+    calcEnvExtended <-  c(calcEnv(),frlEnv())
     calcEnvExtended$MCRuns <- UncertaintyParams()$MCRuns
     calcEnvExtended$MCTolerance <- UncertaintyParams()$MCTolerance
     calcEnvExtended$seed <- UncertaintyParams()$seed
