@@ -87,3 +87,173 @@ t %>%
   )
 
 ```
+
+# Table of Parameters and uncertainty
+```{r echo = FALSE}
+    ParameterTable <- data.frame(
+      name = character(), 
+      value = numeric(), 
+      LCI = numeric(), 
+      UCI=numeric(), 
+      error = numeric(),
+      model=character(),
+      stringsAsFactors=FALSE)
+
+    ParameterTable <- rbind(ParameterTable, list(
+      name = "EFDeforUp", 
+      value = EFDeforUp, 
+      LCI = EFDeforUp_LCI, 
+      UCI= EFDeforUp_UCI, 
+      error = NA,
+      model="Triangle"),
+      stringsAsFactors=FALSE)
+    
+    
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "EFDeforLow",
+      value = EFDeforLow,
+      LCI   = EFDeforLow_LCI,
+      UCI   = EFDeforLow_UCI,
+      error    = NA,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+  
+     ParameterTable <- rbind(ParameterTable,list(
+      name  = "TEF",
+      value = TEF,
+      LCI   = TEF - TEF * errTEF,
+      UCI   = TEF + TEF * errTEF,
+      error    = errTEF,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+
+
+  ParameterTable <- rbind(ParameterTable,list(
+      name  = "MAIBsw",
+      value = MAIBsw,
+      LCI   = MAIBsw - MAIBsw * errMAIBsw,
+      UCI   = MAIBsw + MAIBsw * errMAIBsw,
+      error    = errMAIBsw,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+
+
+  ParameterTable <- rbind(ParameterTable,list(
+      name  = "EFNFDeg",
+      value = EFNFDeg,
+      LCI   = EFNFDeg_LCI,
+      UCI   = EFNFDeg_UCI,
+      error    = NA,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+  
+   ParameterTable <- rbind(ParameterTable,list(
+      name  = "MAICFell",
+      value = MAICFell,
+      LCI   = MAICFell - MAICFell * ErrMAICFell,
+      UCI   = MAICFell + MAICFell * ErrMAICFell,
+      error    = ErrMAICFell,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+  
+   
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "MAIVar",
+      value = MAIVar,
+      LCI   = MAIVar - (MAIVar * errMAIVar),
+      UCI   = MAIVar + (MAIVar * errMAIVar),
+      error    = errMAIVar,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+    
+    
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "MAIVhw",
+      value = MAIVhw,
+      LCI   = MAIVhw - MAIVhw * errMAIVhw,
+      UCI   = MAIVhw + MAIVhw * errMAIVhw,
+      error = errMAIVhw,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+    
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "BiomassConvExpansionARefor",
+      value = BiomassConvExpansionARefor,
+      LCI   = BiomassConvExpansionARefor - (BiomassConvExpansionARefor * errBiomassConvExpansionARefor),
+      UCI   = BiomassConvExpansionARefor + (BiomassConvExpansionARefor * errBiomassConvExpansionARefor),
+      error = errBiomassConvExpansionARefor,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+    
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "BiomassConvExpansionHW",
+      value = BiomassConvExpansionHW,
+      LCI   = BiomassConvExpansionHW - BiomassConvExpansionHW * errBiomassConvExpansionHW,
+      UCI   = BiomassConvExpansionHW + BiomassConvExpansionHW * errBiomassConvExpansionHW,
+      error = errBiomassConvExpansionHW,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+    
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "BiomassConvExpansionIncHW",
+      value = BiomassConvExpansionHW,
+      LCI   = BiomassConvExpansionIncHW - BiomassConvExpansionIncHW * errBiomassConvExpansionIncHW,
+      UCI   = BiomassConvExpansionIncHW + BiomassConvExpansionIncHW * errBiomassConvExpansionIncHW,
+      error = errBiomassConvExpansionIncHW,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)
+    
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "RootToShootTropRain",
+      value = RootToShootTropRain,
+      LCI   = RootToShootTropRain - (RootToShootTropRain * errRootToShootTropRain),
+      UCI   = RootToShootTropRain + (RootToShootTropRain * errRootToShootTropRain),
+      error = errRootToShootTropRain,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)    
+    
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "RootToShootDryLandSmall",
+      value = RootToShootDryLandSmall,
+      LCI   = errLowerRtSDryLandSmall,
+      UCI   = errUpperRtSDryLandSmall,
+      error = NA,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)    
+
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "RootToShootDryLandBig",
+      value = RootToShootDryLandBig,
+      LCI   = errLowerRtSDryLandBig,
+      UCI   = errUpperRtSDryLandBig,
+      error = NA,
+      model ="Triangle"
+    ), stringsAsFactors=FALSE)    
+   
+   ParameterTable <- rbind(ParameterTable,list(
+      name  = "RecoveryRateSW",
+      value = RecoveryRateSW,
+      LCI = qnorm(p = c(QLCI), mean = RecoveryRateSW, sd = (RecoveryRateSW * errRecoveryRateSW)),
+      UCI = qnorm(p = c(QUCI), mean = RecoveryRateSW, sd = (RecoveryRateSW * errRecoveryRateSW)),
+      error = errRecoveryRateSW,
+      model ="Norm"
+    ), stringsAsFactors=FALSE)    
+   
+    ParameterTable <- rbind(ParameterTable,list(
+      name  = "WoodDensitySW",
+      value = WoodDensitySW,
+      LCI = qnorm(p = c(QLCI), mean = WoodDensitySW, sd = SDWoodDensitySW),
+      UCI = qnorm(p = c(QUCI), mean = WoodDensitySW, sd = SDWoodDensitySW),
+      error = NA,
+      model ="Norm"
+    ), stringsAsFactors=FALSE)  
+    
+ParameterTable %>% 
+  kable(fileFormat, caption = "Parameter and associated uncertainty",
+        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+     
+```
+    

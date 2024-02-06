@@ -92,7 +92,7 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
 				MonitoredValues$year1$FPlnAreaPlantHwdSurveyArea,
 				MonitoredValues$year2$FPlnAreaPlantHwdSurveyArea
 			),
-			age_yrs = c(0.5,1.5)
+			age_yrs = c(1.5,0.5)
   )
 
   MonitoredValues$year1$FPlnAreaPlantHwd <- data.frame(
@@ -111,7 +111,7 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
 				MonitoredValues$year1$FPlnAreaPlantSwdSurveyArea,
 				MonitoredValues$year2$FPlnAreaPlantSwdSurveyArea
 			),
-			age_yrs = c(0.5,1.5)
+			age_yrs = c(1.5,0.5)
   )
 
   MonitoredValues$year1$FPlnAreaPlantSwd <- data.frame(
