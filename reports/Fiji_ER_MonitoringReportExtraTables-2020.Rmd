@@ -1,0 +1,608 @@
+---
+title: "Monitoring Report Extra Tables"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+header-includes: \usepackage{caption}
+params:
+  file_format: html
+always_allow_html: yes
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+  pdf_document:
+    toc: true
+    number_sections: true
+  word_document:
+    toc: true
+---
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE,
+                      message=FALSE, warning=FALSE)
+
+
+library(rlang)
+library(dplyr)
+library(kableExtra)
+
+if (!exists("fileFormat")) fileFormat <- params$file_format
+```
+
+```{css echo=FALSE}
+/* Define a margin before h2 element */
+h2,h3,h4  {
+  margin-top: 6em;
+}
+
+/* Define a margin after every first p elements */
+p:first-of-type {
+  margin-bottom: 3em;
+}
+``` 
+
+\captionsetup[table]{labelformat=empty}
+
+## Table Monitoring Period Emissions/Removals
+
+```{r echo = FALSE}
+TableMPEmRems <- createTable_MPEmRems(MR_Values)
+#TableMPEmRems["3", "Year"] <- cell_spec(TableMPEmRems["3", "Year"], color = "black", background = "lightgreen")
+TableMPEmRems %>%
+  kable(fileFormat, caption = "Monitoring Report Table Monitoring Report Emmission/Removals", digits = 4) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  ) %>%  
+  row_spec(0, color = "black", background = "lightgreen") 
+  
+  
+```
+
+
+
+## Estimation of emissions by source and removals by enhancements included in the ER Program's scope
+### Monitoring Period, Year 2020, Net Emissions/Removals
+$$
+\begin{align}
+ER_{2020} &= ER_{Defor,2020} + ER_{FDeg,2020} + ER_{Enh,2020} \\
+\end{align}
+$$
+
+
+### Deforestation
+$$ 
+ER_{Def,2020} = ER_{Def,2020,Upland} + ER_{Def,2020,Lowland}
+$$
+
+#### Monitoring Period, Year 2020, Deforestation Upland 
+
+$$ 
+\begin{align}
+ER_{Def,2020,Upland} &= AD_{Def,2020,Upland} \times  EF_{Def,Upland} \\
+  &= `r MonitoredValues$year2$DeforAreaUp` \times  `r EFDeforUp`\\
+  &= `r MonitoredValues$year2$DeforAreaUp * EFDeforUp`
+\end{align}
+$$
+
+
+
+```{r echo = TRUE, prompt = TRUE}
+MonitoredValues$year2$DeforAreaUp
+EFDeforUp
+MonitoredValues$year2$DeforAreaUp * EFDeforUp
+```
+
+
+#### Monitoring Period, Year 2020, Deforestation Lowland 
+
+$$ 
+\begin{align}
+ER_{Def,2020,Lowland} &= AD_{Def,2020,Lowland} \times  EF_{Def,Lowland} \\
+  &= `r MonitoredValues$year2$DeforAreaLow` \times `r EFDeforLow` \\
+  &= `r MonitoredValues$year2$DeforAreaLow * EFDeforLow`
+\end{align}
+$$
+
+
+
+```{r echo = TRUE, prompt = TRUE}
+MonitoredValues$year2$DeforAreaLow
+EFDeforLow
+MonitoredValues$year2$DeforAreaLow * EFDeforLow
+```
+
+
+#### Monitoring Period, Year 2020, Total Deforestation
+
+$$ 
+\begin{align}
+ER_{Def,2020} &= `r formatDecimal(MonitoredValues$year2$DeforAreaUp * EFDeforUp)`
+  +  `r formatDecimal(MonitoredValues$year2$DeforAreaLow * EFDeforLow)`  \\
+  &= `r formatDecimal((MonitoredValues$year2$DeforAreaUp * EFDeforUp) + (MonitoredValues$year2$DeforAreaLow * EFDeforLow))`
+\end{align}
+$$
+
+
+
+```{r echo = TRUE, prompt = TRUE}
+ER_DEF_2020 <- (MonitoredValues$year2$DeforAreaUp * EFDeforUp) + (MonitoredValues$year2$DeforAreaLow * EFDeforLow)
+ER_DEF_2020
+```
+
+### Forest Degradation
+
+$$ 
+\begin{align}
+ER_{FDeg,2020} &= ER_{NFH,2020,vol} + ER_{NFH,2020,rem} + ER_{NFF,2020} + ER_{FSW,2020} 
+\end{align}
+$$
+
+#### Monitoring Period, Year 2020, Forest Degradation from native forest timber harvest (felling volumes)
+
+$$ 
+\begin{align}
+AD_{NFH,2020,vol} &= `r MonitoredValues$year2$FDegFellVol` \\
+EF_{Felling}         &= `r EFFelling` \\
+EF_{Damage}          &= `r EFDamage` \\ 
+EF_{Infrastructure}  &= `r EFInfrastructure` \\
+EF_{NFHvol} &= TEF = EF_{Felling} + EF_{Damage} + EF_{Infrastructure} \\
+    &= `r EFFelling`+ `r EFDamage` + `r EFInfrastructure` \\
+    &= `r TEF` \\
+ER_{NFH,2020,vol}  &= AD_{NFH,2020,vol} \times EF_{NFHvol} \times \frac{44}{12} \\
+  &=   ( `r MonitoredValues$year2$FDegFellVol` \times `r TEF` ) \times \frac{44}{12} \\
+  &= `r ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) `
+\end{align}
+$$
+
+
+
+```{r echo = TRUE, prompt = TRUE}
+MonitoredValues$year2$FDegFellVol
+EFFelling 
+EFDamage 
+EFInfrastructure
+TEF
+ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF)
+
+```
+#### Monitoring Period, Year 2020, Forest Degradation from native forest timber harvest (felling area)
+$$ 
+\begin{align}
+%AD_{NFH,2020,area} &= `r MonitoredValues$year2$FDegFellArea$area_ha` \\
+%AD_{NFH,2020,age}  &= `r MonitoredValues$year2$FDegFellArea$age_yrs` \\
+%MAIC_{NFHrem}      &= `r MAICFell` \\
+%ER_{NFH,2020,rem}  &=  AD_{NFH,2020,area} \times AD_{NFH,2020,age} \times MAIC_{NFHrem} \times \frac{44}{12} %\times -1\\
+%                  &= ( `r MonitoredValues$year2$FDegFellArea$area_ha` \times 
+%     `r MonitoredValues$year2$FDegFellArea$age_yrs` \times `r MAICFell` ) \times 
+%     \frac{44}{12} \times -1\\
+%                  &= `r ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * (-1)`
+%                  
+\end{align}
+$$
+
+MGG - NOTE check with carly
+
+```{r echo = TRUE, prompt = TRUE}
+MonitoredValues$year2$FDegFellArea$area_ha
+MonitoredValues$year2$FDegFellArea$age_yrs
+MAICFell
+ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * (-1)
+sum(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * (-1))
+
+```
+#### Monitoring Period, Year 2020, Forest Degradation from closed to open native forest
+
+$$ 
+\begin{align}
+AD_{NFDeg,2020} &= `r MonitoredValues$year2$NFDegArea` \\
+ABGBC_{NFDeg} &= `r EFNFDeg` \\
+RootToShootRatio_{wl} &= `r RootToShootTropRain` \\
+ER_{NFF,2020}  &= AD_{NFDeg,2020} \times ABGBC_{NFDeg} \times (1 + RootToShootRatio_{wl}) \times 0.47 \times \frac{44}{12}\\
+  &= `r MonitoredValues$year2$NFDegArea` \times `r EFNFDeg` \times (1 + `r RootToShootTropRain`)  
+      \times 0.47 \times \frac{44}{12}\\
+  &= `r ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain))`
+\end{align}
+$$
+
+
+
+```{r echo = TRUE, prompt = TRUE}
+MonitoredValues$year2$NFDegArea
+EFNFDeg
+RootToShootTropRain
+MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)
+ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain))
+```
+#### Monitoring Period, Year 2020, Forest Degradation from softwood fire
+```{r echo = FALSE, prompt = FALSE}
+# Estimate AGB
+AGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw / (1 + RootToShootDryLandSmall))
+# Estimate BGB
+BGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw * RootToShootDryLandSmall)
+```
+
+$$ 
+\begin{align}
+AD_{FDegBurnData,2020,age,i}    &= `r MonitoredValues$year2$FDegBurnData$age_yrs` \\
+AD_{FDegBurnData,2020,area,i}   &= `r MonitoredValues$year2$FDegBurnData$area_ha` \\
+MAIB_{sw}                       &= `r MAIBsw` \\
+RootToShootRatio_{dll} &= `r RootToShootDryLandSmall` \\
+CombustFactor                   &= `r CombustFactor` \\
+GWP_{CO_2}  &= `r GWPCO2` \\
+GWP_{CH_4}  &= `r GWPCH4` \\
+GWP_{N_2O}  &= `r GWPN2O` \\
+EF_{CO_2}   &= `r EFCO2` \\
+EF_{CH_4}   &= `r EFCH4` \\
+EF_{N_2O}   &= `r EFN2O` \\
+AGB_{i} &= AD_{FDegBurnData,2020,age,i} \times \frac{MAIB_{sw}}{1 + RootToShootRatio_{dll}} \\
+    &= \{`r MonitoredValues$year2$FDegBurnData$age_yrs`\} \times \frac{`r MAIBsw`}{1 + `r RootToShootDryLandSmall`} \\
+BGB_{i} &= AD_{FDegBurnData,2020,age,i} \times MAIB_{sw} \times RootToShootRatio_{dll} \\
+    &= \{`r MonitoredValues$year2$FDegBurnData$age_yrs`\} \times `r MAIBsw` \times `r RootToShootDryLandSmall`\\
+EmCO_2AGB_{i} &= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
+             &= \{`r formatDecimal(MonitoredValues$year2$FDegBurnData$area_ha)`\} \\
+             &  \times `r formatDecimal(AGB)` \\
+             &  \times `r formatDecimal(CombustFactor)` 
+                \times `r GWPCO2` \times `r EFCO2`  \times `r 0.001` \\
+\sum EmCO_2AGB_{i} &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`\\
+EmCO_2BGB_{i} &= AD_{FDegBurnData,2020,area,i} \times BGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
+             &= \{`r formatDecimal(MonitoredValues$year2$FDegBurnData$area_ha)`\} \\
+             &  \times `r formatDecimal(BGB)` \\
+             &  \times `r formatDecimal(CombustFactor)` 
+                \times `r GWPCO2` \times `r EFCO2`  \times `r 0.001` \\
+\sum EmCO_2BGB_{i} &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`\\
+{EmCH_{4}}_i    &= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CH_4} \times EF_{CH_4} \times 0.001  \\
+             &= \{`r formatDecimal(MonitoredValues$year2$FDegBurnData$area_ha)`\} \\
+             &  \times `r formatDecimal(AGB)` \\
+             &  \times `r formatDecimal(CombustFactor)` 
+                \times `r GWPCH4` \times `r EFCH4` \times `r 0.001` \\
+\sum {EmCH_{4}}_i &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)` \\
+{EmN_{2}O}_i    &= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{N_2O} \times EF_{N_2O} \times 0.001  \\
+             &= \{`r formatDecimal(MonitoredValues$year2$FDegBurnData$area_ha)`\} \\
+             &  \times `r formatDecimal(AGB)` \\
+             &  \times `r formatDecimal(CombustFactor)` 
+                \times `r GWPN2O` \times `r EFN2O` \times `r 0.001` \\
+\sum {EmN_{2}O}_i &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+ER_{FSW,2020}&=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_i + \sum {EmN_{2}O}_i \\
+             &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`
+               + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`
+               + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)` 
+               + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+               &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+\end{align}
+$$
+
+
+
+```{r echo = TRUE, prompt = TRUE}
+
+
+MonitoredValues$year2$FDegBurnData$age_yrs
+MAIBsw
+RootToShootDryLandSmall
+MonitoredValues$year2$FDegBurnData$area_ha
+CombustFactor
+GWPCO2
+GWPCH4
+GWPN2O
+EFCO2
+EFCH4
+EFN2O
+
+# Estimate AGB
+AGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw / (1 + RootToShootDryLandSmall))
+# Estimate BGB
+BGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw * RootToShootDryLandSmall)
+# CO2 ABG emissions
+EmCO2AGB <- MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001
+# CO2 BGB emissions
+EmCO2BGB <- MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2 * 0.001
+# CH4 ABG emissions
+EmCH4 <- MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001
+# N_2O (above-ground biomass)
+EmN2O <- MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O  * EFN2O * 0.001
+# sum emissions for each gas and put into dataframe
+sum(sum(EmCO2AGB), sum(EmCO2BGB), sum(EmCH4), sum(EmN2O))
+
+
+```
+#### Monitoring Period, Year 2020, Total Forest Degradation
+
+$$ 
+\begin{align}
+ER_{FDeg,2020} &= `r ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF)` 
+  + (`r ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1`)
+  + `r ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain))`
+  + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+  &= `r formatDecimal(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) + ( ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1) +  ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001))`
+\end{align}
+$$
+
+MGG - NOTE check with carly
+
+```{r echo = TRUE, prompt = FALSE}
+
+ER_FDEG_2020 <- ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) +
+sum(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1) +
+ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) +
+sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
+sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
+sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
+sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
+ER_FDEG_2020
+
+```
+
+
+
+### Removals by Enhancments
+$$
+ER_{Enh,2020} = ER_{FPln,2020} + Rem_{AR,2020}
+$$
+
+#### Monitoring Period, Year 2020, Emission/Removals from forest plantation Hardwood and Softwood
+$$
+\begin{align}
+ER_{FPln,2020} &= ER_{FPln,2020,Hardwood} + ER_{FPln,2020,Softwood}
+\end{align}
+$$
+
+#### Monitoring Period, Year 2020, Emission/Removals from forest plantation Hardwood
+$$
+\begin{align}
+ER_{FPln,2020,Hardwood} &= Em_{FPln,2020,Hardwood} + Rem_{FPln,2020,Hardwood}
+\end{align}
+$$
+
+#### Monitoring Period, Year 2020, Emissions from forest plantation Hardwood
+$$
+\begin{align}
+Em_{FPln,2020,Hardwood} &= (AD_{FPln,2020,vol,hardwood} \times BiomassConvExpansion_{Hardwood} \\
+  & + AD_{FPln,2020,vol,hardwoord} \times BiomassConvExpansion_{Hardwood} \times RootToShootRatio_{wl}) \\
+  & \times 0.47 \times \frac{44}{12} \\
+  &= (`r MonitoredValues$year2$FPlnVolHarvHwd` \times `r BiomassConvExpansionHW` 
+    + `r MonitoredValues$year2$FPlnVolHarvHwd` \times `r BiomassConvExpansionHW` \times `r RootToShootTropRain`)
+    \times 0.47 \times \frac{44}{12} \\
+  &= `r (MonitoredValues$year2$FPlnVolHarvHwd * BiomassConvExpansionHW 
+  + MonitoredValues$year2$FPlnVolHarvHwd * BiomassConvExpansionHW * RootToShootTropRain) * 0.47 * (44/12)`
+\end{align}
+$$
+
+```{r echo = TRUE, prompt = TRUE}
+#' Forest Plantations - Emissions from Hardwood Plantations
+MonitoredValues$year2$FPlnVolHarvHwd
+BiomassConvExpansionHW
+RootToShootTropRain
+  
+#CalcEstEmFPlnHwd
+Em_FPln_2020_Hardwood <- ConvBiomassToCO2e(MonitoredValues$year2$FPlnVolHarvHwd * BiomassConvExpansionHW + MonitoredValues$year2$FPlnVolHarvHwd * BiomassConvExpansionHW * RootToShootTropRain)
+Em_FPln_2020_Hardwood
+```
+
+#### Monitoring Period, Year 2020, Removals from forest plantation Hardwood
+```{r echo = FALSE, prompt = FALSE}
+MAIBhw <- MAIVhw * BiomassConvExpansionIncHW * (1 + RootToShootTropRain)
+```
+
+$$
+\begin{align}
+AD_{FPln,2020,age,Hardwood}   &= `r MonitoredValues$year2$FPlnAreaPlantHwd$age_yrs` \\
+AD_{FPln,2020,area,Hardwood}  &= `r MonitoredValues$year2$FPlnAreaPlantHwd$area_ha` \\
+MAIV_{Hardwood}               &= `r MAIVhw` \\
+BiomassConvExpansion_{IncHW}  &= `r BiomassConvExpansionIncHW` \\
+RootToShootRatio_{wl}   &= `r RootToShootTropRain` \\
+MAIB_{Hardwood}               &= MAIV_{Hardwood} \times BiomassConvExpansion_{IncHW} \times (1 + RootToShootRatio_{wl}) \\
+                              &= `r MAIVhw` \times `r BiomassConvExpansionIncHW` \times (1 + `r RootToShootTropRain`) \\
+                              &= `r MAIVhw * BiomassConvExpansionIncHW * (1 + RootToShootTropRain)` \\
+Rem_{FPln,2020,Hardwood} &=  AD_{FPln,2020,age,Hardwood} \times AD_{FPln,2020,area,Hardwood} \times MAIB_{Hardwood} \times 0.47 \times \frac{44}{12} \times -1 \\
+  &=  `r MonitoredValues$year2$FPlnAreaPlantHwd$age_yrs` \times `r MonitoredValues$year2$FPlnAreaPlantHwd$area_ha` \times `r MAIBhw` \times 0.47 \times \frac{44}{12} \times -1 \\
+  &=  `r MonitoredValues$year2$FPlnAreaPlantHwd$age_yrs * MonitoredValues$year2$FPlnAreaPlantHwd$area_ha * MAIBhw * 0.47 * (44/12) * -1`
+\end{align}
+$$
+
+MGG - NOTE check with carly
+
+```{r echo = TRUE, prompt = TRUE}
+#' Forest Plantations - Removals from Hardwood Plantations
+MonitoredValues$year2$FPlnAreaPlantHwd$area_ha
+MAIVhw
+BiomassConvExpansionIncHW
+RootToShootTropRain
+MonitoredValues$year2$FPlnAreaPlantHwd$age_yrs
+  
+#CalcEstRemFPlnHwd
+MAIBhw <- MAIVhw * BiomassConvExpansionIncHW * (1 + RootToShootTropRain)
+MAIBhw
+
+Rem_FPln_2020_Hardwood <- sum(ConvBiomassToCO2e(MonitoredValues$year2$FPlnAreaPlantHwd$age_yrs * MonitoredValues$year2$FPlnAreaPlantHwd$area_ha * MAIBhw) * -1)
+Rem_FPln_2020_Hardwood
+
+```
+#### Monitoring Period, Year 2020, Net ER from forest plantation Hardwood
+$$
+\begin{align}
+ER_{FPln,2020,Hardwood} &= `r Em_FPln_2020_Hardwood` + `r Rem_FPln_2020_Hardwood` \\
+   &= `r Em_FPln_2020_Hardwood + Rem_FPln_2020_Hardwood`
+\end{align}
+$$
+
+```{r echo = TRUE, prompt = TRUE}
+ER_FPln_2020_Hardwood <- Em_FPln_2020_Hardwood + Rem_FPln_2020_Hardwood
+ER_FPln_2020_Hardwood
+
+```    
+#### Monitoring Period, Year 2020, Emission/Removals from forest plantation Softwood
+$$
+\begin{align}
+ER_{FPln,2020,Softwood} &= Em_{FPln,2020,Softwood} + Rem_{FPln,2020,Softwood}
+\end{align}
+$$
+
+#### Monitoring Period, Year 2020, Emissions from forest plantation Softwood
+$$
+\begin{align}
+AD_{FPln,2020,vol,Softwood}   &= `r MonitoredValues$year2$FPlnVolHarvSwd` \\
+RecoveryRate_{Softwood}       &= `r RecoveryRateSW` \\
+WoodDensity_{Softwood}        &= `r WoodDensitySW` \\
+RootToShootRatio_{dlh} &= `r RootToShootDryLandBig` \\
+Em_{FPln,2020,Softwood} &= (AD_{FPln,2020,vol,Softwood} \times \frac{1}{RecoveryRate_{Softwood}} \times WoodDensity_{Softwood} \\
+   & + AD_{FPln,2020,vol,Softwood} \times \frac{1}{RecoveryRate_{Softwood}} \\
+   & \times WoodDensity_{Softwood} \times RootToShootRatio_{dlh}) \\
+   & \times  0.47 \times \frac{44}{12} \\
+   &= (`r MonitoredValues$year2$FPlnVolHarvSwd` \times \frac{1}{`r RecoveryRateSW`} \times `r WoodDensitySW` \\
+   & +`r MonitoredValues$year2$FPlnVolHarvSwd` \times \frac{1}{`r RecoveryRateSW`} \times `r WoodDensitySW` \times  
+      `r RootToShootDryLandBig`) \times  0.47 \times \frac{44}{12} \\
+   &= `r (MonitoredValues$year2$FPlnVolHarvSwd * (1/RecoveryRateSW) * WoodDensitySW +
+MonitoredValues$year2$FPlnVolHarvSwd * (1/RecoveryRateSW) * WoodDensitySW *  
+                RootToShootDryLandBig) * 0.47 * (44/12)`
+\end{align}
+$$
+
+```{r echo = TRUE, prompt = TRUE}
+#' Forest Plantations - Emissions from Softwood Plantations
+MonitoredValues$year2$FPlnVolHarvSwd
+RecoveryRateSW
+WoodDensitySW
+RootToShootDryLandBig
+
+#CalcEstEmFPlnSwd
+Em_FPln_2020_Softwood <- ConvBiomassToCO2e((MonitoredValues$year2$FPlnVolHarvSwd * (1/RecoveryRateSW) * WoodDensitySW) +
+(MonitoredValues$year2$FPlnVolHarvSwd * (1/RecoveryRateSW) * WoodDensitySW * RootToShootDryLandBig))
+Em_FPln_2020_Softwood
+```
+
+#### Monitoring Period, Year 2020, Removals from forest plantation Softwood
+```{r echo = FALSE, prompt = FALSE}
+MAICsw <- ConvBiomassToCarbon(MAIBsw)
+```
+
+$$
+\begin{align}
+AD_{FPln,2020,age,Softwood}  &= `r MonitoredValues$year2$FPlnAreaPlantSwd$age_yrs` \\
+AD_{FPln,2020,area,Softwood} &= `r MonitoredValues$year2$FPlnAreaPlantSwd$area_ha` \\
+MAIB_{Softwood}              &= `r MAIBsw` \\
+MAIC_{Softwood}              &= MAIB_{softwood} \times 0.47 \\
+                             &= `r MAIBsw` \times 0.47 \\
+                             &= `r MAIBsw * 0.47` \\
+Rem_{FPln,2020,Softwood}     &= AD_{FPln,2020,age,Softwood}
+  \times AD_{FPln,2020,area,Softwood} \times MAIC_{Softwood} \times \frac{44}{12} \times -1\\
+                             &= `r MonitoredValues$year2$FPlnAreaPlantSwd$age_yrs`
+  \times `r MonitoredValues$year2$FPlnAreaPlantSwd$area_ha`  \times `r MAICsw` \times \frac{44}{12} \times -1\\
+                             &= `r MonitoredValues$year2$FPlnAreaPlantSwd$age_yrs * MonitoredValues$year2$FPlnAreaPlantSwd$area_ha * MAICsw * (44/12) * -1`
+\end{align}
+$$
+
+MGG - NOTE check with carly
+
+```{r echo = TRUE, prompt = TRUE}
+#' Forest Plantations - Removals from Softwood Plantations
+MAIBsw
+MonitoredValues$year2$FPlnAreaPlantSwd$area_ha
+MonitoredValues$year2$FPlnAreaPlantSwd$age_yrs
+
+# CalcEstRemFPlnSwd 
+# Calc mean annual increment C for volume m^3
+MAICsw <- ConvBiomassToCarbon(MAIBsw)
+MAICsw
+Rem_FPln_2020_Softwood <-sum(ConvCarbonToCO2e(MonitoredValues$year2$FPlnAreaPlantSwd$age_yrs * MonitoredValues$year2$FPlnAreaPlantSwd$area_ha * MAICsw) * -1)
+Rem_FPln_2020_Softwood
+```
+
+#### Monitoring Period, Year 2020, Net ER from forest plantation Softwood
+$$
+\begin{align}
+ER_{FPln,2020,Softwood} 
+        &= `r Em_FPln_2020_Softwood` + (`r Rem_FPln_2020_Softwood`) \\
+        &= `r Em_FPln_2020_Softwood + Rem_FPln_2020_Softwood`
+\end{align}
+$$
+
+```{r echo = TRUE, prompt = FALSE}
+
+Em_FPln_2020_Softwood
+Rem_FPln_2020_Softwood
+
+ER_FPln_2020_Softwood <-  Em_FPln_2020_Softwood + Rem_FPln_2020_Softwood 
+ER_FPln_2020_Softwood
+
+```
+#### Monitoring Period, Year 2020, Total Emission/Removals from forest plantation Hardwood and Softwood
+$$
+\begin{align}
+ER_{FPln,2020} &= `r ER_FPln_2020_Hardwood` + `r ER_FPln_2020_Softwood` \\
+               &= `r ER_FPln_2020_Hardwood +  ER_FPln_2020_Softwood`
+\end{align}
+$$
+```{r echo = TRUE, prompt = FALSE}
+ER_FPln_2020 <-ER_FPln_2020_Hardwood +  ER_FPln_2020_Softwood
+ER_FPln_2020
+```
+
+#### Monitoring Period, Year 2020, Removals from Afforestation/Reforestation
+```{r echo = FALSE, prompt = FALSE}
+MAIC <-MAIVar * BiomassConvExpansionARefor * (1 + RootToShootTropRain)
+```
+
+$$
+\begin{align}
+AD_{AR,2020,age,i}          &= `r MonitoredValues$year2$AReforArea$age_yrs` \\
+AD_{AR,2020,area,i}         &= `r MonitoredValues$year2$AReforArea$area_ha` \\
+MAIV_{AR}                   &= `r MAIVar` \\
+BiomassConvExpansion_{AR}   &= `r BiomassConvExpansionARefor` \\
+RootToShootRatio_{wl} &= `r RootToShootTropRain` \\
+MAIC_{AR}                   &= MAIV_{AR} \times  BiomassConvExpansion_{AR} \times (1 + RootToShootRatio_{wl}) \\
+                            &= `r MAIVar` \times  `r BiomassConvExpansionARefor` \times (1 + `r RootToShootTropRain`) \\
+                            &= `r MAIVar * BiomassConvExpansionARefor * (1 + RootToShootTropRain)` \\
+Rem_{AR,2020}  &= AD_{AR,2020,age} \times AD_{AR,2020,area} \times MAIC_{AR} \times 0.47 \times \frac{44}{12} \times -1 \\
+               &= `r MonitoredValues$year2$AReforArea$age_yrs` \times 
+                  `r MonitoredValues$year2$AReforArea$area_ha` \times 
+                  `r MAIC` \times `r BiomassConvExpansionARefor` \times (1 + `r RootToShootTropRain`) \times 
+                  0.47 \times \frac{44}{12} \times -1 \\
+               &= `r MonitoredValues$year2$AReforArea$age_yrs *
+                      MonitoredValues$year2$AReforArea$area_ha * MAIC * 0.47 * (44/12) * (-1)`
+\end{align}
+$$
+
+MGG - NOTE check with carly
+
+```{r echo = TRUE, prompt = TRUE}
+MonitoredValues$year2$AReforArea$age_yrs
+MAIVar
+BiomassConvExpansionARefor
+RootToShootTropRain
+MonitoredValues$year2$AReforArea$area_ha
+ 
+
+MAIC <-MAIVar * BiomassConvExpansionARefor * (1 + RootToShootTropRain)
+MAIC
+
+Rem_AR_2020 <- sum(ConvBiomassToCO2e(MonitoredValues$year2$AReforArea$age_yrs * 
+                    MonitoredValues$year2$AReforArea$area_ha * MAIC * (-1))) 
+Rem_AR_2020
+  
+```
+#### Monitoring Period, Year 2020, Total Emission/Removals from enhancements
+$$
+\begin{align}
+ER_{Enh,2020} &= `r ER_FPln_2020` + (`r Rem_AR_2020`) \\
+              &= `r ER_FPln_2020 + Rem_AR_2020`
+\end{align}
+$$
+
+```{r echo = TRUE, prompt = TRUE}
+ER_Enh_2020 <- ER_FPln_2020 + Rem_AR_2020
+ER_Enh_2020
+```
+### Monitoring Period, Year 2020, Net Emissions/Removals
+$$
+\begin{align}
+ER_{2020} &= ER_{Defor,2020} + ER_{FDeg,2020} + ER_{Enh,2020} \\
+          &= `r ER_DEF_2020` + `r ER_FDEG_2020` + `r ER_Enh_2020` \\
+          &= `r ER_DEF_2020 + ER_FDEG_2020 + ER_Enh_2020` 
+\end{align}
+$$
+
+```{r echo = TRUE, prompt = TRUE}
+ER_2020 <- ER_DEF_2020 + ER_FDEG_2020 + ER_Enh_2020
+ER_2020
+```

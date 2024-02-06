@@ -47,3 +47,13 @@ rmarkdown::render(
   output_dir = "./reports",
   output_format = "html_document")
 
+
+rmarkdown::render(
+  "./reports/Fiji_ER_MonitoringReportExtraTables-2019.Rmd",
+  output_dir = "./reports",
+  output_format = "html_document")
+
+rmarkdown::render(
+  "./reports/Fiji_ER_MonitoringReportExtraTables-2020.Rmd",
+  output_dir = "./reports",
+  output_format = "html_document")
