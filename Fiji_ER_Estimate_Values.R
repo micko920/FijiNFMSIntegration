@@ -12,7 +12,7 @@ library(FijiNFMSCalculations)
 
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/mrUpdateOct23/", filename))
+  return(paste0("./Data/mrAuditFeb24/", filename))
 }
 
 load(file = getDataPath("Fiji_ER_Estimate_AccuracyAssessment.RData"))
