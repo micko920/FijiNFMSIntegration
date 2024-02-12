@@ -257,3 +257,13 @@ ParameterTable %>%
      
 ```
     
+# Table of Monitoring Report Parameters 
+```{r echo = FALSE}
+MonitoringReportParams %>% 
+  kable(fileFormat, caption = "Monitoring report parameters",
+        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+     
+```

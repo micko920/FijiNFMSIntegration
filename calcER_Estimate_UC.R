@@ -57,27 +57,24 @@ CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
   MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor)
 
 
-  ## MGG - patch for ARefor survey area to override Adjusted Areas sampled
-  MonitoredValues$year1$AReforSurveyArea <- 616
-  MonitoredValues$year2$AReforSurveyArea <- 667
-
   ## MGG - patch account for half year growth and compound growth of first year in 2nd year
   MonitoredValues$year2$AReforArea <- data.frame(
-			year = c(2019, 2020),
-			area_ha = c(
-				MonitoredValues$year1$AReforSurveyArea,
-				MonitoredValues$year2$AReforSurveyArea
-			),
-			age_yrs = c(0.5,1.5)
+    year = c(2019, 2020),
+    area_ha = c(
+      AdjustedAreas$MCaaaforMean,
+      AdjustedAreas$MCaaaforMean
+    ),
+    age_yrs = c(0.5,1.5)
   )
-
+  
   MonitoredValues$year1$AReforArea <- data.frame(
-			year = c(2019),
-			area_ha = c(
-				MonitoredValues$year1$AReforSurveyArea
-			),
-			age_yrs = c(0.5)
+    year = c(2019),
+    area_ha = c(
+      AdjustedAreas$MCaaaforMean
+    ),
+    age_yrs = c(0.5)
   )
+  
 
   ## MGG - patch for FDeg survey area
   ## MGG - patch account for half year growth and compound growth of first year in 2nd year
