@@ -37,6 +37,10 @@ run-Fiji-ER_EST:
 	Rscript -e 'source("./Fiji_ER_Estimate_Values.R")'
 	Rscript -e 'source("./Fiji_ER_Estimate_UC.R")'
 	Rscript -e 'source("./Fiji_ER_Estimate_Sensitivity.R")'
+	#cp Fiji_ER_Estimate_AccuracyAssessment.pdf 
+	#cp Fiji_ER_Estimate_Sensitivity.pdf
+	#cp Fiji_ER_Estimate_UC.pdf
+	#cp Fiji_ER_Estimate_Values.pdf
 
 run-create-reports:
 	-rm -rf reports/*_cache
