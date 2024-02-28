@@ -1,0 +1,656 @@
+diff --git a/reports/Fiji_ER_Estimate_AccuracyAssessment.html b/reports/Fiji_ER_Estimate_AccuracyAssessment.html
+index f25ee6c..647fbb0 100644
+--- a/reports/Fiji_ER_Estimate_AccuracyAssessment.html
++++ b/reports/Fiji_ER_Estimate_AccuracyAssessment.html
+@@ -566,7 +566,7 @@ pre code {
+ 
+ 
+ <h1 class="title toc-ignore">Mapped Areas Accuracy Assessment Report</h1>
+-<h4 class="date">15 December, 2023</h4>
++<h4 class="date">06 February, 2024</h4>
+ 
+ </div>
+ 
+diff --git a/reports/Fiji_ER_Estimate_Sensitivity.html b/reports/Fiji_ER_Estimate_Sensitivity.html
+index 13db422..5d9fad8 100644
+--- a/reports/Fiji_ER_Estimate_Sensitivity.html
++++ b/reports/Fiji_ER_Estimate_Sensitivity.html
+@@ -566,7 +566,7 @@ pre code {
+ 
+ 
+ <h1 class="title toc-ignore">Monitoring Report Tables Section 5.3</h1>
+-<h4 class="date">15 December, 2023</h4>
++<h4 class="date">06 February, 2024</h4>
+ 
+ </div>
+ 
+diff --git a/reports/Fiji_ER_Estimate_UC.html b/reports/Fiji_ER_Estimate_UC.html
+index dc5d67d..badb8c4 100644
+--- a/reports/Fiji_ER_Estimate_UC.html
++++ b/reports/Fiji_ER_Estimate_UC.html
+@@ -566,7 +566,7 @@ pre code {
+ 
+ 
+ <h1 class="title toc-ignore">Monitoring Report Tables 5.2.2, 7.2, and 8</h1>
+-<h4 class="date">15 December, 2023</h4>
++<h4 class="date">06 February, 2024</h4>
+ 
+ </div>
+ 
+diff --git a/reports/Fiji_ER_Estimate_Values.html b/reports/Fiji_ER_Estimate_Values.html
+index f98c643..2cae21a 100644
+--- a/reports/Fiji_ER_Estimate_Values.html
++++ b/reports/Fiji_ER_Estimate_Values.html
+@@ -566,7 +566,7 @@ pre code {
+ 
+ 
+ <h1 class="title toc-ignore">Monitoring Report Tables Section 4</h1>
+-<h4 class="date">15 December, 2023</h4>
++<h4 class="date">06 February, 2024</h4>
+ 
+ </div>
+ 
+diff --git a/reports/Fiji_ER_MonitoringReportExtraTables-2019.Rmd b/reports/Fiji_ER_MonitoringReportExtraTables-2019.Rmd
+index cd60102..1ccaca1 100644
+--- a/reports/Fiji_ER_MonitoringReportExtraTables-2019.Rmd
++++ b/reports/Fiji_ER_MonitoringReportExtraTables-2019.Rmd
+@@ -216,7 +216,7 @@ ConvBiomassToCO2e(MonitoredValues$year1$NFDegArea * EFNFDeg * (1 + RootToShootTr
+ #### Monitoring Period, Year 2019, Forest Degradation from softwood fire
+ ```{r echo = FALSE, prompt = FALSE}
+ # Estimate AGB
+-AGB <- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw / (1 + RootToShootDryLandSmall))
++AGB <- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw * (1 - RootToShootDryLandSmall))
+ # Estimate BGB
+ BGB <- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw * RootToShootDryLandSmall)
+ ```
+@@ -234,40 +234,44 @@ GWP_{N_2O}  &= `r GWPN2O` \\
+ EF_{CO_2}   &= `r EFCO2` \\
+ EF_{CH_4}   &= `r EFCH4` \\
+ EF_{N_2O}   &= `r EFN2O` \\
+-AGB_{i} &= AD_{FDegBurnData,2019,age,i} \times \frac{MAIB_{sw}}{1 + RootToShootRatio_{dll}} \\
+-    &= \{`r MonitoredValues$year1$FDegBurnData$age_yrs`\} \times \frac{`r MAIBsw`}{1 + `r RootToShootDryLandSmall`} \\
++AGB_{i} &= AD_{FDegBurnData,2019,age,i} \times MAIB_{sw} \times (1 - RootToShootRatio_{dll}) \\
++    &= \{`r MonitoredValues$year1$FDegBurnData$age_yrs`\} \times `r MAIBsw` \times (1 - `r RootToShootDryLandSmall`) \\
++    &= \{`r MonitoredValues$year1$FDegBurnData$age_yrs * MAIBsw * (1 - RootToShootDryLandSmall)`\} \\
+ BGB_{i} &= AD_{FDegBurnData,2019,age,i} \times MAIB_{sw} \times RootToShootRatio_{dll} \\
+     &= \{`r MonitoredValues$year1$FDegBurnData$age_yrs`\} \times `r MAIBsw` \times `r RootToShootDryLandSmall`\\
++    &= \{`r MonitoredValues$year1$FDegBurnData$age_yrs * MAIBsw * RootToShootDryLandSmall`\} \\
+ EmCO_2AGB_{i} &= AD_{FDegBurnData,2019,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
+              &= \{`r formatDecimal(MonitoredValues$year1$FDegBurnData$area_ha)`\} \\
+-             &  \times `r formatDecimal(AGB)` \\
++             &  \times \{`r formatDecimal(AGB)`\} \\
+              &  \times `r formatDecimal(CombustFactor)` 
+                 \times `r GWPCO2` \times `r EFCO2`  \times `r 0.001` \\
+ \sum EmCO_2AGB_{i} &= `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`\\
+-EmCO_2BGB_{i} &= AD_{FDegBurnData,2019,area,i} \times BGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
++EmCO_2BGB_{i} &= AD_{FDegBurnData,2019,area,i} \times BGB_{i} \times 0.47 \times \frac{44}{12} \\
+              &= \{`r formatDecimal(MonitoredValues$year1$FDegBurnData$area_ha)`\} \\
+-             &  \times `r formatDecimal(BGB)` \\
+-             &  \times `r formatDecimal(CombustFactor)` 
+-                \times `r GWPCO2` \times `r EFCO2`  \times `r 0.001` \\
+-\sum EmCO_2BGB_{i} &= `r sum(MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`\\
++             &  \times \{`r formatDecimal(BGB)`\} \\
++             &  \times 0.47 \times \frac{44}{12} \\
++\sum EmCO_2BGB_{i} &= `r ConvBiomassToCO2e(sum(MonitoredValues$year1$FDegBurnData$area_ha * BGB))`\\
+ {EmCH_{4}}_i    &= AD_{FDegBurnData,2019,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CH_4} \times EF_{CH_4} \times 0.001  \\
+              &= \{`r formatDecimal(MonitoredValues$year1$FDegBurnData$area_ha)`\} \\
+-             &  \times `r formatDecimal(AGB)` \\
++             &  \times \{`r formatDecimal(AGB)`\} \\
+              &  \times `r formatDecimal(CombustFactor)` 
+                 \times `r GWPCH4` \times `r EFCH4` \times `r 0.001` \\
+ \sum {EmCH_{4}}_i &= `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)` \\
+ {EmN_{2}O}_i    &= AD_{FDegBurnData,2019,area,i} \times AGB_{i} \times CombustFactor \times GWP_{N_2O} \times EF_{N_2O} \times 0.001  \\
+              &= \{`r formatDecimal(MonitoredValues$year1$FDegBurnData$area_ha)`\} \\
+-             &  \times `r formatDecimal(AGB)` \\
++             &  \times \{`r formatDecimal(AGB)`\} \\
+              &  \times `r formatDecimal(CombustFactor)` 
+                 \times `r GWPN2O` \times `r EFN2O` \times `r 0.001` \\
+ \sum {EmN_{2}O}_i &= `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+ ER_{FSW,2019}&=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_i + \sum {EmN_{2}O}_i \\
+              &= `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`
+-               + `r sum(MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`
++               + `r sum(ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB))`
+                + `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)` 
+                + `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+-               &= `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
++               &= `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + 
++                sum(ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)) +
++                sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001) + 
++                sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+ \end{align}
+ $$
+ 
+@@ -289,13 +293,13 @@ EFCH4
+ EFN2O
+ 
+ # Estimate AGB
+-AGB <- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw / (1 + RootToShootDryLandSmall))
++AGB <- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw * (1 - RootToShootDryLandSmall))
+ # Estimate BGB
+ BGB <- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw * RootToShootDryLandSmall)
+ # CO2 ABG emissions
+ EmCO2AGB <- MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001
+ # CO2 BGB emissions
+-EmCO2BGB <- MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2 * 0.001
++EmCO2BGB <- ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)
+ # CH4 ABG emissions
+ EmCH4 <- MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001
+ # N_2O (above-ground biomass)
+@@ -303,17 +307,25 @@ EmN2O <- MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN
+ # sum emissions for each gas and put into dataframe
+ sum(sum(EmCO2AGB), sum(EmCO2BGB), sum(EmCH4), sum(EmN2O))
+ 
+-
+ ```
+ #### Monitoring Period, Year 2019, Total Forest Degradation
+ 
+ $$ 
+ \begin{align}
+ ER_{FDeg,2019} &= `r ConvCarbonToCO2e(MonitoredValues$year1$FDegFellVol * TEF)` 
+-  + (`r ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * -1`)
++  + (`r sum(ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * -1)`)
+   + `r ConvBiomassToCO2e(MonitoredValues$year1$NFDegArea * EFNFDeg * (1 + RootToShootTropRain))`
+-  + `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+-  &= `r formatDecimal(ConvCarbonToCO2e(MonitoredValues$year1$FDegFellVol * TEF) + ( ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * -1) +  ConvBiomassToCO2e(MonitoredValues$year1$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) + sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001))`
++  + `r sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
++  sum(ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)) + 
++  sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
++  sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
++  &= `r formatDecimal(ConvCarbonToCO2e(MonitoredValues$year1$FDegFellVol * TEF) + 
++  sum(ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * -1) + 
++  sum(ConvBiomassToCO2e(MonitoredValues$year1$NFDegArea * EFNFDeg * (1 + RootToShootTropRain))) +
++  sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
++  sum(ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)) + 
++  sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
++  sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001))`
+ \end{align}
+ $$
+ 
+@@ -321,10 +333,10 @@ $$
+ ```{r echo = TRUE, prompt = FALSE}
+ 
+ ER_FDEG_2019 <- ConvCarbonToCO2e(MonitoredValues$year1$FDegFellVol * TEF) +
+-(ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * -1) +
++sum(ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * -1) +
+ ConvBiomassToCO2e(MonitoredValues$year1$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) +
+ sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
+-sum(MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
++sum(ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)) +
+ sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
+ sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
+ ER_FDEG_2019
+diff --git a/reports/Fiji_ER_MonitoringReportExtraTables-2019.html b/reports/Fiji_ER_MonitoringReportExtraTables-2019.html
+index 99e4e9a..0b5ce7b 100644
+--- a/reports/Fiji_ER_MonitoringReportExtraTables-2019.html
++++ b/reports/Fiji_ER_MonitoringReportExtraTables-2019.html
+@@ -566,7 +566,7 @@ pre code {
+ 
+ 
+ <h1 class="title toc-ignore">Monitoring Report Extra Tables</h1>
+-<h4 class="date">15 December, 2023</h4>
++<h4 class="date">06 February, 2024</h4>
+ 
+ </div>
+ 
+@@ -859,40 +859,41 @@ GWP_{N_2O}  &amp;= 265 \\
+ EF_{CO_2}   &amp;= 1580 \\
+ EF_{CH_4}   &amp;= 6.8 \\
+ EF_{N_2O}   &amp;= 0.2 \\
+-AGB_{i} &amp;= AD_{FDegBurnData,2019,age,i} \times \frac{MAIB_{sw}}{1 + RootToShootRatio_{dll}} \\
+-    &amp;= \{2, 3, 4, 2, 2, 2, 5, 2, 2, 2, 3\} \times \frac{10}{1 + 0.2} \\
++AGB_{i} &amp;= AD_{FDegBurnData,2019,age,i} \times MAIB_{sw} \times (1 - RootToShootRatio_{dll}) \\
++    &amp;= \{2, 3, 4, 2, 2, 2, 5, 2, 2, 2, 3\} \times 10 \times (1 - 0.2) \\
++    &amp;= \{16, 24, 32, 16, 16, 16, 40, 16, 16, 16, 24\} \\
+ BGB_{i} &amp;= AD_{FDegBurnData,2019,age,i} \times MAIB_{sw} \times RootToShootRatio_{dll} \\
+     &amp;= \{2, 3, 4, 2, 2, 2, 5, 2, 2, 2, 3\} \times 10 \times 0.2\\
++    &amp;= \{4, 6, 8, 4, 4, 4, 10, 4, 4, 4, 6\} \\
+ EmCO_2AGB_{i} &amp;= AD_{FDegBurnData,2019,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
+              &amp;= \{10.00,  3.00,  3.00,  2.00, 49.00,  0.60, 11.30, 57.64, 17.31,  4.71, 20.42\} \\
+-             &amp;  \times 16.67, 25.00, 33.33, 16.67, 16.67, 16.67, 41.67, 16.67, 16.67, 16.67, 25.00 \\
++             &amp;  \times \{16.00, 24.00, 32.00, 16.00, 16.00, 16.00, 40.00, 16.00, 16.00, 16.00, 24.00\} \\
+              &amp;  \times 0.46 
+                 \times 1 \times 1580  \times 0.001 \\
+-\sum EmCO_2AGB_{i} &amp;= 2551.54042\\
+-EmCO_2BGB_{i} &amp;= AD_{FDegBurnData,2019,area,i} \times BGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
++\sum EmCO_2AGB_{i} &amp;= 2449.4788032\\
++EmCO_2BGB_{i} &amp;= AD_{FDegBurnData,2019,area,i} \times BGB_{i} \times 0.47 \times \frac{44}{12} \\
+              &amp;= \{10.00,  3.00,  3.00,  2.00, 49.00,  0.60, 11.30, 57.64, 17.31,  4.71, 20.42\} \\
+-             &amp;  \times  4.00,  6.00,  8.00,  4.00,  4.00,  4.00, 10.00,  4.00,  4.00,  4.00,  6.00 \\
+-             &amp;  \times 0.46 
+-                \times 1 \times 1580  \times 0.001 \\
+-\sum EmCO_2BGB_{i} &amp;= 612.3697008\\
++             &amp;  \times \{ 4.00,  6.00,  8.00,  4.00,  4.00,  4.00, 10.00,  4.00,  4.00,  4.00,  6.00\} \\
++             &amp;  \times 0.47 \times \frac{44}{12} \\
++\sum EmCO_2BGB_{i} &amp;= 1452.00484\\
+ {EmCH_{4}}_i    &amp;= AD_{FDegBurnData,2019,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CH_4} \times EF_{CH_4} \times 0.001  \\
+              &amp;= \{10.00,  3.00,  3.00,  2.00, 49.00,  0.60, 11.30, 57.64, 17.31,  4.71, 20.42\} \\
+-             &amp;  \times 16.67, 25.00, 33.33, 16.67, 16.67, 16.67, 41.67, 16.67, 16.67, 16.67, 25.00 \\
++             &amp;  \times \{16.00, 24.00, 32.00, 16.00, 16.00, 16.00, 40.00, 16.00, 16.00, 16.00, 24.00\} \\
+              &amp;  \times 0.46 
+                 \times 28 \times 6.8 \times 0.001 \\
+-\sum {EmCH_{4}}_i &amp;= 307.4767696 \\
++\sum {EmCH_{4}}_i &amp;= 295.1776988 \\
+ {EmN_{2}O}_i    &amp;= AD_{FDegBurnData,2019,area,i} \times AGB_{i} \times CombustFactor \times GWP_{N_2O} \times EF_{N_2O} \times 0.001  \\
+              &amp;= \{10.00,  3.00,  3.00,  2.00, 49.00,  0.60, 11.30, 57.64, 17.31,  4.71, 20.42\} \\
+-             &amp;  \times 16.67, 25.00, 33.33, 16.67, 16.67, 16.67, 41.67, 16.67, 16.67, 16.67, 25.00 \\
++             &amp;  \times \{16.00, 24.00, 32.00, 16.00, 16.00, 16.00, 40.00, 16.00, 16.00, 16.00, 24.00\} \\
+              &amp;  \times 0.46 
+                 \times 265 \times 0.2 \times 0.001 \\
+-\sum {EmN_{2}O}_i &amp;= 85.589647 \\
++\sum {EmN_{2}O}_i &amp;= 82.1660611 \\
+ ER_{FSW,2019}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_i + \sum {EmN_{2}O}_i \\
+-             &amp;= 2551.54042
+-               + 612.3697008
+-               + 307.4767696 
+-               + 85.589647 \\
+-               &amp;= 3556.9765374 \\
++             &amp;= 2449.4788032
++               + 1452.00484
++               + 295.1776988 
++               + 82.1660611 \\
++               &amp;= 4278.8274031 \\
+ \end{align}
+ \]</span></p>
+ <pre class="r"><code>&gt; MonitoredValues$year1$FDegBurnData$age_yrs</code></pre>
+@@ -918,20 +919,20 @@ ER_{FSW,2019}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
+ <pre class="r"><code>&gt; EFN2O</code></pre>
+ <pre><code>## [1] 0.2</code></pre>
+ <pre class="r"><code>&gt; # Estimate AGB
+-&gt; AGB &lt;- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw / (1 + RootToShootDryLandSmall))
++&gt; AGB &lt;- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw * (1 - RootToShootDryLandSmall))
+ &gt; # Estimate BGB
+ &gt; BGB &lt;- MonitoredValues$year1$FDegBurnData$age_yrs * (MAIBsw * RootToShootDryLandSmall)
+ &gt; # CO2 ABG emissions
+ &gt; EmCO2AGB &lt;- MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001
+ &gt; # CO2 BGB emissions
+-&gt; EmCO2BGB &lt;- MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2 * 0.001
++&gt; EmCO2BGB &lt;- ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)
+ &gt; # CH4 ABG emissions
+ &gt; EmCH4 &lt;- MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001
+ &gt; # N_2O (above-ground biomass)
+ &gt; EmN2O &lt;- MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O  * EFN2O * 0.001
+ &gt; # sum emissions for each gas and put into dataframe
+ &gt; sum(sum(EmCO2AGB), sum(EmCO2BGB), sum(EmCH4), sum(EmN2O))</code></pre>
+-<pre><code>## [1] 3556.977</code></pre>
++<pre><code>## [1] 4278.827</code></pre>
+ </div>
+ <div id="monitoring-period-year-2019-total-forest-degradation" class="section level4">
+ <h4>Monitoring Period, Year 2019, Total Forest Degradation</h4>
+@@ -940,19 +941,19 @@ ER_{FSW,2019}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
+ ER_{FDeg,2019} &amp;= 1.0619455\times 10^{5} 
+   + (-2450.25)
+   + 3.5792828\times 10^{4}
+-  + 3556.9765374 \\
+-  &amp;= 143094.10
++  + 4278.8274031 \\
++  &amp;= 143815.96
+ \end{align}
+ \]</span></p>
+ <pre class="r"><code>ER_FDEG_2019 &lt;- ConvCarbonToCO2e(MonitoredValues$year1$FDegFellVol * TEF) +
+-(ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * -1) +
++sum(ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * -1) +
+ ConvBiomassToCO2e(MonitoredValues$year1$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) +
+ sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
+-sum(MonitoredValues$year1$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
++sum(ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)) +
+ sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
+ sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
+ ER_FDEG_2019</code></pre>
+-<pre><code>## [1] 143094.1</code></pre>
++<pre><code>## [1] 143816</code></pre>
+ </div>
+ </div>
+ <div id="removals-by-enhancments" class="section level3">
+@@ -1208,8 +1209,8 @@ ER_{Enh,2019} &amp;= 5.1275008\times 10^{5} + (-2967.6123297) \\
+ <p><span class="math display">\[
+ \begin{align}
+ ER_{2019} &amp;= ER_{Defor,2019} + ER_{FDeg,2019} + ER_{Enh,2019} \\
+-          &amp;= 6.6331104\times 10^{4} + 1.430941\times 10^{5} + 5.0978247\times 10^{5} \\
+-          &amp;= 7.1920768\times 10^{5} 
++          &amp;= 6.6331104\times 10^{4} + 1.4381596\times 10^{5} + 5.0978247\times 10^{5} \\
++          &amp;= 7.1992953\times 10^{5} 
+ \end{align}
+ \]</span></p>
+ <pre class="r"><code>&gt; ER_2019 &lt;- ER_DEF_2019 + ER_FDEG_2019 + ER_Enh_2019
+diff --git a/reports/Fiji_ER_MonitoringReportExtraTables-2020.Rmd b/reports/Fiji_ER_MonitoringReportExtraTables-2020.Rmd
+index f4a3ef6..8117e9e 100644
+--- a/reports/Fiji_ER_MonitoringReportExtraTables-2020.Rmd
++++ b/reports/Fiji_ER_MonitoringReportExtraTables-2020.Rmd
+@@ -180,8 +180,7 @@ $$
+ %                  
+ \end{align}
+ $$
+-
+-MGG - NOTE check with carly
++ 
+ 
+ ```{r echo = TRUE, prompt = TRUE}
+ MonitoredValues$year2$FDegFellArea$area_ha
+@@ -217,7 +216,7 @@ ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTr
+ #### Monitoring Period, Year 2020, Forest Degradation from softwood fire
+ ```{r echo = FALSE, prompt = FALSE}
+ # Estimate AGB
+-AGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw / (1 + RootToShootDryLandSmall))
++AGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw * (1 - RootToShootDryLandSmall))
+ # Estimate BGB
+ BGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw * RootToShootDryLandSmall)
+ ```
+@@ -235,40 +234,44 @@ GWP_{N_2O}  &= `r GWPN2O` \\
+ EF_{CO_2}   &= `r EFCO2` \\
+ EF_{CH_4}   &= `r EFCH4` \\
+ EF_{N_2O}   &= `r EFN2O` \\
+-AGB_{i} &= AD_{FDegBurnData,2020,age,i} \times \frac{MAIB_{sw}}{1 + RootToShootRatio_{dll}} \\
+-    &= \{`r MonitoredValues$year2$FDegBurnData$age_yrs`\} \times \frac{`r MAIBsw`}{1 + `r RootToShootDryLandSmall`} \\
++AGB_{i} &= AD_{FDegBurnData,2020,age,i} \times MAIB_{sw} \times (1 - RootToShootRatio_{dll}) \\
++    &= \{`r MonitoredValues$year2$FDegBurnData$age_yrs`\} \times `r MAIBsw` \times (1 - `r RootToShootDryLandSmall`) \\
++    &= \{`r MonitoredValues$year2$FDegBurnData$age_yrs * MAIBsw * (1 - RootToShootDryLandSmall)`\} \\
+ BGB_{i} &= AD_{FDegBurnData,2020,age,i} \times MAIB_{sw} \times RootToShootRatio_{dll} \\
+     &= \{`r MonitoredValues$year2$FDegBurnData$age_yrs`\} \times `r MAIBsw` \times `r RootToShootDryLandSmall`\\
++    &= \{`r MonitoredValues$year2$FDegBurnData$age_yrs * MAIBsw * RootToShootDryLandSmall`\} \\
+ EmCO_2AGB_{i} &= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
+              &= \{`r formatDecimal(MonitoredValues$year2$FDegBurnData$area_ha)`\} \\
+-             &  \times `r formatDecimal(AGB)` \\
++             &  \times \{`r formatDecimal(AGB)`\} \\
+              &  \times `r formatDecimal(CombustFactor)` 
+                 \times `r GWPCO2` \times `r EFCO2`  \times `r 0.001` \\
+ \sum EmCO_2AGB_{i} &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`\\
+-EmCO_2BGB_{i} &= AD_{FDegBurnData,2020,area,i} \times BGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
++EmCO_2BGB_{i} &= AD_{FDegBurnData,2020,area,i} \times BGB_{i} \times 0.47 \times \frac{44}{12} \\
+              &= \{`r formatDecimal(MonitoredValues$year2$FDegBurnData$area_ha)`\} \\
+-             &  \times `r formatDecimal(BGB)` \\
+-             &  \times `r formatDecimal(CombustFactor)` 
+-                \times `r GWPCO2` \times `r EFCO2`  \times `r 0.001` \\
+-\sum EmCO_2BGB_{i} &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`\\
++             &  \times \{`r formatDecimal(BGB)`\} \\
++             &  \times 0.47 \times \frac{44}{12} \\
++\sum EmCO_2BGB_{i} &= `r ConvBiomassToCO2e(sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB))`\\
+ {EmCH_{4}}_i    &= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CH_4} \times EF_{CH_4} \times 0.001  \\
+              &= \{`r formatDecimal(MonitoredValues$year2$FDegBurnData$area_ha)`\} \\
+-             &  \times `r formatDecimal(AGB)` \\
++             &  \times \{`r formatDecimal(AGB)`\} \\
+              &  \times `r formatDecimal(CombustFactor)` 
+                 \times `r GWPCH4` \times `r EFCH4` \times `r 0.001` \\
+ \sum {EmCH_{4}}_i &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)` \\
+ {EmN_{2}O}_i    &= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{N_2O} \times EF_{N_2O} \times 0.001  \\
+              &= \{`r formatDecimal(MonitoredValues$year2$FDegBurnData$area_ha)`\} \\
+-             &  \times `r formatDecimal(AGB)` \\
++             &  \times \{`r formatDecimal(AGB)`\} \\
+              &  \times `r formatDecimal(CombustFactor)` 
+                 \times `r GWPN2O` \times `r EFN2O` \times `r 0.001` \\
+ \sum {EmN_{2}O}_i &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+ ER_{FSW,2020}&=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_i + \sum {EmN_{2}O}_i \\
+              &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`
+-               + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001)`
++               + `r sum(ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB))`
+                + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)` 
+                + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+-               &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
++               &= `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + 
++                sum(ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)) +
++                sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001) + 
++                sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+ \end{align}
+ $$
+ 
+@@ -290,13 +293,13 @@ EFCH4
+ EFN2O
+ 
+ # Estimate AGB
+-AGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw / (1 + RootToShootDryLandSmall))
++AGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw * (1 - RootToShootDryLandSmall))
+ # Estimate BGB
+ BGB <- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw * RootToShootDryLandSmall)
+ # CO2 ABG emissions
+ EmCO2AGB <- MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001
+ # CO2 BGB emissions
+-EmCO2BGB <- MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2 * 0.001
++EmCO2BGB <- ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)
+ # CH4 ABG emissions
+ EmCH4 <- MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001
+ # N_2O (above-ground biomass)
+@@ -311,14 +314,15 @@ sum(sum(EmCO2AGB), sum(EmCO2BGB), sum(EmCH4), sum(EmN2O))
+ $$ 
+ \begin{align}
+ ER_{FDeg,2020} &= `r ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF)` 
+-  + (`r ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1`)
++  + (`r sum(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1)`)
+   + `r ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain))`
+-  + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
+-  &= `r formatDecimal(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) + ( ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1) +  ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001))`
++  + `r sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)` \\
++  &= `r formatDecimal(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) + 
++  sum(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1) + 
++  ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) + sum(ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)) + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  + sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001))`
+ \end{align}
+ $$
+ 
+-MGG - NOTE check with carly
+ 
+ ```{r echo = TRUE, prompt = FALSE}
+ 
+@@ -326,7 +330,7 @@ ER_FDEG_2020 <- ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) +
+ sum(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1) +
+ ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) +
+ sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
+-sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
++sum(ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)) +
+ sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
+ sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
+ ER_FDEG_2020
+@@ -400,7 +404,6 @@ Rem_{FPln,2020,Hardwood} &=  AD_{FPln,2020,age,Hardwood} \times AD_{FPln,2020,ar
+ \end{align}
+ $$
+ 
+-MGG - NOTE check with carly
+ 
+ ```{r echo = TRUE, prompt = TRUE}
+ #' Forest Plantations - Removals from Hardwood Plantations
+@@ -492,7 +495,6 @@ Rem_{FPln,2020,Softwood}     &= AD_{FPln,2020,age,Softwood}
+ \end{align}
+ $$
+ 
+-MGG - NOTE check with carly
+ 
+ ```{r echo = TRUE, prompt = TRUE}
+ #' Forest Plantations - Removals from Softwood Plantations
+@@ -563,7 +565,6 @@ Rem_{AR,2020}  &= AD_{AR,2020,age} \times AD_{AR,2020,area} \times MAIC_{AR} \ti
+ \end{align}
+ $$
+ 
+-MGG - NOTE check with carly
+ 
+ ```{r echo = TRUE, prompt = TRUE}
+ MonitoredValues$year2$AReforArea$age_yrs
+diff --git a/reports/Fiji_ER_MonitoringReportExtraTables-2020.html b/reports/Fiji_ER_MonitoringReportExtraTables-2020.html
+index 21cf318..74625f5 100644
+--- a/reports/Fiji_ER_MonitoringReportExtraTables-2020.html
++++ b/reports/Fiji_ER_MonitoringReportExtraTables-2020.html
+@@ -566,7 +566,7 @@ pre code {
+ 
+ 
+ <h1 class="title toc-ignore">Monitoring Report Extra Tables</h1>
+-<h4 class="date">15 December, 2023</h4>
++<h4 class="date">06 February, 2024</h4>
+ 
+ </div>
+ 
+@@ -811,7 +811,6 @@ ER_{NFH,2020,vol}  &amp;= AD_{NFH,2020,vol} \times EF_{NFHvol} \times \frac{44}{
+ %                  
+ \end{align}
+ \]</span></p>
+-<p>MGG - NOTE check with carly</p>
+ <pre class="r"><code>&gt; MonitoredValues$year2$FDegFellArea$area_ha</code></pre>
+ <pre><code>## [1] 1350 1083</code></pre>
+ <pre class="r"><code>&gt; MonitoredValues$year2$FDegFellArea$age_yrs</code></pre>
+@@ -862,40 +861,41 @@ GWP_{N_2O}  &amp;= 265 \\
+ EF_{CO_2}   &amp;= 1580 \\
+ EF_{CH_4}   &amp;= 6.8 \\
+ EF_{N_2O}   &amp;= 0.2 \\
+-AGB_{i} &amp;= AD_{FDegBurnData,2020,age,i} \times \frac{MAIB_{sw}}{1 + RootToShootRatio_{dll}} \\
+-    &amp;= \{3, 3, 3, 3, 4, 2, 2, 2, 2, 3, 2\} \times \frac{10}{1 + 0.2} \\
++AGB_{i} &amp;= AD_{FDegBurnData,2020,age,i} \times MAIB_{sw} \times (1 - RootToShootRatio_{dll}) \\
++    &amp;= \{3, 3, 3, 3, 4, 2, 2, 2, 2, 3, 2\} \times 10 \times (1 - 0.2) \\
++    &amp;= \{24, 24, 24, 24, 32, 16, 16, 16, 16, 24, 16\} \\
+ BGB_{i} &amp;= AD_{FDegBurnData,2020,age,i} \times MAIB_{sw} \times RootToShootRatio_{dll} \\
+     &amp;= \{3, 3, 3, 3, 4, 2, 2, 2, 2, 3, 2\} \times 10 \times 0.2\\
++    &amp;= \{6, 6, 6, 6, 8, 4, 4, 4, 4, 6, 4\} \\
+ EmCO_2AGB_{i} &amp;= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
+              &amp;= \{ 8.25, 39.20, 12.10, 25.90, 33.40,  4.00,  9.86,  4.56, 10.77, 13.00, 13.00\} \\
+-             &amp;  \times 25.00, 25.00, 25.00, 25.00, 33.33, 16.67, 16.67, 16.67, 16.67, 25.00, 16.67 \\
++             &amp;  \times \{24.00, 24.00, 24.00, 24.00, 32.00, 16.00, 16.00, 16.00, 16.00, 24.00, 16.00\} \\
+              &amp;  \times 0.46 
+                 \times 1 \times 1580  \times 0.001 \\
+-\sum EmCO_2AGB_{i} &amp;= 3109.0687\\
+-EmCO_2BGB_{i} &amp;= AD_{FDegBurnData,2020,area,i} \times BGB_{i} \times CombustFactor \times GWP_{CO_2} \times EF_{CO_2}  \times 0.001 \\
++\sum EmCO_2AGB_{i} &amp;= 2984.705952\\
++EmCO_2BGB_{i} &amp;= AD_{FDegBurnData,2020,area,i} \times BGB_{i} \times 0.47 \times \frac{44}{12} \\
+              &amp;= \{ 8.25, 39.20, 12.10, 25.90, 33.40,  4.00,  9.86,  4.56, 10.77, 13.00, 13.00\} \\
+-             &amp;  \times 6.00, 6.00, 6.00, 6.00, 8.00, 4.00, 4.00, 4.00, 4.00, 6.00, 4.00 \\
+-             &amp;  \times 0.46 
+-                \times 1 \times 1580  \times 0.001 \\
+-\sum EmCO_2BGB_{i} &amp;= 746.176488\\
++             &amp;  \times \{6.00, 6.00, 6.00, 6.00, 8.00, 4.00, 4.00, 4.00, 4.00, 6.00, 4.00\} \\
++             &amp;  \times 0.47 \times \frac{44}{12} \\
++\sum EmCO_2BGB_{i} &amp;= 1769.2774\\
+ {EmCH_{4}}_i    &amp;= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{CH_4} \times EF_{CH_4} \times 0.001  \\
+              &amp;= \{ 8.25, 39.20, 12.10, 25.90, 33.40,  4.00,  9.86,  4.56, 10.77, 13.00, 13.00\} \\
+-             &amp;  \times 25.00, 25.00, 25.00, 25.00, 33.33, 16.67, 16.67, 16.67, 16.67, 25.00, 16.67 \\
++             &amp;  \times \{24.00, 24.00, 24.00, 24.00, 32.00, 16.00, 16.00, 16.00, 16.00, 24.00, 16.00\} \\
+              &amp;  \times 0.46 
+                 \times 28 \times 6.8 \times 0.001 \\
+-\sum {EmCH_{4}}_i &amp;= 374.662456 \\
++\sum {EmCH_{4}}_i &amp;= 359.6759578 \\
+ {EmN_{2}O}_i    &amp;= AD_{FDegBurnData,2020,area,i} \times AGB_{i} \times CombustFactor \times GWP_{N_2O} \times EF_{N_2O} \times 0.001  \\
+              &amp;= \{ 8.25, 39.20, 12.10, 25.90, 33.40,  4.00,  9.86,  4.56, 10.77, 13.00, 13.00\} \\
+-             &amp;  \times 25.00, 25.00, 25.00, 25.00, 33.33, 16.67, 16.67, 16.67, 16.67, 25.00, 16.67 \\
++             &amp;  \times \{24.00, 24.00, 24.00, 24.00, 32.00, 16.00, 16.00, 16.00, 16.00, 24.00, 16.00\} \\
+              &amp;  \times 0.46 
+                 \times 265 \times 0.2 \times 0.001 \\
+-\sum {EmN_{2}O}_i &amp;= 104.291545 \\
++\sum {EmN_{2}O}_i &amp;= 100.1198832 \\
+ ER_{FSW,2020}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_i + \sum {EmN_{2}O}_i \\
+-             &amp;= 3109.0687
+-               + 746.176488
+-               + 374.662456 
+-               + 104.291545 \\
+-               &amp;= 4334.199189 \\
++             &amp;= 2984.705952
++               + 1769.2774
++               + 359.6759578 
++               + 100.1198832 \\
++               &amp;= 5213.779193 \\
+ \end{align}
+ \]</span></p>
+ <pre class="r"><code>&gt; MonitoredValues$year2$FDegBurnData$age_yrs</code></pre>
+@@ -921,42 +921,41 @@ ER_{FSW,2020}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
+ <pre class="r"><code>&gt; EFN2O</code></pre>
+ <pre><code>## [1] 0.2</code></pre>
+ <pre class="r"><code>&gt; # Estimate AGB
+-&gt; AGB &lt;- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw / (1 + RootToShootDryLandSmall))
++&gt; AGB &lt;- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw * (1 - RootToShootDryLandSmall))
+ &gt; # Estimate BGB
+ &gt; BGB &lt;- MonitoredValues$year2$FDegBurnData$age_yrs * (MAIBsw * RootToShootDryLandSmall)
+ &gt; # CO2 ABG emissions
+ &gt; EmCO2AGB &lt;- MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001
+ &gt; # CO2 BGB emissions
+-&gt; EmCO2BGB &lt;- MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2 * 0.001
++&gt; EmCO2BGB &lt;- ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)
+ &gt; # CH4 ABG emissions
+ &gt; EmCH4 &lt;- MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001
+ &gt; # N_2O (above-ground biomass)
+ &gt; EmN2O &lt;- MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O  * EFN2O * 0.001
+ &gt; # sum emissions for each gas and put into dataframe
+ &gt; sum(sum(EmCO2AGB), sum(EmCO2BGB), sum(EmCH4), sum(EmN2O))</code></pre>
+-<pre><code>## [1] 4334.199</code></pre>
++<pre><code>## [1] 5213.779</code></pre>
+ </div>
+ <div id="monitoring-period-year-2020-total-forest-degradation" class="section level4">
+ <h4>Monitoring Period, Year 2020, Total Forest Degradation</h4>
+ <p><span class="math display">\[ 
+ \begin{align}
+ ER_{FDeg,2020} &amp;= 8.50388\times 10^{4} 
+-  + (-2450.25, -5896.935)
++  + (-8347.185)
+   + 3.5792828\times 10^{4}
+-  + 4334.199189 \\
+-  &amp;= 122715.58, 119268.89
++  + 5213.779193 \\
++  &amp;= 117698.22
+ \end{align}
+ \]</span></p>
+-<p>MGG - NOTE check with carly</p>
+ <pre class="r"><code>ER_FDEG_2020 &lt;- ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) +
+ sum(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * -1) +
+ ConvBiomassToCO2e(MonitoredValues$year2$NFDegArea * EFNFDeg * (1 + RootToShootTropRain)) +
+ sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
+-sum(MonitoredValues$year2$FDegBurnData$area_ha * BGB * CombustFactor * GWPCO2 * EFCO2  * 0.001) +
++sum(ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)) +
+ sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
+ sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
+ ER_FDEG_2020</code></pre>
+-<pre><code>## [1] 116818.6</code></pre>
++<pre><code>## [1] 117698.2</code></pre>
+ </div>
+ </div>
+ <div id="removals-by-enhancments" class="section level3">
+@@ -1022,7 +1021,6 @@ Rem_{FPln,2020,Hardwood} &amp;=  AD_{FPln,2020,age,Hardwood} \times AD_{FPln,202
+   &amp;=  -3.0446412\times 10^{4}, 0
+ \end{align}
+ \]</span></p>
+-<p>MGG - NOTE check with carly</p>
+ <pre class="r"><code>&gt; #' Forest Plantations - Removals from Hardwood Plantations
+ &gt; MonitoredValues$year2$FPlnAreaPlantHwd$area_ha</code></pre>
+ <pre><code>## [1] 4008    0</code></pre>
+@@ -1112,7 +1110,6 @@ Rem_{FPln,2020,Softwood}     &amp;= AD_{FPln,2020,age,Softwood}
+                              &amp;= -1.7302267\times 10^{4}, -4.93735\times 10^{4}
+ \end{align}
+ \]</span></p>
+-<p>MGG - NOTE check with carly</p>
+ <pre class="r"><code>&gt; #' Forest Plantations - Removals from Softwood Plantations
+ &gt; MAIBsw</code></pre>
+ <pre><code>## [1] 10</code></pre>
+@@ -1178,7 +1175,6 @@ Rem_{AR,2020}  &amp;= AD_{AR,2020,age} \times AD_{AR,2020,area} \times MAIC_{AR}
+                &amp;= -2967.6123297, -9639.9225192
+ \end{align}
+ \]</span></p>
+-<p>MGG - NOTE check with carly</p>
+ <pre class="r"><code>&gt; MonitoredValues$year2$AReforArea$age_yrs</code></pre>
+ <pre><code>## [1] 0.5 1.5</code></pre>
+ <pre class="r"><code>&gt; MAIVar</code></pre>
+@@ -1215,8 +1211,8 @@ ER_{Enh,2020} &amp;= 5.9030799\times 10^{5} + (-1.2607535\times 10^{4}) \\
+ <p><span class="math display">\[
+ \begin{align}
+ ER_{2020} &amp;= ER_{Defor,2020} + ER_{FDeg,2020} + ER_{Enh,2020} \\
+-          &amp;= 6.6331104\times 10^{4} + 1.1681864\times 10^{5} + 5.7770045\times 10^{5} \\
+-          &amp;= 7.608502\times 10^{5} 
++          &amp;= 6.6331104\times 10^{4} + 1.1769822\times 10^{5} + 5.7770045\times 10^{5} \\
++          &amp;= 7.6172978\times 10^{5} 
+ \end{align}
+ \]</span></p>
+ <pre class="r"><code>&gt; ER_2020 &lt;- ER_DEF_2020 + ER_FDEG_2020 + ER_Enh_2020
+diff --git a/reports/Fiji_ER_MonitoringReportExtraTables.html b/reports/Fiji_ER_MonitoringReportExtraTables.html
+index 99e4e9a..f0ae1ba 100644
+--- a/reports/Fiji_ER_MonitoringReportExtraTables.html
++++ b/reports/Fiji_ER_MonitoringReportExtraTables.html
+@@ -566,7 +566,7 @@ pre code {
+ 
+ 
+ <h1 class="title toc-ignore">Monitoring Report Extra Tables</h1>
+-<h4 class="date">15 December, 2023</h4>
++<h4 class="date">06 February, 2024</h4>
+ 
+ </div>
+ 
+diff --git a/reports/Fiji_ER_Report.html b/reports/Fiji_ER_Report.html
+index 28269ff..1c33d00 100644
+--- a/reports/Fiji_ER_Report.html
++++ b/reports/Fiji_ER_Report.html
+@@ -566,7 +566,7 @@ pre code {
+ 
+ 
+ <h1 class="title toc-ignore">Fiji ER Report</h1>
+-<h4 class="date">15 December, 2023</h4>
++<h4 class="date">06 February, 2024</h4>
+ 
+ </div>
+ 

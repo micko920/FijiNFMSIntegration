@@ -42,17 +42,12 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
   MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean
   MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor)
 
-
-  ## MGG - patch for ARefor survey area to override Adjusted Areas sampled
-  MonitoredValues$year1$AReforSurveyArea <- 616
-  MonitoredValues$year2$AReforSurveyArea <- 667
-
   ## MGG - patch account for half year growth and compound growth of first year in 2nd year
   MonitoredValues$year2$AReforArea <- data.frame(
 			year = c(2019, 2020),
 			area_ha = c(
-				MonitoredValues$year1$AReforSurveyArea,
-				MonitoredValues$year2$AReforSurveyArea
+			  AdjustedAreas$MCaaaforMean,
+			  AdjustedAreas$MCaaaforMean
 			),
 			age_yrs = c(0.5,1.5)
   )
@@ -60,7 +55,7 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
   MonitoredValues$year1$AReforArea <- data.frame(
 			year = c(2019),
 			area_ha = c(
-				MonitoredValues$year1$AReforSurveyArea
+			  AdjustedAreas$MCaaaforMean
 			),
 			age_yrs = c(0.5)
   )
@@ -92,7 +87,7 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
 				MonitoredValues$year1$FPlnAreaPlantHwdSurveyArea,
 				MonitoredValues$year2$FPlnAreaPlantHwdSurveyArea
 			),
-			age_yrs = c(0.5,1.5)
+			age_yrs = c(1.5,0.5)
   )
 
   MonitoredValues$year1$FPlnAreaPlantHwd <- data.frame(
@@ -111,7 +106,7 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
 				MonitoredValues$year1$FPlnAreaPlantSwdSurveyArea,
 				MonitoredValues$year2$FPlnAreaPlantSwdSurveyArea
 			),
-			age_yrs = c(0.5,1.5)
+			age_yrs = c(1.5,0.5)
   )
 
   MonitoredValues$year1$FPlnAreaPlantSwd <- data.frame(

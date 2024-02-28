@@ -566,7 +566,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Monitoring Report Extra Tables</h1>
-<h4 class="date">23 October, 2023</h4>
+<h4 class="date">16 February, 2024</h4>
 
 </div>
 
@@ -653,13 +653,13 @@ Net emissions and removals (tCO2e/yr)
 66331
 </td>
 <td style="text-align:left;">
-143094
+143816
 </td>
 <td style="text-align:left;">
-509782
+536070
 </td>
 <td style="text-align:left;">
-719208
+746217
 </td>
 </tr>
 <tr>
@@ -670,13 +670,13 @@ Net emissions and removals (tCO2e/yr)
 66331
 </td>
 <td style="text-align:left;">
-116819
+117698
 </td>
 <td style="text-align:left;">
-577700
+313855
 </td>
 <td style="text-align:left;">
-760850
+497884
 </td>
 </tr>
 <tr>
@@ -687,13 +687,13 @@ Total
 132662
 </td>
 <td style="text-align:left;">
-259913
+261514
 </td>
 <td style="text-align:left;">
-1087483
+849925
 </td>
 <td style="text-align:left;">
-1480058
+1244102
 </td>
 </tr>
 </tbody>
@@ -902,8 +902,7 @@ ER_{FSW,2019}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
 <pre class="r"><code>&gt; RootToShootDryLandSmall</code></pre>
 <pre><code>## [1] 0.2</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year1$FDegBurnData$area_ha</code></pre>
-<pre><code>##  [1] 10.000  3.000  3.000  2.000 49.000  0.600 11.300 57.639 17.310  4.710
-## [11] 20.420</code></pre>
+<pre><code>##  [1] 10.000  3.000  3.000  2.000 49.000  0.600 11.300 57.639 17.310  4.710 20.420</code></pre>
 <pre class="r"><code>&gt; CombustFactor</code></pre>
 <pre><code>## [1] 0.46</code></pre>
 <pre class="r"><code>&gt; GWPCO2</code></pre>
@@ -984,15 +983,15 @@ ER_{FPln,2019,Hardwood} &amp;= Em_{FPln,2019,Hardwood} + Rem_{FPln,2019,Hardwood
 Em_{FPln,2019,Hardwood} &amp;= (AD_{FPln,2019,vol,hardwood} \times BiomassConvExpansion_{Hardwood} \\
   &amp; + AD_{FPln,2019,vol,hardwoord} \times BiomassConvExpansion_{Hardwood} \times RootToShootRatio_{wl}) \\
   &amp; \times 0.47 \times \frac{44}{12} \\
-  &amp;= (1.9801647\times 10^{4} \times 1.05 
-    + 1.9801647\times 10^{4} \times 1.05 \times 0.37)
+  &amp;= (2.1253\times 10^{4} \times 1.05 
+    + 2.1253\times 10^{4} \times 1.05 \times 0.37)
     \times 0.47 \times \frac{44}{12} \\
-  &amp;= 4.908858\times 10^{4}
+  &amp;= 5.2686506\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; #' Forest Plantations - Emissions from Hardwood Plantations
 &gt; MonitoredValues$year1$FPlnVolHarvHwd</code></pre>
-<pre><code>## [1] 19801.65</code></pre>
+<pre><code>## [1] 21253</code></pre>
 <pre class="r"><code>&gt; BiomassConvExpansionHW</code></pre>
 <pre><code>## [1] 1.05</code></pre>
 <pre class="r"><code>&gt; RootToShootTropRain</code></pre>
@@ -1000,7 +999,7 @@ Em_{FPln,2019,Hardwood} &amp;= (AD_{FPln,2019,vol,hardwood} \times BiomassConvEx
 <pre class="r"><code>&gt; #CalcEstEmFPlnHwd
 &gt; Em_FPln_2019_Hardwood &lt;- ConvBiomassToCO2e(MonitoredValues$year1$FPlnVolHarvHwd * BiomassConvExpansionHW + MonitoredValues$year1$FPlnVolHarvHwd * BiomassConvExpansionHW * RootToShootTropRain)
 &gt; Em_FPln_2019_Hardwood</code></pre>
-<pre><code>## [1] 49088.58</code></pre>
+<pre><code>## [1] 52686.51</code></pre>
 </div>
 <div id="monitoring-period-year-2019-removals-from-forest-plantation-hardwood" class="section level4">
 <h4>Monitoring Period, Year 2019, Removals from forest plantation Hardwood</h4>
@@ -1042,13 +1041,13 @@ Rem_{FPln,2019,Hardwood} &amp;=  AD_{FPln,2019,age,Hardwood} \times AD_{FPln,201
 <h4>Monitoring Period, Year 2019, Net ER from forest plantation Hardwood</h4>
 <p><span class="math display">\[
 \begin{align}
-ER_{FPln,2019,Hardwood} &amp;= 4.908858\times 10^{4} + -3.0446412\times 10^{4} \\
-   &amp;= 1.8642168\times 10^{4}
+ER_{FPln,2019,Hardwood} &amp;= 5.2686506\times 10^{4} + -3.0446412\times 10^{4} \\
+   &amp;= 2.2240094\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_FPln_2019_Hardwood &lt;- Em_FPln_2019_Hardwood + Rem_FPln_2019_Hardwood
 &gt; ER_FPln_2019_Hardwood</code></pre>
-<pre><code>## [1] 18642.17</code></pre>
+<pre><code>## [1] 22240.09</code></pre>
 </div>
 <div id="monitoring-period-year-2019-emissionremovals-from-forest-plantation-softwood" class="section level4">
 <h4>Monitoring Period, Year 2019, Emission/Removals from forest plantation Softwood</h4>
@@ -1062,7 +1061,7 @@ ER_{FPln,2019,Softwood} &amp;= Em_{FPln,2019,Softwood} + Rem_{FPln,2019,Softwood
 <h4>Monitoring Period, Year 2019, Emissions from forest plantation Softwood</h4>
 <p><span class="math display">\[
 \begin{align}
-AD_{FPln,2019,vol,Softwood}   &amp;= 386985 \\
+AD_{FPln,2019,vol,Softwood}   &amp;= 4.19088\times 10^{5} \\
 RecoveryRate_{Softwood}       &amp;= 0.76 \\
 WoodDensity_{Softwood}        &amp;= 0.47 \\
 RootToShootRatio_{dlh} &amp;= 0.24 \\
@@ -1070,15 +1069,15 @@ Em_{FPln,2019,Softwood} &amp;= (AD_{FPln,2019,vol,Softwood} \times \frac{1}{Reco
    &amp; + AD_{FPln,2019,vol,Softwood} \times \frac{1}{RecoveryRate_{Softwood}} \\
    &amp; \times WoodDensity_{Softwood} \times RootToShootRatio_{dlh}) \\
    &amp; \times  0.47 \times \frac{44}{12} \\
-   &amp;= (386985 \times \frac{1}{0.76} \times 0.47 \\
-   &amp; +386985 \times \frac{1}{0.76} \times 0.47 \times  
+   &amp;= (4.19088\times 10^{5} \times \frac{1}{0.76} \times 0.47 \\
+   &amp; +4.19088\times 10^{5} \times \frac{1}{0.76} \times 0.47 \times  
       0.24) \times  0.47 \times \frac{44}{12} \\
-   &amp;= 5.1141018\times 10^{5}
+   &amp;= 5.5383509\times 10^{5}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; #' Forest Plantations - Emissions from Softwood Plantations
 &gt; MonitoredValues$year1$FPlnVolHarvSwd</code></pre>
-<pre><code>## [1] 386985</code></pre>
+<pre><code>## [1] 419088</code></pre>
 <pre class="r"><code>&gt; RecoveryRateSW</code></pre>
 <pre><code>## [1] 0.76</code></pre>
 <pre class="r"><code>&gt; WoodDensitySW</code></pre>
@@ -1089,7 +1088,7 @@ Em_{FPln,2019,Softwood} &amp;= (AD_{FPln,2019,vol,Softwood} \times \frac{1}{Reco
 &gt; Em_FPln_2019_Softwood &lt;- ConvBiomassToCO2e((MonitoredValues$year1$FPlnVolHarvSwd * (1/RecoveryRateSW) * WoodDensitySW) +
 + (MonitoredValues$year1$FPlnVolHarvSwd * (1/RecoveryRateSW) * WoodDensitySW * RootToShootDryLandBig))
 &gt; Em_FPln_2019_Softwood</code></pre>
-<pre><code>## [1] 511410.2</code></pre>
+<pre><code>## [1] 553835.1</code></pre>
 </div>
 <div id="monitoring-period-year-2019-removals-from-forest-plantation-softwood" class="section level4">
 <h4>Monitoring Period, Year 2019, Removals from forest plantation Softwood</h4>
@@ -1129,36 +1128,36 @@ Rem_{FPln,2019,Softwood}     &amp;= AD_{FPln,2019,age,Softwood}
 <p><span class="math display">\[
 \begin{align}
 ER_{FPln,2019,Softwood} 
-        &amp;= 5.1141018\times 10^{5} + (-1.7302267\times 10^{4}) \\
-        &amp;= 4.9410792\times 10^{5}
+        &amp;= 5.5383509\times 10^{5} + (-1.7302267\times 10^{4}) \\
+        &amp;= 5.3653282\times 10^{5}
 \end{align}
 \]</span></p>
 <pre class="r"><code>Em_FPln_2019_Softwood</code></pre>
-<pre><code>## [1] 511410.2</code></pre>
+<pre><code>## [1] 553835.1</code></pre>
 <pre class="r"><code>Rem_FPln_2019_Softwood</code></pre>
 <pre><code>## [1] -17302.27</code></pre>
 <pre class="r"><code>ER_FPln_2019_Softwood &lt;-  Em_FPln_2019_Softwood + Rem_FPln_2019_Softwood 
 ER_FPln_2019_Softwood</code></pre>
-<pre><code>## [1] 494107.9</code></pre>
+<pre><code>## [1] 536532.8</code></pre>
 </div>
 <div id="monitoring-period-year-2019-total-emissionremovals-from-forest-plantation-hardwood-and-softwood" class="section level4">
 <h4>Monitoring Period, Year 2019, Total Emission/Removals from forest plantation Hardwood and Softwood</h4>
 <p><span class="math display">\[
 \begin{align}
-ER_{FPln,2019} &amp;= 1.8642168\times 10^{4} + 4.9410792\times 10^{5} \\
-               &amp;= 5.1275008\times 10^{5}
+ER_{FPln,2019} &amp;= 2.2240094\times 10^{4} + 5.3653282\times 10^{5} \\
+               &amp;= 5.5877291\times 10^{5}
 \end{align}
 \]</span></p>
 <pre class="r"><code>ER_FPln_2019 &lt;-ER_FPln_2019_Hardwood +  ER_FPln_2019_Softwood
 ER_FPln_2019</code></pre>
-<pre><code>## [1] 512750.1</code></pre>
+<pre><code>## [1] 558772.9</code></pre>
 </div>
 <div id="monitoring-period-year-2019-removals-from-afforestationreforestation" class="section level4">
 <h4>Monitoring Period, Year 2019, Removals from Afforestation/Reforestation</h4>
 <p>ghdfg <span class="math display">\[
 \begin{align}
 AD_{AR,2019,age,i}          &amp;= 0.5 \\
-AD_{AR,2019,area,i}         &amp;= 616 \\
+AD_{AR,2019,area,i}         &amp;= 4712.5095437 \\
 MAIV_{AR}                   &amp;= 3.71 \\
 BiomassConvExpansion_{AR}   &amp;= 1.1 \\
 RootToShootRatio_{wl} &amp;= 0.37 \\
@@ -1167,10 +1166,10 @@ MAIC_{AR}                   &amp;= MAIV_{AR} \times  BiomassConvExpansion_{AR} \
                             &amp;= 5.59097 \\
 Rem_{AR,2019}  &amp;= AD_{AR,2019,age} \times AD_{AR,2019,area} \times MAIC_{AR} \times 0.47 \times \frac{44}{12} \times -1 \\
                &amp;= 0.5 \times 
-                  616 \times 
+                  4712.5095437 \times 
                   5.59097 \times 1.1 \times (1 + 0.37) \times 
                   0.47 \times \frac{44}{12} \times -1 \\
-               &amp;= -2967.6123297
+               &amp;= -2.2702762\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; MonitoredValues$year1$AReforArea$age_yrs</code></pre>
@@ -1182,26 +1181,26 @@ Rem_{AR,2019}  &amp;= AD_{AR,2019,age} \times AD_{AR,2019,area} \times MAIC_{AR}
 <pre class="r"><code>&gt; RootToShootTropRain</code></pre>
 <pre><code>## [1] 0.37</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year1$AReforArea$area_ha</code></pre>
-<pre><code>## [1] 616</code></pre>
+<pre><code>## [1] 4712.51</code></pre>
 <pre class="r"><code>&gt; MAIC &lt;-MAIVar * BiomassConvExpansionARefor * (1 + RootToShootTropRain)
 &gt; MAIC</code></pre>
 <pre><code>## [1] 5.59097</code></pre>
 <pre class="r"><code>&gt; Rem_AR_2019 &lt;- ConvBiomassToCO2e(MonitoredValues$year1$AReforArea$age_yrs * 
 +                     MonitoredValues$year1$AReforArea$area_ha * MAIC * (-1)) 
 &gt; Rem_AR_2019</code></pre>
-<pre><code>## [1] -2967.612</code></pre>
+<pre><code>## [1] -22702.76</code></pre>
 </div>
 <div id="monitoring-period-year-2019-total-emissionremovals-from-enhancements" class="section level4">
 <h4>Monitoring Period, Year 2019, Total Emission/Removals from enhancements</h4>
 <p><span class="math display">\[
 \begin{align}
-ER_{Enh,2019} &amp;= 5.1275008\times 10^{5} + (-2967.6123297) \\
-              &amp;= 5.0978247\times 10^{5}
+ER_{Enh,2019} &amp;= 5.5877291\times 10^{5} + (-2.2702762\times 10^{4}) \\
+              &amp;= 5.3607015\times 10^{5}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_Enh_2019 &lt;- ER_FPln_2019 + Rem_AR_2019
 &gt; ER_Enh_2019</code></pre>
-<pre><code>## [1] 509782.5</code></pre>
+<pre><code>## [1] 536070.2</code></pre>
 </div>
 </div>
 <div id="monitoring-period-year-2019-net-emissionsremovals-1" class="section level3">
@@ -1209,13 +1208,13 @@ ER_{Enh,2019} &amp;= 5.1275008\times 10^{5} + (-2967.6123297) \\
 <p><span class="math display">\[
 \begin{align}
 ER_{2019} &amp;= ER_{Defor,2019} + ER_{FDeg,2019} + ER_{Enh,2019} \\
-          &amp;= 6.6331104\times 10^{4} + 1.430941\times 10^{5} + 5.0978247\times 10^{5} \\
-          &amp;= 7.1920768\times 10^{5} 
+          &amp;= 6.6331104\times 10^{4} + 1.430941\times 10^{5} + 5.3607015\times 10^{5} \\
+          &amp;= 7.4549536\times 10^{5} 
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_2019 &lt;- ER_DEF_2019 + ER_FDEG_2019 + ER_Enh_2019
 &gt; ER_2019</code></pre>
-<pre><code>## [1] 719207.7</code></pre>
+<pre><code>## [1] 745495.4</code></pre>
 </div>
 </div>
 

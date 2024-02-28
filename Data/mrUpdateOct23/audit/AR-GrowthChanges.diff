@@ -1,0 +1,66 @@
+diff --git a/calcER_Estimate_Sensitivity.R b/calcER_Estimate_Sensitivity.R
+index 861d635..5927b94 100644
+--- a/calcER_Estimate_Sensitivity.R
++++ b/calcER_Estimate_Sensitivity.R
+@@ -91,7 +91,7 @@ CalcER_Estimate_Sensitivity <- function(statusCallback, interrupted, calcEnv) {
+ 				MonitoredValues$year1$FPlnAreaPlantHwdSurveyArea,
+ 				MonitoredValues$year2$FPlnAreaPlantHwdSurveyArea
+ 			),
+-			age_yrs = c(0.5,1.5)
++			age_yrs = c(1.5,0.5)
+   )
+ 
+   MonitoredValues$year1$FPlnAreaPlantHwd <- data.frame(
+@@ -110,7 +110,7 @@ CalcER_Estimate_Sensitivity <- function(statusCallback, interrupted, calcEnv) {
+ 				MonitoredValues$year1$FPlnAreaPlantSwdSurveyArea,
+ 				MonitoredValues$year2$FPlnAreaPlantSwdSurveyArea
+ 			),
+-			age_yrs = c(0.5,1.5)
++			age_yrs = c(1.5,0.5)
+   )
+ 
+   MonitoredValues$year1$FPlnAreaPlantSwd <- data.frame(
+diff --git a/calcER_Estimate_UC.R b/calcER_Estimate_UC.R
+index ab7f4d0..413fbf5 100644
+--- a/calcER_Estimate_UC.R
++++ b/calcER_Estimate_UC.R
+@@ -106,7 +106,7 @@ CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
+ 				MonitoredValues$year1$FPlnAreaPlantHwdSurveyArea,
+ 				MonitoredValues$year2$FPlnAreaPlantHwdSurveyArea
+ 			),
+-			age_yrs = c(0.5,1.5)
++			age_yrs = c(1.5,0.5)
+   )
+ 
+   MonitoredValues$year1$FPlnAreaPlantHwd <- data.frame(
+@@ -125,7 +125,7 @@ CalcER_Estimate_UC <- function(statusCallback, interrupted, calcEnv) {
+ 				MonitoredValues$year1$FPlnAreaPlantSwdSurveyArea,
+ 				MonitoredValues$year2$FPlnAreaPlantSwdSurveyArea
+ 			),
+-			age_yrs = c(0.5,1.5)
++			age_yrs = c(1.5,0.5)
+   )
+ 
+   MonitoredValues$year1$FPlnAreaPlantSwd <- data.frame(
+diff --git a/calcER_Estimate_Values.R b/calcER_Estimate_Values.R
+index e232d1e..6ef4acf 100644
+--- a/calcER_Estimate_Values.R
++++ b/calcER_Estimate_Values.R
+@@ -92,7 +92,7 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
+ 				MonitoredValues$year1$FPlnAreaPlantHwdSurveyArea,
+ 				MonitoredValues$year2$FPlnAreaPlantHwdSurveyArea
+ 			),
+-			age_yrs = c(0.5,1.5)
++			age_yrs = c(1.5,0.5)
+   )
+ 
+   MonitoredValues$year1$FPlnAreaPlantHwd <- data.frame(
+@@ -111,7 +111,7 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
+ 				MonitoredValues$year1$FPlnAreaPlantSwdSurveyArea,
+ 				MonitoredValues$year2$FPlnAreaPlantSwdSurveyArea
+ 			),
+-			age_yrs = c(0.5,1.5)
++			age_yrs = c(1.5,0.5)
+   )
+ 
+   MonitoredValues$year1$FPlnAreaPlantSwd <- data.frame(
