@@ -1,39 +1,39 @@
 
 
 
-load("./Data/mrAuditFeb24/Fiji_ER_Estimate_Params.RData")
-load("./Data/mrAuditFeb24/fiji_frl_overall_years.RData")
+load("./Data/mrAuditMay24/Fiji_ER_Estimate_Params.RData")
+load("./Data/mrAuditMay24/fiji_frl_overall_years.RData")
 
 
-load("./Data/mrAuditFeb24/Fiji_ER_Estimate_AccuracyAssessment.RData")
+load("./Data/mrAuditMay24/Fiji_ER_Estimate_AccuracyAssessment.RData")
 rmarkdown::render(
   "./reports/Fiji_ER_Estimate_AccuracyAssessment.Rmd",
   output_dir = "./reports",
   output_format = "html_document")
 
-load("./Data/mrAuditFeb24/Fiji_ER_Estimate_Values.RData")
+load("./Data/mrAuditMay24/Fiji_ER_Estimate_Values.RData")
 rmarkdown::render(
   "./reports/Fiji_ER_Estimate_Values.Rmd",
   output_dir = "./reports",
   output_format = "html_document")
 
-load("./Data/mrAuditFeb24/Fiji_ER_Estimate_UC.RData")
+load("./Data/mrAuditMay24/Fiji_ER_Estimate_UC.RData")
 rmarkdown::render(
   "./reports/Fiji_ER_Estimate_UC.Rmd",
   output_dir = "./reports",
   output_format = "html_document")
 
-load("./Data/mrAuditFeb24/Fiji_ER_Estimate_Sensitivity.RData")
+load("./Data/mrAuditMay24/Fiji_ER_Estimate_Sensitivity.RData")
 rmarkdown::render(
   "./reports/Fiji_ER_Estimate_Sensitivity.Rmd",
   output_dir = "./reports",
   output_format = "html_document")
 
-source("./Data/frlAuditFeb24/FRL_Parameters.R")
-load("./Data/frlAuditFeb24/fiji_frl_tables.RData")
-load("./Data/frlAuditFeb24/fiji_frl_input.RData")
-load("./Data/frlAuditFeb24/fiji_frl_estimate_values.RData")
-load("./Data/mrAuditFeb24/fiji_frl_overall_years.RData")
+source("./Data/frlAuditMay24/FRL_Parameters.R")
+load("./Data/frlAuditMay24/fiji_frl_tables.RData")
+load("./Data/frlAuditMay24/fiji_frl_input.RData")
+load("./Data/frlAuditMay24/fiji_frl_estimate_values.RData")
+load("./Data/mrAuditMay24/fiji_frl_overall_years.RData")
 
 rmarkdown::render(
   "./reports/Fiji_ER_Report.Rmd",
