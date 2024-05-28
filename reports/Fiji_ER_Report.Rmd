@@ -92,6 +92,7 @@ t %>%
 # Table of Parameters and uncertainty
 ```{r echo = FALSE}
 ParameterTable <- data.frame(
+  symbol = character(),
   name = character(), 
   value = numeric(), 
   LCI = numeric(), 
@@ -101,6 +102,7 @@ ParameterTable <- data.frame(
   stringsAsFactors=FALSE)
 
 ParameterTable <- rbind(ParameterTable, list(
+  symbol = "\\begin{align} EF_{Def,upland} \\end{align}",
   name = "EFDeforUp", 
   value = EFDeforUp, 
   LCI = EFDeforUp_LCI, 
@@ -111,6 +113,7 @@ ParameterTable <- rbind(ParameterTable, list(
 
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} EF_{Def,lowland} \\end{align}",
   name  = "EFDeforLow",
   value = EFDeforLow,
   LCI   = EFDeforLow_LCI,
@@ -120,6 +123,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)
 
  ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} TEF \\end{align}",
   name  = "TEF",
   value = TEF,
   LCI   = TEF - TEF * errTEF,
@@ -130,6 +134,7 @@ ParameterTable <- rbind(ParameterTable,list(
 
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} MAIB_{SW} \\end{align}",
   name  = "MAIBsw",
   value = MAIBsw,
   LCI   = MAIBsw - MAIBsw * errMAIBsw,
@@ -140,6 +145,7 @@ ParameterTable <- rbind(ParameterTable,list(
 
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} \\Delta ABG_{NFF} \\end{align}",
   name  = "EFNFDeg",
   value = EFNFDeg,
   LCI   = EFNFDeg_LCI,
@@ -149,6 +155,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} MAIC_{FD} \\end{align}",
   name  = "MAICFell",
   value = MAICFell,
   LCI   = MAICFell - MAICFell * ErrMAICFell,
@@ -159,6 +166,7 @@ ParameterTable <- rbind(ParameterTable,list(
 
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} MAIV_{AR} \\end{align}",
   name  = "MAIVar",
   value = MAIVar,
   LCI   = MAIVar - (MAIVar * errMAIVar),
@@ -169,6 +177,7 @@ ParameterTable <- rbind(ParameterTable,list(
 
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} \\overline{MAIV}_{HW} \\end{align}",
   name  = "MAIVhw",
   value = MAIVhw,
   LCI   = MAIVhw - MAIVhw * errMAIVhw,
@@ -178,6 +187,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} BCEF_{AR,I} \\end{align}",
   name  = "BiomassConvExpansionARefor",
   value = BiomassConvExpansionARefor,
   LCI   = BiomassConvExpansionARefor - (BiomassConvExpansionARefor * errBiomassConvExpansionARefor),
@@ -187,6 +197,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} BCEF_{HW,R} \\end{align}",
   name  = "BiomassConvExpansionHW",
   value = BiomassConvExpansionHW,
   LCI   = BiomassConvExpansionHW - BiomassConvExpansionHW * errBiomassConvExpansionHW,
@@ -196,8 +207,9 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} BCEF_{HW,I} \\end{align}",
   name  = "BiomassConvExpansionIncHW",
-  value = BiomassConvExpansionHW,
+  value = BiomassConvExpansionIncHW,
   LCI   = BiomassConvExpansionIncHW - BiomassConvExpansionIncHW * errBiomassConvExpansionIncHW,
   UCI   = BiomassConvExpansionIncHW + BiomassConvExpansionIncHW * errBiomassConvExpansionIncHW,
   error = errBiomassConvExpansionIncHW,
@@ -205,6 +217,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} R_{wl} \\end{align}",
   name  = "RootToShootTropRain",
   value = RootToShootTropRain,
   LCI   = RootToShootTropRain - (RootToShootTropRain * errRootToShootTropRain),
@@ -214,6 +227,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)    
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} R_{dll} \\end{align}",
   name  = "RootToShootDryLandSmall",
   value = RootToShootDryLandSmall,
   LCI   = errLowerRtSDryLandSmall,
@@ -223,6 +237,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)    
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} R_{dlh} \\end{align}",
   name  = "RootToShootDryLandBig",
   value = RootToShootDryLandBig,
   LCI   = errLowerRtSDryLandBig,
@@ -232,6 +247,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)    
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} \\lambda_{Pine} \\end{align}",
   name  = "RecoveryRateSW",
   value = RecoveryRateSW,
   LCI = qnorm(p = c(QLCI), mean = RecoveryRateSW, sd = (RecoveryRateSW * errRecoveryRateSW)),
@@ -241,6 +257,7 @@ ParameterTable <- rbind(ParameterTable,list(
 ), stringsAsFactors=FALSE)    
 
 ParameterTable <- rbind(ParameterTable,list(
+  symbol = "\\begin{align} \\rho_{Pine} \\end{align}",
   name  = "WoodDensitySW",
   value = WoodDensitySW,
   LCI = qnorm(p = c(QLCI), mean = WoodDensitySW, sd = SDWoodDensitySW),
@@ -270,9 +287,11 @@ data.frame(value = unlist(MonitoringReportParams)) %>%
   )
      
 ```
+
 # Table of Monitored Values
 ```{r echo = FALSE}
 MVTable <- data.frame(
+  symbol = character(),
   name = character(),
   year = character(),
   value = numeric(), 
@@ -283,6 +302,7 @@ MVTable <- data.frame(
   stringsAsFactors=FALSE)
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPDF,Lowland} \\end{align}",
   name  = "DeforAreaLow",
   year = as.character(MonitoredValues$year1$year),
   value = MonitoredValues$year1$DeforAreaLow,
@@ -294,6 +314,7 @@ MVTable <- rbind(MVTable,list(
     
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPDF,Upland} \\end{align}",
   name  = "DeforAreaUp",
   year = as.character(MonitoredValues$year1$year),
   value = MonitoredValues$year1$DeforAreaUp,
@@ -304,6 +325,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPAR,t} \\end{align}",
   name  = "AReforArea",
   year = as.character(MonitoredValues$year1$year),
   value = MonitoredValues$year1$AReforArea$area_ha[1],
@@ -314,6 +336,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPFD,t} \\end{align}",
   name  = "FDegFellArea",
   year = as.character(MonitoredValues$year1$year),
   value = MonitoredValues$year1$FDegFellArea$area_ha,
@@ -324,6 +347,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPHWPlant,t} \\end{align}",
   name  = "FPlnAreaPlantHwd",
   year = as.character(MonitoredValues$year1$year),
   value = MonitoredValues$year1$FPlnAreaPlantHwd$area_ha,
@@ -334,6 +358,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPSWPlant,t} \\end{align}",
   name  = "FPlnAreaPlantSwd",
   year = as.character(MonitoredValues$year1$year),
   value = MonitoredValues$year1$FPlnAreaPlantSwd$area_ha,
@@ -344,6 +369,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPNFF,t} \\end{align}",
   name  = "NFDegArea",
   year = as.character(MonitoredValues$year1$year),
   value = MonitoredValues$year1$NFDegArea,
@@ -353,8 +379,42 @@ MVTable <- rbind(MVTable,list(
   model ="Triangle"
 ), stringsAsFactors=FALSE) 
 
+MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} V_{MPNF,t} \\end{align}",
+  name  = "FDegFellVol",
+  year = as.character(MonitoredValues$year1$year),
+  value = MonitoredValues$year1$FDegFellVol,
+  LCI = NA,
+  UCI = NA,
+  error = NA,
+  model = NA
+), stringsAsFactors=FALSE) 
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} V_{MPHWHarvest,t} \\end{align}",
+  name  = "FPlnVolHarvHwd",
+  year = as.character(MonitoredValues$year1$year),
+  value = MonitoredValues$year1$FPlnVolHarvHwd,
+  LCI = NA,
+  UCI = NA,
+  error = NA,
+  model = NA
+), stringsAsFactors=FALSE) 
+
+MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} V_{MPSWHarvest,t} \\end{align}",
+  name  = "FPlnVolHarvSwd",
+  year = as.character(MonitoredValues$year1$year),
+  value = MonitoredValues$year1$FPlnVolHarvSwd,
+  LCI = NA,
+  UCI = NA,
+  error = NA,
+  model = NA
+), stringsAsFactors=FALSE) 
+
+
+MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPDF,Lowland} \\end{align}",
   name  = "DeforAreaLow",
   year = as.character(MonitoredValues$year2$year),
   value = MonitoredValues$year2$DeforAreaLow,
@@ -366,6 +426,7 @@ MVTable <- rbind(MVTable,list(
     
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPDF,Upland} \\end{align}",
   name  = "DeforAreaUp",
   year = as.character(MonitoredValues$year2$year),
   value = MonitoredValues$year2$DeforAreaUp,
@@ -376,6 +437,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPAR,t} \\end{align}",
   name  = "AReforArea",
   year = as.character(MonitoredValues$year2$year),
   value = MonitoredValues$year2$AReforArea$area_ha[1],
@@ -386,6 +448,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPFD,t} \\end{align}",
   name  = "FDegFellArea",
   year = as.character(MonitoredValues$year2$year),
   value = MonitoredValues$year2$FDegFellArea$area_ha[2],
@@ -396,6 +459,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPHWPlant,t} \\end{align}",
   name  = "FPlnAreaPlantHwd",
   year = as.character(MonitoredValues$year2$year),
   value = MonitoredValues$year2$FPlnAreaPlantHwd$area_ha[2],
@@ -406,6 +470,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPSWPlant,t} \\end{align}",
   name  = "FPlnAreaPlantSwd",
   year = as.character(MonitoredValues$year2$year),
   value = MonitoredValues$year2$FPlnAreaPlantSwd$area_ha[2],
@@ -416,6 +481,7 @@ MVTable <- rbind(MVTable,list(
 ), stringsAsFactors=FALSE)  
 
 MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} A_{MPNFF,t} \\end{align}",
   name  = "NFDegArea",
   year = as.character(MonitoredValues$year2$year),
   value = MonitoredValues$year2$NFDegArea,
@@ -425,8 +491,57 @@ MVTable <- rbind(MVTable,list(
   model ="Triangle"
 ), stringsAsFactors=FALSE) 
 
+
+## New values no UC
+
+MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} V_{MPNF,t} \\end{align}",
+  name  = "FDegFellVol",
+  year = as.character(MonitoredValues$year2$year),
+  value = MonitoredValues$year2$FDegFellVol,
+  LCI = NA,
+  UCI = NA,
+  error = NA,
+  model = NA
+), stringsAsFactors=FALSE) 
+
+MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} V_{MPHWHarvest,t} \\end{align}",
+  name  = "FPlnVolHarvHwd",
+  year = as.character(MonitoredValues$year2$year),
+  value = MonitoredValues$year2$FPlnVolHarvHwd,
+  LCI = NA,
+  UCI = NA,
+  error = NA,
+  model = NA
+), stringsAsFactors=FALSE) 
+
+MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} V_{MPSWHarvest,t} \\end{align}",
+  name  = "FPlnVolHarvSwd",
+  year = as.character(MonitoredValues$year2$year),
+  value = MonitoredValues$year2$FPlnVolHarvSwd,
+  LCI = NA,
+  UCI = NA,
+  error = NA,
+  model = NA
+), stringsAsFactors=FALSE) 
+
+MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} \\Lambda_{MPSWBurn,t} \\end{align}",
+  name  = "FDegBurnData",
+  year = NA,
+  value = NA,
+  LCI = NA,
+  UCI = NA,
+  error = NA,
+  model ="Census"
+), stringsAsFactors=FALSE) 
+
+
+
 f <- function(x) {
-  y <- as.character(format(x,big.mark = ",", digits= 2, nsmall = 2))
+  y <- as.character(format(x,big.mark = ",",digits= 2, nsmall = 2,scientific=F))
   return(replace(y,are_na(x)," "))
 }
 
@@ -434,7 +549,7 @@ f <- function(x) {
 
 MVTable %>% 
   mutate(across(where(~ is.numeric(.x)), ~ f(.x)))%>% 
-  kable(fileFormat, caption = "Monitored Values and associated uncertainty") %>%
+  kable(fileFormat, escape=FALSE, caption = "Monitored Values and associated uncertainty") %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )

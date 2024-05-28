@@ -566,7 +566,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Monitoring Report Extra Tables</h1>
-<h4 class="date">16 February, 2024</h4>
+<h4 class="date">28 May, 2024</h4>
 
 </div>
 
@@ -653,13 +653,13 @@ Net emissions and removals (tCO2e/yr)
 66331
 </td>
 <td style="text-align:left;">
-143816
+123449
 </td>
 <td style="text-align:left;">
 536070
 </td>
 <td style="text-align:left;">
-746217
+725851
 </td>
 </tr>
 <tr>
@@ -670,13 +670,13 @@ Net emissions and removals (tCO2e/yr)
 66331
 </td>
 <td style="text-align:left;">
-117698
+112897
 </td>
 <td style="text-align:left;">
 313855
 </td>
 <td style="text-align:left;">
-497884
+493084
 </td>
 </tr>
 <tr>
@@ -684,16 +684,16 @@ Net emissions and removals (tCO2e/yr)
 Total
 </td>
 <td style="text-align:left;">
-132662
+132663
 </td>
 <td style="text-align:left;">
-261514
+236347
 </td>
 <td style="text-align:left;">
 849925
 </td>
 <td style="text-align:left;">
-1244102
+1218935
 </td>
 </tr>
 </tbody>
@@ -735,29 +735,29 @@ ER_{Def,2020,Upland} &amp;= AD_{Def,2020,Upland} \times  EF_{Def,Upland} \\
 <p><span class="math display">\[ 
 \begin{align}
 ER_{Def,2020,Lowland} &amp;= AD_{Def,2020,Lowland} \times  EF_{Def,Lowland} \\
-  &amp;= 252.5884678 \times 259.4 \\
-  &amp;= 6.5521449\times 10^{4}
+  &amp;= 252.5884678 \times 259.401 \\
+  &amp;= 6.5521701\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; MonitoredValues$year2$DeforAreaLow</code></pre>
 <pre><code>## [1] 252.5885</code></pre>
 <pre class="r"><code>&gt; EFDeforLow</code></pre>
-<pre><code>## [1] 259.4</code></pre>
+<pre><code>## [1] 259.401</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year2$DeforAreaLow * EFDeforLow</code></pre>
-<pre><code>## [1] 65521.45</code></pre>
+<pre><code>## [1] 65521.7</code></pre>
 </div>
 <div id="monitoring-period-year-2020-total-deforestation" class="section level4">
 <h4>Monitoring Period, Year 2020, Total Deforestation</h4>
 <p><span class="math display">\[ 
 \begin{align}
 ER_{Def,2020} &amp;= 809.66
-  +  65521.45  \\
-  &amp;= 66331.10
+  +  65521.70  \\
+  &amp;= 66331.36
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_DEF_2020 &lt;- (MonitoredValues$year2$DeforAreaUp * EFDeforUp) + (MonitoredValues$year2$DeforAreaLow * EFDeforLow)
 &gt; ER_DEF_2020</code></pre>
-<pre><code>## [1] 66331.1</code></pre>
+<pre><code>## [1] 66331.36</code></pre>
 </div>
 </div>
 <div id="forest-degradation" class="section level3">
@@ -771,7 +771,7 @@ ER_{FDeg,2020} &amp;= ER_{NFH,2020,vol} + ER_{NFH,2020,rem} + ER_{NFF,2020} + ER
 <h4>Monitoring Period, Year 2020, Forest Degradation from native forest timber harvest (felling volumes)</h4>
 <p><span class="math display">\[ 
 \begin{align}
-AD_{NFH,2020,vol} &amp;= 22088 \\
+AD_{NFH,2020,vol} &amp;= 2.0841\times 10^{4} \\
 EF_{Felling}         &amp;= 0.69 \\
 EF_{Damage}          &amp;= 0.15 \\ 
 EF_{Infrastructure}  &amp;= 0.21 \\
@@ -779,12 +779,12 @@ EF_{NFHvol} &amp;= TEF = EF_{Felling} + EF_{Damage} + EF_{Infrastructure} \\
     &amp;= 0.69+ 0.15 + 0.21 \\
     &amp;= 1.05 \\
 ER_{NFH,2020,vol}  &amp;= AD_{NFH,2020,vol} \times EF_{NFHvol} \times \frac{44}{12} \\
-  &amp;=   ( 22088 \times 1.05 ) \times \frac{44}{12} \\
-  &amp;= 8.50388\times 10^{4}
+  &amp;=   ( 2.0841\times 10^{4} \times 1.05 ) \times \frac{44}{12} \\
+  &amp;= 8.023785\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; MonitoredValues$year2$FDegFellVol</code></pre>
-<pre><code>## [1] 22088</code></pre>
+<pre><code>## [1] 20841</code></pre>
 <pre class="r"><code>&gt; EFFelling </code></pre>
 <pre><code>## [1] 0.69</code></pre>
 <pre class="r"><code>&gt; EFDamage </code></pre>
@@ -794,7 +794,7 @@ ER_{NFH,2020,vol}  &amp;= AD_{NFH,2020,vol} \times EF_{NFHvol} \times \frac{44}{
 <pre class="r"><code>&gt; TEF</code></pre>
 <pre><code>## [1] 1.05</code></pre>
 <pre class="r"><code>&gt; ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF)</code></pre>
-<pre><code>## [1] 85038.8</code></pre>
+<pre><code>## [1] 80237.85</code></pre>
 </div>
 <div id="monitoring-period-year-2020-forest-degradation-from-native-forest-timber-harvest-felling-area" class="section level4">
 <h4>Monitoring Period, Year 2020, Forest Degradation from native forest timber harvest (felling area)</h4>
@@ -940,11 +940,11 @@ ER_{FSW,2020}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
 <h4>Monitoring Period, Year 2020, Total Forest Degradation</h4>
 <p><span class="math display">\[ 
 \begin{align}
-ER_{FDeg,2020} &amp;= 8.50388\times 10^{4} 
+ER_{FDeg,2020} &amp;= 8.023785\times 10^{4} 
   + (-8347.185)
   + 3.5792828\times 10^{4}
   + 5213.779193 \\
-  &amp;= 117698.22
+  &amp;= 112897.27
 \end{align}
 \]</span></p>
 <pre class="r"><code>ER_FDEG_2020 &lt;- ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) +
@@ -955,7 +955,7 @@ sum(ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)) +
 sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
 sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
 ER_FDEG_2020</code></pre>
-<pre><code>## [1] 117698.2</code></pre>
+<pre><code>## [1] 112897.3</code></pre>
 </div>
 </div>
 <div id="removals-by-enhancments" class="section level3">
@@ -1211,13 +1211,13 @@ ER_{Enh,2020} &amp;= 4.0466604\times 10^{5} + (-9.0811048\times 10^{4}) \\
 <p><span class="math display">\[
 \begin{align}
 ER_{2020} &amp;= ER_{Defor,2020} + ER_{FDeg,2020} + ER_{Enh,2020} \\
-          &amp;= 6.6331104\times 10^{4} + 1.1769822\times 10^{5} + 3.13855\times 10^{5} \\
-          &amp;= 4.9788432\times 10^{5} 
+          &amp;= 6.6331357\times 10^{4} + 1.1289727\times 10^{5} + 3.13855\times 10^{5} \\
+          &amp;= 4.9308363\times 10^{5} 
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_2020 &lt;- ER_DEF_2020 + ER_FDEG_2020 + ER_Enh_2020
 &gt; ER_2020</code></pre>
-<pre><code>## [1] 497884.3</code></pre>
+<pre><code>## [1] 493083.6</code></pre>
 </div>
 </div>
 

@@ -566,7 +566,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Monitoring Report Extra Tables</h1>
-<h4 class="date">16 February, 2024</h4>
+<h4 class="date">28 May, 2024</h4>
 
 </div>
 
@@ -653,13 +653,13 @@ Net emissions and removals (tCO2e/yr)
 66331
 </td>
 <td style="text-align:left;">
-143816
+123449
 </td>
 <td style="text-align:left;">
 536070
 </td>
 <td style="text-align:left;">
-746217
+725851
 </td>
 </tr>
 <tr>
@@ -670,13 +670,13 @@ Net emissions and removals (tCO2e/yr)
 66331
 </td>
 <td style="text-align:left;">
-117698
+112897
 </td>
 <td style="text-align:left;">
 313855
 </td>
 <td style="text-align:left;">
-497884
+493084
 </td>
 </tr>
 <tr>
@@ -684,16 +684,16 @@ Net emissions and removals (tCO2e/yr)
 Total
 </td>
 <td style="text-align:left;">
-132662
+132663
 </td>
 <td style="text-align:left;">
-261514
+236347
 </td>
 <td style="text-align:left;">
 849925
 </td>
 <td style="text-align:left;">
-1244102
+1218935
 </td>
 </tr>
 </tbody>
@@ -735,29 +735,29 @@ ER_{Def,2019,Upland} &amp;= AD_{Def,2019,Upland} \times  EF_{Def,Upland} \\
 <p><span class="math display">\[ 
 \begin{align}
 ER_{Def,2019,Lowland} &amp;= AD_{Def,2019,Lowland} \times  EF_{Def,Lowland} \\
-  &amp;= 252.5884678 \times 259.4 \\
-  &amp;= 6.5521449\times 10^{4}
+  &amp;= 252.5884678 \times 259.401 \\
+  &amp;= 6.5521701\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; MonitoredValues$year1$DeforAreaLow</code></pre>
 <pre><code>## [1] 252.5885</code></pre>
 <pre class="r"><code>&gt; EFDeforLow</code></pre>
-<pre><code>## [1] 259.4</code></pre>
+<pre><code>## [1] 259.401</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year1$DeforAreaLow * EFDeforLow</code></pre>
-<pre><code>## [1] 65521.45</code></pre>
+<pre><code>## [1] 65521.7</code></pre>
 </div>
 <div id="monitoring-period-year-2019-total-deforestation" class="section level4">
 <h4>Monitoring Period, Year 2019, Total Deforestation</h4>
 <p><span class="math display">\[ 
 \begin{align}
 ER_{Def,2019} &amp;= 809.66
-  +  65521.45  \\
-  &amp;= 66331.10
+  +  65521.70  \\
+  &amp;= 66331.36
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_DEF_2019 &lt;- (MonitoredValues$year1$DeforAreaUp * EFDeforUp) + (MonitoredValues$year1$DeforAreaLow * EFDeforLow)
 &gt; ER_DEF_2019</code></pre>
-<pre><code>## [1] 66331.1</code></pre>
+<pre><code>## [1] 66331.36</code></pre>
 </div>
 </div>
 <div id="forest-degradation" class="section level3">
@@ -771,7 +771,7 @@ ER_{FDeg,2019} &amp;= ER_{NFH,2019,vol} + ER_{NFH,2019,rem} + ER_{NFF,2019} + ER
 <h4>Monitoring Period, Year 2019, Forest Degradation from native forest timber harvest (felling volumes)</h4>
 <p><span class="math display">\[ 
 \begin{align}
-AD_{NFH,2019,vol} &amp;= 27583 \\
+AD_{NFH,2019,vol} &amp;= 2.2293\times 10^{4} \\
 EF_{Felling}         &amp;= 0.69 \\
 EF_{Damage}          &amp;= 0.15 \\ 
 EF_{Infrastructure}  &amp;= 0.21 \\
@@ -779,12 +779,12 @@ EF_{NFHvol} &amp;= TEF = EF_{Felling} + EF_{Damage} + EF_{Infrastructure} \\
     &amp;= 0.69+ 0.15 + 0.21 \\
     &amp;= 1.05 \\
 ER_{NFH,2019,vol}  &amp;= AD_{NFH,2019,vol} \times EF_{NFHvol} \times \frac{44}{12} \\
-  &amp;=   ( 27583 \times 1.05 ) \times \frac{44}{12} \\
-  &amp;= 1.0619455\times 10^{5}
+  &amp;=   ( 2.2293\times 10^{4} \times 1.05 ) \times \frac{44}{12} \\
+  &amp;= 8.582805\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; MonitoredValues$year1$FDegFellVol</code></pre>
-<pre><code>## [1] 27583</code></pre>
+<pre><code>## [1] 22293</code></pre>
 <pre class="r"><code>&gt; EFFelling </code></pre>
 <pre><code>## [1] 0.69</code></pre>
 <pre class="r"><code>&gt; EFDamage </code></pre>
@@ -794,7 +794,7 @@ ER_{NFH,2019,vol}  &amp;= AD_{NFH,2019,vol} \times EF_{NFHvol} \times \frac{44}{
 <pre class="r"><code>&gt; TEF</code></pre>
 <pre><code>## [1] 1.05</code></pre>
 <pre class="r"><code>&gt; ConvCarbonToCO2e(MonitoredValues$year1$FDegFellVol * TEF)</code></pre>
-<pre><code>## [1] 106194.6</code></pre>
+<pre><code>## [1] 85828.05</code></pre>
 </div>
 <div id="monitoring-period-year-2019-forest-degradation-from-native-forest-timber-harvest-felling-area" class="section level4">
 <h4>Monitoring Period, Year 2019, Forest Degradation from native forest timber harvest (felling area)</h4>
@@ -903,7 +903,8 @@ ER_{FSW,2019}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
 <pre class="r"><code>&gt; RootToShootDryLandSmall</code></pre>
 <pre><code>## [1] 0.2</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year1$FDegBurnData$area_ha</code></pre>
-<pre><code>##  [1] 10.000  3.000  3.000  2.000 49.000  0.600 11.300 57.639 17.310  4.710 20.420</code></pre>
+<pre><code>##  [1] 10.000  3.000  3.000  2.000 49.000  0.600 11.300 57.639 17.310  4.710
+## [11] 20.420</code></pre>
 <pre class="r"><code>&gt; CombustFactor</code></pre>
 <pre><code>## [1] 0.46</code></pre>
 <pre class="r"><code>&gt; GWPCO2</code></pre>
@@ -938,11 +939,11 @@ ER_{FSW,2019}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
 <h4>Monitoring Period, Year 2019, Total Forest Degradation</h4>
 <p><span class="math display">\[ 
 \begin{align}
-ER_{FDeg,2019} &amp;= 1.0619455\times 10^{5} 
+ER_{FDeg,2019} &amp;= 8.582805\times 10^{4} 
   + (-2450.25)
   + 3.5792828\times 10^{4}
   + 4278.8274031 \\
-  &amp;= 143815.96
+  &amp;= 123449.46
 \end{align}
 \]</span></p>
 <pre class="r"><code>ER_FDEG_2019 &lt;- ConvCarbonToCO2e(MonitoredValues$year1$FDegFellVol * TEF) +
@@ -953,7 +954,7 @@ sum(ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)) +
 sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
 sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
 ER_FDEG_2019</code></pre>
-<pre><code>## [1] 143816</code></pre>
+<pre><code>## [1] 123449.5</code></pre>
 </div>
 </div>
 <div id="removals-by-enhancments" class="section level3">
@@ -1209,13 +1210,13 @@ ER_{Enh,2019} &amp;= 5.5877291\times 10^{5} + (-2.2702762\times 10^{4}) \\
 <p><span class="math display">\[
 \begin{align}
 ER_{2019} &amp;= ER_{Defor,2019} + ER_{FDeg,2019} + ER_{Enh,2019} \\
-          &amp;= 6.6331104\times 10^{4} + 1.4381596\times 10^{5} + 5.3607015\times 10^{5} \\
-          &amp;= 7.4621721\times 10^{5} 
+          &amp;= 6.6331357\times 10^{4} + 1.2344946\times 10^{5} + 5.3607015\times 10^{5} \\
+          &amp;= 7.2585096\times 10^{5} 
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_2019 &lt;- ER_DEF_2019 + ER_FDEG_2019 + ER_Enh_2019
 &gt; ER_2019</code></pre>
-<pre><code>## [1] 746217.2</code></pre>
+<pre><code>## [1] 725851</code></pre>
 </div>
 </div>
 

@@ -38,25 +38,30 @@ run-Fiji-ER_EST:
 	Rscript -e 'source("./Fiji_ER_Estimate_UC.R")'
 	Rscript -e 'source("./Fiji_ER_Estimate_Sensitivity.R")'
 	
-run-create-reports:
+run-create-reports-ER:
 	-rm -rf reports/*_cache
 	-rm \
-		reports/Fiji_FRL_Report.html \
 		reports/Fiji_ER_Report.html \
 		reports/Fiji_ER_Estimate_UC.html \
 		reports/Fiji_ER_Estimate_Values.html \
 		reports/Fiji_ER_Estimate_AccuracyAssesment.html \
 		reports/Fiji_MonitoringReportExtraTables.html
-	Rscript -e 'source("./createReport_FRL.R")'
 	Rscript -e 'source("./createReport_ER.R")'
-	cp Fiji_ER_Estimate_AccuracyAssessment.pdf ./Data/mrAuditFeb24/
-	cp Fiji_ER_Estimate_Sensitivity.pdf ./Data/mrAuditFeb24/
-	cp Fiji_ER_Estimate_UC.pdf ./Data/mrAuditFeb24/
-	cp Fiji_ER_Estimate_Values.pdf ./Data/mrAuditFeb24/
-	cp ./reports/Fiji_FRL_Report.html ./Data/frlAuditFeb24/
-	cp ./reports/Fiji_ER_*.html ./Data/mrAuditFeb24/
+	cp Fiji_ER_Estimate_AccuracyAssessment.pdf ./Data/mrAuditMay24/
+	cp Fiji_ER_Estimate_Sensitivity.pdf ./Data/mrAuditMay24/
+	cp Fiji_ER_Estimate_UC.pdf ./Data/mrAuditMay24/
+	cp Fiji_ER_Estimate_Values.pdf ./Data/mrAuditMay24/
+	cp ./reports/Fiji_ER_*.html ./Data/mrAuditMay24/
 	-rm -rf reports/*_cache
 
+
+run-create-reports-FRL:
+	-rm -rf reports/*_cache
+	-rm \
+		reports/Fiji_FRL_Report.html 
+	Rscript -e 'source("./createReport_FRL.R")'
+	cp ./reports/Fiji_FRL_Report.html ./Data/frlAuditMay24/
+	-rm -rf reports/*_cache
 
 
 run-test-ER_EST:
