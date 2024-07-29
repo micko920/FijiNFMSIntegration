@@ -222,3 +222,54 @@ t %>%
 
 
 ```
+
+## FRL Params
+```{r echo = FALSE}
+t <- FRLParams
+
+data.frame(value = unlist(t)) %>% 
+  kable(fileFormat, caption = "FRL Parameters", 
+        format.args = list(big.mark = ",",digits=2, nsmall = 0,scientific = FALSE)) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+```
+
+
+## FRL Monitored Values
+```{r echo = FALSE}
+
+MVTable <- data.frame(
+  symbol = character(),
+  name = character(),
+  stringsAsFactors=FALSE)
+
+MVTable <- rbind(MVTable,list(
+  symbol = "\\begin{align} X_{X,t} \\end{align}",
+  name  = "DeforAreaLow"
+), stringsAsFactors=FALSE)  
+    
+
+#"AdjustedAreas"
+#"bioburn_ghgs"
+#"dnf_area"
+#"EmissionFactors" 
+#"hw_ahp"         
+#"hw_species"
+#"hwsw_volharv"
+#"lnf_area"
+#"lnf_volume"
+#"nfi_ai_esf_srtm"
+#"nfi_cid"
+#"nfi_r2"
+#"nfi_r3"
+#"nfi_species"
+#"nfi_spid"       
+#"nfi_strata"
+#"psp_trees"
+#"pthd"
+#"sw_barea"
+#"sw_hvol_parea"  
+```
+

@@ -13,10 +13,10 @@
 
 # Original data from published FRL values in the ER-PD, Dated June 14 2019
 
-load("./Data/mrAuditFeb24/Fiji_ER_Estimate_Params.RData")
+load("./Data/mrAuditJuly24/Fiji_ER_Estimate_Params.RData")
 
-MonitoredValues$year1$FDegBurnData <- read.table( "./Data/mrAuditFeb24/Burn2019.txt", sep="\t", header=TRUE)[, c("year", "area_ha", "age_yrs")]
-MonitoredValues$year2$FDegBurnData <- read.table( "./Data/mrAuditFeb24/Burn2020.txt", sep="\t", header=TRUE)[, c("year", "area_ha", "age_yrs")]
+MonitoredValues$year1$FDegBurnData <- read.table( "./Data/mrAuditJuly24/Burn2019.txt", sep="\t", header=TRUE)[, c("year", "area_ha", "age_yrs")]
+MonitoredValues$year2$FDegBurnData <- read.table( "./Data/mrAuditJuly24/Burn2020.txt", sep="\t", header=TRUE)[, c("year", "area_ha", "age_yrs")]
 
 
 # Published values from the Fiji Bureau of Stats. Ann. 2021 Table 3.8 Timber Production
@@ -27,7 +27,7 @@ MonitoredValues$year1$FPlnVolHarvSwd <- 419088
 MonitoredValues$year2$FPlnVolHarvSwd <- 385314
 
 
-load("./Data/frlAuditFeb24/fiji_frl_overall_years.RData", envir=(NE <- new.env()))
+load("./Data/frlAuditJuly24/fiji_frl_overall_years.RData", envir=(NE <- new.env()))
 ErpaYearlyFRL <- NE$ErpaYearlyFRL
 rm(NE)
 
@@ -75,4 +75,4 @@ MonitoringReportParams$ErpaPreviousERs<- 0
 MonitoringReportParams$FDegUncertaintyDiscount<- 0.15
 
 
-save.image("./Data/mrAuditFeb24/Fiji_ER_Estimate_Params.RData")
+save.image("./Data/mrAuditJuly24/Fiji_ER_Estimate_Params.RData")
