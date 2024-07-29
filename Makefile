@@ -2,6 +2,8 @@
 all: run-Fiji-FRL run-FijiER_EST run-test
 
 run-Fiji-FRL:
+	Rscript -e 'devtools::install("../ValueWithUncertainty")'
+	Rscript -e 'devtools::install("../FijiNFMSCalculations")'
 	Rscript -e 'source("./Fiji_FRL_AccuracyAssessment.R")'
 	Rscript -e 'source("./Fiji_FRL_NFIEmissionFactors.R")'
 	Rscript -e 'source("./Fiji_FRL_Estimate_Values.R")'
@@ -38,25 +40,35 @@ run-Fiji-ER_EST:
 	Rscript -e 'source("./Fiji_ER_Estimate_UC.R")'
 	Rscript -e 'source("./Fiji_ER_Estimate_Sensitivity.R")'
 	
-run-create-reports:
+run-create-reports-ER:
 	-rm -rf reports/*_cache
 	-rm \
-		reports/Fiji_FRL_Report.html \
 		reports/Fiji_ER_Report.html \
 		reports/Fiji_ER_Estimate_UC.html \
 		reports/Fiji_ER_Estimate_Values.html \
 		reports/Fiji_ER_Estimate_AccuracyAssesment.html \
 		reports/Fiji_MonitoringReportExtraTables.html
-	Rscript -e 'source("./createReport_FRL.R")'
 	Rscript -e 'source("./createReport_ER.R")'
-	cp Fiji_ER_Estimate_AccuracyAssessment.pdf ./Data/mrAuditFeb24/
-	cp Fiji_ER_Estimate_Sensitivity.pdf ./Data/mrAuditFeb24/
-	cp Fiji_ER_Estimate_UC.pdf ./Data/mrAuditFeb24/
-	cp Fiji_ER_Estimate_Values.pdf ./Data/mrAuditFeb24/
-	cp ./reports/Fiji_FRL_Report.html ./Data/frlAuditFeb24/
-	cp ./reports/Fiji_ER_*.html ./Data/mrAuditFeb24/
+	cp Fiji_ER_Estimate_AccuracyAssessment.pdf ./Data/mrAuditJuly24/
+	cp Fiji_ER_Estimate_Sensitivity.pdf ./Data/mrAuditJuly24/
+	cp Fiji_ER_Estimate_UC.pdf ./Data/mrAuditJuly24/
+	cp Fiji_ER_Estimate_Values.pdf ./Data/mrAuditJuly24/
+	cp ./reports/Fiji_ER_*.html ./Data/mrAuditJuly24/
 	-rm -rf reports/*_cache
 
+
+run-create-reports-FRL:
+	-rm -rf reports/*_cache
+	-rm \
+		reports/Fiji_FRL_Report.html 
+	Rscript -e 'source("./createReport_FRL.R")'
+	cp Fiji_FRL_AccuracyAssessment.pdf ./Data/frlAuditJuly24/
+	cp Fiji_FRL_Estimate_Values.pdf ./Data/frlAuditJuly24/
+	cp Fiji_FRL_NFIEmmissionFactors.pdf ./Data/frlAuditJuly24/
+	cp Fiji_FRL_Report.pdf ./Data/frlAuditJuly24/
+	cp Fiji_FRL_Tables.pdf ./Data/frlAuditJuly24/
+	cp ./reports/Fiji_FRL_Report.html ./Data/frlAuditJuly24/
+	-rm -rf reports/*_cache
 
 
 run-test-ER_EST:

@@ -8,7 +8,7 @@ library(VGAM)
 library(FijiNFMSCalculations)
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/mrAuditFeb24/", filename))
+  return(paste0("./Data/mrAuditJuly24/", filename))
 }
 
 aa_sample <- read.csv(file = getDataPath("aa_sample.csv"))
