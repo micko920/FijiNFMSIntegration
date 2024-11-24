@@ -58,6 +58,7 @@ MonitoringReportParams$ErpaYearlyFRLFDegNonProxyUCI <- ErpaYearlyFRL$erpa_yearly
 MonitoringReportParams$ErpaYearlyFRLFDegNonProxyLCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDegNonProxy","LCI"]
 
 
+
 MonitoringReportParams$ErpaTransferredERs<- 0
 
 MonitoringReportParams$ErpaContestedERs<- 0

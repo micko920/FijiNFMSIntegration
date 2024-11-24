@@ -15,6 +15,22 @@ library(rlang)
 library(dplyr)
 library(kableExtra)
 if (!exists("fileFormat")) fileFormat <- params$file_format
+
+formatPercent <- function(x) {
+  return(ifelse(is.na(x),"--", paste(format(round(x * 100, 2), nsmall = 2), "%")))
+}
+
+formatMaxPercent <- function(x) {
+  return(ifelse(x>1,">100%",formatPercent(x)))
+}
+
+formatNumber <- function(x) {
+  return(format(round(x, 0), big.mark = ",", digits= 4, nsmall = 0))
+}
+
+formatDecimal <- function(x) {
+  return(format(round(x, 4), nsmall = 4))
+}
 ```
 
 
@@ -44,4 +60,121 @@ Table4_3 %>%
     latex_options = c("hold_position", "scale_down")
   )
 ```
+```{r echo = FALSE}
 
+
+t <- data.frame(
+    A = c(
+      sum(ErpaYearlyFRL$erpa_yearly$yearly[1,"2019"]) +
+      sum(ErpaYearlyFRL$erpa_yearly$yearly[1,"2020"]),
+      EmRems_Values$year1$GrossEmDefor +
+      EmRems_Values$year2$GrossEmDefor
+    ),
+    B = c(
+      sum(ErpaYearlyFRL$erpa_yearly$yearly[c(2,3,4,8),"2019"]) +
+      sum(ErpaYearlyFRL$erpa_yearly$yearly[c(2,3,4,8),"2020"]),
+      EmRems_Values$year1$NetEmRemsFell +
+      EmRems_Values$year1$EstEmFire +
+      EmRems_Values$year2$NetEmRemsFell +
+      EmRems_Values$year2$EstEmFire +
+      EmRems_Values$year1$NetEmRemsNFDeg +
+      EmRems_Values$year2$NetEmRemsNFDeg
+    ),
+    C = c(
+      sum(ErpaYearlyFRL$erpa_yearly$yearly[c(7),"2019"]) + 
+      sum(ErpaYearlyFRL$erpa_yearly$yearly[c(7),"2020"]),
+      EmRems_Values$year1$EstRemARefor + 
+      EmRems_Values$year2$EstRemARefor
+    ),
+    D = c(
+      sum(ErpaYearlyFRL$erpa_yearly$yearly[c(5,6,9,10),"2019"]) + 
+      sum(ErpaYearlyFRL$erpa_yearly$yearly[c(5,6,9,10),"2020"]),
+      EmRems_Values$year1$EstEmFPlnHwd + 
+      EmRems_Values$year1$EstRemFPlnHwd +
+      EmRems_Values$year1$EstEmFPlnSwd + 
+      EmRems_Values$year1$EstRemFPlnSwd +
+      EmRems_Values$year2$EstEmFPlnHwd + 
+      EmRems_Values$year2$EstRemFPlnHwd +
+      EmRems_Values$year2$EstEmFPlnSwd + 
+      EmRems_Values$year2$EstRemFPlnSwd
+    ))
+t <- rbind(t,t[1,]- t[2,])
+t <- cbind(t,rowSums(t))
+t <- rbind(t,t[3,] * MonitoringReportParams$RpMpRatio)
+
+createTable_4_3_new <- function(MR, MRparams) {
+  Table4_3 <- data.frame(
+    row.names = c(
+      "Emission or removals in the Reference Level (tCO2-e)",
+      "Emissions or removals under the ER Program during the Monitoring Period (tCO2-e)",
+      "Emission Reductions during the Monitoring Period (tCO2-e)",
+      "Length of the Reporting period / Length of the Monitoring Period (# days/# days)",
+      "Emission Reductions during the Reporting Period (tCO2-e)"
+    ),
+    A = c(
+      formatNumber(t[c(1,2,3),"A"]),
+      paste(
+        formatNumber(MRparams$RpDays),
+        "/",
+        formatNumber(MRparams$MpDays)
+      ),
+      formatNumber(t[c(4),"A"])
+    ),
+    B = c(
+      formatNumber(t[c(1,2,3),"B"]),
+      paste(
+        formatNumber(MRparams$RpDays),
+        "/",
+        formatNumber(MRparams$MpDays)
+      ),
+      formatNumber(t[c(4),"B"])
+    ),
+    C = c(
+      formatNumber(t[c(1,2,3),"C"]),
+      paste(
+        formatNumber(MRparams$RpDays),
+        "/",
+        formatNumber(MRparams$MpDays)
+      ),
+      formatNumber(t[c(4),"C"])
+    ),
+    D = c(
+      formatNumber(t[c(1,2,3),"D"]),
+      paste(
+        formatNumber(MRparams$RpDays),
+        "/",
+        formatNumber(MRparams$MpDays)
+      ),
+      formatNumber(t[c(4),"D"])
+    ),
+    E = c(
+      formatNumber(t[c(1,2,3),5]),
+      paste(
+        formatNumber(MRparams$RpDays),
+        "/",
+        formatNumber(MRparams$MpDays)
+      ),
+      formatNumber(t[c(4),5])
+    )
+  )
+  
+  names(Table4_3) <- c(
+    "Deforestation",    # A
+    "If applicable, forest degradation",    # B
+    "If applicable, enhanced removals from afforestation/ reforestation (A/R)",    # C
+    "If applicable, enhanced removals from other activities besides A/R*",    # D
+    "Total (tCO2-e)" # E
+  )
+  
+  return(Table4_3)
+}
+
+createTable_4_3_new(MR_Values, MonitoringReportParams) %>%
+  kable(fileFormat, caption = "Updated Monitoring Report Table 4.3", digits = 4) %>%
+  footnote(symbol = 
+  "See template", threeparttable = FALSE) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+```

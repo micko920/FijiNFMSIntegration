@@ -129,11 +129,7 @@ CalcER_Estimate_Values <- function(statusCallback, interrupted, calcEnv) {
   MonitoredValues$year2$NFDegArea_LCI <- (428.5581 / 2 - (qnorm(0.95) * 88.5538 / sqrt(2)))
   MonitoredValues$year2$NFDegArea_UCI <- (428.5581 / 2 + (qnorm(0.95) * 88.5538 / sqrt(2)))
 
-  MonitoringReportParams$ErpaYearlyFRL <- ErpaYearlyFRL$erpa_yearly$mp_frl["NetFRL","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLFDeg <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDeg","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLDefor <- ErpaYearlyFRL$erpa_yearly$mp_frl["Defor","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLEnh <- ErpaYearlyFRL$erpa_yearly$mp_frl["Enh","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLFDegNonProxy <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDegNonProxy","MP_FRL"]
+
 
 
   checkStatus <- function(status) {

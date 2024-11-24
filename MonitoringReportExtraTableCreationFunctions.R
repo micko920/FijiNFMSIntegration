@@ -9,7 +9,7 @@ formatMaxPercent <- function(x) {
 }
 
 formatNumber <- function(x) {
-  return(format(round(x, 0), nsmall = 0))
+  return(format(round(x, 0), big.mark = ",", digits= 4, nsmall = 0))
 }
 
 formatDecimal <- function(x) {
@@ -30,6 +30,11 @@ createTable_MPEmRems <- function(MR) {
       formatNumber(MR$year2$EstEmRemsFDeg),
       formatNumber(MR$MpEstEmRemsFDeg)
     ),
+    DegradationNonProxy = c(
+      formatNumber(MR$year1$EstEmRemsFDegNonProxy),
+      formatNumber(MR$year2$EstEmRemsFDegNonProxy),
+      formatNumber(MR$MpEstEmRemsFDegNonProxy)
+    ),
     Removals = c(
       formatNumber(MR$year1$EstEmRemsEnh),
       formatNumber(MR$year2$EstEmRemsEnh),
@@ -45,6 +50,7 @@ createTable_MPEmRems <- function(MR) {
     "Year",
     "Emissions from deforestation (tCO2e/yr)",
     "Emissions from forest degradation (tCO2e/yr)",
+    "Emissions from forest degradation Non Proxy (tCO2e/yr)",
     "Removals by sinks (tCO2e/yr)",
     "Net emissions and removals (tCO2e/yr)"
   )
