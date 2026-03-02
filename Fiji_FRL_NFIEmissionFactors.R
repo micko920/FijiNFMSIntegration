@@ -1,7 +1,7 @@
 
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/frlAuditJuly24/", filename))
+  return(paste0("./Data/frlPostAuditOct25/", filename))
 }
 
 
@@ -16,6 +16,8 @@ library(VGAM)
 library(FijiNFMSCalculations)
 
 options(show.error.locations = TRUE)
+outputFilename <- "Fiji_FRL_NFIEmmissionFactors"
+pdf(paste0(getDataPath(outputFilename), ".pdf"))
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 options(max.print=50)
@@ -35,8 +37,7 @@ MCRuns <- FRLParams$runs
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
-outputFilename <- "Fiji_FRL_NFIEmmissionFactors"
-pdf(paste0(outputFilename, ".pdf"))
+
 
 print("Running NFI calculations and generating emission factors....")
 timestamp <- Sys.time()

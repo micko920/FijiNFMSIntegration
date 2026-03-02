@@ -12,4 +12,6 @@ MonitoredValues$year2$FPlnAreaPlantSwd <- 1910
 MonitoredValues$year1$FDegFellVol <- 22293
 MonitoredValues$year2$FDegFellVol <- 20841
 MonitoredValues$year1$FDegFellArea <- 1670
+MonitoredValues$year1$FDegFellAreaSurveyArea <- 1670
 MonitoredValues$year2$FDegFellArea <- 1457
+MonitoredValues$year2$FDegFellAreaSurveyArea <- 1457

@@ -1,6 +1,4 @@
 ---
-title: "Mapped Areas Accuracy Assessment Report"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 header-includes: \usepackage{caption}
 always_allow_html: yes
 params:
@@ -15,9 +13,20 @@ library(rlang)
 library(dplyr)
 library(kableExtra)
 if (!exists("fileFormat")) fileFormat <- params$file_format
+#Set the report year via the ReportYear global variable. 
+if (!exists("ReportYear")) ReportPeriod <- MonitoringReportParams$period$description
 ```
 
+---
+title: "Mapped Areas Accuracy Assessment Report `r ReportPeriod`"
+---
+
 \captionsetup[table]{labelformat=empty}
+
+**Report Period:** `r ReportPeriod`  
+**Generated:** `r format(Sys.time(), '%d %B, %Y')`
+
+
 
 # Error Matrix
 ```{r echo = FALSE}

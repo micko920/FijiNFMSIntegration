@@ -35,6 +35,7 @@ CalcER_Estimate_AccuracyAssessment <- function(statusCallback, interrupted, calc
   }
 
   AdjustedAreas <- CalcAdjustedAreas(lcc_mapped_areas, aa_sample, 2, progress = checkStatus)
+  AdjustedAreas$period <- MonitoringReportParams$period
 
 
   # Some results

@@ -7,17 +7,20 @@ library(survey)
 library(VGAM)
 library(FijiNFMSCalculations)
 
-getDataPath<-function(filename) {
-  return(paste0("./Data/mrAuditJuly24/", filename))
-}
-
-aa_sample <- read.csv(file = getDataPath("aa_sample.csv"))
-lcc_mapped_areas <- read.csv(file = getDataPath("lcc_mapped_areas.csv"))
+source("./getDataPath.R")
 load(file = getDataPath("Fiji_ER_Estimate_Params.RData"))
+aa_sample <- read.csv(file = getPeriodDataPath("aa_sample", MonitoringReportParams$period$description, "csv"))
+names(aa_sample) <- tolower(names(aa_sample))
+lcc_mapped_areas <- read.csv(file = getPeriodDataPath("lcc_mapped_areas", MonitoringReportParams$period$description, "csv"))
+names(lcc_mapped_areas) <- tolower(names(lcc_mapped_areas))
+
+
+source("./calcER_Estimate_AccuracyAssessment.R")
 
 options("width" = 220)
 options(digits = 6)
 options(show.error.locations = TRUE)
+pdf(file=getPeriodDataPath(outputFilename, MonitoringReportParams$period$description, "pdf"))
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 
@@ -35,12 +38,7 @@ plot_mc_output <- FALSE # Turn on plots for MC samples
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
-
-
-source("./calcER_Estimate_AccuracyAssessment.R")
-
-pdf(paste0(outputFilename, ".pdf"))
-
+print(paste0("Report Period: ", MonitoringReportParams$period$description))
 print("Running Accuracy Assessment and generating adjusted areas....")
 timestamp <- Sys.time()
 print(date())
@@ -77,10 +75,10 @@ print(difftime(Sys.time(), timestamp, unit = "auto"))
 
 list2env(result$env, environment())
 
-fullFilename <- paste(outputFilename, "RData", sep = ".")
+
 save(
-        list = outputSaveNames,
-        file = paste(getDataPath(fullFilename))
+  list = outputSaveNames,
+  file = paste(getPeriodDataPath(outputFilename,MonitoringReportParams$period$description,"RData"))
 )
 
 

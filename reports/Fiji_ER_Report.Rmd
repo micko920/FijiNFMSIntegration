@@ -1,47 +1,67 @@
 ---
-title: "Fiji ER Report"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 header-includes: \usepackage{caption}
-params:
-  file_format: html
 always_allow_html: yes
+params:
+  file_format: "html"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache=TRUE,
                       message=FALSE, warning=FALSE)
 
-
 library(rlang)
 library(dplyr)
 library(kableExtra)
 library(FijiNFMSCalculations)
 if (!exists("fileFormat")) fileFormat <- params$file_format
+#Set the report year via the ReportYear global variable. 
+if (!exists("ReportYear")) ReportPeriod <- MonitoringReportParams$period$description
 getOption("max.print")
+
+formatPercent <- function(x) {
+  return(ifelse(is.na(x),"--", paste(format(round(x * 100, 2), nsmall = 2), "%")))
+}
+
+formatMaxPercent <- function(x) {
+  return(ifelse(x>1,">100%",formatPercent(x)))
+}
+
+formatNumber <- function(x) {
+  return(format(round(x, 0), big.mark = ",", digits= 4, nsmall = 0))
+}
+
+formatDecimal <- function(x) {
+  return(format(round(x, 4), nsmall = 4))
+}
 ```
+
+---
+title: "Fiji ER Report"
+---
 
 \captionsetup[table]{labelformat=empty}
 
-
+**Generated:** `r format(Sys.time(), '%d %B, %Y')`
 
 # Monitoring Period yearly chart of accounts FRL and Monitored Em/Rems
 ```{r echo = FALSE}
 options(max.print=1000000)
-
+crediting_period <- 2019:MonitoringReportParams$period$end
 mp_yearly <- 
   cbind(
-    t(rbind(as.data.frame(EmRems_Values$year1),as.data.frame(EmRems_Values$year2))),
-    as.data.frame(replicate(3, rep.int(0,22))))
+    t(do.call(rbind,MultiYear_EmRems_Values$year[as.character(crediting_period)])),
+    as.data.frame(replicate(length(FRLMonitoringPeriodProjectionYears) - length(crediting_period), 
+                  rep.int(0,length(MultiYear_EmRems_Values$year[[as.character(crediting_period[1])]])))))
   
 mp_yearly <- mp_yearly[order(row.names(mp_yearly)),]
       
-names(mp_yearly) <- c(2019:2023)
+names(mp_yearly) <- FRLMonitoringPeriodProjectionYears
 
 
 
 overall_frl <- rbind( 
-  ErpaYearlyFRL$erpa_yearly$yearly[2:6],
-  mp_yearly[1:5]
+  ErpaYearlyFRL$erpa_yearly$yearly[1:FRLMonitoringPeriodProjectionLength+1],
+  mp_yearly[1:FRLMonitoringPeriodProjectionLength]
 )
 
 
@@ -56,7 +76,7 @@ row.names(overall_frl) <- NULL
 t <- overall_frl
 t %>% 
   kable(fileFormat, caption = "Monitoring Period FRL and Monitored values",  
-        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
+        format.args = list(big.mark = ",", digits= 2, nsmall = 2)) %>%
   
   kable_styling(
     latex_options = c("hold_position", "scale_down")
@@ -65,27 +85,17 @@ t %>%
 
 ```
 # Year Monitoring Period Results Tables
-## Year 1
-```{r echo = FALSE}
-t <- ResultsTables$year1
-t %>% 
-  kable(fileFormat, caption = "Monitoring Period values: year 1",
-        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
-  kable_styling(
-    latex_options = c("hold_position", "scale_down")
-  )
 
-```
+```{r echo = FALSE, results="asis"}
+for (y in names(MultiYear_ResultsTables$year)) {
+  cat(paste0("## Year ",y,"\n"))
+  t <- MultiYear_ResultsTables$year[[y]]
+  t %>% 
+    kable(fileFormat, caption = paste0("Monitoring Period values: year ",y),
+        format.args = list(big.mark = ",", digits= 2, nsmall = 2)) %>%
+      kable_styling(latex_options = c("hold_position", "scale_down")) %>% cat
 
-## Year 2
-```{r echo = FALSE}
-t <- ResultsTables$year2
-t %>% 
-  kable(fileFormat, caption = "Monitoring Period values: year 2",
-        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
-  kable_styling(
-    latex_options = c("hold_position", "scale_down")
-  )
+}
 
 ```
 
@@ -268,7 +278,7 @@ ParameterTable <- rbind(ParameterTable,list(
     
 ParameterTable %>% 
   kable(fileFormat, caption = "Parameter and associated uncertainty",
-        format.args = list(big.mark = ",", digits= 4, nsmall = 4)) %>%
+        format.args = list(big.mark = ",", digits= 2, nsmall = 4)) %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")
   )
@@ -278,8 +288,11 @@ ParameterTable %>%
 # Table of Monitoring Report Parameters 
 ```{r echo = FALSE}
 
+t <- rbind(as.data.frame(ReportSettings$params[[1]]),as.data.frame(ReportSettings$params[[2]]))
+t <- format(t,big.mark = ",",digits= 2, nsmall = 2,scientific=F)
+t <- t(t)
 
-data.frame(value = unlist(MonitoringReportParams)) %>% 
+t %>% 
   kable(fileFormat, caption = "Monitoring report parameters", 
         format.args = list(big.mark = ",",digits=2, nsmall = 0,scientific = FALSE)) %>%
   kable_styling(
@@ -301,254 +314,209 @@ MVTable <- data.frame(
   model=character(),
   stringsAsFactors=FALSE)
 
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPDF,Lowland} \\end{align}",
-  name  = "DeforAreaLow",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$DeforAreaLow,
-  LCI = unname(quantile(MonitoredValues$year1$McDeforAreaLow,probs=QLCI)),
-  UCI = unname(quantile(MonitoredValues$year1$McDeforAreaLow,probs=QUCI)),
-  error = NA,
-  model ="Sampled"
-), stringsAsFactors=FALSE)  
-    
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPDF,Upland} \\end{align}",
-  name  = "DeforAreaUp",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$DeforAreaUp,
-  LCI = unname(quantile(MonitoredValues$year1$McDeforAreaUp,probs=QLCI)),
-  UCI = unname(quantile(MonitoredValues$year1$McDeforAreaUp,probs=QUCI)),
-  error = NA,
-  model ="Sampled"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPAR,t} \\end{align}",
-  name  = "AReforArea",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$AReforArea$area_ha[1],
-  LCI = unname(quantile(MonitoredValues$year1$McAReforArea,probs=QLCI)),
-  UCI = unname(quantile(MonitoredValues$year1$McAReforArea,probs=QUCI)),
-  error = NA,
-  model ="Sampled"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPFD,t} \\end{align}",
-  name  = "FDegFellArea",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$FDegFellArea$area_ha,
-  LCI = MonitoredValues$year1$FDegFellArea$area_ha - MonitoredValues$year1$FDegFellArea$area_ha * ErrAreaFell,
-  UCI = MonitoredValues$year1$FDegFellArea$area_ha + MonitoredValues$year1$FDegFellArea$area_ha * ErrAreaFell,
-  error = ErrAreaFell,
-  model ="Triangle"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPHWPlant,t} \\end{align}",
-  name  = "FPlnAreaPlantHwd",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$FPlnAreaPlantHwd$area_ha,
-  LCI = MonitoredValues$year1$FPlnAreaPlantHwd$area_ha - MonitoredValues$year1$FPlnAreaPlantHwd$area_ha * ErrAreaARefor,
-  UCI = MonitoredValues$year1$FPlnAreaPlantHwd$area_ha + MonitoredValues$year1$FPlnAreaPlantHwd$area_ha * ErrAreaARefor,
-  error = ErrAreaARefor,
-  model ="Triangle"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPSWPlant,t} \\end{align}",
-  name  = "FPlnAreaPlantSwd",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$FPlnAreaPlantSwd$area_ha,
-  LCI = MonitoredValues$year1$FPlnAreaPlantSwd$area_ha - MonitoredValues$year1$FPlnAreaPlantSwd$area_ha * ErrAreaARefor,
-  UCI = MonitoredValues$year1$FPlnAreaPlantSwd$area_ha + MonitoredValues$year1$FPlnAreaPlantSwd$area_ha * ErrAreaARefor,
-  error = ErrAreaARefor,
-  model ="Triangle"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPNFF,t} \\end{align}",
-  name  = "NFDegArea",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$NFDegArea,
-  LCI = MonitoredValues$year1$NFDegArea_LCI,
-  UCI = MonitoredValues$year1$NFDegArea_UCI,
-  error = NA,
-  model ="Triangle"
-), stringsAsFactors=FALSE) 
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} V_{MPNF,t} \\end{align}",
-  name  = "FDegFellVol",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$FDegFellVol,
-  LCI = NA,
-  UCI = NA,
-  error = NA,
-  model = NA
-), stringsAsFactors=FALSE) 
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} V_{MPHWHarvest,t} \\end{align}",
-  name  = "FPlnVolHarvHwd",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$FPlnVolHarvHwd,
-  LCI = NA,
-  UCI = NA,
-  error = NA,
-  model = NA
-), stringsAsFactors=FALSE) 
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} V_{MPSWHarvest,t} \\end{align}",
-  name  = "FPlnVolHarvSwd",
-  year = as.character(MonitoredValues$year1$year),
-  value = MonitoredValues$year1$FPlnVolHarvSwd,
-  LCI = NA,
-  UCI = NA,
-  error = NA,
-  model = NA
-), stringsAsFactors=FALSE) 
 
 
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPDF,Lowland} \\end{align}",
-  name  = "DeforAreaLow",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$DeforAreaLow,
-  LCI = unname(quantile(MonitoredValues$year2$McDeforAreaLow,probs=QLCI)),
-  UCI = unname(quantile(MonitoredValues$year2$McDeforAreaLow,probs=QUCI)),
-  error = NA,
-  model ="Sampled"
-), stringsAsFactors=FALSE)  
-    
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPDF,Upland} \\end{align}",
-  name  = "DeforAreaUp",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$DeforAreaUp,
-  LCI = unname(quantile(MonitoredValues$year2$McDeforAreaUp,probs=QLCI)),
-  UCI = unname(quantile(MonitoredValues$year2$McDeforAreaUp,probs=QUCI)),
-  error = NA,
-  model ="Sampled"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPAR,t} \\end{align}",
-  name  = "AReforArea",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$AReforArea$area_ha[1],
-  LCI = unname(quantile(MonitoredValues$year2$McAReforArea,probs=QLCI)),
-  UCI = unname(quantile(MonitoredValues$year2$McAReforArea,probs=QUCI)),
-  error = NA,
-  model ="Sampled"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPFD,t} \\end{align}",
-  name  = "FDegFellArea",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$FDegFellArea$area_ha[2],
-  LCI = MonitoredValues$year2$FDegFellArea$area_ha[2] - MonitoredValues$year2$FDegFellArea$area_ha[2] * ErrAreaFell,
-  UCI = MonitoredValues$year2$FDegFellArea$area_ha[2] + MonitoredValues$year2$FDegFellArea$area_ha[2] * ErrAreaFell,
-  error = ErrAreaFell,
-  model ="Triangle"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPHWPlant,t} \\end{align}",
-  name  = "FPlnAreaPlantHwd",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$FPlnAreaPlantHwd$area_ha[2],
-  LCI = MonitoredValues$year2$FPlnAreaPlantHwd$area_ha[2] - MonitoredValues$year2$FPlnAreaPlantHwd$area_ha[2] * ErrAreaARefor,
-  UCI = MonitoredValues$year2$FPlnAreaPlantHwd$area_ha[2] + MonitoredValues$year2$FPlnAreaPlantHwd$area_ha[2] * ErrAreaARefor,
-  error = ErrAreaARefor,
-  model ="Triangle"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPSWPlant,t} \\end{align}",
-  name  = "FPlnAreaPlantSwd",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$FPlnAreaPlantSwd$area_ha[2],
-  LCI = MonitoredValues$year2$FPlnAreaPlantSwd$area_ha[2] - MonitoredValues$year2$FPlnAreaPlantSwd$area_ha[2] * ErrAreaARefor,
-  UCI = MonitoredValues$year2$FPlnAreaPlantSwd$area_ha[2] + MonitoredValues$year2$FPlnAreaPlantSwd$area_ha[2] * ErrAreaARefor,
-  error = ErrAreaARefor,
-  model ="Triangle"
-), stringsAsFactors=FALSE)  
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} A_{MPNFF,t} \\end{align}",
-  name  = "NFDegArea",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$NFDegArea,
-  LCI = MonitoredValues$year2$NFDegArea_LCI,
-  UCI = MonitoredValues$year2$NFDegArea_UCI,
-  error = NA,
-  model ="Triangle"
-), stringsAsFactors=FALSE) 
-
-
-## New values no UC
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} V_{MPNF,t} \\end{align}",
-  name  = "FDegFellVol",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$FDegFellVol,
-  LCI = NA,
-  UCI = NA,
-  error = NA,
-  model = NA
-), stringsAsFactors=FALSE) 
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} V_{MPHWHarvest,t} \\end{align}",
-  name  = "FPlnVolHarvHwd",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$FPlnVolHarvHwd,
-  LCI = NA,
-  UCI = NA,
-  error = NA,
-  model = NA
-), stringsAsFactors=FALSE) 
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} V_{MPSWHarvest,t} \\end{align}",
-  name  = "FPlnVolHarvSwd",
-  year = as.character(MonitoredValues$year2$year),
-  value = MonitoredValues$year2$FPlnVolHarvSwd,
-  LCI = NA,
-  UCI = NA,
-  error = NA,
-  model = NA
-), stringsAsFactors=FALSE) 
-
-MVTable <- rbind(MVTable,list(
-  symbol = "\\begin{align} \\Lambda_{MPSWBurn,t} \\end{align}",
-  name  = "FDegBurnData",
-  year = NA,
-  value = NA,
-  LCI = NA,
-  UCI = NA,
-  error = NA,
-  model ="Census"
-), stringsAsFactors=FALSE) 
-
-
-
-f <- function(x) {
-  y <- as.character(format(x,big.mark = ",",digits= 2, nsmall = 2,scientific=F))
-  return(replace(y,are_na(x)," "))
+createEntry <- function(MVTable, symbol, name, model, mv, value_fun) {
+  return(
+    rbind(MVTable, data.frame(
+      list(
+      symbol = symbol,
+      name  = name,
+      model = model),
+      do.call(
+        rbind, 
+        lapply(mv, 
+        function(x) {
+          r <- sapply(value_fun(x), function (y) {
+            if (is.numeric(y))
+              return(as.character(format(y,big.mark = ",",digits= 2, nsmall = 2,scientific=F)))
+          else
+              return(y)
+          })
+          return(c(year=x$year,r))
+        }
+        )
+      )
+    ), stringsAsFactors=FALSE))
 }
 
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} A_{MPDF,Lowland} \\end{align}",
+  name  = "DeforAreaLow",
+  model ="Sampled",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value=x$DeforAreaLow,
+      LCI = unname(quantile(x$McDeforAreaLow,probs=QLCI)),
+      UCI = unname(quantile(x$McDeforAreaLow,probs=QUCI)),
+      error = NA
+    )
+)
+  
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} A_{MPDF,Lowland} \\end{align}",
+  name  = "DeforAreaLow",
+  model ="Sampled",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value=x$DeforAreaLow,
+      LCI = unname(quantile(x$McDeforAreaLow,probs=QLCI)),
+      UCI = unname(quantile(x$McDeforAreaLow,probs=QUCI)),
+      error = NA
+    )
+  )
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} A_{MPDF,Upland} \\end{align}",
+  name  = "DeforAreaUp",
+  model ="Sampled",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = MonitoredValues$year1$DeforAreaUp,
+      LCI = unname(quantile(x$McDeforAreaUp,probs=QLCI)),
+      UCI = unname(quantile(x$McDeforAreaUp,probs=QUCI)),
+      error = NA
+    )
+)
+
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} A_{MPAR,t} \\end{align}",
+  name  = "AReforArea",
+  model ="Sampled",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = x$AReforArea$area_ha[1],
+      LCI = unname(quantile(x$McAReforArea,probs=QLCI)),
+      UCI = unname(quantile(x$McAReforArea,probs=QUCI)),
+      error = NA
+    )
+)
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} A_{MPFD,t} \\end{align}",
+  name  = "FDegFellArea",
+  model ="Triangle",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = paste(x$FDegFellArea$area_ha, collapse = ", "),
+      LCI = paste(x$FDegFellArea$area_ha - x$FDegFellArea$area_ha * ErrAreaFell, collapse = ", "),
+      UCI = paste(x$FDegFellArea$area_ha + x$FDegFellArea$area_ha * ErrAreaFell, collapse = ", "),
+      error = ErrAreaFell
+    )
+)
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} A_{MPHWPlant,t} \\end{align}",
+  name  = "FPlnAreaPlantHwd",
+  model ="Triangle",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = paste(x$FPlnAreaPlantHwd$area_ha, collapse = ", "),
+      LCI = paste(x$FPlnAreaPlantHwd$area_ha - x$FPlnAreaPlantHwd$area_ha * ErrAreaARefor, collapse = ", "),
+      UCI = paste(x$FPlnAreaPlantHwd$area_ha + x$FPlnAreaPlantHwd$area_ha * ErrAreaARefor, collapse = ", "),
+      error = ErrAreaARefor
+  )
+)
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} A_{MPSWPlant,t} \\end{align}",
+  name  = "FPlnAreaPlantSwd",
+  model ="Triangle",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = paste(x$FPlnAreaPlantSwd$area_ha, collapse = ", "),
+      LCI = paste(x$FPlnAreaPlantSwd$area_ha - x$FPlnAreaPlantSwd$area_ha * ErrAreaARefor, collapse = ", "),
+      UCI = paste(x$FPlnAreaPlantSwd$area_ha + x$FPlnAreaPlantSwd$area_ha * ErrAreaARefor, collapse = ", "),
+      error = ErrAreaARefor
+    )
+)  
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} A_{MPNFF,t} \\end{align}",
+  name  = "NFDegArea",
+  model ="Triangle",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = x$NFDegArea,
+      LCI = x$NFDegArea_LCI,
+      UCI = x$NFDegArea_UCI,
+      error = NA
+  )
+) 
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} V_{MPNF,t} \\end{align}",
+  name  = "FDegFellVol",
+  model = NA,
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = x$FDegFellVol,
+      LCI = NA,
+      UCI = NA,
+      error = NA
+  )
+) 
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} V_{MPHWHarvest,t} \\end{align}",
+  name  = "FPlnVolHarvHwd",
+  model = NA,
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = x$FPlnVolHarvHwd,
+      LCI = NA,
+      UCI = NA,
+      error = NA
+  )
+) 
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} V_{MPSWHarvest,t} \\end{align}",
+  name  = "FPlnVolHarvSwd",
+  model = NA,
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = x$FPlnVolHarvSwd,
+      LCI = NA,
+      UCI = NA,
+      error = NA
+  )
+) 
+
+
+MVTable<- createEntry(MVTable, 
+  symbol = "\\begin{align} \\Lambda_{MPSWBurn,t} \\end{align}",
+  name  = "FDegBurnData",
+  model ="Census",
+  MonitoredValues$year, 
+  function(x) 
+    c(
+      value = NA,
+      LCI = NA,
+      UCI = NA,
+      error = NA
+  )
+) 
+
+
+
+MVTable <- MVTable[order(MVTable$name),]
+rownames(MVTable) <- NULL
 
 
 MVTable %>% 
-  mutate(across(where(~ is.numeric(.x)), ~ f(.x)))%>% 
   kable(fileFormat, escape=FALSE, caption = "Monitored Values and associated uncertainty") %>%
   kable_styling(
     latex_options = c("hold_position", "scale_down")

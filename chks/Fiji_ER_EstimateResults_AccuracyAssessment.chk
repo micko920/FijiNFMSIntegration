@@ -10880,3 +10880,29 @@ $MCaaafor
 9999      0.00   0
 10000 14005.87   0
 
+$period
+$period$start
+[1] 2019
+
+$period$end
+[1] 2020
+
+$period$description
+[1] "2019-2020"
+
+$period$MpDays
+[1] 730
+
+$period$RpDays
+[1] 539
+
+$period$IsRpEqualToMp
+[1] FALSE
+
+$period$RpMpRatio
+[1] 0.738356
+
+$period$RpMpProrataYears
+[1] 1.47671
+
+

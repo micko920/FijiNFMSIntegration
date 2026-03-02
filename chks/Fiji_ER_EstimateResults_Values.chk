@@ -4,67 +4,70 @@ $year1$EstEmDeforUp
 [1] 809.656
 
 $year1$EstEmDeforLow
-[1] 65521.4
+[1] 65521.7
 
 $year1$GrossEmDefor
-[1] 66331.1
+[1] 66331.4
 
 $year1$EstEmFell
-[1] 106195
+[1] 85906.1
 
 $year1$EstRemFell
-[1] -2450.25
+[1] -3033.81
 
 $year1$NetEmRemsFell
-[1] 103744
+[1] 82872.3
 
 $year1$EstEmNFDeg
-[1] 35792.8
+[1] 36762.1
 
 $year1$NetEmRemsNFDeg
-[1] 35792.8
+[1] 36762.1
 
 $year1$EstEmFire
-[1] 3556.98
+[1] 4280.15
 
 $year1$EstRemARefor
-[1] -2967.61
+[1] -22723.4
 
 $year1$EstEmFPlnHwd
-[1] 49088.6
+[1] 52734.4
 
 $year1$EstEmFPlnSwd
-[1] 511410
+[1] 554339
 
 $year1$EstRemFPlnHwd
-[1] -30446.4
+[1] -30474.1
 
 $year1$EstRemFPlnSwd
-[1] -17302.3
+[1] -17318
 
 $year1$GrossEmFPln
-[1] 560499
+[1] 607073
 
 $year1$GrossRemFPln
-[1] -47748.7
+[1] -47792.1
 
 $year1$NetEmRemsFPln
-[1] 512750
+[1] 559281
 
 $year1$GrossEm
-[1] 772374
+[1] 800353
 
 $year1$GrossRem
-[1] -53166.5
+[1] -73549.3
 
 $year1$EstEmRemsFDeg
-[1] 143094
+[1] 82872.3
+
+$year1$EstEmRemsFDegNonProxy
+[1] 41042.3
 
 $year1$EstEmRemsEnh
-[1] 509782
+[1] 536557
 
 $year1$NetEmRems
-[1] 719208
+[1] 726803
 
 
 $year2
@@ -72,102 +75,108 @@ $year2$EstEmDeforUp
 [1] 809.656
 
 $year2$EstEmDeforLow
-[1] 65521.4
+[1] 65521.7
 
 $year2$GrossEmDefor
-[1] 66331.1
+[1] 66331.4
 
 $year2$EstEmFell
-[1] 85038.8
+[1] 80310.8
 
 $year2$EstRemFell
-[1] -8347.18
+[1] -8714.47
 
 $year2$NetEmRemsFell
-[1] 76691.6
+[1] 71596.3
 
 $year2$EstEmNFDeg
-[1] 35792.8
+[1] 36762.1
 
 $year2$NetEmRemsNFDeg
-[1] 35792.8
+[1] 36762.1
 
 $year2$EstEmFire
-[1] 4334.2
+[1] 5215.39
 
 $year2$EstRemARefor
-[1] -12607.5
+[1] -68170.2
 
 $year2$EstEmFPlnHwd
-[1] 53152.6
+[1] 55218.2
 
 $year2$EstEmFPlnSwd
-[1] 634278
+[1] 509665
 
 $year2$EstRemFPlnHwd
-[1] -30446.4
+[1] -60948.2
 
 $year2$EstRemFPlnSwd
-[1] -66675.8
+[1] -51108.8
 
 $year2$GrossEmFPln
-[1] 687430
+[1] 564883
 
 $year2$GrossRemFPln
-[1] -97122.2
+[1] -112057
 
 $year2$NetEmRemsFPln
-[1] 590308
+[1] 452826
 
 $year2$GrossEm
-[1] 878927
+[1] 753503
 
 $year2$GrossRem
-[1] -118077
+[1] -188942
 
 $year2$EstEmRemsFDeg
-[1] 116819
+[1] 71596.3
+
+$year2$EstEmRemsFDegNonProxy
+[1] 41977.5
 
 $year2$EstEmRemsEnh
-[1] 577700
+[1] 384656
 
 $year2$NetEmRems
-[1] 760850
+[1] 564561
 
 
 [1] "****** ER_Values *******"
 $MpGrossEmDefor
-[1] 132662
+[1] 132663
 
 $MpEstEmRemsFDeg
-[1] 259913
+[1] 154469
+
+$MpEstEmRemsFDegNonProxy
+[1] 83019.8
 
 $MpEstEmRemsEnh
-[1] 1087483
+[1] 921213
 
 $MpEstEmRemsDefEnh
-[1] 1220145
+[1] 1136896
 
 $MpNetEmRems
-[1] 1480058
+[1] 1291364
 
 $MpEstFRL
-[1] 2888635
+[1] 3000445
 
 $MpEstERs
-[1] 1408577
+[1] 1709081
 
 $MpEstFRLFDeg
-[1] 692551
+[1] 759716
 
 $MpEstERsFDeg
-[1] 432639
+[1] 605248
 
 $MpEstFRLDefEnh
-[1] 2196084
+[1] 2240729
 
 $MpEstERsDefEnh
-[1] 975939
+[1] 1103833
 
 [1] "***** MR_Values ********"
 $year1
@@ -175,16 +184,19 @@ $year1$year
 [1] 2019
 
 $year1$GrossEmDefor
-[1] 66331.1
+[1] 66331.4
 
 $year1$EstEmRemsFDeg
-[1] 143094
+[1] 82872.3
+
+$year1$EstEmRemsFDegNonProxy
+[1] 41042.3
 
 $year1$EstEmRemsEnh
-[1] 509782
+[1] 536557
 
 $year1$NetEmRems
-[1] 719208
+[1] 726803
 
 
 $year2
@@ -192,75 +204,93 @@ $year2$year
 [1] 2020
 
 $year2$GrossEmDefor
-[1] 66331.1
+[1] 66331.4
 
 $year2$EstEmRemsFDeg
-[1] 116819
+[1] 71596.3
+
+$year2$EstEmRemsFDegNonProxy
+[1] 41977.5
 
 $year2$EstEmRemsEnh
-[1] 577700
+[1] 384656
 
 $year2$NetEmRems
-[1] 760850
+[1] 564561
 
 
 $MpGrossEmDefor
-[1] 132662
+[1] 132663
 
 $MpEstEmRemsFDeg
-[1] 259913
+[1] 154469
+
+$MpEstEmRemsFDegNonProxy
+[1] 83019.8
 
 $MpEstEmRemsEnh
-[1] 1087483
+[1] 921213
 
 $MpNetEmRems
-[1] 1480058
+[1] 1291364
 
 $RpNetEmRems
-[1] 1092810
+[1] 953487
 
 $MpEstFRL
-[1] 2888635
+[1] 3000445
 
 $RpEstFRL
-[1] 2132842
+[1] 2215397
 
 $MpEstERs
-[1] 1408577
+[1] 1709081
 
 $RpEstERs
-[1] 1040032
+[1] 1261910
 
 $RpEstEmRemsFDeg
-[1] 191908
+[1] 114053
+
+$RpEstEmRemsFDegNonProxy
+[1] 61298.2
 
 $MpEstFRLFDeg
-[1] 692551
+[1] 759716
 
 $RpEstFRLFDeg
-[1] 511350
+[1] 560941
+
+$RpEstFRLFDegNonProxy
+numeric(0)
 
 $MpEstERsFDeg
-[1] 432639
+[1] 605248
 
 $RpEstERsFDeg
-[1] 319441
+[1] 446888
+
+$RpEstERsFDegNonProxy
+numeric(0)
 
 $MpEstEmRemsDefEnh
-[1] 1220145
+[1] 1136896
 
 $RpEstEmRemsDefEnh
-[1] 900902
+[1] 839434
 
 $MpEstFRLDefEnh
-[1] 2196084
+[1] 2240729
 
 $RpEstFRLDefEnh
-[1] 1621492
+[1] 1654456
 
 $MpEstERsDefEnh
-[1] 975939
+[1] 1103833
 
 $RpEstERsDefEnh
-[1] 720590
+[1] 815022
+
+$RpEstEmRemsARefor
+numeric(0)
 

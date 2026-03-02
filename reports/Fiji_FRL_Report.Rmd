@@ -236,7 +236,28 @@ data.frame(value = unlist(t)) %>%
 
 ```
 
+## Monitoring Period FRL annex 4 table 8.4
+```{r echo = FALSE}
+options(max.print=1000000)
 
+
+t <- ErpaYearlyFRL$erpa_yearly$yearly[c(1,2,3,4,5,6,7,8,9,10),]
+annex4Table <- t(rbind( 
+  cbind(data.frame(value="Deforestation"), as.data.frame(t(apply(t[c(1),-1],MARGIN = 2,sum)))),
+  cbind(data.frame(value="Forest Degradation"), as.data.frame(t(apply(t[c(2,3,4,8),-1],MARGIN = 2,sum)))),
+  cbind(data.frame(value="Removals by Sinks"), as.data.frame(t(apply(t[c(5,6,7,9,10),-1],MARGIN = 2,sum)))),
+  cbind(data.frame(value="Total"), as.data.frame(t(apply(t[c(1,2,3,4,5,6,7,8,9,10),-1],MARGIN = 2,sum))))
+))
+
+
+annex4Table %>% 
+  kable(fileFormat, caption = "Monitoring Period FRL annex 4 table 8.4") %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+
+```
 ## FRL Monitored Values
 ```{r echo = FALSE}
 

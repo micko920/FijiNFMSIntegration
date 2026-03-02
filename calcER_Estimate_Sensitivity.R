@@ -23,128 +23,6 @@ CalcER_Estimate_Sensitivity <- function(statusCallback, interrupted, calcEnv) {
 
   list2env(calcEnv, environment())
 
-  # Area of deforestation in natural forest lowland (ha) # Uncertainty to be considered
-  MonitoredValues$year1$DeforAreaLow <- AdjustedAreas$areaLoss[1]
-  MonitoredValues$year1$McDeforAreaLow <- AdjustedAreas$MCaadeforL
-  MonitoredValues$year2$DeforAreaLow <- AdjustedAreas$areaLoss[1]
-  MonitoredValues$year2$McDeforAreaLow <- AdjustedAreas$MCaadeforL
-  # Area of deforestation in natural forest upland (ha) # Uncertainty to be considered
-  MonitoredValues$year1$DeforAreaUp <- AdjustedAreas$areaLoss[2]
-  MonitoredValues$year1$McDeforAreaUp <- AdjustedAreas$MCaadeforU
-  MonitoredValues$year2$DeforAreaUp <- AdjustedAreas$areaLoss[2]
-  MonitoredValues$year2$McDeforAreaUp <- AdjustedAreas$MCaadeforU
-  # Area of Afforestation lowland and upland (ha) (Not split into lowland and upland)
-  # AReforAreaLow      #AReforArea = Sum of AReforAreaLow and AReforAreaUp
-  # AReforAreaUp       #AReforArea = Sum of AReforAreaLow and AReforAreaUp
-  MonitoredValues$year1$AReforArea <- AdjustedAreas$MCaaaforMean
-  MonitoredValues$year1$McAReforArea <- rowSums(AdjustedAreas$MCaaafor)
-  MonitoredValues$year2$AReforArea <- AdjustedAreas$MCaaaforMean
-  MonitoredValues$year2$McAReforArea <- rowSums(AdjustedAreas$MCaaafor)
-
-
-  ## MGG - patch account for half year growth and compound growth of first year in 2nd year
-  MonitoredValues$year2$AReforArea <- data.frame(
-    year = c(2019, 2020),
-    area_ha = c(
-      AdjustedAreas$MCaaaforMean,
-      AdjustedAreas$MCaaaforMean
-    ),
-    age_yrs = c(0.5,1.5)
-  )
-  
-  MonitoredValues$year1$AReforArea <- data.frame(
-    year = c(2019),
-    area_ha = c(
-      AdjustedAreas$MCaaaforMean
-    ),
-    age_yrs = c(0.5)
-  )
-
-  ## MGG - patch for FDeg survey area
-  ## MGG - patch account for half year growth and compound growth of first year in 2nd year
-  MonitoredValues$year2$FDegFellArea <- data.frame(
-			year = c(2019, 2020),
-			area_ha = c(
-				MonitoredValues$year1$FDegFellAreaSurveyArea,
-				MonitoredValues$year2$FDegFellAreaSurveyArea
-			),
-			age_yrs = c(0.5,1.5)
-  )
-
-  MonitoredValues$year1$FDegFellArea <- data.frame(
-			year = c(2019),
-			area_ha = c(
-				MonitoredValues$year1$FDegFellAreaSurveyArea
-			),
-			age_yrs = c(0.5)
-  )
-
-  ## MGG - patch for FPlnAreaPlantHwd survey area
-  ## MGG - patch account for half year growth and compound growth of first year in 2nd year
-  MonitoredValues$year2$FPlnAreaPlantHwd <- data.frame(
-			year = c(2019, 2020),
-			area_ha = c(
-				MonitoredValues$year1$FPlnAreaPlantHwdSurveyArea,
-				MonitoredValues$year2$FPlnAreaPlantHwdSurveyArea
-			),
-			age_yrs = c(1.5,0.5)
-  )
-
-  MonitoredValues$year1$FPlnAreaPlantHwd <- data.frame(
-			year = c(2019),
-			area_ha = c(
-				MonitoredValues$year1$FPlnAreaPlantHwdSurveyArea
-			),
-			age_yrs = c(0.5)
-  )
-
-  ## MGG - patch for FPlnAreaPlantSwd survey area
-  ## MGG - patch account for half year growth and compound growth of first year in 2nd year
-  MonitoredValues$year2$FPlnAreaPlantSwd <- data.frame(
-			year = c(2019, 2020),
-			area_ha = c(
-				MonitoredValues$year1$FPlnAreaPlantSwdSurveyArea,
-				MonitoredValues$year2$FPlnAreaPlantSwdSurveyArea
-			),
-			age_yrs = c(1.5,0.5)
-  )
-
-  MonitoredValues$year1$FPlnAreaPlantSwd <- data.frame(
-			year = c(2019),
-			area_ha = c(
-				MonitoredValues$year1$FPlnAreaPlantSwdSurveyArea
-			),
-			age_yrs = c(0.5)
-  )
-
-  # Eric number 428.5581 ha area of degradation activities (standard error of 88.5538 ha).
-  # Period for 2019-2020 so divide by 2
-  # FCPF uses 90% CI (5% to 95%)
-  ## MGG - patch for new data for NFDeg
-  MonitoredValues$year1$NFDegArea <- 428.5581 / 2
-  MonitoredValues$year1$NFDegArea_LCI <- (428.5581 / 2) - (qnorm(0.95) * 88.5538 / sqrt(2))
-  MonitoredValues$year1$NFDegArea_UCI <- (428.5581 / 2) + (qnorm(0.95) * 88.5538 / sqrt(2))
-  MonitoredValues$year2$NFDegArea <- 428.5581 / 2
-  MonitoredValues$year2$NFDegArea_LCI <- (428.5581 / 2) - (qnorm(0.95) * 88.5538 / sqrt(2))
-  MonitoredValues$year2$NFDegArea_UCI <- (428.5581 / 2) + (qnorm(0.95) * 88.5538 / sqrt(2))
-
-  MonitoringReportParams$ErpaYearlyFRL <- ErpaYearlyFRL$erpa_yearly$mp_frl["NetFRL","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLUCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["NetFRL","UCI"]
-  MonitoringReportParams$ErpaYearlyFRLLCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["NetFRL","LCI"]
-  MonitoringReportParams$ErpaYearlyFRLFDeg <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDeg","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLFDegUCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDeg","UCI"]
-  MonitoringReportParams$ErpaYearlyFRLFDegLCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDeg","LCI"]
-  MonitoringReportParams$ErpaYearlyFRLDefor <- ErpaYearlyFRL$erpa_yearly$mp_frl["Defor","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLDeforUCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["Defor","UCI"]
-  MonitoringReportParams$ErpaYearlyFRLDeforLCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["Defor","LCI"]
-  MonitoringReportParams$ErpaYearlyFRLEnh <- ErpaYearlyFRL$erpa_yearly$mp_frl["Enh","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLEnhUCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["Enh","UCI"]
-  MonitoringReportParams$ErpaYearlyFRLEnhLCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["Enh","LCI"]
-  MonitoringReportParams$ErpaYearlyFRLFDegNonProxy <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDegNonProxy","MP_FRL"]
-  MonitoringReportParams$ErpaYearlyFRLFDegNonProxyUCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDegNonProxy","UCI"]
-  MonitoringReportParams$ErpaYearlyFRLFDegNonProxyLCI <- ErpaYearlyFRL$erpa_yearly$mp_frl["FDegNonProxy","LCI"]
-
-
   checkStatus <- function(status, notification) {
     # Check for user interrupts
     if (interrupted()) {
@@ -173,15 +51,13 @@ CalcER_Estimate_Sensitivity <- function(statusCallback, interrupted, calcEnv) {
 
   ER_Values <- CalcERValues(
     EmRems_Values,
-    MonitoringReportParams$ErpaYearlyFRL,
-    MonitoringReportParams$ErpaYearlyFRLFDeg,
-    MonitoringReportParams$ErpaYearlyFRLDefor,
-    MonitoringReportParams$ErpaYearlyFRLEnh,
-    MonitoringReportParams$ErpaYearlyFRLFDegNonProxy 
+    paste0(MonitoredValues$year1$year, "-", MonitoredValues$year2$year),
+    ErpaYearlyFRL$erpa_yearly$mp_frl,
+    ErpaYearlyFRL$erpa_yearly$yearly[c("value", MonitoredValues$year1$year, MonitoredValues$year2$year)]
   )
 
   UC_Values <- list()
-  UC_Values <- createUC_Values(MonitoringReportParams)
+  UC_Values <- createUC_Values(MonitoringReportParams, ErpaYearlyFRL)
 
 
   UC_MV_Values <- list()

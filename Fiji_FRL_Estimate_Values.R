@@ -1,7 +1,7 @@
 
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/frlAuditJuly24/", filename))
+  return(paste0("./Data/frlPostAuditOct25/", filename))
 }
 
   
@@ -19,6 +19,8 @@ library(FijiNFMSCalculations)
 
 # Set up
 options(show.error.locations = TRUE)
+outputFilename <- "Fiji_FRL_Estimate_Values"
+pdf(paste0(getDataPath(outputFilename), ".pdf"))
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 options(max.print=50)
@@ -38,8 +40,6 @@ MCRuns <- FRLParams$runs
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
-outputFilename <- "Fiji_FRL_Estimate_Values"
-pdf(paste0(outputFilename, ".pdf"))
 
 print("Running FRL Estimate Calculations...")
 timestamp <- Sys.time()
@@ -70,6 +70,8 @@ calcFRLDegradation()
 
 ## Afforestation
 FRLAfforestation <- calcFRLAfforestation()
+FRLAfforestation
+
 
 ## Hardwood Plantations
 FRLHardwoodPlantations <- calcFRLHardwoodPlantations()

@@ -566,7 +566,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Monitoring Report Extra Tables</h1>
-<h4 class="date">28 July, 2024</h4>
+<h4 class="date">20 November, 2024</h4>
 
 </div>
 
@@ -637,6 +637,9 @@ Emissions from deforestation (tCO2e/yr)
 Emissions from forest degradation (tCO2e/yr)
 </th>
 <th style="text-align:left;color: black !important;background-color: lightgreen !important;">
+Emissions from forest degradation Non Proxy (tCO2e/yr)
+</th>
+<th style="text-align:left;color: black !important;background-color: lightgreen !important;">
 Removals by sinks (tCO2e/yr)
 </th>
 <th style="text-align:left;color: black !important;background-color: lightgreen !important;">
@@ -650,16 +653,19 @@ Net emissions and removals (tCO2e/yr)
 2019
 </td>
 <td style="text-align:left;">
-66331
+66,331
 </td>
 <td style="text-align:left;">
-124385
+82,797
 </td>
 <td style="text-align:left;">
-536070
+41,008
 </td>
 <td style="text-align:left;">
-726787
+536,070
+</td>
+<td style="text-align:left;">
+726,206
 </td>
 </tr>
 <tr>
@@ -667,16 +673,19 @@ Net emissions and removals (tCO2e/yr)
 2020
 </td>
 <td style="text-align:left;">
-66331
+66,331
 </td>
 <td style="text-align:left;">
-113833
+71,531
 </td>
 <td style="text-align:left;">
-313855
+41,943
 </td>
 <td style="text-align:left;">
-494020
+384,306
+</td>
+<td style="text-align:left;">
+564,112
 </td>
 </tr>
 <tr>
@@ -684,16 +693,19 @@ Net emissions and removals (tCO2e/yr)
 Total
 </td>
 <td style="text-align:left;">
-132663
+132,663
 </td>
 <td style="text-align:left;">
-238219
+154,328
 </td>
 <td style="text-align:left;">
-849925
+82,950
 </td>
 <td style="text-align:left;">
-1220806
+920,377
+</td>
+<td style="text-align:left;">
+1,290,318
 </td>
 </tr>
 </tbody>
@@ -800,25 +812,25 @@ ER_{NFH,2019,vol}  &amp;= AD_{NFH,2019,vol} \times EF_{NFHvol} \times \frac{44}{
 <h4>Monitoring Period, Year 2019, Forest Degradation from native forest timber harvest (felling area)</h4>
 <p><span class="math display">\[ 
 \begin{align}
-%AD_{NFH,2019,area} &amp;= 1350 \\
+%AD_{NFH,2019,area} &amp;= 1670 \\
 %AD_{NFH,2019,age}  &amp;= 0.5 \\
 %MAIC_{NFHrem}      &amp;= 0.99 \\
 %ER_{NFH,2019,rem}  &amp;=  AD_{NFH,2019,area} \times AD_{NFH,2019,age} \times MAIC_{NFHrem} \times \frac{44}{12} %\times -1\\
-%                  &amp;= ( 1350 \times 
+%                  &amp;= ( 1670 \times 
 %     0.5 \times 0.99 ) \times 
 %     \frac{44}{12} \times -1\\
-%                  &amp;= -2450.25
+%                  &amp;= -3031.05
 %                  
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; MonitoredValues$year1$FDegFellArea$area_ha</code></pre>
-<pre><code>## [1] 1350</code></pre>
+<pre><code>## [1] 1670</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year1$FDegFellArea$age_yrs</code></pre>
 <pre><code>## [1] 0.5</code></pre>
 <pre class="r"><code>&gt; MAICFell</code></pre>
 <pre><code>## [1] 0.99</code></pre>
 <pre class="r"><code>&gt; ConvCarbonToCO2e(MonitoredValues$year1$FDegFellArea$area_ha * MonitoredValues$year1$FDegFellArea$age_yrs * MAICFell) * (-1)</code></pre>
-<pre><code>## [1] -2450.25</code></pre>
+<pre><code>## [1] -3031.05</code></pre>
 </div>
 <div id="monitoring-period-year-2019-forest-degradation-from-closed-to-open-native-forest" class="section level4">
 <h4>Monitoring Period, Year 2019, Forest Degradation from closed to open native forest</h4>
@@ -940,10 +952,10 @@ ER_{FSW,2019}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
 <p><span class="math display">\[ 
 \begin{align}
 ER_{FDeg,2019} &amp;= 8.582805\times 10^{4} 
-  + (-2450.25)
+  + (-3031.05)
   + 3.6728753\times 10^{4}
   + 4278.8274031 \\
-  &amp;= 124385.38
+  &amp;= 123804.58
 \end{align}
 \]</span></p>
 <pre class="r"><code>ER_FDEG_2019 &lt;- ConvCarbonToCO2e(MonitoredValues$year1$FDegFellVol * TEF) +
@@ -954,7 +966,7 @@ sum(ConvBiomassToCO2e(MonitoredValues$year1$FDegBurnData$area_ha * BGB)) +
 sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
 sum(MonitoredValues$year1$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
 ER_FDEG_2019</code></pre>
-<pre><code>## [1] 124385.4</code></pre>
+<pre><code>## [1] 123804.6</code></pre>
 </div>
 </div>
 <div id="removals-by-enhancments" class="section level3">
@@ -1210,13 +1222,13 @@ ER_{Enh,2019} &amp;= 5.5877291\times 10^{5} + (-2.2702762\times 10^{4}) \\
 <p><span class="math display">\[
 \begin{align}
 ER_{2019} &amp;= ER_{Defor,2019} + ER_{FDeg,2019} + ER_{Enh,2019} \\
-          &amp;= 6.6331357\times 10^{4} + 1.2438538\times 10^{5} + 5.3607015\times 10^{5} \\
-          &amp;= 7.2678689\times 10^{5} 
+          &amp;= 6.6331357\times 10^{4} + 1.2380458\times 10^{5} + 5.3607015\times 10^{5} \\
+          &amp;= 7.2620609\times 10^{5} 
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_2019 &lt;- ER_DEF_2019 + ER_FDEG_2019 + ER_Enh_2019
 &gt; ER_2019</code></pre>
-<pre><code>## [1] 726786.9</code></pre>
+<pre><code>## [1] 726206.1</code></pre>
 </div>
 </div>
 

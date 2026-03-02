@@ -11,16 +11,16 @@ library(FijiNFMSCalculations)
 
 
 
-getDataPath<-function(filename) {
-  return(paste0("./Data/mrAuditJuly24/", filename))
-}
-
-load(file = getDataPath("Fiji_ER_Estimate_AccuracyAssessment.RData"))
+source("./getDataPath.R")
 load(file = getDataPath("Fiji_ER_Estimate_Params.RData"))
+load(file = getPeriodDataPath("Fiji_ER_Estimate_AccuracyAssessment", MonitoringReportParams$period$description, "RData"))
 load(file = getDataPath("fiji_frl_overall_years.RData"))
+
+source("./calcER_Estimate_Values.R")
 
 options(digits = 6)
 options(show.error.locations = TRUE)
+pdf(file=getPeriodDataPath(outputFilename, MonitoringReportParams$period$description, "pdf"))
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 
@@ -38,10 +38,8 @@ plot_mc_output <- FALSE # Turn on plots for MC samples
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
-source("./calcER_Estimate_Values.R")
 
-pdf(paste0(outputFilename, ".pdf"))
-
+print(paste0("Report Period: ", MonitoringReportParams$period$description))
 print("Running ER Estimate Values....")
 timestamp <- Sys.time()
 print(date())
@@ -81,12 +79,11 @@ if (debug_er) {
         print(ER_Values)
 }
 
-print(outputFilename)
-fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
-        list = outputSaveNames,
-        file = paste(getDataPath(fullFilename))
+  list = outputSaveNames,
+  file = paste(getPeriodDataPath(outputFilename,MonitoringReportParams$period$description,"RData"))
 )
+
 
 if (debug_er | show_output) {
         old_width <- options("width" = 120)

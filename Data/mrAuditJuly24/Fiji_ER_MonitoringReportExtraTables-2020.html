@@ -566,7 +566,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Monitoring Report Extra Tables</h1>
-<h4 class="date">28 July, 2024</h4>
+<h4 class="date">20 November, 2024</h4>
 
 </div>
 
@@ -637,6 +637,9 @@ Emissions from deforestation (tCO2e/yr)
 Emissions from forest degradation (tCO2e/yr)
 </th>
 <th style="text-align:left;color: black !important;background-color: lightgreen !important;">
+Emissions from forest degradation Non Proxy (tCO2e/yr)
+</th>
+<th style="text-align:left;color: black !important;background-color: lightgreen !important;">
 Removals by sinks (tCO2e/yr)
 </th>
 <th style="text-align:left;color: black !important;background-color: lightgreen !important;">
@@ -650,16 +653,19 @@ Net emissions and removals (tCO2e/yr)
 2019
 </td>
 <td style="text-align:left;">
-66331
+66,331
 </td>
 <td style="text-align:left;">
-124385
+82,797
 </td>
 <td style="text-align:left;">
-536070
+41,008
 </td>
 <td style="text-align:left;">
-726787
+536,070
+</td>
+<td style="text-align:left;">
+726,206
 </td>
 </tr>
 <tr>
@@ -667,16 +673,19 @@ Net emissions and removals (tCO2e/yr)
 2020
 </td>
 <td style="text-align:left;">
-66331
+66,331
 </td>
 <td style="text-align:left;">
-113833
+71,531
 </td>
 <td style="text-align:left;">
-313855
+41,943
 </td>
 <td style="text-align:left;">
-494020
+384,306
+</td>
+<td style="text-align:left;">
+564,112
 </td>
 </tr>
 <tr>
@@ -684,16 +693,19 @@ Net emissions and removals (tCO2e/yr)
 Total
 </td>
 <td style="text-align:left;">
-132663
+132,663
 </td>
 <td style="text-align:left;">
-238219
+154,328
 </td>
 <td style="text-align:left;">
-849925
+82,950
 </td>
 <td style="text-align:left;">
-1220806
+920,377
+</td>
+<td style="text-align:left;">
+1,290,318
 </td>
 </tr>
 </tbody>
@@ -800,27 +812,27 @@ ER_{NFH,2020,vol}  &amp;= AD_{NFH,2020,vol} \times EF_{NFHvol} \times \frac{44}{
 <h4>Monitoring Period, Year 2020, Forest Degradation from native forest timber harvest (felling area)</h4>
 <p><span class="math display">\[ 
 \begin{align}
-%AD_{NFH,2020,area} &amp;= 1350, 1083 \\
-%AD_{NFH,2020,age}  &amp;= 0.5, 1.5 \\
+%AD_{NFH,2020,area} &amp;= 1670, 1457 \\
+%AD_{NFH,2020,age}  &amp;= 1, 0.5 \\
 %MAIC_{NFHrem}      &amp;= 0.99 \\
 %ER_{NFH,2020,rem}  &amp;=  AD_{NFH,2020,area} \times AD_{NFH,2020,age} \times MAIC_{NFHrem} \times \frac{44}{12} %\times -1\\
-%                  &amp;= ( 1350, 1083 \times 
-%     0.5, 1.5 \times 0.99 ) \times 
+%                  &amp;= ( 1670, 1457 \times 
+%     1, 0.5 \times 0.99 ) \times 
 %     \frac{44}{12} \times -1\\
-%                  &amp;= -2450.25, -5896.935
+%                  &amp;= -6062.1, -2644.455
 %                  
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; MonitoredValues$year2$FDegFellArea$area_ha</code></pre>
-<pre><code>## [1] 1350 1083</code></pre>
+<pre><code>## [1] 1670 1457</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year2$FDegFellArea$age_yrs</code></pre>
-<pre><code>## [1] 0.5 1.5</code></pre>
+<pre><code>## [1] 1.0 0.5</code></pre>
 <pre class="r"><code>&gt; MAICFell</code></pre>
 <pre><code>## [1] 0.99</code></pre>
 <pre class="r"><code>&gt; ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * (-1)</code></pre>
-<pre><code>## [1] -2450.250 -5896.935</code></pre>
+<pre><code>## [1] -6062.100 -2644.455</code></pre>
 <pre class="r"><code>&gt; sum(ConvCarbonToCO2e(MonitoredValues$year2$FDegFellArea$area_ha * MonitoredValues$year2$FDegFellArea$age_yrs * MAICFell) * (-1))</code></pre>
-<pre><code>## [1] -8347.185</code></pre>
+<pre><code>## [1] -8706.555</code></pre>
 </div>
 <div id="monitoring-period-year-2020-forest-degradation-from-closed-to-open-native-forest" class="section level4">
 <h4>Monitoring Period, Year 2020, Forest Degradation from closed to open native forest</h4>
@@ -941,10 +953,10 @@ ER_{FSW,2020}&amp;=  \sum EmCO_2AGB_{i} + \sum EmCO_2BGB_{i}  + \sum {EmCH_{4}}_
 <p><span class="math display">\[ 
 \begin{align}
 ER_{FDeg,2020} &amp;= 8.023785\times 10^{4} 
-  + (-8347.185)
+  + (-8706.555)
   + 3.6728753\times 10^{4}
   + 5213.779193 \\
-  &amp;= 113833.20
+  &amp;= 113473.83
 \end{align}
 \]</span></p>
 <pre class="r"><code>ER_FDEG_2020 &lt;- ConvCarbonToCO2e(MonitoredValues$year2$FDegFellVol * TEF) +
@@ -955,7 +967,7 @@ sum(ConvBiomassToCO2e(MonitoredValues$year2$FDegBurnData$area_ha * BGB)) +
 sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPCH4 * EFCH4 * 0.001)  +
 sum(MonitoredValues$year2$FDegBurnData$area_ha * AGB * CombustFactor * GWPN2O * EFN2O * 0.001)
 ER_FDEG_2020</code></pre>
-<pre><code>## [1] 113833.2</code></pre>
+<pre><code>## [1] 113473.8</code></pre>
 </div>
 </div>
 <div id="removals-by-enhancments" class="section level3">
@@ -1008,7 +1020,7 @@ Em_{FPln,2020,Hardwood} &amp;= (AD_{FPln,2020,vol,hardwood} \times BiomassConvEx
 <h4>Monitoring Period, Year 2020, Removals from forest plantation Hardwood</h4>
 <p><span class="math display">\[
 \begin{align}
-AD_{FPln,2020,age,Hardwood}   &amp;= 1.5, 0.5 \\
+AD_{FPln,2020,age,Hardwood}   &amp;= 1, 0.5 \\
 AD_{FPln,2020,area,Hardwood}  &amp;= 4008, 0 \\
 MAIV_{Hardwood}               &amp;= 5.85 \\
 BiomassConvExpansion_{IncHW}  &amp;= 1.1 \\
@@ -1017,8 +1029,8 @@ MAIB_{Hardwood}               &amp;= MAIV_{Hardwood} \times BiomassConvExpansion
                               &amp;= 5.85 \times 1.1 \times (1 + 0.37) \\
                               &amp;= 8.81595 \\
 Rem_{FPln,2020,Hardwood} &amp;=  AD_{FPln,2020,age,Hardwood} \times AD_{FPln,2020,area,Hardwood} \times MAIB_{Hardwood} \times 0.47 \times \frac{44}{12} \times -1 \\
-  &amp;=  1.5, 0.5 \times 4008, 0 \times 8.81595 \times 0.47 \times \frac{44}{12} \times -1 \\
-  &amp;=  -9.1339237\times 10^{4}, 0
+  &amp;=  1, 0.5 \times 4008, 0 \times 8.81595 \times 0.47 \times \frac{44}{12} \times -1 \\
+  &amp;=  -6.0892825\times 10^{4}, 0
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; #' Forest Plantations - Removals from Hardwood Plantations
@@ -1031,26 +1043,26 @@ Rem_{FPln,2020,Hardwood} &amp;=  AD_{FPln,2020,age,Hardwood} \times AD_{FPln,202
 <pre class="r"><code>&gt; RootToShootTropRain</code></pre>
 <pre><code>## [1] 0.37</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year2$FPlnAreaPlantHwd$age_yrs</code></pre>
-<pre><code>## [1] 1.5 0.5</code></pre>
+<pre><code>## [1] 1.0 0.5</code></pre>
 <pre class="r"><code>&gt; #CalcEstRemFPlnHwd
 &gt; MAIBhw &lt;- MAIVhw * BiomassConvExpansionIncHW * (1 + RootToShootTropRain)
 &gt; MAIBhw</code></pre>
 <pre><code>## [1] 8.81595</code></pre>
 <pre class="r"><code>&gt; Rem_FPln_2020_Hardwood &lt;- sum(ConvBiomassToCO2e(MonitoredValues$year2$FPlnAreaPlantHwd$age_yrs * MonitoredValues$year2$FPlnAreaPlantHwd$area_ha * MAIBhw) * -1)
 &gt; Rem_FPln_2020_Hardwood</code></pre>
-<pre><code>## [1] -91339.24</code></pre>
+<pre><code>## [1] -60892.82</code></pre>
 </div>
 <div id="monitoring-period-year-2020-net-er-from-forest-plantation-hardwood" class="section level4">
 <h4>Monitoring Period, Year 2020, Net ER from forest plantation Hardwood</h4>
 <p><span class="math display">\[
 \begin{align}
-ER_{FPln,2020,Hardwood} &amp;= 5.5168\times 10^{4} + -9.1339237\times 10^{4} \\
-   &amp;= -3.6171237\times 10^{4}
+ER_{FPln,2020,Hardwood} &amp;= 5.5168\times 10^{4} + -6.0892825\times 10^{4} \\
+   &amp;= -5724.824754
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_FPln_2020_Hardwood &lt;- Em_FPln_2020_Hardwood + Rem_FPln_2020_Hardwood
 &gt; ER_FPln_2020_Hardwood</code></pre>
-<pre><code>## [1] -36171.24</code></pre>
+<pre><code>## [1] -5724.825</code></pre>
 </div>
 <div id="monitoring-period-year-2020-emissionremovals-from-forest-plantation-softwood" class="section level4">
 <h4>Monitoring Period, Year 2020, Emission/Removals from forest plantation Softwood</h4>
@@ -1097,7 +1109,7 @@ Em_{FPln,2020,Softwood} &amp;= (AD_{FPln,2020,vol,Softwood} \times \frac{1}{Reco
 <h4>Monitoring Period, Year 2020, Removals from forest plantation Softwood</h4>
 <p><span class="math display">\[
 \begin{align}
-AD_{FPln,2020,age,Softwood}  &amp;= 1.5, 0.5 \\
+AD_{FPln,2020,age,Softwood}  &amp;= 1, 0.5 \\
 AD_{FPln,2020,area,Softwood} &amp;= 2008, 1910 \\
 MAIB_{Softwood}              &amp;= 10 \\
 MAIC_{Softwood}              &amp;= MAIB_{softwood} \times 0.47 \\
@@ -1105,9 +1117,9 @@ MAIC_{Softwood}              &amp;= MAIB_{softwood} \times 0.47 \\
                              &amp;= 4.7 \\
 Rem_{FPln,2020,Softwood}     &amp;= AD_{FPln,2020,age,Softwood}
   \times AD_{FPln,2020,area,Softwood} \times MAIC_{Softwood} \times \frac{44}{12} \times -1\\
-                             &amp;= 1.5, 0.5
+                             &amp;= 1, 0.5
   \times 2008, 1910  \times 4.7 \times \frac{44}{12} \times -1\\
-                             &amp;= -5.19068\times 10^{4}, -1.6457833\times 10^{4}
+                             &amp;= -3.4604533\times 10^{4}, -1.6457833\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; #' Forest Plantations - Removals from Softwood Plantations
@@ -1116,7 +1128,7 @@ Rem_{FPln,2020,Softwood}     &amp;= AD_{FPln,2020,age,Softwood}
 <pre class="r"><code>&gt; MonitoredValues$year2$FPlnAreaPlantSwd$area_ha</code></pre>
 <pre><code>## [1] 2008 1910</code></pre>
 <pre class="r"><code>&gt; MonitoredValues$year2$FPlnAreaPlantSwd$age_yrs</code></pre>
-<pre><code>## [1] 1.5 0.5</code></pre>
+<pre><code>## [1] 1.0 0.5</code></pre>
 <pre class="r"><code>&gt; # CalcEstRemFPlnSwd 
 &gt; # Calc mean annual increment C for volume m^3
 &gt; MAICsw &lt;- ConvBiomassToCarbon(MAIBsw)
@@ -1124,42 +1136,42 @@ Rem_{FPln,2020,Softwood}     &amp;= AD_{FPln,2020,age,Softwood}
 <pre><code>## [1] 4.7</code></pre>
 <pre class="r"><code>&gt; Rem_FPln_2020_Softwood &lt;-sum(ConvCarbonToCO2e(MonitoredValues$year2$FPlnAreaPlantSwd$age_yrs * MonitoredValues$year2$FPlnAreaPlantSwd$area_ha * MAICsw) * -1)
 &gt; Rem_FPln_2020_Softwood</code></pre>
-<pre><code>## [1] -68364.63</code></pre>
+<pre><code>## [1] -51062.37</code></pre>
 </div>
 <div id="monitoring-period-year-2020-net-er-from-forest-plantation-softwood" class="section level4">
 <h4>Monitoring Period, Year 2020, Net ER from forest plantation Softwood</h4>
 <p><span class="math display">\[
 \begin{align}
 ER_{FPln,2020,Softwood} 
-        &amp;= 5.0920191\times 10^{5} + (-6.8364633\times 10^{4}) \\
-        &amp;= 4.4083728\times 10^{5}
+        &amp;= 5.0920191\times 10^{5} + (-5.1062367\times 10^{4}) \\
+        &amp;= 4.5813955\times 10^{5}
 \end{align}
 \]</span></p>
 <pre class="r"><code>Em_FPln_2020_Softwood</code></pre>
 <pre><code>## [1] 509201.9</code></pre>
 <pre class="r"><code>Rem_FPln_2020_Softwood</code></pre>
-<pre><code>## [1] -68364.63</code></pre>
+<pre><code>## [1] -51062.37</code></pre>
 <pre class="r"><code>ER_FPln_2020_Softwood &lt;-  Em_FPln_2020_Softwood + Rem_FPln_2020_Softwood 
 ER_FPln_2020_Softwood</code></pre>
-<pre><code>## [1] 440837.3</code></pre>
+<pre><code>## [1] 458139.5</code></pre>
 </div>
 <div id="monitoring-period-year-2020-total-emissionremovals-from-forest-plantation-hardwood-and-softwood" class="section level4">
 <h4>Monitoring Period, Year 2020, Total Emission/Removals from forest plantation Hardwood and Softwood</h4>
 <p><span class="math display">\[
 \begin{align}
-ER_{FPln,2020} &amp;= -3.6171237\times 10^{4} + 4.4083728\times 10^{5} \\
-               &amp;= 4.0466604\times 10^{5}
+ER_{FPln,2020} &amp;= -5724.824754 + 4.5813955\times 10^{5} \\
+               &amp;= 4.5241472\times 10^{5}
 \end{align}
 \]</span></p>
 <pre class="r"><code>ER_FPln_2020 &lt;-ER_FPln_2020_Hardwood +  ER_FPln_2020_Softwood
 ER_FPln_2020</code></pre>
-<pre><code>## [1] 404666</code></pre>
+<pre><code>## [1] 452414.7</code></pre>
 </div>
 <div id="monitoring-period-year-2020-removals-from-afforestationreforestation" class="section level4">
 <h4>Monitoring Period, Year 2020, Removals from Afforestation/Reforestation</h4>
 <p><span class="math display">\[
 \begin{align}
-AD_{AR,2020,age,i}          &amp;= 0.5, 1.5 \\
+AD_{AR,2020,age,i}          &amp;= 1, 0.5 \\
 AD_{AR,2020,area,i}         &amp;= 4712.5095437, 4712.5095437 \\
 MAIV_{AR}                   &amp;= 3.71 \\
 BiomassConvExpansion_{AR}   &amp;= 1.1 \\
@@ -1168,15 +1180,15 @@ MAIC_{AR}                   &amp;= MAIV_{AR} \times  BiomassConvExpansion_{AR} \
                             &amp;= 3.71 \times  1.1 \times (1 + 0.37) \\
                             &amp;= 5.59097 \\
 Rem_{AR,2020}  &amp;= AD_{AR,2020,age} \times AD_{AR,2020,area} \times MAIC_{AR} \times 0.47 \times \frac{44}{12} \times -1 \\
-               &amp;= 0.5, 1.5 \times 
+               &amp;= 1, 0.5 \times 
                   4712.5095437, 4712.5095437 \times 
                   5.59097 \times 1.1 \times (1 + 0.37) \times 
                   0.47 \times \frac{44}{12} \times -1 \\
-               &amp;= -2.2702762\times 10^{4}, -6.8108286\times 10^{4}
+               &amp;= -4.5405524\times 10^{4}, -2.2702762\times 10^{4}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; MonitoredValues$year2$AReforArea$age_yrs</code></pre>
-<pre><code>## [1] 0.5 1.5</code></pre>
+<pre><code>## [1] 1.0 0.5</code></pre>
 <pre class="r"><code>&gt; MAIVar</code></pre>
 <pre><code>## [1] 3.71</code></pre>
 <pre class="r"><code>&gt; BiomassConvExpansionARefor</code></pre>
@@ -1191,19 +1203,19 @@ Rem_{AR,2020}  &amp;= AD_{AR,2020,age} \times AD_{AR,2020,area} \times MAIC_{AR}
 <pre class="r"><code>&gt; Rem_AR_2020 &lt;- sum(ConvBiomassToCO2e(MonitoredValues$year2$AReforArea$age_yrs * 
 +                     MonitoredValues$year2$AReforArea$area_ha * MAIC * (-1))) 
 &gt; Rem_AR_2020</code></pre>
-<pre><code>## [1] -90811.05</code></pre>
+<pre><code>## [1] -68108.29</code></pre>
 </div>
 <div id="monitoring-period-year-2020-total-emissionremovals-from-enhancements" class="section level4">
 <h4>Monitoring Period, Year 2020, Total Emission/Removals from enhancements</h4>
 <p><span class="math display">\[
 \begin{align}
-ER_{Enh,2020} &amp;= 4.0466604\times 10^{5} + (-9.0811048\times 10^{4}) \\
-              &amp;= 3.13855\times 10^{5}
+ER_{Enh,2020} &amp;= 4.5241472\times 10^{5} + (-6.8108286\times 10^{4}) \\
+              &amp;= 3.8430644\times 10^{5}
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_Enh_2020 &lt;- ER_FPln_2020 + Rem_AR_2020
 &gt; ER_Enh_2020</code></pre>
-<pre><code>## [1] 313855</code></pre>
+<pre><code>## [1] 384306.4</code></pre>
 </div>
 </div>
 <div id="monitoring-period-year-2020-net-emissionsremovals-1" class="section level3">
@@ -1211,13 +1223,13 @@ ER_{Enh,2020} &amp;= 4.0466604\times 10^{5} + (-9.0811048\times 10^{4}) \\
 <p><span class="math display">\[
 \begin{align}
 ER_{2020} &amp;= ER_{Defor,2020} + ER_{FDeg,2020} + ER_{Enh,2020} \\
-          &amp;= 6.6331357\times 10^{4} + 1.138332\times 10^{5} + 3.13855\times 10^{5} \\
-          &amp;= 4.9401955\times 10^{5} 
+          &amp;= 6.6331357\times 10^{4} + 1.1347383\times 10^{5} + 3.8430644\times 10^{5} \\
+          &amp;= 5.6411162\times 10^{5} 
 \end{align}
 \]</span></p>
 <pre class="r"><code>&gt; ER_2020 &lt;- ER_DEF_2020 + ER_FDEG_2020 + ER_Enh_2020
 &gt; ER_2020</code></pre>
-<pre><code>## [1] 494019.6</code></pre>
+<pre><code>## [1] 564111.6</code></pre>
 </div>
 </div>
 

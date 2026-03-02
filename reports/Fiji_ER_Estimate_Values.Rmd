@@ -1,10 +1,8 @@
 ---
-title: "Monitoring Report Tables Section 4"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 header-includes: \usepackage{caption}
-params:
-  file_format: html
 always_allow_html: yes
+params:
+  file_format: "html"
 ---
 
 ```{r setup, include=FALSE}
@@ -15,10 +13,54 @@ library(rlang)
 library(dplyr)
 library(kableExtra)
 if (!exists("fileFormat")) fileFormat <- params$file_format
+#Set the report year via the ReportYear global variable. 
+if (!exists("ReportYear")) ReportPeriod <- MonitoringReportParams$period$description
+```
+
+---
+title: "Monitoring Report Tables Section 4 `r ReportPeriod`"
+---
+
+\captionsetup[table]{labelformat=empty}
+
+**Report Period:** `r ReportPeriod`  
+**Generated:** `r format(Sys.time(), '%d %B, %Y')`
+
+
+```{r include=FALSE, echo = FALSE}
+
+formatPercent <- function(x) {
+  return(ifelse(is.na(x),"--", paste(format(round(x * 100, 2), nsmall = 2), "%")))
+}
+
+formatMaxPercent <- function(x) {
+  return(ifelse(x>1,">100%",formatPercent(x)))
+}
+
+formatNumber <- function(x) {
+  return(format(round(x, 0), big.mark = ",", digits= 4, nsmall = 0))
+}
+
+formatDecimal <- function(x) {
+  return(format(round(x, 4), nsmall = 4))
+}
 ```
 
 
 \captionsetup[table]{labelformat=empty}
+
+
+```{r echo = FALSE}
+Table4_1_ReferenceLevel %>%
+  kable(fileFormat, caption = "Monitoring Report Table 4.1 Reference Level", digits = 4) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+# %>%
+#  column_spec(1, color = "black",width = "30em", background = "green") %>%
+#  column_spec(2, color = "black",width = "30em", background = "green")
+```
+
 
 
 
@@ -45,3 +87,62 @@ Table4_3 %>%
   )
 ```
 
+```{r echo = FALSE}
+
+
+Table4_3_t1 %>%
+  kable(fileFormat, caption = "Updated Monitoring Report Table 4.3 (T1)", digits = 4) %>%
+  footnote(symbol = 
+  "See template", threeparttable = FALSE) %>%
+  kable_styling(
+    latex_options = c("hold_position", "scale_down")
+  )
+
+```
+
+```{r echo = FALSE}
+
+
+Table4_3_t2 %>%
+  kable(fileFormat, caption = "Updated Monitoring Report Table 4.3 (T2)", digits = 4) %>%
+  kable_styling(full_width = TRUE, font_size = 11,
+                 latex_options = c("hold_position", "scale_down")) %>%
+  footnote(symbol = "See template", threeparttable = FALSE) %>%
+  column_spec(1, bold = T, width = "12em") %>%
+  column_spec(2, bold = F, width = "5em") %>%
+  column_spec(3, bold = F, width = "5em") %>%
+  column_spec(4, bold = F, width = "5em") %>%
+  column_spec(5, bold = F, width = "5em") %>%
+  column_spec(6, bold = F, width = "5em") %>%
+  column_spec(7, bold = F, width = "5em") %>%
+  column_spec(8, bold = F, width = "5em") %>%
+  column_spec(9, bold = F, width = "5em") %>%
+  column_spec(10, bold = F, width = "5em") %>%
+  column_spec(11, bold = F, width = "5em") %>%
+  column_spec(12, bold = F, width = "5em") %>%
+  column_spec(13, bold = F, width = "5em") %>%
+  add_header_above( c(
+    " " = 1,
+    "Deforestation" = 2,    # A
+    "Forest degradation" = 2,    # B
+    "Enhanced removals from afforestation/ reforestation (A/R)" = 2,    # C
+    "Enhanced removals from other activities besides A/R*" = 2,    # D
+    "Adjustments" = 2,
+    "Total (tCO2-e)" = 2 # E 
+  )) 
+
+  
+
+
+```
+
+```{r echo = FALSE}
+
+
+Table4_3_t5 %>%
+  kable(fileFormat, caption = "Updated Monitoring Report Table 4.3 (T5)", digits = 4) %>%
+  kable_styling(full_width = TRUE, 
+                 latex_options = c("hold_position", "scale_down"))
+
+
+```

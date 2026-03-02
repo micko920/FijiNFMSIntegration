@@ -1,5 +1,5 @@
 [1] "Running NFI calculations and generating emission factors...."
-[1] "Tue Dec 13 08:05:18 2022"
+[1] "Tue Oct 28 23:35:26 2025"
 [1] "==== debug: CalcEmissionFactors.R:495"
    cid    agb3p    agb2p
 1 1000 30.68153 1.851231
@@ -371,11 +371,11 @@ NULL
 2  Upland         54.45778             42.38226             63.91443
 [1] "==== debug: CalcEmissionFactors.R:826"
   stratum ef_tco2e_ha lci_ef_tco2e_ha uci_ef_tco2e_ha
-1 Lowland    259.4006        214.2767        288.7848
-2  Upland    199.6785        155.4016        234.3529
-[1] "Tue Dec 13 09:50:47 2022"
+1 Lowland    259.6365        214.4715        289.0473
+2  Upland    199.8601        155.5429        234.5659
+[1] "Wed Oct 29 01:13:33 2025"
 [1] "Execution time: "
-Time difference of 1.758041 hours
+Time difference of 1.635194 hours
 $dc
 [1] 70.74563 54.45778
 
@@ -401,6 +401,6 @@ $v_dc
 
 $df_ef
   stratum ef_tco2e_ha lci_ef_tco2e_ha uci_ef_tco2e_ha
-1 Lowland    259.4006        214.2767        288.7848
-2  Upland    199.6785        155.4016        234.3529
+1 Lowland    259.6365        214.4715        289.0473
+2  Upland    199.8601        155.5429        234.5659
 

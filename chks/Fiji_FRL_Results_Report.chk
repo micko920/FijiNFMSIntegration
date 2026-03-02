@@ -1,0 +1,74 @@
+[1] "Calculating FRL...."
+[1] "Runs --  100"
+[1] "Mon Nov 10 22:45:44 2025"
+[1] "==== debug: CalcFRLTable.R:36"
+  sourceSink gross_emissions gross_removals net_emissions
+1         DF           24.48           0.00         29.05
+2        FDL           12.41           3.80         11.75
+3        FDF           10.22           0.00         12.13
+4       FUEL            5.16           0.00          6.13
+5       FDNF            9.31           0.00         11.05
+6       ECAR            0.00          14.35         11.26
+7       ECHS           38.42          81.85         18.63
+[1] "==== debug: CalcFRLTable.R:427"
+  aa_emissions_tco2e_yr lci_aa_emissions_tco2e_yr uci_aa_emissions_tco2e_yr aa_removals_tco2e_yr lci_aa_removals_tco2e_yr uci_aa_removals_tco2e_yr aa_net_emissions_tco2e_yr lci_aa_net_emissions_tco2e_yr lci_aa_net_emissions_tco2e_yr.1
+1             394478.89                 277900.51                  502002.4                 0.00                     0.00                     0.00                 394478.89                     277900.51                        502002.4
+2             200033.08                 165976.60                  233909.5            -40480.58                -54641.61                -26526.38                 159552.51                     123001.36                        195596.1
+3             164653.37                 132231.31                  192394.3                 0.00                     0.00                     0.00                 164653.37                     132231.31                        192394.3
+4              83171.56                  58880.71                  108494.4                 0.00                     0.00                     0.00                  83171.56                      58880.71                        108494.4
+5             150071.29                  46067.69                  300111.1                 0.00                     0.00                     0.00                 150071.29                      46067.69                        300111.1
+ [ reached 'max' / getOption("max.print") -- omitted 3 rows ]
+[1] "==== debug: CalcFRLTable.R:36"
+  sourceSink gross_emissions gross_removals net_emissions
+1         DF           25.81           0.00         30.95
+2        FDL           13.09           3.80         12.52
+3        FDF           10.77           0.00         12.92
+4       FDNF            9.82           0.00         11.77
+5       ECAR            0.00          14.35         12.00
+6       ECHS           40.51          81.85         19.85
+[1] "==== debug: CalcFRLTable.R:451"
+  aa_emissions_tco2e_yr lci_aa_emissions_tco2e_yr uci_aa_emissions_tco2e_yr aa_removals_tco2e_yr lci_aa_removals_tco2e_yr uci_aa_removals_tco2e_yr aa_net_emissions_tco2e_yr lci_aa_net_emissions_tco2e_yr lci_aa_net_emissions_tco2e_yr.1
+1              394478.9                 277900.51                  502002.4                 0.00                     0.00                     0.00                  394478.9                     277900.51                       502002.45
+2              200033.1                 165976.60                  233909.5            -40480.58                -54641.61                -26526.38                  159552.5                     123001.36                       195596.10
+3              164653.4                 132231.31                  192394.3                 0.00                     0.00                     0.00                  164653.4                     132231.31                       192394.26
+5              150071.3                  46067.69                  300111.1                 0.00                     0.00                     0.00                  150071.3                      46067.69                       300111.13
+6                   0.0                      0.00                       0.0           -152931.04               -285715.78                -66192.31                 -152931.0                    -285715.78                       -66192.31
+ [ reached 'max' / getOption("max.print") -- omitted 2 rows ]
+[1] "Mon Nov 10 22:45:44 2025"
+[1] "Execution time: "
+Time difference of 0.1818547 secs
+    source_sink estimate_tco2e_yr lci_tco2e_yr uci_tco2e_yr
+1         aaeDF         394478.89    277900.51    502002.45
+2       aaeFD_L         200033.08    165976.60    233909.53
+3     aaeFD_BSW         164653.37    132231.31    192394.26
+4      aaeFD_NF         150071.29     46067.69    300111.13
+5      aaeEC_HS         619079.58    532272.34    730427.16
+6  aae_Combined        1528316.21   1340583.52   1736976.84
+7       aarFD_L         -40480.58    -54641.61    -26526.38
+8      aarEC_AR        -152931.04   -285715.78    -66192.31
+9      aarEC_HS        -872082.38  -1100467.27   -665247.03
+10 aar_Combined       -1065494.00   -833499.68  -1320129.89
+11       aaneDF         394478.89    277900.51    502002.45
+12       aaneFD         474277.16    355929.43    629122.67
+ [ reached 'max' / getOption("max.print") -- omitted 2 rows ]
+NULL
+R version 3.6.3 (2020-02-29)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Debian GNU/Linux 10 (buster)
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.8.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.8.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8    LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C               LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8
+[12] LC_IDENTIFICATION=C       
+
+attached base packages:
+ [1] splines   stats4    grid      stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] microbenchmark_1.4-7        FijiNFMSCalculations_1.0.10 MonteCarloUtils_1.0.1       ValueWithUncertainty_1.0.3  VGAM_1.1-7                  survey_4.2-1                survival_3.1-8              Matrix_1.2-18               data.table_1.17.8           nlme_3.1-164               
+
+loaded via a namespace (and not attached):
+[1] lattice_0.20-40 DBI_1.2.2       magrittr_2.0.4  compiler_3.6.3  mitools_2.4    

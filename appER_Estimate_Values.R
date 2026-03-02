@@ -493,8 +493,8 @@ server <- function(input, output, session) {
                                 )
                         pmrpdata <- as.list(pmrpdataEnv())$MonitoringReportParams
 
-                        updateTextInput(session, "mrpMpDays", value = pmrpdata$MpDays)
-                        updateTextInput(session, "mrpRpDays", value = pmrpdata$RpDays)
+                        updateTextInput(session, "mrpMpDays", value = pmrpdata$period$MpDays)
+                        updateTextInput(session, "mrpRpDays", value = pmrpdata$period$RpDays)
                         updateTextInput(session, "mrpErpaYearlyFRL", value = pmrpdata$ErpaYearlyFRL)
                         updateTextInput(session, "mrpErpaYearlyFRLUCI", value = pmrpdata$ErpaYearlyFRLUCI)
                         updateTextInput(session, "mrpErpaYearlyFRLLCI", value = pmrpdata$ErpaYearlyFRLLCI)
@@ -615,13 +615,13 @@ server <- function(input, output, session) {
         MonitoringReportParams <- reactive({
                 mrp <- list()
 
-                mrp$MpDays <- input$mrpMpDays
-                mrp$RpDays <- input$mrpRpDays
-                mrp$IsRpEqualToMp <-
+                mrp$period$MpDays <- input$mrpMpDays
+                mrp$period$RpDays <- input$mrpRpDays
+                mrp$period$IsRpEqualToMp <-
                         (input$mrpMpDays == input$mrpRpDays)
-                mrp$RpMpRatio <-
+                mrp$period$RpMpRatio <-
                         (input$mrpRpDays / input$mrpMpDays)
-                mrp$RpMpProrataYears <- 2 * mrp$RpMpRatio
+                mrp$period$RpMpProrataYears <- 2 * mrp$period$RpMpRatio
                 mrp$ErpaYearlyFRL <- input$mrpErpaYearlyFRL
                 mrp$ErpaYearlyFRLUCI <- input$mrpErpaYearlyFRLUCI
                 mrp$ErpaYearlyFRLLCI <- input$mrpErpaYearlyFRLLCI

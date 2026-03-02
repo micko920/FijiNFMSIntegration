@@ -7,7 +7,8 @@ FRLParams$runs          <- 10000     # Number of Monte-Carlo runs
 FRLParams$qlci          <- 0.05      # Lower quantile (confidence bounds, 0.05 <- 90% CI)
 FRLParams$quci          <- 0.95      # Upper quantile (confidence bounds, 0.95 <- 90% CI)
 FRLParams$etacf         <- 0.47      # Biomass to carbon conversion (IPCC default)
-FRLParams$etacc         <- 44/12     # Carbon to CO_2e conversion (IPCC default * -1)
+#FRLParams$etacc         <- 44/12     # Carbon to CO_2e conversion (IPCC default * -1)
+FRLParams$etacc         <- 3.67     # Carbon to CO_2e conversion (IPCC default * -1)
 FRLParams$Ty            <- 2006:2016 # Years of the FRL Reference Period
 FRLParams$Tl            <- length(FRLParams$Ty)    # Number of years in the FRL Reference Period
 FRLParams$deltaT        <- c(FRLParams$Tl:1) - 0.5 # Years of growth over the Reference Period

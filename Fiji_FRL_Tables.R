@@ -1,7 +1,7 @@
 
 
 getDataPath<-function(filename) {
-  return(paste0("./Data/frlAuditJuly24/", filename))
+  return(paste0("./Data/frlPostAuditOct25/", filename))
 }
 
 
@@ -21,6 +21,8 @@ library(microbenchmark)
 
 # Set up
 options(show.error.locations = TRUE)
+outputFilename <- "Fiji_FRL_Tables"
+pdf(paste0(getDataPath(outputFilename), ".pdf"))
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 options(max.print=150)
@@ -40,8 +42,7 @@ MCRuns <- FRLParams$runs
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
-outputFilename <- "Fiji_FRL_Tables"
-pdf(paste0(outputFilename, ".pdf"))
+
 
 # Load all necessary data
 load(file = getDataPath("fiji_frl_adjusted_areas.RData"))

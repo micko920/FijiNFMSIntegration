@@ -12,24 +12,25 @@ library(ValueWithUncertainty)
 library(MonteCarloUtils)
 library(FijiNFMSCalculations)
 
-getDataPath<-function(filename) {
-  return(paste0("./Data/mrAuditJuly24/", filename))
-}
-
-load(file = getDataPath("Fiji_ER_Estimate_AccuracyAssessment.RData"))
+source("./getDataPath.R")
 load(file = getDataPath("Fiji_ER_Estimate_Params.RData"))
+load(file = getPeriodDataPath("Fiji_ER_Estimate_AccuracyAssessment", MonitoringReportParams$period$description, "RData"))
+load(file = getPeriodDataPath("Fiji_ER_Estimate_Values", MonitoringReportParams$period$description, "RData"))
 load(file = getDataPath("fiji_frl_overall_years.RData"))
-load(file = getDataPath("Fiji_ER_Estimate_Values.RData"))
+
+
+source("./calcER_Estimate_UC.R")
 
 options(digits = 6)
 options(show.error.locations = TRUE)
+pdf(file=getPeriodDataPath(outputFilename, MonitoringReportParams$period$description, "pdf"))
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 
 # This number was used to generate the chk file.
 #### Values used to calculate 2019-2020 output
 MCRuns <- 1.5e+06
-#MCRuns <- 100000
+#MCRuns <- 1000
 MCTolerance <- 0.0025
 seed <- 08121976
 set.seed(seed) # Seed set to remove random nature of MC Analysis for LCI & UCI
@@ -42,10 +43,8 @@ plot_mc_output <- TRUE # Turn on plots for MC samples
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
-source("./calcER_Estimate_UC.R")
 
-pdf(paste0(outputFilename, ".pdf"))
-
+print(paste0("Report Period: ", MonitoringReportParams$period$description))
 print("Running ER Estimate Uncertainty...")
 timestamp <- Sys.time()
 print(date())
@@ -96,6 +95,7 @@ list2env(result$env, environment())
 
 
 if (debug_er) {
+        print(Table4_1_ReferenceLevel)
         print(Table4_2)
         print(Table4_3)
         print(Table5_2_2)
@@ -286,10 +286,9 @@ if (debug_er) {
 }
 
 
-fullFilename <- paste(outputFilename, "RData", sep = ".")
 save(
-        list = outputSaveNames,
-        file = paste(getDataPath(fullFilename))
+  list = outputSaveNames,
+  file = paste(getPeriodDataPath(outputFilename,MonitoringReportParams$period$description,"RData"))
 )
 
 

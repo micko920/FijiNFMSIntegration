@@ -1,9 +1,6 @@
 ---
-title: "Monitoring Report Tables Section 5.3"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-always_allow_html: true
-header-includes:
-    - \usepackage{caption}
+header-includes: \usepackage{caption}
+always_allow_html: yes
 params:
   file_format: "html"
 ---
@@ -16,10 +13,18 @@ library(rlang)
 library(dplyr)
 library(kableExtra)
 if (!exists("fileFormat")) fileFormat <- params$file_format
+#Set the report year via the ReportYear global variable. 
+if (!exists("ReportYear")) ReportPeriod <- MonitoringReportParams$period$description
 ```
 
+---
+title: "Monitoring Report Tables Section 5.3 `r ReportPeriod`"
+---
 
 \captionsetup[table]{labelformat=empty}
+
+**Report Period:** `r ReportPeriod`  
+**Generated:** `r format(Sys.time(), '%d %B, %Y')`
 
 # Sensivity Analysis
 

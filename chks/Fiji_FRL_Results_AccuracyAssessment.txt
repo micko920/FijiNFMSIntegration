@@ -1,5 +1,5 @@
 [1] "Running Accuracy Assessment and generating adjusted areas...."
-[1] "Tue Dec 13 08:03:53 2022"
+[1] "Tue Oct 28 23:33:51 2025"
 'data.frame':	11 obs. of  2 variables:
  $ class_code    : int  111 112 171 172 555 711 712 777 1115 1125 ...
  $ area_mapped_ha: num  620116 79359 98668 6667 161035 ...
@@ -72,9 +72,9 @@ predicted     111     112     171     172     711     712     777
 3  AR Lowland 2880.012234 2877.139139 1446.3452662 5137.901953
 4   AR Upland    2.656363    2.672124    0.8854542    5.312725
 31      Total 2882.668597 2879.811263 1449.6646708 5140.559360
-[1] "Tue Dec 13 08:05:16 2022"
+[1] "Tue Oct 28 23:35:25 2025"
 [1] "Execution time: "
-Time difference of 1.382472 mins
+Time difference of 1.562286 mins
 $errorMatrix
          observed
 predicted 111 112 171 172 711 712 777

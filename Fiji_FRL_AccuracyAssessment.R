@@ -1,14 +1,14 @@
 
 
 
+
 getDataPath<-function(filename) {
-  return(paste0("./Data/frlAuditJuly24/", filename))
+  return(paste0("./Data/frlPostAuditOct25/", filename))
 }
 
-
 # Load all necessary data
-aa_sample <- read.csv(file = getDataPath("aa_sample.csv"))
-lcc_mapped_areas <- read.csv(file = getDataPath("lcc_mapped_areas.csv"))
+aa_sample <- read.csv(file = getDataPath(paste0("aa_sample.csv")))
+lcc_mapped_areas <- read.csv(file = getDataPath(paste0("lcc_mapped_areas.csv")))
 
 
 # Required R packages
@@ -19,6 +19,8 @@ library(VGAM)
 library(FijiNFMSCalculations)
 
 options(show.error.locations = TRUE)
+outputFilename <- "Fiji_FRL_AccuracyAssessment"
+pdf(paste0(getDataPath(outputFilename), ".pdf"))
 pdf.options(paper = "a4r", reset = FALSE)
 par(mfrow = c(2, 1))
 options(max.print = 50)
@@ -39,8 +41,7 @@ MCRuns <- FRLParams$runs
 # End of Parameters -- Start of calculations #######################################################
 ####################################################################################################
 
-outputFilename <- "Fiji_FRL_AccuracyAssessment"
-pdf(paste0(outputFilename, ".pdf"))
+
 
 print("Running Accuracy Assessment and generating adjusted areas....")
 timestamp <- Sys.time()
