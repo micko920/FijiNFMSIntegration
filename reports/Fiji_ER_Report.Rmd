@@ -47,17 +47,19 @@ title: "Fiji ER Report"
 ```{r echo = FALSE}
 options(max.print=1000000)
 crediting_period <- 2019:MonitoringReportParams$period$end
-mp_yearly <- 
-  cbind(
-    t(do.call(rbind,MultiYear_EmRems_Values$year[as.character(crediting_period)])),
-    as.data.frame(replicate(length(FRLMonitoringPeriodProjectionYears) - length(crediting_period), 
-                  rep.int(0,length(MultiYear_EmRems_Values$year[[as.character(crediting_period[1])]])))))
+
+mp_yearly <- as.data.frame(t(do.call(rbind,MultiYear_EmRems_Values$year[as.character(crediting_period)])))
+if ((length(FRLMonitoringPeriodProjectionYears) - length(crediting_period)) > 0) {
+  mp_yearly <- 
+    cbind(
+      mp_yearly,
+      as.data.frame(replicate(length(FRLMonitoringPeriodProjectionYears) - length(crediting_period), 
+                    rep.int(0,length(MultiYear_EmRems_Values$year[[as.character(crediting_period[1])]])))))
+  names(mp_yearly) <- as.character(FRLMonitoringPeriodProjectionYears)
+}
   
 mp_yearly <- mp_yearly[order(row.names(mp_yearly)),]
       
-names(mp_yearly) <- FRLMonitoringPeriodProjectionYears
-
-
 
 overall_frl <- rbind( 
   ErpaYearlyFRL$erpa_yearly$yearly[1:FRLMonitoringPeriodProjectionLength+1],
