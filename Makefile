@@ -76,7 +76,21 @@ run-test-ER_EST:
 	Rscript -e 'source("./Fiji_ER_Estimate_Sensitivity.R")'
 	-diff -U 1  ./chks/Fiji_ER_EstimateResults_Sensitivity.chk ./chks/Fiji_ER_EstimateResults_Sensitivity.txt
 
+
+fix-github:
+	git config --global --add safe.directory /home/ruser/code/MonteCarloUtils
+	git config --global --add safe.directory /home/ruser/code/ValueWithUncertainty
+	git config --global --add safe.directory /home/ruser/code/FijiNFMSCalculations
+	git config --global --add safe.directory /home/ruser/code/FijiNFMSIntegration
+	cd ../MonteCarloUtils && git remote set-url origin https://github.com/micko920/MonteCarloUtils.git
+	cd ../ValueWithUncertainty && git remote set-url origin https://github.com/micko920/ValueWithUncertainty.git
+	cd ../FijiNFMSCalculations && git remote set-url origin https://github.com/micko920/FijiNFMSCalculations.git
+	#cd ../FijiNFMSIntegration && git remote set-url origin https://github.com/micko920/FijiNFMSIntegration.git
+
 run-install-requirements:
+	cd ../ValueWithUncertainty && git remote -v && git fetch -a && git pull
+	cd ../MonteCarloUtils && git remote -v &&  git fetch -a && git pull
+	cd ../FijiNFMSCalculations && git remote -v &&  git fetch -a && git pull
 	Rscript -e 'source("./requirements.R")'
 	
 	
