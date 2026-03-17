@@ -5,17 +5,6 @@ source("./getDataPath.R")
 load(file = getDataPath("Fiji_ER_Estimate_Params.RData"))
 
 
-# Eric number 428.5581 ha area of degradation activities (standard error of 88.5538 ha).
-# Period for 2019-2020 so divide by 2
-# FCPF uses 90% CI (5% to 95%)
-## MGG - patch for new data for NFDeg
-# MonitoredValues$year1$NFDegArea <- 428.5581 / 2
-# MonitoredValues$year1$NFDegArea_LCI <- (428.5581 / 2 - (qnorm(0.95) * 88.5538 / sqrt(2)))
-# MonitoredValues$year1$NFDegArea_UCI <- (428.5581 / 2 + (qnorm(0.95) * 88.5538 / sqrt(2)))
-# MonitoredValues$year2$NFDegArea <- 428.5581 / 2
-# MonitoredValues$year2$NFDegArea_LCI <- (428.5581 / 2 - (qnorm(0.95) * 88.5538 / sqrt(2)))
-# MonitoredValues$year2$NFDegArea_UCI <- (428.5581 / 2 + (qnorm(0.95) * 88.5538 / sqrt(2)))
-
 MonitoredValues <- list()
 
 MonitoredValues$year <- list()
@@ -225,10 +214,10 @@ MonitoredValues$year[['2021']] <- list(
   ),
   FPlnAreaHarvSwd = 0, # not used
   FPlnAreaJustGrowsSwd = 0, # not used
-  FDegFellVol = 35959,
+  FDegFellVol = 64452,
   FDegFellArea = structure(
     list(
-      area_ha = c(1670, 1457, 4278),
+      area_ha = c(1670, 1457, 4249),
       age_yrs = c(1, 1, 0.5)
     ),
     class = "data.frame",
@@ -277,10 +266,10 @@ MonitoredValues$year[['2022']] <- list(
   ),
   FPlnAreaHarvSwd = 0, # not used
   FPlnAreaJustGrowsSwd = 0, # not used
-  FDegFellVol = 34299,
+  FDegFellVol = 38555,
   FDegFellArea = structure(
     list(
-      area_ha = c(1670, 1457, 4278, 3169),
+      area_ha = c(1670, 1457, 4249, 3169),
       age_yrs = c(1, 1, 1, 0.5)
     ),
     class = "data.frame",
@@ -396,35 +385,35 @@ MonitoredValues$year[['2022']]$McAReforArea_UCI <- quantile(rowSums(AdjustedArea
 
 MonitoredValues$year[['2023']] <- list(
   year = 2023L,
-  FPlnVolHarvHwd = 37242,
+  FPlnVolHarvHwd = 41702,
   FPlnAreaStockHwd = 0, # not used
   FPlnAreaPlantHwd = structure(
     list(
-      area_ha = c(4008,0,101),
-      age_yrs = c(1,1,0.5)
+      area_ha = c(4008,0,101,250,6),
+      age_yrs = c(1,1,1,1,0.5)
     ),
     class = "data.frame",
     row.names = c(NA,-3L)
   ),
   FPlnAreaHarvHwd = 0, #not used
   FPlnAreaJustGrowsHwd = 0, # not used
-  FPlnVolHarvSwd = 603437,
+  FPlnVolHarvSwd = 298046,
   FPlnAreaStockSwd = 0, # Not used
   FPlnAreaPlantSwd = structure(
     list(
-      area_ha = c(2008, 1910, 4237),
-      age_yrs = c(1,1,0.5)
+      area_ha = c(2008, 1910, 4237,7495,4022),
+      age_yrs = c(1,1,1,1,0.5)
     ),
     class = "data.frame",
     row.names = c(NA,-3L)
   ),
   FPlnAreaHarvSwd = 0, # not used
   FPlnAreaJustGrowsSwd = 0, # not used
-  FDegFellVol = 35959,
+  FDegFellVol = 27874,
   FDegFellArea = structure(
     list(
-      area_ha = c(1670, 1457, 4278),
-      age_yrs = c(1, 1, 0.5)
+      area_ha = c(1670, 1457, 4249, 3169, 2606),
+      age_yrs = c(1, 1, 1, 1, 0.5)
     ),
     class = "data.frame",
     row.names = c(NA,-3L)
@@ -448,35 +437,35 @@ if (all(lengths(na.omit(MonitoredValues$year[['2023']]$FDegBurnData))  == 0)) Mo
 MonitoredValues$year[['2024']] <- list(
   year = 2024L,
   testdebug = "test",
-  FPlnVolHarvHwd = 46915,
+  FPlnVolHarvHwd = 27046,
   FPlnAreaStockHwd = 0, # not used
   FPlnAreaPlantHwd = structure(
     list(
-      area_ha = c(4008,0,101, 250),
-      age_yrs = c(1,1,1,0.5)
+      area_ha = c(4008,0,101,250,6,0),
+      age_yrs = c(1,1,1,1,1,0.5)
     ),
     class = "data.frame",
     row.names = c(NA,-4L)
   ),
   FPlnAreaHarvHwd = 0, # not used
   FPlnAreaJustGrowsHwd = 0, # no used
-  FPlnVolHarvSwd = 380905,
+  FPlnVolHarvSwd = 328672,
   FPlnAreaStockSwd = 0, # not used
   FPlnAreaPlantSwd = structure(
     list(
-      area_ha = c(2008, 1910, 4237, 7495),
-      age_yrs = c(1,1,1,0.5)
+      area_ha = c(2008, 1910, 4237, 7495, 4022,3708),
+      age_yrs = c(1,1,1,1,1,0.5)
     ),
     class = "data.frame",
     row.names = c(NA,-4L)
   ),
   FPlnAreaHarvSwd = 0, # not used
   FPlnAreaJustGrowsSwd = 0, # not used
-  FDegFellVol = 34299,
+  FDegFellVol = 75664,
   FDegFellArea = structure(
     list(
-      area_ha = c(1670, 1457, 4278, 3169),
-      age_yrs = c(1, 1, 1, 0.5)
+      area_ha = c(1670, 1457, 4249, 3169, 2606, 3012),
+      age_yrs = c(1, 1, 1, 1, 1, 0.5)
     ),
     class = "data.frame",
     row.names = c(NA,-4L)
@@ -599,7 +588,7 @@ if (FileLoaded) {
 }
 
 ####################################################################################
-## End of Monitored Values: 2021 to 2022
+## End of Monitored Values: 2023 to 2024
 ####################################################################################
 
 
